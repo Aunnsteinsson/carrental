@@ -1,0 +1,1 @@
+#Þetta er testfile til þess að stofna git repo.
