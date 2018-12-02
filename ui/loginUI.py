@@ -3,6 +3,7 @@ from getpass import getpass
 
 
 def csv_userdata_to_list():
+    '''makes a list from text file so it is more readable'''
     userslist = []
     with open("data/usern_passw.txt") as signin_data:
         for line in signin_data:
@@ -13,11 +14,13 @@ def csv_userdata_to_list():
 
 
 def print_header():
+    '''prints header for sign-in screen. (with today)'''
     print("{} {:>65}".format("Innskráning", str(date.today())))
     print(("-"*80))
 
 
 def check_if_correct(name, passw, signin_data):
+    '''checks if username matches password'''
     userposition = False
     for value in signin_data:
         if value[0] == name and value[1] == passw:
