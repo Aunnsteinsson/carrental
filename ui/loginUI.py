@@ -2,7 +2,7 @@ from datetime import date
 from getpass import getpass
 
 
-def csv_userdata_to_list():
+def txt_userdata_to_list():
     userslist = []
     with open("data/usern_passw.txt") as signin_data:
         for line in signin_data:
@@ -29,7 +29,7 @@ def main():
     print_header()
     username = input("Notendanafn: ")
     password = getpass(prompt="Lykilorð: ")
-    list_of_userdata = csv_userdata_to_list()
+    list_of_userdata = txt_userdata_to_list()
     checked_position = check_if_correct(username, password, list_of_userdata)
     if not checked_position:
         print("\nVitlaust notendanafn eða lykilorð, vinsamlegast hafðu samband"
