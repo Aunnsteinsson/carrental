@@ -23,4 +23,6 @@ class Order(object):
         pass
 
     def __repr__(self):
+        # return "{},{},{}".format(self.__start_date,
+        # self.__end_date, self.__car)
         pass
