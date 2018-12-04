@@ -4,6 +4,7 @@ HEIMSETNINGAR = ["h", "H", "s", "S"]
 
 class SalesmanUI(object):
     """Klasi sem sér um viðmót Sölumanns og ferðir þar um"""
+
     def __init__(self, name):
         self.__name = name
 
@@ -66,7 +67,6 @@ class SalesmanUI(object):
             if choice == "3":
                 pass
         return choice
-    
 
     def new_customer_menu(self):
         self.print_header()
@@ -126,3 +126,14 @@ class SalesmanUI(object):
 
 k1 = SalesmanUI("Gamli")
 k1.main_menu()
+
+
+# def add_employee(self):
+#         username = input("Notendanafn: ")
+#         password = input("Lykilorð: ")
+#         name = input("Nafn: ")
+#         address = input("Heimilisfang: ")
+#         phonenumber = input("Sími: ")
+#         emp_type = input("(S)öludeil, (y)firmaður eða (k)erfisstjóri: ")
+#         Employee(username, password, name,
+#                  address, phonenumber, emp_type)
