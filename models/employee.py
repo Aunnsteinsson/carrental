@@ -1,7 +1,7 @@
 class Employee(object):
-    """þessi klasi er með nokkrar breytur, (phonenumber og address eru default 
-    því það er ekki bráðnauðsynlegar upplýsingar) og heimilar það að þær 
-    breytur séu sóttar og þeim breytt með föllum"""
+    """þessi klasi er með nokkrar breytur, (phonenumber og address eru default
+     því það er ekki bráðnauðsynlegar upplýsingar) og heimilar það að þær
+     breytur séu sóttar og þeim breytt með föllum"""
 
     def __init__(self, username, password,
                  type, name, phonenumber="N/A", address="N/A"):
