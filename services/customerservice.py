@@ -1,26 +1,26 @@
-from car-rental.customerrepo import CustomerRepo
+from repositories.customerrepo import CustomerRepo
 
 
 class CustomerService(object):
     def __init__(self):
         pass
 
-    def make_customer(self, name, SSN, creditcard_number, phone_number):
+    def make_customer(self, name, ssn, creditcard_number, phone_number):
         customer = CustomerRepo.add_customer(
-            name, SSN, creditcard_number, phone_number)
+            name, ssn, creditcard_number, phone_number)
         return customer
 
-    def remove_customer(self, SSN):
-        CustomerRepo.remove_customer(SSN)
+    def remove_customer(self, ssn):
+        CustomerRepo.remove_customer(ssn)
 
-    def change_card(self, SSN, new_credit):
-        CustomerRepo.change_card_number(SSN, new_credit)
+    def change_card(self, ssn, new_credit):
+        CustomerRepo.change_card_number(ssn, new_credit)
 
-    def change_phone_number(self, SSN, new_phone_number):
-        CustomerRepo.change_card_number(SSN, new_phone_number)
+    def change_phone_number(self, ssn, new_phone_number):
+        CustomerRepo.change_card_number(ssn, new_phone_number)
 
-    def change_name(self, SSN, new_name):
-        CustomerRepo.change_name(SSN, new_name)
+    def change_name(self, ssn, new_name):
+        CustomerRepo.change_name(ssn, new_name)
 
     def show_list(self):
         CustomerRepo.get_customers()
