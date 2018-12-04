@@ -4,11 +4,11 @@ class Employee(object):
      breytur séu sóttar og þeim breytt með föllum"""
 
     def __init__(self, username, password,
-                 type, name, phonenumber="N/A", address="N/A"):
+                 name, address="N/A", phonenumber="N/A", emp_type="soludeild"):
         self.__username = username
         self.__name = name
         self.__password = password
-        self.__type = type
+        self.__emp_type = emp_type
         self.__phone_number = phonenumber
         self.__address = address
 
