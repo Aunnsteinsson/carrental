@@ -1,5 +1,5 @@
 class Employee(object):
-    """þessi klasi er með nokkrar breytur, (phonenumber og address eru default
+    """Þessi klasi er með nokkrar breytur, (phonenumber og address eru default
      því það er ekki bráðnauðsynlegar upplýsingar) og heimilar það að þær
      breytur séu sóttar og þeim breytt með föllum"""
 
@@ -12,7 +12,7 @@ class Employee(object):
         self.__phone_number = phonenumber
         self.__address = address
 
-    # hér eru nokkur get föll sett inn til að nálgast breyturnar í fallinu
+    # Hér eru nokkur get föll sett inn til að nálgast breyturnar í fallinu
     def get_name(self):
         return self.__name
 
@@ -31,7 +31,7 @@ class Employee(object):
     def get_phone_number(self):
         return self.__phone_number
 
-    # hér eru nokkur change föll til að breyta breytunum.
+    # Hér eru nokkur change föll til að breyta breytunum.
     def change_name(self, new_name):
         self.__name = new_name
 
