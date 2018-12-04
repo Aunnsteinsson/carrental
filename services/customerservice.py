@@ -23,8 +23,7 @@ class CustomerService(object):
         CustomerRepo.change_name(SSN, new_name)
 
     def show_list(self):
-
-        pass
+        CustomerRepo.get_customers()
 
     def show_orders():
         pass
