@@ -1,4 +1,4 @@
-import models.employee
+from models.employee import Employee
 
 
 class EmployeeRepo(object):
@@ -17,6 +17,3 @@ class EmployeeRepo(object):
         emp_type = input("(S)öludeil, (y)firmaður eða (k)erfisstjóri: ")
         Employee(username, password, name,
                  address, phonenumber, emp_type)
-
-
-atli = EmployeeRepo()

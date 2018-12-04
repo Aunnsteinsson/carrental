@@ -17,6 +17,6 @@ class CustomerRepo(object):
 
 
 with open("./data/customers.csv") as customer_file:
-    csv_reader = csv.reader(customer_file)
+    csv_reader = csv.DictReader(customer_file)
     for line in csv_reader:
         print(line)
