@@ -14,3 +14,9 @@ class Car(object):
 
     def __repr__(self):
         pass
+
+
+def class Jeep(Car):
+    def __init__(self, price):
+        Car.__init__(self, licence_plate, a_type)
+        self.__price = price

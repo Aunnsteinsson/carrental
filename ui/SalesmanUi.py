@@ -9,7 +9,7 @@ class SalesmanUI(object):
     def print_header(self):
         '''prints header for sign-in screen'''
         # Hér þarf að laga print setninguna svo dagsetningin sé ekki lengst til hægri
-        print("{} {:>50}".format(
+        print("{:40s} {:>39}".format(
             "Söludeild - notandi: {}".format(self.__name), str(date.today())))
         print(("-"*80))
 
@@ -65,7 +65,17 @@ class SalesmanUI(object):
 
     def customer_menu(self):
         """Prints customer menu and follows up on commands"""
-        pass
+        choice = ""
+        while choice not in HEIMSETNINGAR:  # Placeholder
+            choice = self.show_menu(
+                "Viðskiptavinir\n\t1. Leita eftir kennitölu\n\t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur")
+            if choice == "1":
+                pass
+            if choice == "2":
+                pass
+            if choice == "3":
+                pass
+        return choice
 
     def car_menu(self):
         """Prints car menu and follows up on commands"""
@@ -73,13 +83,10 @@ class SalesmanUI(object):
         while choice not in HEIMSETNINGAR:  # Placeholder
             choice = self.show_menu(
                 "Bílayfirlit\n\t1. Allir Bílar\n\t2. Lausir Bílar\n\t3. Í útleigu")
-
-    def quit(self):
-        # Hér þarf að ákveða hvort þetta sé við að hætta í login fallinu
-        # og þá væri þetta fall tilgangslaust eða hvort að við séum að
-        # að kalla á login skjáinn
-        pass
-
-
-k1 = SalesmanUI("gamli")
-k1.main_menu()
+            if choice == "1":
+                pass
+            if choice == "2":
+                pass
+            if choice == "3":
+                pass
+        return choice
