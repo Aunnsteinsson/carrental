@@ -36,13 +36,13 @@ class Customer(object):
         self.__creditcard_number = new_creditcard_number
 
     def __str__(self):
-        # Sting fall sem prentar allt nema kreditkorta upplýsingar
+        '''String fall sem prentar allt nema kreditkorta upplýsingar'''
         return "Kennitala: {} Nafn: {} Sími: {}".format(
             self.__ssn, self.__name, self.__phone_number)
 
     def __repr__(self):
-        # Fall tileinkað kerfisstjóra til að sækja allar
-        # upplýsingar notanda
+        '''Fall tileinkað kerfisstjóra til að sækja allar
+         upplýsingar notanda'''
         return "{},{},{},{}".format(
             self.__ssn, self.__name, self.__phone_number,
             self.__creditcard_number)
