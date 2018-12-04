@@ -1,4 +1,5 @@
 from datetime import date
+HEIMSETNINGAR = ["h", "H", "s", "S"]
 
 
 class SalesmanUI(object):
@@ -8,16 +9,15 @@ class SalesmanUI(object):
     def print_header(self):
         '''prints header for sign-in screen'''
         # Hér þarf að laga print setninguna svo dagsetningin sé ekki lengst til hægri
-        right_justified = 65-len(self.__name)
-        print("{} {:>{}}".format(
-            "Söludeild - notandi: {}".format(self.__name), str(date.today()), right_justified))
+        print("{} {:>50}".format(
+            "Söludeild - notandi: {}".format(self.__name), str(date.today())))
         print(("-"*80))
 
     def show_menu(self, texti):
         self.print_header()
         print(texti)
 
-        choice = input("Veldu síðu: ")
+        choice = input("Veldu aðgerð: ")
         # Inn í þetta vantar að prenta út það sem er fyrir neðan
         return choice
 
@@ -39,19 +39,29 @@ class SalesmanUI(object):
 
     def order_menu(self):
         """Prints order menu and follows up on commands"""
-        while 1 > 0:
+        choice = ""
+        while choice not in HEIMSETNINGAR:  # Placeholder þangað til ég næ að lata while loopuna virka betur
             choice = self.show_menu(
                 "Pantanir\n\n1. Yfirlit pantana\n2. Ný pöntun")
             if choice == "1":
-                # CustomerService.show_list()
-                pass
+                choice = self.order_list_menu()
             elif choice == "2":
                 # CustomerService.make_customer()
                 pass
-            elif choice == "h":
-                return choice
-            elif choice == "s":
-                return choice
+        return choice
+
+    def order_list_menu(self):
+        choice = ""
+        while choice not in HEIMSETNINGAR:  # Placeholder
+            choice = self.show_menu(
+                "Pantanir - Yfirlit pantana\n\tSækjaupplýsingar út frá:\n\t1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir")
+            if choice == "1":
+                pass
+            if choice == "2":
+                pass
+            if choice == "3":
+                pass
+        return choice
 
     def customer_menu(self):
         """Prints customer menu and follows up on commands"""
@@ -59,6 +69,10 @@ class SalesmanUI(object):
 
     def car_menu(self):
         """Prints car menu and follows up on commands"""
+        choice = ""
+        while choice not in HEIMSETNINGAR:  # Placeholder
+            choice = self.show_menu(
+                "Bílayfirlit\n\t1. Allir Bílar\n\t2. Lausir Bílar\n\t3. Í útleigu")
 
     def quit(self):
         # Hér þarf að ákveða hvort þetta sé við að hætta í login fallinu
