@@ -25,9 +25,11 @@ class Order(object):
         self.__insurance = new_ins
 
     def __str__(self):
-        pass
+        '''Prentaðar út þær upplýsingar sem tilheyra pöntun.'''
+        return "Upphafsdagur: {}, Skiladagur {}, Bíll {}, \
+        Viðbótartrygging {}".format(self.__start_date, self.__end_date,
+                                    self.__car, self.__insurance)
 
-    def __repr__(self):
-        # return "{},{},{},{}".format(self.__start_date,
-        # self.__end_date, self.__car, self.__insurance)
-        pass
+    # def __repr__(self):
+    #     return "{},{},{},{}".format(self.__start_date, self.__end_date,
+    #                                 self.__car, self.__insurance)

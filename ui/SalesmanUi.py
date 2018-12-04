@@ -48,11 +48,11 @@ class SalesmanUI(object):
             if choice == "1":
                 choice = self.order_list_menu()
             elif choice == "2":
-                # CustomerService.make_customer()
-                pass
+                choice = self.new_customer_menu()
         return choice
 
     def order_list_menu(self):
+        """Prints the more detailed order menu and follows up on commands"""
         choice = ""
         while choice not in HEIMSETNINGAR:  # Placeholder
             choice = self.show_menu(
@@ -65,6 +65,31 @@ class SalesmanUI(object):
             if choice == "3":
                 pass
         return choice
+
+    def new_customer_menu(self):
+        self.print_header()
+        print("Pantanir - Ný pöntun\n\tTímabil\n\t--------")
+        begin_date = input("Upphafsdagsetning: ")
+        end_date = input("Skiladagsetning: ")
+        print("\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
+        type_of_car = input("Flokkur: ")
+        insurance_price = 100  # Hér þarf að sækja verð
+        insurance = input(
+            "Viðbótartrygging (verð {} á dag) (J)á/(N)ei: ".format(
+                insurance_price))
+        format(insurance_price)
+        discount = input("Afsláttur(0-20%): ")
+        total_price = 10000  # hér þarð að nota aðra klasa
+        SSN = input("Kennitala viðskiptavinar: ")
+        # if setning til að athuga hvort manneskjan sé til. Ef svo er
+        # þá prentast út upplýsingar um hana, annars er sótt fall til
+        # að gera nýjan viðskiptavin
+        customer_name = "Siggi Gunnars"
+        print("{}".format(customer_name))
+        payment = input("Greiðslumáti: (D)ebit, (K)redit, (P)eningar: ")
+        # kallar á föll og býr til klasa
+        print("---------------------\nPöntun Staðfest")
+        return "h"
 
     def customer_menu(self):
         """Prints customer menu and follows up on commands"""

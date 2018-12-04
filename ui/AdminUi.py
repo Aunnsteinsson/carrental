@@ -7,17 +7,17 @@ class AdminUI(object):
         self.__username = username
 
     def print_header(self):
-        '''prints header for sign-in screen'''
+        '''Prentar haus fyrir Kerfisstjóra'''
         print("{:40s} {:>39}".format(
             "Kerfisstjóri - notandi: {}".format(self.__username), str(
                 date.today())))
         print(("-"*80))
 
-    def show_menu(self, texti):
+    def show_menu(self, texti, prompt):
         self.print_header()
         print(texti)
 
-        choice = input("Veldu síðu: ")
+        choice = input(prompt)
 
         return choice
 
@@ -26,7 +26,8 @@ class AdminUI(object):
         choice = ""
         while choice not in HEIMSETNINGAR:
             choice = self.show_menu(
-                "\n\n1. Starfsmenn\n\n\2. Nýr starfsmaður\n\n3. Bílayfirlit\n")
+                "\n\t1. Starfsmenn\n\t2. Nýr starfsmaður\n\t3. Bílayfirlit\n",
+                "Veldu síðu: ")
             if choice == 1:
                 choice = self.employee_menu
             # elif choice == 2:
@@ -35,10 +36,38 @@ class AdminUI(object):
                 choice = self.car_menu
 
     def car_menu(self):
-        pass
+        '''Bílayfirlit menu fyrir Kerfisstjóra'''
+        choice = ""
+        while choice not in HEIMSETNINGAR:
+            choice = self.show_menu(
+                "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3. Í útleigu\n\t\
+4. Nýskrá bíl\n\t5. Afskrá bíl\n", "Veldu aðgerð: ")
+            if choice == 1:
+                pass
+            elif choice == 2:
+                pass
+            elif choice == 3:
+                pass
+            elif choice == 4:
+                pass
+            elif choice == 5:
+                pass
+
+        return choice
+
+    def print_employee_header(self):
+        '''Prentar haus fyrir starfmannayfirlit'''
+        print("{:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<20s}".format(
+            "Notandi", "Lykilorð", "Hlutverk", "Nafn", "Sími", "Heimilisfang"))
+        print("-"*80)
 
     def employee_menu(self):
-        pass
+        '''Yfirlit yfir alla starfsmenn fyrirtækis,
+        Möguleiki á að eyða starfsmanni'''
+        # choice = ""
+        # while choice not in HEIMSETNINGAR:
+        self.print_header()
+        self.print_employee_header()
 
     def new_employee(self):
         pass
@@ -48,8 +77,8 @@ class AdminUI(object):
 
 
 def main():
-    test = AdminUI("logigeir")
-    test.main_menu()
+    A1 = AdminUI("logigeir")
+    A1.employee_menu()
 
 
 main()
