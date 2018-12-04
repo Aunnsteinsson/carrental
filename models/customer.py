@@ -43,6 +43,6 @@ class Customer(object):
     def __repr__(self):
         # Fall tileinkað kerfisstjóra til að sækja allar
         # upplýsingar notanda
-        return "{},{},{},{},{}".format(
+        return "{},{},{},{}".format(
             self.__ssn, self.__name, self.__phone_number,
             self.__creditcard_number)
