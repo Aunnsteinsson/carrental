@@ -3,6 +3,7 @@ HEIMSETNINGAR = ["h", "H", "s", "S"]
 
 
 class SalesmanUI(object):
+    """Klasi sem sér um viðmót Sölumanns og ferðir þar um"""
     def __init__(self, name):
         self.__name = name
 
@@ -65,6 +66,7 @@ class SalesmanUI(object):
             if choice == "3":
                 pass
         return choice
+    
 
     def new_customer_menu(self):
         self.print_header()
@@ -88,7 +90,7 @@ class SalesmanUI(object):
         print("{}".format(customer_name))
         payment = input("Greiðslumáti: (D)ebit, (K)redit, (P)eningar: ")
         # kallar á föll og býr til klasa
-        print("---------------------\nPöntun Staðfest")
+        print("---------------------\nPöntun Staðfest\n")
         return "h"
 
     def customer_menu(self):
