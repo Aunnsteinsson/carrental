@@ -35,8 +35,8 @@
 #     list_of_userdata = txt_userdata_to_list()
 #     checked_position = check_if_correct(username, password, list_of_userdata)
 #     if not checked_position:
-#         print("\nVitlaust notendanafn eða lykilorð, vinsamlegast hafðu samband"
-#               "\nvið kerfisstjóra "
+#         print("\nVitlaust notendanafn eða lykilorð, vinsamlegast hafðu"
+#               "samband\nvið kerfisstjóra "
 #               "ef þú hefur gleymt notendanafni eða lykilorði\n")
 #     else:
 #         print(checked_position)
