@@ -11,7 +11,7 @@ class Customer(object):
     # Föllin hér að neðan eru hugsuð til að sækja
     # einhverja eina sérstaka breytu
     def get__ssn(self):
-        return self.get__ssn
+        return self.__ssn
 
     def get_name(self):
         return self.__name
