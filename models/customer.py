@@ -1,5 +1,5 @@
 class Customer(object):
-    '''custumer klassi, tekur inn kennitölu, nafn, síma og kreditkorta
+    '''Custumer klassi, tekur inn kennitölu, nafn, síma og kreditkorta
     númer'''
 
     def __init__(self, ssn, name, phone_number, creditcard_number):
@@ -8,7 +8,7 @@ class Customer(object):
         self.__phone_number = phone_number
         self.__creditcard_number = creditcard_number
 
-    # föllin hér að neðan eru hugsuð til að sækja
+    # Föllin hér að neðan eru hugsuð til að sækja
     # einhverja eina sérstaka breytu
     def get__ssn(self):
         return self.get__ssn
@@ -22,7 +22,7 @@ class Customer(object):
     def get_creditcard_number(self):
         return self.__creditcard_number
 
-    # föllin hér að neðan eru til að breyta upplýsingum fyrir breytur
+    # Föllin hér að neðan eru til að breyta upplýsingum fyrir breytur
     def change__ssn(self, new_ssn):
         self.get__ssn = new_ssn
 
@@ -36,12 +36,12 @@ class Customer(object):
         self.__creditcard_number = new_creditcard_number
 
     def __str__(self):
-        # sting fall sem prentar allt nema kreditkorta upplýsingar
+        # Sting fall sem prentar allt nema kreditkorta upplýsingar
         return "Kennitala: {} Nafn: {} Sími: {}".format(
             self.__ssn, self.__name, self.__phone_number)
 
     def __repr__(self):
-        # fall tileinkað kerfisstjóra til að sækja allar
+        # Fall tileinkað kerfisstjóra til að sækja allar
         # upplýsingar notanda
         return "{},{},{},{},{}".format(
             self.__ssn, self.__name, self.__phone_number,
