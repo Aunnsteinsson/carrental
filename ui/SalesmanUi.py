@@ -23,7 +23,6 @@ class SalesmanUI(object):
         return choice
 
     def main_menu(self):
-        # While skipunin er fkd. Maður festist í henni
         choice = ""
         while choice != HEIMSETNINGAR[2] and choice != HEIMSETNINGAR[3]:
             choice = self.show_menu(

@@ -26,9 +26,6 @@ class Employee(object):
     def get_type(self):
         return self.__type
 
-    def get_address(self):
-        return self.__address
-
     def get_phone_number(self):
         return self.__phone_number
     # Hér eru nokkur change föll til að breyta breytunum.
