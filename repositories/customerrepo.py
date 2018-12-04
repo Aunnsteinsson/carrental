@@ -1,9 +1,10 @@
-# DENNI
+from models.customer import Customer
+import csv
 
 
 class CustomerRepo(object):
     def __init__(self):
-        pass
+        self.__customer = {}
 
     def add_customer(self):
         pass
@@ -13,3 +14,9 @@ class CustomerRepo(object):
 
     def get_car(self):
         pass
+
+
+with open("./data/customers.csv") as customer_file:
+    csv_reader = csv.reader(customer_file)
+    for line in csv_reader:
+        print(line)
