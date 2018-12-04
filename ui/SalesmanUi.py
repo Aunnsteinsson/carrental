@@ -1,5 +1,5 @@
 from datetime import date
-HEIMSETNINGAR = ["h", "H", "s", "S"]
+HOMECOMMANDS = ["h", "H", "s", "S"]
 
 
 class SalesmanUI(object):
@@ -9,7 +9,7 @@ class SalesmanUI(object):
         self.__name = name
 
     def print_header(self):
-        '''prints header for sign-in screen'''
+        '''prentar haus á síðum notanda'''
         # Hér þarf að laga print setninguna svo dagsetningin sé ekki lengst
         # til haegri
         print("{:40s} {:>54}".format(
@@ -26,7 +26,7 @@ class SalesmanUI(object):
 
     def main_menu(self):
         choice = ""
-        while choice != HEIMSETNINGAR[2] and choice != HEIMSETNINGAR[3]:
+        while choice != HOMECOMMANDS[2] and choice != HOMECOMMANDS[3]:
             choice = self.show_menu(
                 """ \t1. Pantanir\n\t2. Bílayfirlit
 \t3. Viðskiptavinir\n\t4. Verðlisti\n""")
@@ -41,9 +41,9 @@ class SalesmanUI(object):
                 # ég hef ekki hugmynd um hvernig við ætlum að sýna verðlistann
 
     def order_menu(self):
-        """Prints order menu and follows up on commands"""
+        """Prentar pantana viðmót tekur við inputi"""
         choice = ""
-        while choice not in HEIMSETNINGAR:  # Placeholder þangað til ég næ að
+        while choice not in HOMECOMMANDS:  # Placeholder þangað til ég næ að
             # lata while loopuna virka betur
             choice = self.show_menu(
                 "Pantanir\n\t1. Yfirlit pantana\n\t2. Ný pöntun")
@@ -54,9 +54,9 @@ class SalesmanUI(object):
         return choice
 
     def order_list_menu(self):
-        """Prints the more detailed order menu and follows up on commands"""
+        """Prentar innra pantana viðmót og tekur við input"""
         choice = ""
-        while choice not in HEIMSETNINGAR:  # Placeholder
+        while choice not in HOMECOMMANDS:  # Placeholder
             choice = self.show_menu(
                 """Pantanir - Yfirlit pantana\n\tSækjaupplýsingar út frá:
 \t1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir""")
@@ -65,8 +65,15 @@ class SalesmanUI(object):
             if choice == "2":
                 pass
             if choice == "3":
-                pass
+                self.all_orders()
         return choice
+
+    def all_orders(self):
+        self.print_header()
+        print("dagsetning | Pönt.nr |  Nafn  |  Kennitala  | Tegund",
+              "Bílnr.  | Staða")
+        print("\t", "-"*80)
+        # Sæki drasl1
 
     def new_customer_menu(self):
         self.print_header()
@@ -94,9 +101,9 @@ class SalesmanUI(object):
         return "h"
 
     def customer_menu(self):
-        """Prints customer menu and follows up on commands"""
+        """Prentar viðskiptavinaviðmót sölumanns og tekur við input"""
         choice = ""
-        while choice not in HEIMSETNINGAR:  # Placeholder
+        while choice not in HOMECOMMANDS:  # Placeholder
             choice = self.show_menu(
                 """Viðskiptavinir\n\t1. Leita eftir kennitölu
 \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur""")
@@ -109,9 +116,9 @@ class SalesmanUI(object):
         return choice
 
     def car_menu(self):
-        """Prints car menu and follows up on commands"""
+        """Pprentar bílayfirlits viðmót og tekur við input"""
         choice = ""
-        while choice not in HEIMSETNINGAR:  # Placeholder
+        while choice not in HOMECOMMANDS:  # Placeholder
             choice = self.show_menu(
                 """Bílayfirlit\n\t1. Allir Bílar
 \t2. Lausir Bílar\n\t3. Í útleigu""")
@@ -126,14 +133,3 @@ class SalesmanUI(object):
 
 k1 = SalesmanUI("Gamli")
 k1.main_menu()
-
-
-# def add_employee(self):
-#         username = input("Notendanafn: ")
-#         password = input("Lykilorð: ")
-#         name = input("Nafn: ")
-#         address = input("Heimilisfang: ")
-#         phonenumber = input("Sími: ")
-#         emp_type = input("(S)öludeil, (y)firmaður eða (k)erfisstjóri: ")
-#         Employee(username, password, name,
-#                  address, phonenumber, emp_type)
