@@ -3,12 +3,10 @@ from repositories.customerrepo import CustomerRepo
 
 class CustomerService(object):
     def __init__(self):
-        pass
+        self.__customer_repo = CustomerRepo()
 
-    def make_customer(self, name, ssn, creditcard_number, phone_number):
-        customer = CustomerRepo.add_customer(
-            name, ssn, creditcard_number, phone_number)
-        return customer
+    def make_customer(self, customer):
+        self.__customer_repo.add_customer(customer)
 
     def remove_customer(self, ssn):
         CustomerRepo.remove_customer(ssn)

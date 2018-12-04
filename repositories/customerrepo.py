@@ -8,10 +8,10 @@ class CustomerRepo(object):
 
     def add_customer(self, customer):
         with open("./data/customers.csv", "a+") as customer_file:
-            ssn = Customer.get__ssn()
-            name = Customer.get_name()
-            phone_number = Customer.get_phone_number()
-            creditcard_number = Customer.get_creditcard_number()
+            ssn = customer.get__ssn()
+            name = customer.get_name()
+            phone_number = customer.get_phone_number()
+            creditcard_number = customer.get_creditcard_number()
             customer_file.write("{},{},{},{}".format(
                 ssn, name, phone_number, creditcard_number))
 

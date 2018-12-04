@@ -1,4 +1,12 @@
 from datetime import date
+from models.customer import Customer
+from models.order import Order
+from models.car import Car
+from models.employee import Employee
+from services.carservice import CarService
+from services.customerservice import CustomerService
+from services.employeeservice import EmployeeService
+from services.orderservice import OrderService
 HOMECOMMANDS = ["h", "H", "s", "S"]
 
 
@@ -7,6 +15,10 @@ class SalesmanUI(object):
 
     def __init__(self, name):
         self.__name = name
+        self.__customer_service = CustomerService()
+        self.__car_service = CarService()
+        self.__order_service = OrderService()
+        self.__employee_service = EmployeeService()
 
     def print_header(self):
         '''prentar haus á síðum notanda'''
@@ -50,7 +62,7 @@ class SalesmanUI(object):
             if choice == "1":
                 choice = self.order_list_menu()
             elif choice == "2":
-                choice = self.new_customer_menu()
+                choice = self.new_order_menu()
         return choice
 
     def order_list_menu(self):
@@ -60,9 +72,9 @@ class SalesmanUI(object):
             choice = self.show_menu(
                 """Pantanir - Yfirlit pantana\n\tSækjaupplýsingar út frá:
 \t1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir""")
-            if choice == "1":
+            if choice == "1":  # TODO Þurfum að geta tengt viðskiptavin við pöntun
                 pass
-            if choice == "2":
+            if choice == "2":  # TODO Þurfum að gefa pöntunarnúmer
                 pass
             if choice == "3":
                 self.all_orders()
@@ -75,7 +87,7 @@ class SalesmanUI(object):
         print("\t", "-"*80)
         # Sæki drasl1
 
-    def new_customer_menu(self):
+    def new_order_menu(self):
         self.print_header()
         print("Pantanir - Ný pöntun\n\tTímabil\n\t--------")
         begin_date = input("Upphafsdagsetning: ")
@@ -96,6 +108,10 @@ class SalesmanUI(object):
         customer_name = "Siggi Gunnars"
         print("{}".format(customer_name))
         payment = input("Greiðslumáti: (D)ebit, (K)redit, (P)eningar: ")
+        #self, start_date, end_date, car, insurance=False
+        an_order = Order(begin_date, end_date, type_of_car, insurance)
+        self.__order_service.make_order(an_order)
+
         # kallar á föll og býr til klasa
         print("---------------------\nPöntun Staðfest\n")
         return "h"
@@ -107,13 +123,24 @@ class SalesmanUI(object):
             choice = self.show_menu(
                 """Viðskiptavinir\n\t1. Leita eftir kennitölu
 \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur""")
-            if choice == "1":
+            if choice == "1":  # Kann ekki að leita að viðskiptavinum
                 pass
-            if choice == "2":
+            if choice == "2":  # Ekki komið get fall. Geri þetta þegar það kemur
                 pass
             if choice == "3":
-                pass
+                self.new_customer_menu()
         return choice
+
+    def new_customer_menu(self):
+        """biður um nauðsynlegar upplýsingar og býr til viðskiptavin"""
+        self.print_header
+        print("Viðskiptavinir - Nýr viðskiptavinur\n")
+        ssn = input("\tKennitala: ")
+        name = input("\tNafn: ")
+        phone_number = input("\tSími: ")
+        credit_card_number = input("\tKreditkort: ")
+        a_customer = Customer(ssn, name, phone_number, credit_card_number)
+        self.__customer_service.make_customer(a_customer)
 
     def car_menu(self):
         """Pprentar bílayfirlits viðmót og tekur við input"""
@@ -129,7 +156,3 @@ class SalesmanUI(object):
             if choice == "3":
                 pass
         return choice
-
-
-k1 = SalesmanUI("Gamli")
-k1.main_menu()
