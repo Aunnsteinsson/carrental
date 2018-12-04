@@ -21,6 +21,3 @@ class Order(object):
 
     def get_insurance(self):
         pass
-
-    def __repr__(self):
-        pass

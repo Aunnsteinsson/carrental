@@ -10,6 +10,3 @@ class OrderRepo(object):
 
     def get_order(self):
         pass
-
-    def __str__(self):
-        pass
