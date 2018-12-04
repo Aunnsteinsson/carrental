@@ -24,7 +24,7 @@ class Customer(object):
 
     # Föllin hér að neðan eru til að breyta upplýsingum fyrir breytur
     def change__ssn(self, new_ssn):
-        self.get__ssn = new_ssn
+        self.__ssn = new_ssn
 
     def change_name(self, new_name):
         self.__name = new_name
