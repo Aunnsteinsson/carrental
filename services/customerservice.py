@@ -1,4 +1,4 @@
-from repositories import CustomerRepo
+from repositories.customerrepo import CustomerRepo
 
 
 class CustomerService(object):
@@ -27,3 +27,6 @@ class CustomerService(object):
 
     def show_orders():
         pass
+
+
+k = CustomerService()
