@@ -1,4 +1,4 @@
-from repositories.customerrepo import CustomerRepo
+from car-rental.customerrepo import CustomerRepo
 
 
 class CustomerService(object):
