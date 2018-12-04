@@ -1,4 +1,6 @@
 from datetime import date
+from models.employee import Employee
+
 HEIMSETNINGAR = ["h", "H", "s", "S"]
 
 
@@ -70,7 +72,18 @@ class AdminUI(object):
         self.print_employee_header()
 
     def new_employee(self):
-        pass
+        '''Býr til nýjan starfsmann'''
+        choice = ""
+        while choice not in HEIMSETNINGAR:
+            self.print_header()
+            username = input("Notendanafn: ")
+            password = input("Lykilorð: ")
+            name = input("Nafn: ")
+            address = input("Heimilisfang: ")
+            phonenumber = input("Sími: ")
+            emp_type = input("(S)öludeil, (y)firmaður eða (k)erfisstjóri: ")
+            Employee(username, password, name,
+                     address, phonenumber, emp_type)
 
     def quit(self):
         pass
@@ -78,7 +91,7 @@ class AdminUI(object):
 
 def main():
     A1 = AdminUI("logigeir")
-    A1.employee_menu()
+    A1.new_employee()
 
 
 main()
