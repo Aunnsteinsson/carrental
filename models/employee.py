@@ -35,12 +35,12 @@ class Employee(object):
         """Her ery prentaðar allar upplýsingar nema password
          því það eiga ekki allir að hafa aðgang að passwordi"""
         return "Nafn: {}, Notendanafn: {}, Staða: {}, Símanúmer: {}, \
-        Heimilisfang: {}".format(self.__name, self.__username, self.__emp_type,
-                                 self.__phone_number, self.__address)
+        Heimilisfang: {}".format(self.__name, self.__username,  self.__address,
+                                 self.__phone_number, self.__emp_type)
 
     def __repr__(self):
         """Hér eru allar upplýsingar prentaðar
          með kommu á milli. Þetta er gert fyrir admin"""
         return "{},{},{},{},{},{}".format(self.__name, self.__username,
-                                          self.__password, self.__emp_type,
-                                          self.__phone_number, self.__address)
+                                          self.__password, self.__address,
+                                          self.__phone_number, self.__emp_type)
