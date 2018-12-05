@@ -28,8 +28,9 @@ class CarRepo(object):
                 csv_reader = csv.reader(car_input)
                 csv_writer = csv.writer(car_output)
                 for row in csv_reader:
-                    if row[0] != licence_plate:
-                        csv_writer.writerow(row)
+                    if row:
+                        if row[0] != licence_plate:
+                            csv_writer.writerow(row)
 
         with open("./data/cars.csv", "w") as new_car_file:
             with open("./data/cars_edit.csv", "r") as new_car_edit:
@@ -37,6 +38,19 @@ class CarRepo(object):
                 csv_writer = csv.writer(new_car_file)
                 for row in csv_reader:
                     csv_writer.writerow(row)
+
+    def change_status(self, licence_plate, new_status):
+        #Breytir stöðu bíls
+        with open("./data/cars.csv", "r") as car_input:
+            with open("./data/cars_edit.csv", "w") as car_output:
+                csv_reader = csv.reader(car_input)
+                csv_writer = csv.writer(car_output)
+                for row in csv_reader:
+                    if row[0] == licence_plate:
+                        print("FOUND!")
+                        row[3] = "UPDATED STATUS"
+                        csv_writer.writerow(row)
+
 
     def __str__(self):
         # Prentar út upplýsingar um alla bíla
