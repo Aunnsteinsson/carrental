@@ -143,6 +143,15 @@ class SalesmanUI(object):
     def find_customer(self, customer):
         self.print_header()
         print("Viðskiptavinir - Kennitala\n")
+        print(customer)
+        # self.__order_service.showorders(customer)
+        # þetta vantar alveg inn
+        choice = ""
+        while choice not in HOMECOMMANDS:
+            choice = input("\t1. Breyta\n\t2. Eyða")
+            if choice == "1":
+                what_to_change = input("1 Breyta nafni"
+                                       "\n2. Breyta símanúmer\n3. Breyta kredikortanúmeri")
 
     def get_customer_list(self):
         """Prentar ut lista yfir alla viðskiptavini með grunnupplýsingum"""
