@@ -24,7 +24,7 @@ class Customer(object):
 
     def __str__(self):
         '''String fall sem prentar allt nema kreditkorta upplýsingar'''
-        return "Kennitala: {} Nafn: {} Sími: {}".format(
+        return "{:>20}{:>10}{:>20}".format(
             self.__ssn, self.__name, self.__phone_number)
 
     def __repr__(self):
