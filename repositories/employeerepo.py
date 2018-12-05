@@ -29,7 +29,7 @@ class EmployeeRepo(object):
                         csv_writer.writerow(row)
                     else:
                         employee_to_store.append(row)
-                        employee_to_store[choice] = new_value
+                        employee_to_store[choice-1] = new_value
                         csv_writer.writerow(employee_to_store)
 
         with open("./data/employees.csv", "w") as new_employees_file:
