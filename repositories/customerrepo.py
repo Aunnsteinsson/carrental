@@ -37,8 +37,10 @@ class CustomerRepo(object):
         with open("./data/customers.csv", "r") as customer_file:
             csv_reader = csv.reader(customer_file)
             for row in csv_reader:
-                if row[0] == ssn:
-                    return row
+                if row:
+                    if row[0] == ssn:
+                        return row
+        return None
 
 
 """with open("./data/customers.csv") as customer_file:

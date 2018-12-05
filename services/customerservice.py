@@ -14,7 +14,8 @@ class CustomerService(object):
         if customer_list == None:
             return None
         customer = Customer(
-            customer_list[0], customer_list[1], customer_list[2], customer_list[3])
+            customer_list[0], customer_list[1], customer_list[2],
+            customer_list[3])
         return customer
 
     def remove_customer(self, ssn):
@@ -31,13 +32,15 @@ class CustomerService(object):
 
     def get_list(self):
         list = self.__customer_repo.get_customers()
+        customer_list = []
+        for customer in list:
+            customer_class = Customer(
+                customer[0], customer[1], customer[2], customer[3])
+            customer_list.append(customer_class)
         string = ""
-        for customer in listi:
+        for customer in customer_list:
             string += customer + "\n"
         return string
 
     def show_orders():
         pass
-
-
-k = CustomerService()
