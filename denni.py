@@ -14,7 +14,7 @@ import csv
 bla("1234567890")"""
 
 
-def bla(ssn):
+"""def bla(ssn):
 
     with open("./data/customers.csv", "r") as customer_file:
         csv_reader = csv.reader(customer_file)
@@ -25,3 +25,17 @@ def bla(ssn):
 
 joi = bla("1234")
 print(joi)
+"""
+
+
+def overview_customers():
+    list_of_employees = []
+    with open("./data/customers.csv", "r") as customer_file:
+        csv_reader = csv.reader(customer_file)
+        for line in csv_reader:
+            list_of_employees.append(line)
+    return list_of_employees
+
+
+bla = overview_customers()
+print(bla)

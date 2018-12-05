@@ -17,7 +17,7 @@ class CustomerRepo(object):
 
     def remove_customer(self, ssn):
         with open("./data/customers.csv", "r") as customer_input:
-            with open("./data/customers_edit.csv", "w") as customer_output:
+            with open("./data/customers_edit.csv", "w", newline="") as customer_output:
                 csv_reader = csv.reader(customer_input)
                 csv_writer = csv.writer(customer_output)
                 for row in csv_reader:
@@ -25,7 +25,7 @@ class CustomerRepo(object):
                         if row[0] != ssn:
                             csv_writer.writerow(row)
 
-        with open("./data/customers.csv", "w") as new_customer_file:
+        with open("./data/customers.csv", "w", newline="") as new_customer_file:
             with open("./data/customers_edit.csv", "r") as new_customer_edit:
                 csv_reader = csv.reader(new_customer_edit)
                 csv_writer = csv.writer(new_customer_file)
@@ -37,8 +37,18 @@ class CustomerRepo(object):
         with open("./data/customers.csv", "r") as customer_file:
             csv_reader = csv.reader(customer_file)
             for row in csv_reader:
-                if row[0] == ssn:
-                    return row
+                if row:
+                    if row[0] == ssn:
+                        return row
+        return None
+
+    def overview_customers(self):
+        list_of_employees = []
+        with open("./data/customers.csv", "r") as customer_file:
+            csv_reader = csv.reader(customer_file)
+            for line in csv_reader:
+                list_of_employees.append(line)
+        return list_of_employees
 
 
 """with open("./data/customers.csv") as customer_file:
