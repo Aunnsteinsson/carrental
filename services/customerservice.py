@@ -3,13 +3,14 @@ from repositories.customerrepo import CustomerRepo
 
 class CustomerService(object):
     def __init__(self):
-        self.__customer_repo = CustomerRepo
+        self.__customer_repo = CustomerRepo()
 
     def make_customer(self, customer):
         self.__customer_repo.add_customer(customer)
 
     def find_customer(self, ssn):
-        self.__customer_repo.  # Eitthvað fall
+        # self.__customer_repo.  # Eitthvað fall
+        pass
 
     def remove_customer(self, ssn):
         self.__customer_repo.remove_customer(ssn)
