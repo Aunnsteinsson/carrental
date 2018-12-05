@@ -134,7 +134,8 @@ class SalesmanUI(object):
                     print("Enginn viðskiptavinur skráður á þessa kennitölu")
 
             if choice == "2":
-                choice = self.get_customer_list()
+                string = self.get_customer_list()
+                print(string)
             if choice == "3":
                 self.new_customer_menu()
         return choice

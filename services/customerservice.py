@@ -43,7 +43,7 @@ class CustomerService(object):
         self.make_customer(customer_class)
 
     def get_list(self):
-        list = self.__customer_repo.get_customers()
+        list = self.__customer_repo.overview_customers()
         customer_list = []
         for customer in list:
             customer_class = Customer(
