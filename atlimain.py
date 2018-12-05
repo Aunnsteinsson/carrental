@@ -20,8 +20,11 @@ class SalesmanUI(object):
         a_customer = Employee("gunnarboss", "abc1234",
                               "Gunnar Pall")
         self.__employee_service.add_employee(a_customer)
+        yesno = input("remove?")
+        if yesno == "y":
+            self.__employee_service.remove_employee("gunnarboss")
         # username = input("username: ")
-        # numer = input("skrifaðu 3")
+        # numer = input("skrifaðu 2: ")
         # nytt_nafn = input("skrifaðu nýja nafnið: ")
         # self.__employee_service.change_employee(username, numer, nytt_nafn)
         # username = ("username: ")
