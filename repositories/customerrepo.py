@@ -12,17 +12,17 @@ class CustomerRepo(object):
             name = customer.get_name()
             phone_number = customer.get_phone_number()
             creditcard_number = customer.get_creditcard_number()
-            customer_file.write("{},{},{},{}".format(
+            customer_file.write("\n{},{},{},{}".format(
                 ssn, name, phone_number, creditcard_number))
 
     def remove_customer(self):
         pass
 
-    def get_car(self):
+    def get_customer(self):
         pass
 
 
-with open("./data/customers.csv") as customer_file:
+"""with open("./data/customers.csv") as customer_file:
     csv_reader = csv.DictReader(customer_file)
     for line in csv_reader:
-        print(line)
+        print(line)"""
