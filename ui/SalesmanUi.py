@@ -124,12 +124,39 @@ class SalesmanUI(object):
                 """Viðskiptavinir\n\t1. Leita eftir kennitölu
 \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur""")
             if choice == "1":  # Kann ekki að leita að viðskiptavinum
-                pass
-            if choice == "2":  # Ekki komið get fall. Geri þetta þegar það kemur
-                pass
+                ssn = input("Kennitala: ")
+                # Bara tímabundið þangað til að ég fæ find customer
+                self.__customer_service.remove_customer(ssn)
+                #customer = self.__customer_service(ssn)
+                # returnar None ef að hann finnst ekki
+                # if customer:
+                #    self.find_customer(customer)
+                # else:
+                #    print("Enginn viðskiptavinur skráður á þessa kennitölu")
+
+            if choice == "2":
+                choice = self.get_customer_list()
             if choice == "3":
                 self.new_customer_menu()
         return choice
+
+    def find_customer(self, customer):
+        self.print_header()
+        print("Viðskiptavinir - Kennitala\n")
+
+    def get_customer_list(self):
+        """Prentar ut lista yfir alla viðskiptavini með grunnupplýsingum"""
+        self.print_header()
+        print("Viðskiptavinir - Allir Viðskiptavinir")
+        print("\t Kennitala     | Nafn        | Sími")
+        print("-"*50)
+        string = self.__customer_service.get_list()
+        print(string)
+        choice = input("Veldu aðgerð")
+        if choice in HOMECOMMANDS:
+            return choice
+        else:
+            return None
 
     def new_customer_menu(self):
         """biður um nauðsynlegar upplýsingar og býr til viðskiptavin"""

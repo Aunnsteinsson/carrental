@@ -8,6 +8,9 @@ class CustomerService(object):
     def make_customer(self, customer):
         self.__customer_repo.add_customer(customer)
 
+    def find_customer(self, ssn):
+        self.__customer_repo.  # Eitthvað fall
+
     def remove_customer(self, ssn):
         self.__customer_repo.remove_customer(ssn)
 
@@ -20,8 +23,12 @@ class CustomerService(object):
     def change_name(self, ssn, new_name):
         self.__customer_repo.change_name(ssn, new_name)
 
-    def show_list(self):
-        self.__customer_repo.get_customers()
+    def get_list(self):
+        list = self.__customer_repo.get_customers()
+        string = ""
+        for customer in listi:
+            string += customer + "\n"
+        return string
 
     def show_orders():
         pass
