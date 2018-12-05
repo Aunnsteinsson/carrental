@@ -50,16 +50,6 @@ class SalesmanUI(object):
                 self.customer_menu()
             elif choice == "4":
                 pass
-            elif choice == "5":
-                kennitala = input("username: ")
-                self.__employee_service.add_employee(kennitala)
-                kennitala = input("username: ")
-                numer = input("skrifaðu 3")
-                nytt_nafn = input("skrifaðu nýja nafnið: ")
-                self.__employee_service.change_employee(
-                    kennitala, numer, nytt_nafn)
-                kennitala = ("username: ")
-                self.__employee_service.remove_employee(kennitala)
 
                 # ég hef ekki hugmynd um hvernig við ætlum að sýna verðlistann
 
@@ -136,14 +126,12 @@ class SalesmanUI(object):
 \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur""")
             if choice == "1":  # Kann ekki að leita að viðskiptavinum
                 ssn = input("Kennitala: ")
-                # Bara tímabundið þangað til að ég fæ find customer
-                self.__customer_service.remove_customer(ssn)
-                #customer = self.__customer_service(ssn)
+                customer = self.__customer_service.find_customer(ssn)
                 # returnar None ef að hann finnst ekki
-                # if customer:
-                #    self.find_customer(customer)
-                # else:
-                #    print("Enginn viðskiptavinur skráður á þessa kennitölu")
+                if customer:
+                    self.find_customer(ssn, customer)
+                else:
+                    print("Enginn viðskiptavinur skráður á þessa kennitölu")
 
             if choice == "2":
                 choice = self.get_customer_list()
@@ -151,7 +139,7 @@ class SalesmanUI(object):
                 self.new_customer_menu()
         return choice
 
-    def find_customer(self, customer):
+    def find_customer(self, ssn, customer):
         self.print_header()
         print("Viðskiptavinir - Kennitala\n")
         print(customer)
@@ -161,8 +149,23 @@ class SalesmanUI(object):
         while choice not in HOMECOMMANDS:
             choice = input("\t1. Breyta\n\t2. Eyða")
             if choice == "1":
-                what_to_change = input("1 Breyta nafni"
-                                       "\n2. Breyta símanúmer\n3. Breyta kredikortanúmeri")
+                self.change_menu(ssn)
+            if choice == "2":
+                self.__customer_service.remove_customer(ssn)
+
+    def change_menu(self, ssn):
+        what_to_change = input("1 Breyta nafni"
+                               "\n2. Breyta símanúmer"
+                               "\n3. Breyta kredikortanúmeri")
+        if what_to_change == "1":
+            new_name = input("Nýtt nafn")
+            self.__customer_service.change_name(ssn, new_name)
+        if what_to_change == "2":
+            new_phone_number = input("Nýja símanúmerið")
+            self.__customer_service.change_phone_number(ssn, new_phone_number)
+        if what_to_change == "3":
+            new_card_number = input("Nýja kortanúmerið")
+            self.__customer_service.change_card(ssn, new_card_number)
 
     def get_customer_list(self):
         """Prentar ut lista yfir alla viðskiptavini með grunnupplýsingum"""
