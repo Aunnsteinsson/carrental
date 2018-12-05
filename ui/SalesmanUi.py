@@ -145,13 +145,14 @@ class SalesmanUI(object):
         print(customer)
         # self.__order_service.showorders(customer)
         # þetta vantar alveg inn
-        choice = ""
-        while choice not in HOMECOMMANDS:
-            choice = input("\t1. Breyta\n\t2. Eyða")
-            if choice == "1":
-                self.change_menu(ssn)
-            if choice == "2":
-                self.__customer_service.remove_customer(ssn)
+        choice = input("\t1. Breyta\n\t2. Eyða\n\tVeldu aðgerð: ")
+        if choice == "1":
+            self.change_menu(ssn)
+        if choice == "2":
+            self.__customer_service.remove_customer(ssn)
+            print("Viðskiptavini hefur verið eytt")
+        else:
+            print("Aðgerð ekki í boði")
 
     def change_menu(self, ssn):
         what_to_change = input("1 Breyta nafni"
