@@ -11,7 +11,7 @@ class CarRepo(object):
     def add_car(self, car):
         # Bætir bíl inn í geymslu
         with open("./data/cars.csv", "a+") as car_file:
-            licence_plate = car.get__licence_plate()
+            licence_plate = car.get_licence_plate()
             a_type = car.get_type()
             status = car.get_status()
             car_file.write("\n{},{},{}".format(
@@ -24,14 +24,14 @@ class CarRepo(object):
     def remove_car(self, licence_plate):
         # Eyðir bíl úr geymslu
         with open("./data/cars.csv", "r") as car_input:
-            with open("./data/customers_edit.csv", "w") as car_output:
+            with open("./data/cars_edit.csv", "w") as car_output:
                 csv_reader = csv.reader(car_input)
                 csv_writer = csv.writer(car_output)
                 for row in csv_reader:
                     if row[0] != licence_plate:
                         csv_writer.writerow(row)
 
-        with open("./data/car.csv", "w") as new_car_file:
+        with open("./data/cars.csv", "w") as new_car_file:
             with open("./data/cars_edit.csv", "r") as new_car_edit:
                 csv_reader = csv.reader(new_car_edit)
                 csv_writer = csv.writer(new_car_file)
