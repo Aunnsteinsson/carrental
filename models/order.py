@@ -30,6 +30,6 @@ class Order(object):
         Viðbótartrygging {}".format(self.__start_date, self.__end_date,
                                     self.__car, self.__insurance)
 
-    # def __repr__(self):
-    #     return "{},{},{},{}".format(self.__start_date, self.__end_date,
-    #                                 self.__car, self.__insurance)
+    def __repr__(self):
+        return "{},{},{},{}".format(self.__start_date, self.__end_date,
+                                    self.__car, self.__insurance)
