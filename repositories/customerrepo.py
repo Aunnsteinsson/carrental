@@ -21,15 +21,16 @@ class CustomerRepo(object):
                 csv_reader = csv.reader(customer_input)
                 csv_writer = csv.writer(customer_output)
                 for row in csv_reader:
-                    if row[0] != ssn:
-                        csv_writer.writerow(row)
+                    if row:
+                        if row[0] != ssn:
+                            csv_writer.writerow(row)
 
         with open("./data/customers.csv", "w") as new_customer_file:
             with open("./data/customers_edit.csv", "r") as new_customer_edit:
                 csv_reader = csv.reader(new_customer_edit)
                 csv_writer = csv.writer(new_customer_file)
                 for row in csv_reader:
-                    if row != "":
+                    if row:
                         csv_writer.writerow(row)
 
     def get_customer(self, ssn):
