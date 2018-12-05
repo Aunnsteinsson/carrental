@@ -6,7 +6,7 @@ class EmployeeRepo(object):
     def __init__(self):
         self.__employee = {}
 
-    def get_employees(self):
+    def get_employee(self):
         employees = []
         with open("./data/employees.csv", "r") as employees_file:
             csv_reader = csv.reader(employees_file)
@@ -18,7 +18,8 @@ class EmployeeRepo(object):
         with open("./data/employees.csv", "a+") as employees_file:
             employees_file.write(employee.__repr__() + "/n")
 
-    def change_info_of_employee(self, username_of_user_to_change, choice, new_value):
+    def change_info_of_employee(self, username_of_user_to_change, choice,
+                                new_value):
         employee_to_store = []
         with open("./data/employees.csv", "r") as employees_input:
             with open("./data/employees_edit.csv", "w") as employees_output:
