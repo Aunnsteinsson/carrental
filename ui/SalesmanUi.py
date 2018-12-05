@@ -50,6 +50,17 @@ class SalesmanUI(object):
                 self.customer_menu()
             elif choice == "4":
                 pass
+            elif choice == "5":
+                kennitala = input("username: ")
+                self.__employee_service.add_employee(kennitala)
+                kennitala = input("username: ")
+                numer = input("skrifaðu 3")
+                nytt_nafn = input("skrifaðu nýja nafnið: ")
+                self.__employee_service.change_employee(
+                    kennitala, numer, nytt_nafn)
+                kennitala = ("username: ")
+                self.__employee_service.remove_employee(kennitala)
+
                 # ég hef ekki hugmynd um hvernig við ætlum að sýna verðlistann
 
     def order_menu(self):

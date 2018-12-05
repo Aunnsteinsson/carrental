@@ -22,19 +22,6 @@ class Customer(object):
     def get_creditcard_number(self):
         return self.__creditcard_number
 
-    # Föllin hér að neðan eru til að breyta upplýsingum fyrir breytur
-    def change__ssn(self, new_ssn):
-        self.__ssn = new_ssn
-
-    def change_name(self, new_name):
-        self.__name = new_name
-
-    def change_phone_number(self, new_phone_number):
-        self.__phone_number = new_phone_number
-
-    def change_creditcard_number(self, new_creditcard_number):
-        self.__creditcard_number = new_creditcard_number
-
     def __str__(self):
         '''String fall sem prentar allt nema kreditkorta upplýsingar'''
         return "Kennitala: {} Nafn: {} Sími: {}".format(
