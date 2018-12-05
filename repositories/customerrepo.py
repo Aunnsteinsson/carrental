@@ -48,7 +48,7 @@ class CustomerRepo(object):
             csv_reader = csv.reader(customer_file)
             for line in csv_reader:
                 list_of_employees.append(line)
-            return list_of_employees
+        return list_of_employees
 
 
 """with open("./data/customers.csv") as customer_file:
