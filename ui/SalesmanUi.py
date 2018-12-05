@@ -33,7 +33,7 @@ class SalesmanUI(object):
         print(texti)
 
         choice = input("Veldu aðgerð: ")
-        # Inn í þetta vantar að prenta út það sem er fyrir neðan
+        # Inn í þetta Sendibílartar að prenta út það sem er fyrir neðan
         return choice
 
     def main_menu(self):
@@ -149,10 +149,40 @@ class SalesmanUI(object):
             choice = self.show_menu(
                 """Bílayfirlit\n\t1. Allir Bílar
 \t2. Lausir Bílar\n\t3. Í útleigu""")
-            if choice == "1":
-                pass
-            if choice == "2":
-                pass
-            if choice == "3":
-                pass
+            if choice == "1" or "2" or "3":
+                if choice == "1":
+                    menu = "sem eru lausir eða í útleigu"
+                if choice == "2":
+                    menu = "sem eru lausir "
+                if choice == "3":
+                    menu = "sem eru í útleigu"
+                second_choice = input(
+                    "\t1. Allar gerðir\n\t2. Jeppar\n\t3. Fólksbílar"
+                    "\n\t4. Sendibílar")
+                if second_choice == "2":
+                    the_type = "Jeppar"
+                elif second_choice == "3":
+                    the_type = "Fólksbílar"
+                elif second_choice == "4":
+                    the_type = "Sendibílar"
+                else:
+                    the_type = "all_cars"
+            choice = self.second_car_menu(the_type, menu)
+        return choice
+
+    def second_car_menu(self, the_type, menu):
+        self.print_header()
+        print("Bílayfirlit - {} {}".format(the_type, menu))
+        print("\tTegund | Bílnúmer | Staða\n\t", "-"*23)
+        if the_type == "Allir bílar":
+            pass
+        if the_type == "Jeppar":
+            pass
+        if the_type == "Fólksbílar":
+            pass
+        if the_type == "Sendibílar":
+            pass
+        choice = ""
+        while choice not in HOMECOMMANDS:
+            choice = input("Veldu aðgerð: ")
         return choice
