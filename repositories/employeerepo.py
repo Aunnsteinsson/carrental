@@ -6,19 +6,17 @@ class EmployeeRepo(object):
     def __init__(self):
         self.__employee = {}
 
-    def get_employee(self):
-        pass
+    def get_employees(self):
+        employees = []
+        with open("./data/employees.csv", "r") as employees_file:
+            csv_reader = csv.reader(employees_file)
+            for line in csv_reader:
+                employees.append(line)
+        return employees
 
     def add_employee(self, employee):
         with open("./data/employees.csv", "a+") as employees_file:
-            username = employee.get__username()
-            password = employee.get__password()
-            position = employee.get__type()
-            name = employee.get__name()
-            phone = employee.get__phone_number()
-            address = employee.get_address()
-            employees_file.write("\n{},{},{},{},{},{}".format(
-                username, password, position, name, phone, address))
+            employees_file.write(employee.__repr__() + "/n")
 
     def change_info(self, choice, new_value):
         pass

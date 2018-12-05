@@ -7,3 +7,6 @@ class EmployeeService(object):
 
     def add_employee(self, employee):
         self.__employee_repo.add_employee(employee)
+
+    def get_employees(self):
+        self.__employee_repo.get_employees()
