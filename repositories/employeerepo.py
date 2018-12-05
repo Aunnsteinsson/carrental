@@ -16,7 +16,7 @@ class EmployeeRepo(object):
 
     def add_employee(self, employee):
         with open("./data/employees.csv", "a+") as employees_file:
-            employees_file.write(employee.__repr__() + "\n")
+            employees_file.write(employee.__repr__() + "/n")
 
     def change_info(self, choice, new_value):
         pass
