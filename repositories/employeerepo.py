@@ -16,6 +16,7 @@ class EmployeeRepo(object):
 
     def add_employee(self, employee):
         with open("./data/employees.csv", "a+") as employees_file:
+
             employees_file.write(employee.__repr__())
 
     def change_info_of_employee(self, username_of_user_to_change, choice,
