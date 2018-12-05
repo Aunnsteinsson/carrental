@@ -32,8 +32,12 @@ class CustomerRepo(object):
                     if row != "":
                         csv_writer.writerow(row)
 
-    def get_customer(self):
-        pass
+    def get_customer(self, ssn):
+        with open("./data/customers.csv", "r") as customer_file:
+            csv_reader = csv.reader(customer_file)
+            for row in csv_reader:
+                if row[0] == ssn:
+                    return row
 
 
 """with open("./data/customers.csv") as customer_file:
