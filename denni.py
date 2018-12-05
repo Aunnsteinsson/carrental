@@ -33,7 +33,8 @@ def overview_customers():
     with open("./data/customers.csv", "r") as customer_file:
         csv_reader = csv.reader(customer_file)
         for line in csv_reader:
-            list_of_employees.append(line)
+            if line[0] != "kennitala":
+                list_of_employees.append(line)
     return list_of_employees
 
 
