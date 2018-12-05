@@ -33,7 +33,7 @@ class BossUI(object):
             elif choice == "2":
                 choice = self.car_menu()
             elif choice == "3":
-                self.show_customers()
+                choice = self.show_customers()
             elif choice == "4":
                 self.show_employees()
             elif choice == "5":
