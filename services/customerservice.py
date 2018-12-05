@@ -14,30 +14,47 @@ class CustomerService(object):
         if customer_list == None:
             return None
         customer = Customer(
-            customer_list[0], customer_list[1], customer_list[2], customer_list[3])
+            customer_list[0], customer_list[1], customer_list[2],
+            customer_list[3])
         return customer
 
     def remove_customer(self, ssn):
         self.__customer_repo.remove_customer(ssn)
 
     def change_card(self, ssn, new_credit):
-        self.__customer_repo.change_card_number(ssn, new_credit)
+        customer_list = self.__customer_repo.get_customer(ssn)
+        customer_class = Customer(
+            customer_list[0], customer_list[1], customer_list[2], new_credit)
+        self.remove_customer(ssn)
+        self.make_customer(customer_class)
 
     def change_phone_number(self, ssn, new_phone_number):
-        self.__customer_repo.change_card_number(ssn, new_phone_number)
+        customer_list = self.__customer_repo.get_customer(ssn)
+        customer_class = Customer(
+            customer_list[0], customer_list[1], new_phone_number, customer_list[3])
+        self.remove_customer(ssn)
+        self.make_customer(customer_class)
 
     def change_name(self, ssn, new_name):
-        self.__customer_repo.change_name(ssn, new_name)
+        customer_list = self.__customer_repo.get_customer(ssn)
+        customer_class = Customer(
+            customer_list[0], new_name, customer_list[2], customer_list[3])
+        self.remove_customer(ssn)
+        self.make_customer(customer_class)
 
     def get_list(self):
-        list = self.__customer_repo.get_customers()
+        list = self.__customer_repo.overview_customers()
+        customer_list = []
+        for customer in list:
+            if len(customer) == 4:
+                customer_class = Customer(
+                    customer[0], customer[1], customer[2], customer[3])
+                customer_list.append(customer_class)
         string = ""
-        for customer in listi:
-            string += customer + "\n"
+        for customer in customer_list:
+            customer_string = customer.__str__()
+            string += customer_string + "\n"
         return string
 
     def show_orders():
         pass
-
-
-k = CustomerService()

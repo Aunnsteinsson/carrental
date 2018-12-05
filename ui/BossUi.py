@@ -1,5 +1,6 @@
 #Teddi sér um þennan fæl
 from datetime import date
+import os
 HOMECOMMANDS = ["h", "s"]
 POSSIBLE_ACTIONS = "\t1. Pantanir\n\t2. Bílayfirlit\n\
 \t3. Viðskiptavinir\n\t4. Starfsmenn\n\t5. Verðlisti\n\t6. Tekjur\n"
@@ -16,6 +17,7 @@ class BossUI(object):
         print(("-"*100))
 
     def show_menu(self, possible_operations):
+        os.system('cls')
         self.print_header()
         print(possible_operations)
 
@@ -24,6 +26,7 @@ class BossUI(object):
         return choice
 
     def main_menu(self):
+        os.system('cls')
         #Sýnir upphafsviðmót yfirmanns
         choice = ""
         while choice.lower() != HOMECOMMANDS[1]:
@@ -33,7 +36,7 @@ class BossUI(object):
             elif choice == "2":
                 choice = self.car_menu()
             elif choice == "3":
-                self.show_customers()
+                choice = self.show_customers()
             elif choice == "4":
                 self.show_employees()
             elif choice == "5":
@@ -43,6 +46,7 @@ class BossUI(object):
 
     def show_all_orders(self):
         #from services import orderservice
+        os.system('cls')
         self.print_header()
         print("\tdagsetning  |  Pönt.nr.  |  Nafn  |  Kennitala  |  Tegund  |  Bílnr.  |  Staða\n"+("-")*100)
         choice = ""
@@ -53,6 +57,7 @@ class BossUI(object):
     def car_menu(self):
         #Sýnir bílayfirlitsviðmót yfirmanns og kallar á klasa eftir því sem við á
         """Prints car menu and follows up on commands"""
+        os.system('cls')
         choice = ""
         while choice not in HOMECOMMANDS:  # Placeholder
             choice = self.show_menu(
@@ -68,6 +73,7 @@ class BossUI(object):
 
     def show_customers(self):
         """Prints all customers for boss"""
+        os.system('cls')
         self.print_header()
         print("\tKennitala  |  Nafn  |  Sími\n"+("-")*100)
         choice = ""
@@ -76,6 +82,7 @@ class BossUI(object):
         return choice
     
     def show_employees(self):
+        os.system('cls')
         self.print_header()
         print("\tNotendanafn  |  Hlutverk  |  Nafn  |  Sími  |  Heimilisfang\n"+("-")*100)
         choice = ""
@@ -85,6 +92,7 @@ class BossUI(object):
 
     def price_menu(self):
         #Sýnir verðlistaviðmót yfirmanns og kallar á klasa eftir því sem við á
+        os.system('cls')
         self.print_header()
         print("Verðlisti\n\t{:<12} | {:<12}".format("Jeppi","10000/dag"))
         print("\t{:<12} | {:<12}".format("Fólksbíll","500/dag"))
@@ -96,6 +104,7 @@ class BossUI(object):
         return choice
     
     def revenue(self):
+        os.system('cls')
         self.print_header()
         print("Tekjur\n\t{:<25} | {:<10}\n\t".format("Pöntunarnúmer","Tekjur")+("-")*38)
         print("\t{:<25} | {:>10}".format("000001", "120.000 kr"))

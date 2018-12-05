@@ -120,11 +120,11 @@ class SalesmanUI(object):
     def customer_menu(self):
         """Prentar viðskiptavinaviðmót sölumanns og tekur við input"""
         choice = ""
-        while choice not in HOMECOMMANDS:  # Placeholder
+        while choice not in HOMECOMMANDS:
             choice = self.show_menu(
                 """Viðskiptavinir\n\t1. Leita eftir kennitölu
 \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur""")
-            if choice == "1":  # Kann ekki að leita að viðskiptavinum
+            if choice == "1":
                 ssn = input("Kennitala: ")
                 customer = self.__customer_service.find_customer(ssn)
                 # returnar None ef að hann finnst ekki
@@ -134,7 +134,8 @@ class SalesmanUI(object):
                     print("Enginn viðskiptavinur skráður á þessa kennitölu")
 
             if choice == "2":
-                choice = self.get_customer_list()
+                string = self.get_customer_list()
+                print(string)
             if choice == "3":
                 self.new_customer_menu()
         return choice
