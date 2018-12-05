@@ -26,7 +26,7 @@ class Employee(object):
         return self.__password
 
     def get_type(self):
-        return self.__type
+        return self.__emp_type
 
     def get_phone_number(self):
         return self.__phone_number
@@ -54,12 +54,12 @@ class Employee(object):
         """Her ery prentaðar allar upplýsingar nema password
          því það eiga ekki allir að hafa aðgang að passwordi"""
         return "Nafn: {}, Notendanafn: {}, Staða: {}, Símanúmer: {}, \
-        Heimilisfang: {}".format(self.__name, self.__username, self.__type,
+        Heimilisfang: {}".format(self.__name, self.__username, self.__emp_type,
                                  self.__phone_number, self.__address)
 
     def __repr__(self):
         """Hér eru allar upplýsingar prentaðar
          með kommu á milli. Þetta er gert fyrir admin"""
         return "{},{},{},{},{},{}".format(self.__name, self.__username,
-                                          self.__password, self.__type,
+                                          self.__password, self.__emp_type,
                                           self.__phone_number, self.__address)

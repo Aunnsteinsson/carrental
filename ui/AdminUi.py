@@ -1,5 +1,6 @@
 from datetime import date
 from models.employee import Employee
+from services.employeeservice import EmployeeService
 
 HEIMSETNINGAR = ["h", "H", "s", "S"]
 
@@ -7,6 +8,7 @@ HEIMSETNINGAR = ["h", "H", "s", "S"]
 class AdminUI(object):
     def __init__(self, username):
         self.__username = username
+        self.__employee_service = EmployeeService()
 
     def print_header(self):
         '''Prentar haus fyrir Kerfisstjóra'''
@@ -76,14 +78,19 @@ class AdminUI(object):
         choice = ""
         while choice not in HEIMSETNINGAR:
             self.print_header()
-            username = input("Notendanafn: ")
-            password = input("Lykilorð: ")
-            name = input("Nafn: ")
-            address = input("Heimilisfang: ")
-            phonenumber = input("Sími: ")
-            emp_type = input("(S)öludeil, (y)firmaður eða (k)erfisstjóri: ")
-            Employee(username, password, name,
-                     address, phonenumber, emp_type)
+            username = input("\tNotendanafn: ")
+            password = input("\tLykilorð: ")
+            name = input("\tNafn: ")
+            address = input("\tHeimilisfang: ")
+            phonenumber = input("\tSími: ")
+            emp_type = input("\t(S)öludeild, (y)firmaður eða (k)erfisstjóri: ")
+            if emp_type.lower() == "k":
+                emp_type = "admin"
+            elif emp_type.lower() == "y":
+                emp_type = "yfirmadur"
+            an_employee = Employee(username, password, name,
+                                   address, phonenumber, emp_type)
+            self.__employee_service.add_employee(an_employee)
 
     def quit(self):
         pass
