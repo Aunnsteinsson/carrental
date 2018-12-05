@@ -10,3 +10,10 @@ class EmployeeService(object):
 
     def get_employees(self):
         self.__employee_repo.get_employees()
+
+    def remove_employees(self, username):
+        self.__employee_repo.remove_employee(username)
+
+    def change_employee(self, username, choice, new_value):
+        self.__employee_repo.change_info_of_employee(
+            username, choice, new_value)
