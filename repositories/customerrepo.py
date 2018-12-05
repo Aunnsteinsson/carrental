@@ -12,7 +12,7 @@ class CustomerRepo(object):
             name = customer.get_name()
             phone_number = customer.get_phone_number()
             creditcard_number = customer.get_creditcard_number()
-            customer_file.write("\n{},{},{},{}".format(
+            customer_file.write("{},{},{},{}\n".format(
                 ssn, name, phone_number, creditcard_number))
 
     def remove_customer(self, ssn):
@@ -29,7 +29,8 @@ class CustomerRepo(object):
                 csv_reader = csv.reader(new_customer_edit)
                 csv_writer = csv.writer(new_customer_file)
                 for row in csv_reader:
-                    csv_writer.writerow(row)
+                    if row != "":
+                        csv_writer.writerow(row)
 
     def get_customer(self):
         pass
