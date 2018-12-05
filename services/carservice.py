@@ -1,22 +1,23 @@
 #Teddi á að massa þennan fæl
+from repositories.carrepo import CarRepo
 
 class CarService(object):
     #Sér um aðgerðir með bíla
     def __init__(self):
-        pass
+        self.__car_repo = CarRepo
 
     def make_car(self):
         #Nýskráir bíl í kerfi
-        pass
+        self.__car_repo.add_car(car)
     
     def remove_car(self):
         #Fjarlægir bíl úr kerfi
-        pass
+        self.__car_repo.remove_car(license_plate)
     
     def change_status(self):
         #Breytir stöðu bíls
-        pass
+        self.__car_repo.change_status(license_plate, new_status)
 
     def show_cars(self):
         #Fall sem sýnir lista af bílum
-        pass
+        self.__car_repo.get_car()
