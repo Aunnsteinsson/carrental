@@ -6,7 +6,7 @@ class EmployeeRepo(object):
     def __init__(self):
         self.__employee = {}
 
-    def get_employee(self):
+    def get_employees(self):
         employees = []
         with open("./data/employees.csv", "r") as employees_file:
             csv_reader = csv.reader(employees_file)
