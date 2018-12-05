@@ -41,6 +41,6 @@ class Employee(object):
     def __repr__(self):
         """Hér eru allar upplýsingar prentaðar
          með kommu á milli. Þetta er gert fyrir admin"""
-        return "{},{},{},{},{},{}".format(self.__name, self.__username,
-                                          self.__password, self.__address,
+        return "{},{},{},{},{},{}".format(self.__username, self.__password,
+                                          self.__name, self.__address,
                                           self.__phone_number, self.__emp_type)

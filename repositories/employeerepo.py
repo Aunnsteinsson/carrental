@@ -49,9 +49,9 @@ class EmployeeRepo(object):
                 csv_reader = csv.reader(employees_input)
                 csv_writer = csv.writer(employees_output)
                 for row in csv_reader:
-
-                    if temp_list[1] != username:
-                        csv_writer.writerow(row)
+                    if row:
+                        if row[0] != username:
+                            csv_writer.writerow(row)
 
         with open("./data/employees.csv", "w",
                   newline="") as new_employees_file:
@@ -59,4 +59,5 @@ class EmployeeRepo(object):
                 csv_reader = csv.reader(new_employees_edit)
                 csv_writer = csv.writer(new_employees_file)
                 for row in csv_reader:
-                    csv_writer.writerow(row)
+                    if row:
+                        csv_writer.writerow(row)
