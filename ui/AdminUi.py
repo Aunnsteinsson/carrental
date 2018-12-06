@@ -19,10 +19,10 @@ class AdminUI(object):
 
     def print_header(self):
         '''Prentar haus fyrir Kerfisstjóra'''
-        print("{:40s} {:>39}".format(
+        print("{:40s} {:>55}".format(
             "Kerfisstjóri - notandi: {}".format(self.__username), str(
                 date.today())))
-        print(("-"*80))
+        print(("-"*100))
 
     def show_menu(self, text, prompt):
         '''Prentar það menu sem notandi er staddur á.'''
@@ -90,9 +90,9 @@ class AdminUI(object):
 
     def print_employee_header(self):
         '''Prentar haus fyrir starfmannayfirlit'''
-        print("{:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<20s}".format(
-            "Notandi", "Lykilorð", "Nafn", "Hlutverk", "Sími", "Heimilisfang"))
-        print("-"*80)
+        print("{:<10s}| {:<10s}| {:<25s}| {:<25s}| {:<10s}| {:<12s}".format(
+            "Notandi", "Lykilorð", "Nafn", "Heimilisfang", "Sími", "Hlutverk"))
+        print("-"*100)
 
     def print_empoloyee(self, employee):
         '''prentar lista yfir employees'''
