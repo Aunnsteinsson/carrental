@@ -61,9 +61,9 @@ class CustomerRepo(object):
         for customer in customer_list:
             customer_class = Customer(
                 customer[KENNITALA], customer[NAFN], customer[SIMI], customer[KREDIT])
-            kennitala = Customer(ssn)
-            customer_dict[kennitala] = customer_class
-        return customer_dict
+        kennitala = customer[0]
+        customer_dict[kennitala] = customer_class
+    return customer_dict
 
     """def get_indicators(list_of_employees):
     Tekur við lista og flokkar eftir kennitölu, nafni, símanr og kreditkorti

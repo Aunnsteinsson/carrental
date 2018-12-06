@@ -1,5 +1,5 @@
 import csv
-
+from models.customer import Customer
 KENNITALA = 0
 NAFN = 1
 SIMI = 2
@@ -42,10 +42,25 @@ def overview_customers():
     return list_of_employees
 
 
-list_of_employees = overview_customers()
+list_of_customers = overview_customers()
 
 
-def get_indicators(risk_factor_list):
+def customer_dict(list_of_customers):
+    customer_list = list_of_customers
+    customer_dict = {}
+    for customer in customer_list:
+        customer_class = Customer(
+            customer[KENNITALA], customer[NAFN], customer[SIMI], customer[KREDIT])
+        kennitala = customer[0]
+        customer_dict[kennitala] = customer_class
+    return customer_dict
+
+
+bla = customer_dict(list_of_customers)
+print(bla)
+
+
+"""def get_indicators(risk_factor_list):
     ''' Extracts and returns the individual indicators from the given list '''
     kennitala = [lst[KENNITALA] for lst in list_of_employees]
     nafn = [lst[NAFN] for lst in list_of_employees]
@@ -56,3 +71,4 @@ def get_indicators(risk_factor_list):
 
 blabla = get_indicators(list_of_employees)
 print(blabla)
+"""
