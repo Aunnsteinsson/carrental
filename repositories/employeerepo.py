@@ -1,10 +1,9 @@
-from models.employee import Employee
 import csv
 
 
 class EmployeeRepo(object):
     def __init__(self):
-        self.__employee = {}
+        pass
 
     def get_employees(self):
         employees = []
