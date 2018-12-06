@@ -1,4 +1,5 @@
 #Teddi sér um þennan fæl
+from ui.sub_menus.car_menu import CarUI
 from datetime import date
 import os
 HOMECOMMANDS = ["h", "s"]
@@ -9,6 +10,7 @@ class BossUI(object):
     #Sér um viðmót yfirmanns
     def __init__(self, username):
         self.__username = username #strengur sem inniheldur notendanafn
+        self.__car_ui = CarUI(self.__username)
     
     def print_header(self):
         '''prints header for sign-in screen'''
@@ -35,7 +37,7 @@ class BossUI(object):
             if choice == "1":
                 choice = self.show_all_orders()
             elif choice == "2":
-                choice = self.car_menu()
+                choice = self.__car_ui.boss_and_salesman_car_menu()
             elif choice == "3":
                 choice = self.show_customers()
             elif choice == "4":
