@@ -43,16 +43,10 @@ class CustomerService(object):
         self.make_customer(customer_class)
 
     def get_list(self):
-        list = self.__customer_repo.overview_customers()
-        customer_list = []
-        for customer in list:
-            if len(customer) == 4:
-                customer_class = Customer(
-                    customer[0], customer[1], customer[2], customer[3])
-                customer_list.append(customer_class)
+        dict = self.__customer_repo.overview_customers()
         string = ""
-        for customer in customer_list:
-            customer_string = customer.__str__()
+        for kennitala, value in dict.items():
+            customer_string = value.__str__()
             string += customer_string + "\n"
         return string
 
