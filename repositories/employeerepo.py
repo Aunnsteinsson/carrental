@@ -10,6 +10,7 @@ class EmployeeRepo(object):
         employees = []
         with open("./data/employees.csv", "r") as employees_file:
             csv_reader = csv.reader(employees_file)
+            next(csv_reader)
             for line in csv_reader:
                 employees.append(line)
         return employees
