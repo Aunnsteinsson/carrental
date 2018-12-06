@@ -1,3 +1,5 @@
+import os
+import time
 from datetime import date
 from models.employee import Employee
 from services.employeeservice import EmployeeService
@@ -5,6 +7,7 @@ from services.carservice import CarService
 from repositories.employeerepo import EmployeeRepo
 
 HOMECOMMANDS = ["h", "H", "s", "S"]
+VALIDJOB = ["k", "s", "y"]
 
 
 class AdminUI(object):
@@ -34,6 +37,7 @@ class AdminUI(object):
         '''Upphafssíða fyrir kerfisstjóra'''
         choice = ""
         while choice not in HOMECOMMANDS:
+            os.system('cls')
             choice = self.show_menu(
                 "\n\t1. Starfsmenn\n\t2. Nýr starfsmaður\n\t3. Bílayfirlit\n",
                 "Veldu síðu: ")
@@ -60,6 +64,7 @@ class AdminUI(object):
 
     def car_menu(self):
         '''Bílayfirlit menu fyrir Kerfisstjóra'''
+        os.system('cls')
         choice = ""
         while choice not in HOMECOMMANDS:
             choice = self.show_menu(
@@ -94,6 +99,7 @@ class AdminUI(object):
     def employee_menu(self):
         '''Yfirlit yfir alla starfsmenn fyrirtækis,
         Möguleiki á að eyða starfsmanni'''
+        os.system('cls')
         choice = ""
         while choice not in HOMECOMMANDS:
             self.print_header()
@@ -119,6 +125,7 @@ class AdminUI(object):
                 elif choice.lower() == "n":
                     print("{}\nNotanda hefur ekki verið eytt!\n".format(
                         "-"*40))
+                time.sleep(3)
                 choice = "h"
             elif choice == "2":
                 # Breyta einhverju við employee
@@ -132,6 +139,7 @@ class AdminUI(object):
         print("Hverju skal breyta?\n{}".format("-"*40))
         print("\t1. Lykilorð\n\t2. Nafn\n\t3. Heimilisfang\n\t4. Sími\n")
         choice = ""
+        new_value = ""
         while choice not in HOMECOMMANDS:
             choice = input("Veldu aðgerð: ")
             if choice == "1":
@@ -142,14 +150,15 @@ class AdminUI(object):
                 new_value = input("Nýtt heimilisfang: ")
             elif choice == "4":
                 new_value = input("Nýr sími: ")
+
             # Skoða bug
             self.__employee_repo.change_info_of_employee(
                 username, choice, new_value)
-
         choice = "h"
 
     def new_employee(self):
         '''Býr til nýjan starfsmann'''
+        os.system('cls')
         choice = ""
         while choice not in HOMECOMMANDS:
             self.print_header()
@@ -158,7 +167,10 @@ class AdminUI(object):
             name = input("\tNafn: ")
             address = input("\tHeimilisfang: ")
             phonenumber = input("\tSími: ")
-            emp_type = input("\t(S)öludeild, (y)firmaður eða (k)erfisstjóri: ")
+            emp_type = ""
+            while emp_type not in VALIDJOB:
+                emp_type = input(
+                    "\t(S)öludeild, (y)firmaður eða (k)erfisstjóri: ")
             if emp_type.lower() == "k":
                 emp_type = "admin"
             elif emp_type.lower() == "y":
@@ -168,14 +180,15 @@ class AdminUI(object):
             an_employee = Employee(username, password, name,
                                    address, phonenumber, emp_type)
             choice = input(
-                "Staðfesta nýjan notanda {} ((J)á/(N)ei): ".format(username))
+                "\tStaðfesta nýjan notanda {} ((J)á/(N)ei): ".format(username))
             if choice.lower() == "j":
                 self.__employee_service.add_employee(an_employee)
-                print("\n{}\nNýr notandi hefur verið skráður!\n".format("-"*40))
-                choice = "h"
+                print("\n{}\nNýr notandi hefur verið skráður!\n".format(
+                    "-"*40))
             else:
-                print("Action aborted!")
-                choice = "h"
+                print("\nAction aborted! - Returning home")
+            time.sleep(3)
+            choice = "h"
 
     def quit(self):
         pass
