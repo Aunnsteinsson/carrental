@@ -204,37 +204,37 @@ class SalesmanUI(object):
             if choice == "1" or "2" or "3":
                 if choice == "1":
                     menu = "sem eru lausir eða í útleigu"
+                    listi1 = ["Frátekinn", "Laus"]
                 if choice == "2":
                     menu = "sem eru lausir "
+                    listi1 = ["Laus"]
                 if choice == "3":
                     menu = "sem eru í útleigu"
+                    listi1 = ["Frátekinn"]
                 second_choice = input(
                     "\t1. Allar gerðir\n\t2. Jeppar\n\t3. Fólksbílar"
                     "\n\t4. Sendibílar")
                 if second_choice == "2":
                     the_type = "Jeppar"
+                    listi2 = ["Jeppi"]
                 elif second_choice == "3":
                     the_type = "Fólksbílar"
+                    listi2 = ["Fólksbíll"]
                 elif second_choice == "4":
                     the_type = "Sendibílar"
+                    listi2 = ["Sendibíll"]
                 else:
                     the_type = "all_cars"
-            choice = self.second_car_menu(the_type, menu)
+                    listi2 = ["Sendibíll", "Fólksbíll", "Jeppi"]
+            choice = self.second_car_menu(the_type, menu, listi1, listi2)
         return choice
 
-    def second_car_menu(self, the_type, menu):
+    def second_car_menu(self, the_type, menu, listi1, listi2):
         self.print_header()
         print("Bílayfirlit - {} {}".format(the_type, menu))
         print("\tTegund | Bílnúmer | Staða\n\t", "-"*23)
-        if the_type == "Allir bílar":
-            pass
-        if the_type == "Jeppar":
-            pass
-        if the_type == "Fólksbílar":
-            pass
-        if the_type == "Sendibílar":
-            pass
-        choice = ""
+        strengur = self.__car_service.get_list_of_cars(listi2, listi1)
+        print(strengur)
         while choice not in HOMECOMMANDS:
             choice = input("Veldu aðgerð: ")
         return choice
