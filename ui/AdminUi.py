@@ -35,15 +35,15 @@ class AdminUI(object):
             choice = self.show_menu(
                 "\n\t1. Starfsmenn\n\t2. Nýr starfsmaður\n\t3. Bílayfirlit\n",
                 "Veldu síðu: ")
-            if choice == 1:
-                choice = self.employee_menu
-            # elif choice == 2:
-                # choice =  # new employee
-            elif choice == 3:
-                choice = self.car_menu
+            if choice == "1":
+                choice = self.employee_menu()
+            elif choice == "2":
+                choice = self.new_employee()
+            elif choice == "3":
+                choice = self.car_menu()
 
     def car_menu(self):
-        '''Bílayfirlit fyrir Kerfisstjóra'''
+        '''Bílayfirlit menu fyrir Kerfisstjóra'''
         choice = ""
         while choice not in HOMECOMMANDS:
             choice = self.show_menu(
@@ -68,6 +68,10 @@ class AdminUI(object):
             "Nafn", "Notandi", "Lykilorð", "Hlutverk", "Sími", "Heimilisfang"))
         print("-"*80)
 
+    def print_empoloyee_list(self, employee_list):
+        '''prentar lista yfir employees'''
+        pass
+
     def employee_menu(self):
         '''Yfirlit yfir alla starfsmenn fyrirtækis,
         Möguleiki á að eyða starfsmanni'''
@@ -77,24 +81,53 @@ class AdminUI(object):
             self.print_employee_header()
             # Finna leið til að prenta starfsmenn rétt
             employees_list = self.__employee_repo.get_employees()
-            print(employees_list)
+            # self.print_employee_list(employees_list)
             # aðgerðir tengdar starfsmanni (eyða, breyta)
             print("\nEyða starfsmanni?\n{}".format("-"*40))
             print("1. Eyða\n2. Breyta\n")
             choice = input("Veldu aðgerð: ")
             if choice == "1":
+                # Eyða employee
                 print("\nEyða\n{}".format("-"*40))
-                # empl = input("Notandanafn: ")
+                username = input("Notandanafn: ")
+                # check ef employee er til í kerfi(empl.csv), þá halda áfram,
+                # annars láta vita að notandi er ekki til
+
                 choice = input("Ertu viss? ((J)á/(N)ei): ")
                 if choice.lower() == "j":
-                    # Hér þarf að tengja við remove_employee í emprepo
+                    self.__employee_repo.remove_employee(username)
                     print("{}\nNotanda hefur verið eytt!\n".format("-"*40))
                 elif choice.lower() == "n":
                     print("{}\nNotanda hefur ekki verið eytt!\n".format(
                         "-"*40))
+                choice = "h"
             elif choice == "2":
-                # hér þarf að tengja við change_info í emprepo
-                pass
+                # Breyta einhverju við employee
+                self.edit_employee()
+
+    def edit_employee(self):
+        '''Menu fyrir breytingu á starfsmanni'''
+        print("\nBreyta\n{}".format("-"*40))
+        username = input("Notandanafn: ")
+        # checka ef notandanafn er til
+        print("Hverju skal breyta?\n{}".format("-"*40))
+        print("\t1. Lykilorð\n\t2. Nafn\n\t3. Heimilisfang\n\t4. Sími\n")
+        choice = ""
+        while choice not in HOMECOMMANDS:
+            choice = input("Veldu aðgerð: ")
+            if choice == "1":
+                new_value = input("Nýtt lykilorð: ")
+            elif choice == "2":
+                new_value = input("Nýtt nafn: ")
+            elif choice == "3":
+                new_value = input("Nýtt heimilisfang: ")
+            elif choice == "4":
+                new_value = input("Nýr sími: ")
+            # Skoða bug
+            self.__employee_repo.change_info_of_employee(
+                username, choice, new_value)
+
+        choice = "h"
 
     def new_employee(self):
         '''Býr til nýjan starfsmann'''
@@ -115,7 +148,18 @@ class AdminUI(object):
                 emp_type = "soludeild"
             an_employee = Employee(username, password, name,
                                    address, phonenumber, emp_type)
-            self.__employee_service.add_employee(an_employee)
+            choice = input(
+                "Staðfesta nýjan notanda {} ((J)á/(N)ei): ".format(username))
+            if choice.lower() == "j":
+                self.__employee_service.add_employee(an_employee)
+                print("\n{}\nNýr notandi hefur verið skráður!\n".format("-"*40))
+                choice = "h"
+            else:
+                print("Action aborted!")
+                choice = "h"
+
+    def new_car(self):
+        pass
 
     def quit(self):
         pass
