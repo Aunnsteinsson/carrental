@@ -30,7 +30,7 @@ class CarService(object):
         for car in list:
             if len(car) == 3:
                 car_class = Car(
-                    car[0], car[1], car[2], "siggi")
+                    car[0], car[1], car[2])
                 car_list.append(car_class)
         string = ""
         for car in car_list:

@@ -9,10 +9,10 @@ class Car(object):
         self.__licence_plate = licence_plate
         self.__a_type = a_type
         self.__status = status
+        self.__price = "100"
 
     def __str__(self):
-        return "Bíltegund: {} - númeraplata: {} - verð: {} - staða: {}".format
-        (self.__a_type, self.__licence_plate, self.__price, self.__status)
+        return "Bíltegund: {} - númeraplata: {} - verð: {} - staða: {}".format(self.__a_type, self.__licence_plate, self.__price, self.__status)
 
     def get_licence_plate(self):
         """Skilar númeraplötu"""
