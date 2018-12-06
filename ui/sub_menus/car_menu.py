@@ -63,6 +63,7 @@ class CarUI(object):
                 self.__car_service.make_car(new_car)
             elif choice == "5":
                 licence_plate = input("Númer bíls til afskráningar: ")
+                # if licence_plate in `...... þarf að geta checkað hvort númeraplata sé á skrá??`
                 print()
                 approve_remove_car = input(
                     "Viltu eyða bíl með bílnúmerið {} ((J)á/(N)ei): ".format(
@@ -112,7 +113,7 @@ class CarUI(object):
         return choice
 
     def show_cars(self, choice):
-        if choice == "1" or "2" or "3":
+        if choice == "1" or choice == "2" or choice == "3":
             if choice == "1":
                 menu = "sem eru lausir eða í útleigu"
                 listi1 = ["Fratekinn", "Laus"]

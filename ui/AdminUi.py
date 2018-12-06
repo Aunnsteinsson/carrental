@@ -77,10 +77,8 @@ class AdminUI(object):
                 # Eyða employee
                 print("\nEyða\n{}".format("-"*40))
                 username = input("Notandanafn: ")
+                # athugar hvort notandi sé í kerfi
                 if username in employees_list:
-                    # check ef employee er til í kerfi(empl.csv), þá halda áfram,
-                    # annars láta vita að notandi er ekki til
-
                     choice = input("Ertu viss? ((J)á/(N)ei): ")
                     if choice.lower() == "j":
                         self.__employee_repo.remove_employee(username)
