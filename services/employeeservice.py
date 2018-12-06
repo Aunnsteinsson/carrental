@@ -9,7 +9,7 @@ class EmployeeService(object):
         self.__employee_repo.add_employee(employee)
 
     def get_employees(self):
-        self.__employee_repo.get_employees()
+        return self.__employee_repo.get_employees()
 
     def remove_employee(self, username):
         self.__employee_repo.remove_employee(username)

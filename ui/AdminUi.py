@@ -106,8 +106,9 @@ class AdminUI(object):
             self.print_header()
             self.print_employee_header()
             # Finna leið til að prenta starfsmenn rétt
-            employees_list = self.__employee_repo.get_employees()
+            employees_list = self.__employee_service.get_employees()
             # self.print_employee_list(employees_list)
+            print(employees_list)
             # aðgerðir tengdar starfsmanni (eyða, breyta)
             print("\nEyða starfsmanni?\n{}".format("-"*40))
             print("1. Eyða\n2. Breyta\n")
