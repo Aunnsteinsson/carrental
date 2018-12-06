@@ -5,9 +5,9 @@ from models.car import Car
 geymsla = CarRepo()
 Bíll = Car("AA111","Jeppi")
 
-geymsla.remove_car("AA111")
+geymsla.add_car(Bíll)
 
-geymsla.change_status("kdkjj","Tekinn")
+geymsla.change_status("AA111","Laus")
 
 
 with open("./data/cars.csv", "r") as car_input:

@@ -16,8 +16,7 @@ class CarRepo(object):
                 licence_plate, a_type, status))
     
     def get_car(self, licence_plate):
-        # Sækir upplýsingar um bíl. Kallar á __str__ fall úr class Car
-        #copyright Denni
+        """ Sækir upplýsingar um bíl. Kallar á __str__ fall úr class Car"""
         with open("./data/cars.csv", "r") as car_file:
             csv_reader = csv.reader(car_file)
             for row in csv_reader:
@@ -27,7 +26,6 @@ class CarRepo(object):
         return None
 
     def get_all_cars(self):
-        #copyright Denni
         list_of_cars = []
         with open("./data/cars.csv", "r") as car_file:
             csv_reader = csv.reader(car_file)
@@ -37,7 +35,7 @@ class CarRepo(object):
         return list_of_cars
 
     def remove_car(self, licence_plate):
-        # Eyðir bíl úr geymslu
+        """Eyðir bíl úr geymslu"""
         with open("./data/cars.csv", "r") as car_input:
             with open("./data/cars_edit.csv", "w", newline = "") as car_output:
                 csv_reader = csv.reader(car_input)
@@ -51,8 +49,8 @@ class CarRepo(object):
             with open("./data/cars_edit.csv", "r") as new_car_edit:
                 csv_reader = csv.reader(new_car_edit)
                 csv_writer = csv.writer(new_car_file)
-                if row:
-                    for row in csv_reader:
+                for row in csv_reader:
+                    if row:
                         csv_writer.writerow(row)
 
     def change_status(self, licence_plate, new_status):
@@ -71,6 +69,6 @@ class CarRepo(object):
             with open("./data/cars_edit.csv", "r") as new_car_edit:
                 csv_reader = csv.reader(new_car_edit)
                 csv_writer = csv.writer(new_car_file)
-                if row:
-                    for row in csv_reader:
+                for row in csv_reader:
+                    if row:                
                         csv_writer.writerow(row)
