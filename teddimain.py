@@ -5,13 +5,12 @@ from models.car import Car
 geymsla = CarRepo()
 Bíll = Car("AA111","Jeppi")
 
-service = CarService()
+geymsla.remove_car("AA111")
 
-listi = service.get_list()
+geymsla.change_status("kdkjj","Tekinn")
 
-print(listi)
 
-with open("./data/cars_edit.csv", "r") as car_input:
+with open("./data/cars.csv", "r") as car_input:
     for row in car_input:
         row.split(",")
         print(row)

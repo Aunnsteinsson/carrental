@@ -1,5 +1,3 @@
-# Teddi á að sjá um þennan fæl
-# Nota CSV module, setja alla bíla í dictionary. Geyma stórt dictionary og notar nokkra lykla til að sækja allar upplýsingar.
 from models.car import Car
 import csv
 
@@ -13,8 +11,8 @@ class CarRepo(object):
         with open("./data/cars.csv", "a+") as car_file:
             licence_plate = car.get_licence_plate()
             a_type = car.get_type()
-            status = car.get_status()
-            car_file.write("\n{},{},{}".format(
+            status = car.get_status()    
+            car_file.write("{},{},{}\n".format(
                 licence_plate, a_type, status))
     
     def get_car(self, licence_plate):
@@ -53,8 +51,9 @@ class CarRepo(object):
             with open("./data/cars_edit.csv", "r") as new_car_edit:
                 csv_reader = csv.reader(new_car_edit)
                 csv_writer = csv.writer(new_car_file)
-                for row in csv_reader:
-                    csv_writer.writerow(row)
+                if row:
+                    for row in csv_reader:
+                        csv_writer.writerow(row)
 
     def change_status(self, licence_plate, new_status):
         #Breytir stöðu bíls
@@ -63,13 +62,15 @@ class CarRepo(object):
                 csv_reader = csv.reader(car_input)
                 csv_writer = csv.writer(car_output)
                 for row in csv_reader:
-                    if row[0] == licence_plate:
-                        print("FOUND!")
-                        row[3] = "UPDATED STATUS"
+                    if row:
+                        if row[0] == licence_plate:
+                            row[2] = (new_status)
                         csv_writer.writerow(row)
 
-
-    def __str__(self):
-        # Prentar út upplýsingar um alla bíla
-        pass
-
+        with open("./data/cars.csv", "w", newline = "") as new_car_file:
+            with open("./data/cars_edit.csv", "r") as new_car_edit:
+                csv_reader = csv.reader(new_car_edit)
+                csv_writer = csv.writer(new_car_file)
+                if row:
+                    for row in csv_reader:
+                        csv_writer.writerow(row)
