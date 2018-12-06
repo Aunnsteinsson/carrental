@@ -127,9 +127,9 @@ class AdminUI(object):
                     self.__employee_repo.remove_employee(username)
                     print("{}\nNotanda hefur verið eytt!\n".format("-"*40))
                 elif choice.lower() == "n":
-                    print("{}\nNotanda hefur ekki verið eytt!\n".format(
+                    print("{}\nHætt við aðgerð - Fer á upphafssíðu!\n".format(
                         "-"*40))
-                time.sleep(3)
+                time.sleep(2)
                 choice = "h"
             elif choice == "2":
                 # Breyta einhverju við employee
@@ -190,8 +190,8 @@ class AdminUI(object):
                 print("\n{}\nNýr notandi hefur verið skráður!\n".format(
                     "-"*40))
             else:
-                print("\nAction aborted! - Returning home")
-            time.sleep(3)
+                print("\nHætt við aðgerð - Fer á upphafssíðu!")
+            time.sleep(2)
             choice = "h"
 
     def quit(self):
