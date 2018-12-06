@@ -16,15 +16,32 @@ class CarRepo(object):
             status = car.get_status()
             car_file.write("\n{},{},{}".format(
                 licence_plate, a_type, status))
-
-    def get_car(self):
+    
+    def get_car(self, licence_plate):
         # Sækir upplýsingar um bíl. Kallar á __str__ fall úr class Car
-        pass
+        #copyright Denni
+        with open("./data/cars.csv", "r") as car_file:
+            csv_reader = csv.reader(car_file)
+            for row in csv_reader:
+                if row:
+                    if row[0] == licence_plate:
+                        return row
+        return None
+
+    def get_all_cars(self):
+        #copyright Denni
+        list_of_cars = []
+        with open("./data/cars.csv", "r") as car_file:
+            csv_reader = csv.reader(car_file)
+            for line in csv_reader:
+                if line[0] != "númeraplata":
+                    list_of_cars.append(line)
+        return list_of_cars
 
     def remove_car(self, licence_plate):
         # Eyðir bíl úr geymslu
         with open("./data/cars.csv", "r") as car_input:
-            with open("./data/cars_edit.csv", "w") as car_output:
+            with open("./data/cars_edit.csv", "w", newline = "") as car_output:
                 csv_reader = csv.reader(car_input)
                 csv_writer = csv.writer(car_output)
                 for row in csv_reader:
@@ -32,7 +49,7 @@ class CarRepo(object):
                         if row[0] != licence_plate:
                             csv_writer.writerow(row)
 
-        with open("./data/cars.csv", "w") as new_car_file:
+        with open("./data/cars.csv", "w", newline = "") as new_car_file:
             with open("./data/cars_edit.csv", "r") as new_car_edit:
                 csv_reader = csv.reader(new_car_edit)
                 csv_writer = csv.writer(new_car_file)
@@ -42,7 +59,7 @@ class CarRepo(object):
     def change_status(self, licence_plate, new_status):
         #Breytir stöðu bíls
         with open("./data/cars.csv", "r") as car_input:
-            with open("./data/cars_edit.csv", "w") as car_output:
+            with open("./data/cars_edit.csv", "w", newline = "") as car_output:
                 csv_reader = csv.reader(car_input)
                 csv_writer = csv.writer(car_output)
                 for row in csv_reader:
@@ -55,3 +72,4 @@ class CarRepo(object):
     def __str__(self):
         # Prentar út upplýsingar um alla bíla
         pass
+

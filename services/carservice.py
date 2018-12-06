@@ -1,5 +1,6 @@
 #Teddi á að massa þennan fæl
 from repositories.carrepo import CarRepo
+from models.car import Car
 
 class CarService(object):
     #Sér um aðgerðir með bíla
@@ -18,6 +19,21 @@ class CarService(object):
         #Breytir stöðu bíls
         self.__car_repo.change_status(licence_plate, new_status)
 
-    def show_cars(self):
+    def show_cars(self, licence_plate):
         #Fall sem sýnir lista af bílum
-        self.__car_repo.get_car()
+        self.__car_repo.get_car(licence_plate)
+
+    def get_list(self):
+        #Heavy copyright Denni
+        list = self.__car_repo.get_all_cars()
+        car_list = []
+        for car in list:
+            if len(car) == 3:
+                car_class = Car(
+                    car[0], car[1], car[2], "siggi")
+                car_list.append(car_class)
+        string = ""
+        for car in car_list:
+            car_string = car.__str__()
+            string += car_string + "\n"
+        return string
