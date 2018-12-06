@@ -59,6 +59,7 @@ class AdminUI(object):
         os.system('cls')
         self.print_car_header(status)
         # sækja upplýsingar til prentunar út frá "status" í parameter
+
         print("\t{:<20} | {:<20} | {:<20}".format(
             "Jeppi", "K1NG", "þriggjaDekkja"))
         # prenta upplýsingar um bíl
@@ -90,10 +91,10 @@ class AdminUI(object):
     def print_employee_header(self):
         '''Prentar haus fyrir starfmannayfirlit'''
         print("{:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<20s}".format(
-            "Nafn", "Notandi", "Lykilorð", "Hlutverk", "Sími", "Heimilisfang"))
+            "Notandi", "Lykilorð", "Nafn", "Hlutverk", "Sími", "Heimilisfang"))
         print("-"*80)
 
-    def print_empoloyee_list(self, employee_list):
+    def print_empoloyee(self, employee):
         '''prentar lista yfir employees'''
         pass
 
@@ -102,13 +103,14 @@ class AdminUI(object):
         Möguleiki á að eyða starfsmanni'''
         os.system('cls')
         choice = ""
+        get_pass = 1
         while choice not in HOMECOMMANDS:
             self.print_header()
             self.print_employee_header()
-            # Finna leið til að prenta starfsmenn rétt
-            employees_list = self.__employee_service.get_employees()
-            # self.print_employee_list(employees_list)
-            print(employees_list)
+            # Prentar lista yfir starfsmenn
+            employees_list = self.__employee_service.get_employees(get_pass)
+            for employee in employees_list:
+                print(employee)
             # aðgerðir tengdar starfsmanni (eyða, breyta)
             print("\nEyða starfsmanni?\n{}".format("-"*40))
             print("1. Eyða\n2. Breyta\n")
