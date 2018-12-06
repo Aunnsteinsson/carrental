@@ -19,14 +19,14 @@ class CustomerRepo(object):
         self.customer_dict.append(new_customer)
 
     def remove_customer(self, ssn):
-        for kennitala, value in self.customer_dict.items():
+        for kennitala, value in self.__customer.items():
             if kennitala == ssn:
-                self.customer_dict[ssn].pop()
+                self.customer_dict = self.__customer.pop(ssn)
 
     def get_customer(self, ssn):
-        for kennitala, value in self.customer_dict.items():
+        for kennitala, value in self.__customer.items():
             if kennitala == ssn:
-                return self.customer_dict[ssn]
+                return self.__customer[ssn]
 
     def overview_customers(self):
         return self.__customer
