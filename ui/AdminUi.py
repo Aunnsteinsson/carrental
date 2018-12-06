@@ -1,6 +1,7 @@
 import os
 import time
 from datetime import date
+from models.car import Car
 from models.employee import Employee
 from services.employeeservice import EmployeeService
 from services.carservice import CarService
@@ -66,9 +67,9 @@ class AdminUI(object):
 
     def car_menu(self):
         '''Bílayfirlit menu fyrir Kerfisstjóra'''
-        os.system('cls')
         choice = ""
         while choice not in HOMECOMMANDS:
+            os.system('cls')
             choice = self.show_menu(
                 "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3. Í útleigu\n\t\
 4. Nýskrá bíl\n\t5. Afskrá bíl\n", "Veldu aðgerð: ")
@@ -79,24 +80,51 @@ class AdminUI(object):
             elif choice == "3":
                 self.print_cars("Í útleigu")
             elif choice == "4":
-                # self.__car_service.make_car()
-                pass
+                new_car = self.add_new_car()
+                self.__car_service.make_car(new_car)
             elif choice == "5":
-                licence_plate = input("Númer bíls: ")
-                # athuga hvort bíll sé á skrá.
-                self.__car_service.remove_car(licence_plate)
-                print("\nBíl með númerið {} hefur verið eytt!".format(
-                    licence_plate))
+                licence_plate = input("Númer bíls til afskráningar: ")
+                print()
+                approve_remove_car = input(
+                    "Viltu eyða bíl með bílnúmerið {} ((J)á/(N)ei): ".format(
+                        licence_plate))
+                if approve_remove_car.lower() == 'j':
+                    self.__car_service.remove_car(licence_plate)
+                    print("\nBíl með númerið {} hefur verið eytt!".format(
+                        licence_plate))
+                time.sleep(2)
+
+    def add_new_car(self):
+        os.system('cls')
+        approve_plate = ""
+        while approve_plate.lower() != "j":
+            os.system('cls')
+            self.print_header()
+            print("\tFlokkar\n\t{}".format("-"*10))
+            print("\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
+            a_type = input("Flokkur: ")
+            if a_type.lower() == 'j':
+                a_type = "Jeppi"
+            elif a_type.lower() == 'f':
+                a_type = "Folksbill"
+            elif a_type.lower() == 's':
+                a_type = "Sendibill"
+            license_plate = input("Bílnúmer: ")
+            print()
+            approve_plate = input("Skrá {} með númerið {}\
+ ((J)á/(N)ei)? ".format(
+                a_type, license_plate))
+            new_car = Car(a_type, license_plate)
+        else:
+            print("\nBíll hefur verið skráður!")
+            time.sleep(2)
+            return new_car
 
     def print_employee_header(self):
         '''Prentar haus fyrir starfmannayfirlit'''
         print("{:<10s}| {:<10s}| {:<25s}| {:<25s}| {:<10s}| {:<12s}".format(
             "Notandi", "Lykilorð", "Nafn", "Heimilisfang", "Sími", "Hlutverk"))
         print("-"*100)
-
-    def print_empoloyee(self, employee):
-        '''prentar lista yfir employees'''
-        pass
 
     def employee_menu(self):
         '''Yfirlit yfir alla starfsmenn fyrirtækis,
@@ -105,9 +133,10 @@ class AdminUI(object):
         choice = ""
         get_pass = 1
         while choice not in HOMECOMMANDS:
+            os.system('cls')
             self.print_header()
             self.print_employee_header()
-            # Prentar lista yfir starfsmenn
+            # Prentar lista yfir starfsmenn fyrir admin (með passwordi)
             employees_list = self.__employee_service.get_employees(get_pass)
             for employee in employees_list:
                 print(employee)
@@ -119,18 +148,22 @@ class AdminUI(object):
                 # Eyða employee
                 print("\nEyða\n{}".format("-"*40))
                 username = input("Notandanafn: ")
-                # check ef employee er til í kerfi(empl.csv), þá halda áfram,
-                # annars láta vita að notandi er ekki til
+                if username in employees_list:
+                    # check ef employee er til í kerfi(empl.csv), þá halda áfram,
+                    # annars láta vita að notandi er ekki til
 
-                choice = input("Ertu viss? ((J)á/(N)ei): ")
-                if choice.lower() == "j":
-                    self.__employee_repo.remove_employee(username)
-                    print("{}\nNotanda hefur verið eytt!\n".format("-"*40))
-                elif choice.lower() == "n":
-                    print("{}\nHætt við aðgerð - Fer á upphafssíðu!\n".format(
-                        "-"*40))
-                time.sleep(2)
-                choice = "h"
+                    choice = input("Ertu viss? ((J)á/(N)ei): ")
+                    if choice.lower() == "j":
+                        self.__employee_repo.remove_employee(username)
+                        print("{}\nNotanda hefur verið eytt!\n".format("-"*40))
+                    elif choice.lower() == "n":
+                        print("{}\nHætt við aðgerð - Fer á upphafssíðu!\n".format(
+                            "-"*40))
+                    time.sleep(2)
+                    choice = "h"
+                else:
+                    print("\nNotandanafn ekki á skrá.")
+                    time.sleep(2)
             elif choice == "2":
                 # Breyta einhverju við employee
                 self.edit_employee()
