@@ -24,7 +24,7 @@ class SalesmanUI(object):
             if choice == "1":
                 choice = self.__order_ui.order_menu()
             elif choice == "2":
-                choice = self.__car_ui.car_menu()
+                choice = self.__car_ui.boss_and_salesman_car_menu()
             elif choice == "3":
                 self.__customer_ui.customer_menu()
             elif choice == "4":

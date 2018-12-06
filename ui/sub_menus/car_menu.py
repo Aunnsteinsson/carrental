@@ -12,7 +12,7 @@ class CarUI(object):
         self.__car_service = CarService()
         self.__uistandard = UIStandard(name)
 
-    def car_menu(self):
+    def boss_and_salesman_car_menu(self):
         """Pprentar bílayfirlits viðmót og tekur við input"""
         choice = ""
         while choice not in HOMECOMMANDS:  # Placeholder
