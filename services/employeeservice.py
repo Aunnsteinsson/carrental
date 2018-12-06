@@ -22,7 +22,7 @@ class EmployeeService(object):
             if boss_or_admin == 0:
                 list_with_data_in_string.append("\
 {:<25s}| {:<10s}| {:<25s}| {:<10s}| {:<12s}".format(
-                    name, username, address, phone, position))
+                    username, position, name, phone, address))
             else:
                 list_with_data_in_string.append("\
 {:<10s}| {:<10s}| {:<25s}| {:<25s}| {:<10s}| {:<12s}".format(
