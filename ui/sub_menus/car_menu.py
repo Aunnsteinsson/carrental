@@ -1,3 +1,6 @@
+import os
+from datetime import date
+import time
 from models.car import Car
 from services.carservice import CarService
 from ui.ui_standard_functions import UIStandard
@@ -8,7 +11,7 @@ class CarUI(object):
     """Klasi sem sér um viðmót Sölumanns og ferðir þar um"""
 
     def __init__(self, name):
-        self.__name = name
+        self.__username = name
         self.__car_service = CarService()
         self.__uistandard = UIStandard(name)
 
@@ -28,6 +31,22 @@ class CarUI(object):
             "Jeppi", "K1NG", "þriggjaDekkja"))
         # prenta upplýsingar um bíl
 
+    def print_header(self):
+        '''Prentar haus fyrir Kerfisstjóra'''
+        print("{:40s} {:>55}".format(
+            "Kerfisstjóri - notandi: {}".format(self.__username), str(
+                date.today())))
+        print(("-"*100))
+
+    def show_menu(self, text, prompt):
+        '''Prentar það menu sem notandi er staddur á.'''
+        self.print_header()
+        print(text)
+
+        choice = input(prompt)
+
+        return choice
+
     def car_menu_admin(self):
         '''Bílayfirlit menu fyrir Kerfisstjóra'''
         choice = ""
@@ -37,7 +56,7 @@ class CarUI(object):
                 "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3. Í útleigu\n\t\
 4. Nýskrá bíl\n\t5. Afskrá bíl\n", "Veldu aðgerð: ")
 
-            if choice == "1" or "2" or "3":
+            if choice == "1" or choice == "2" or choice == "3":
                 choice = self.show_cars(choice)
             elif choice == "4":
                 new_car = self.add_new_car()
