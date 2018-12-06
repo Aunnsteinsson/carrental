@@ -33,19 +33,26 @@ print(joi)
 
 
 def overview_customers():
-    list_of_employees = []
+    #list_of_employees = []
+    customer_dict = {}
     with open("./data/customers.csv", "r") as customer_file:
         csv_reader = csv.reader(customer_file)
-        for line in csv_reader:
-            if line[0] != "kennitala":
-                list_of_employees.append(line)
-    return list_of_employees
+        for customer in csv_reader:
+            if customer[0] != "kennitala":
+                customer_class = Customer(
+                    customer[KENNITALA], customer[NAFN], customer[SIMI], customer[KREDIT])
+                kennitala = customer[0]
+                customer_dict[kennitala] = customer_class
+
+    print(customer_dict["siggi"])
+    # return list_of_employees
 
 
-list_of_customers = overview_customers()
+overview_customers()
+#list_of_customers = overview_customers()
 
 
-def customer_dict(list_of_customers):
+"""def customer_dict(list_of_customers):
     customer_list = list_of_customers
     customer_dict = {}
     for customer in customer_list:
@@ -53,11 +60,11 @@ def customer_dict(list_of_customers):
             customer[KENNITALA], customer[NAFN], customer[SIMI], customer[KREDIT])
         kennitala = customer[0]
         customer_dict[kennitala] = customer_class
-    return customer_dict
+    return customer_dict"""
 
 
-bla = customer_dict(list_of_customers)
-print(bla)
+"""bla = customer_dict(list_of_customers)
+print(bla)"""
 
 
 """def get_indicators(risk_factor_list):

@@ -8,7 +8,7 @@ KREDIT = 3
 
 class CustomerRepo(object):
     def __init__(self):
-        self.__customer = {}
+        self.__customer = customer_dict
 
     def add_customer(self, customer):
         with open("./data/customers.csv", "a+") as customer_file:
@@ -47,23 +47,19 @@ class CustomerRepo(object):
         return None
 
     def overview_customers(self):
-        list_of_customers = []
-        with open("./data/customers.csv", "r") as customer_file:
-            csv_reader = csv.reader(customer_file)
-            for line in csv_reader:
-                if line[0] != "kennitala":
-                    list_of_customers.append(line)
-        return list_of_customers
+        return self.__customer
 
     def customer_dict(self):
-        customer_list = list_of_customers
         customer_dict = {}
-        for customer in customer_list:
-            customer_class = Customer(
-                customer[KENNITALA], customer[NAFN], customer[SIMI], customer[KREDIT])
-        kennitala = customer[0]
-        customer_dict[kennitala] = customer_class
-        self.__customer = customer_dict
+        with open("./data/customers.csv", "r") as customer_file:
+            csv_reader = csv.reader(customer_file)
+            for customer in csv_reader:
+                if customer[KENNITALA] != "kennitala":
+                    customer_class = Customer(
+                        customer[KENNITALA], customer[NAFN], customer[SIMI], customer[KREDIT])
+                    kennitala = customer[KENNITALA]
+                    customer_dict[kennitala] = customer_class
+        return customer_dict
 
     """def get_indicators(list_of_employees):
     Tekur við lista og flokkar eftir kennitölu, nafni, símanr og kreditkorti
