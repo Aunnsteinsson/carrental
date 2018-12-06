@@ -10,37 +10,25 @@ class CustomerService(object):
         self.__customer_repo.add_customer(customer)
 
     def find_customer(self, ssn):
-        customer_list = self.__customer_repo.get_customer(ssn)
-        if customer_list == None:
+        customer = self.__customer_repo.get_customer(ssn)
+        if customer == None:
             return None
-        customer = Customer(
-            customer_list[0], customer_list[1], customer_list[2],
-            customer_list[3])
         return customer
 
     def remove_customer(self, ssn):
         self.__customer_repo.remove_customer(ssn)
 
     def change_card(self, ssn, new_credit):
-        customer_list = self.__customer_repo.get_customer(ssn)
-        customer_class = Customer(
-            customer_list[0], customer_list[1], customer_list[2], new_credit)
-        self.remove_customer(ssn)
-        self.make_customer(customer_class)
+        customer = self.__customer_repo.get_customer(ssn)
+        customer.change_credit_card(new_credit)
 
     def change_phone_number(self, ssn, new_phone_number):
-        customer_list = self.__customer_repo.get_customer(ssn)
-        customer_class = Customer(
-            customer_list[0], customer_list[1], new_phone_number, customer_list[3])
-        self.remove_customer(ssn)
-        self.make_customer(customer_class)
+        customer = self.__customer_repo.get_customer(ssn)
+        customer.change_phone_number(new_phone_number)
 
     def change_name(self, ssn, new_name):
-        customer_list = self.__customer_repo.get_customer(ssn)
-        customer_class = Customer(
-            customer_list[0], new_name, customer_list[2], customer_list[3])
-        self.remove_customer(ssn)
-        self.make_customer(customer_class)
+        customer = self.__customer_repo.get_customer(ssn)
+        customer.change_name(new_name)
 
     def get_list(self):
         dict = self.__customer_repo.overview_customers()
