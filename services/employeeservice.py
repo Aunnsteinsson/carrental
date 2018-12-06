@@ -8,7 +8,7 @@ class EmployeeService(object):
     def add_employee(self, employee):
         self.__employee_repo.add_employee(employee)
 
-    def get_employees(self, boss_or_admin=1):
+    def get_employees(self, boss_or_admin=0):
         list_with_data_in_string = []
         employee_list = self.__employee_repo.get_employees()
         for value in employee_list:
@@ -20,10 +20,12 @@ class EmployeeService(object):
             address = value[5]
 
             if boss_or_admin == 0:
-                pass
+                list_with_data_in_string.append("\
+{:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<20s}".format(
+                    name, username, address, phone, position))
             else:
                 list_with_data_in_string.append("\
-                {:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<20s}".format(
+{:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<20s}".format(
                     username, password, name, address, phone, position))
         return list_with_data_in_string
 
