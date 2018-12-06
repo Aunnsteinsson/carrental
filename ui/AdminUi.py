@@ -5,7 +5,6 @@ from ui.sub_menus.car_menu import CarUI
 from models.car import Car
 from models.employee import Employee
 from services.employeeservice import EmployeeService
-from services.carservice import CarService
 from repositories.employeerepo import EmployeeRepo
 
 HOMECOMMANDS = ["h", "H", "s", "S"]
@@ -16,7 +15,6 @@ class AdminUI(object):
     def __init__(self, username):
         self.__username = username
         self.__employee_service = EmployeeService()
-        self.__car_service = CarService()
         self.__employee_repo = EmployeeRepo()
         self.__car_ui = CarUI(self.__username)
 

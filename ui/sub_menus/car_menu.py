@@ -71,6 +71,8 @@ class CarUI(object):
                     self.__car_service.remove_car(licence_plate)
                     print("\nBíl með númerið {} hefur verið eytt!".format(
                         licence_plate))
+                else:
+                    print("\nHætt við aðgerð!")
                 time.sleep(2)
 
     def add_new_car(self):
@@ -93,7 +95,7 @@ class CarUI(object):
             approve_plate = input("Skrá {} með númerið {}\
  ((J)á/(N)ei)? ".format(
                 a_type, license_plate))
-            new_car = Car(a_type, license_plate)
+            new_car = Car(license_plate, a_type)
         else:
             print("\nBíll hefur verið skráður!")
             time.sleep(2)
