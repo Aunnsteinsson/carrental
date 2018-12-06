@@ -14,15 +14,20 @@ class Order(object):
     def get_insurance(self):
         return self.__insurance
 
+    def get_car(self):
+        return self.__car
+
     def change_start(self, new_start):
         self.__start_date = new_start
-        return new_start
 
     def change_end(self, new_end):
         self.__end_date = new_end
 
     def change_insurance(self, new_ins):
         self.__insurance = new_ins
+
+    def change_car(self, new_car):
+        self.__car = new_car
 
     def __str__(self):
         '''Prentaðar út þær upplýsingar sem tilheyra pöntun.'''
