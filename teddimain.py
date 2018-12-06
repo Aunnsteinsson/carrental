@@ -17,3 +17,5 @@ with open("./data/cars_edit.csv", "r") as car_input:
         print(row)
 
 
+
+#a_type og status
