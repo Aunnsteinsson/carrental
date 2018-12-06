@@ -1,6 +1,7 @@
 from datetime import date
 from models.employee import Employee
 from services.employeeservice import EmployeeService
+from services.carservice import CarService
 from repositories.employeerepo import EmployeeRepo
 
 HOMECOMMANDS = ["h", "H", "s", "S"]
@@ -10,6 +11,7 @@ class AdminUI(object):
     def __init__(self, username):
         self.__username = username
         self.__employee_service = EmployeeService()
+        self.__car_service = CarService()
         self.__employee_repo = EmployeeRepo()
 
     def print_header(self):
@@ -42,6 +44,20 @@ class AdminUI(object):
             elif choice == "3":
                 choice = self.car_menu()
 
+    def print_car_header(self, status_of_car):
+        self.print_header()
+        print("Bílayfirlit - {}".format(status_of_car))
+        print("\t{:<20} | {:<20} | {:<20}".format(
+            "Tegund", "Bílnúmer", "Staða"))
+        print("\t{}".format("-"*60))
+
+    def print_cars(self, status):
+        self.print_car_header(status)
+        # sækja upplýsingar til prentunar út frá "status" í parameter
+        print("\t{:<20} | {:<20} | {:<20}".format(
+            "Jeppi", "K1NG", "þriggjaDekkja"))
+        # prenta upplýsingar um bíl
+
     def car_menu(self):
         '''Bílayfirlit menu fyrir Kerfisstjóra'''
         choice = ""
@@ -49,18 +65,21 @@ class AdminUI(object):
             choice = self.show_menu(
                 "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3. Í útleigu\n\t\
 4. Nýskrá bíl\n\t5. Afskrá bíl\n", "Veldu aðgerð: ")
-            if choice == 1:
+            if choice == "1":
+                self.print_cars("Allir bílar")
+            elif choice == "2":
+                self.print_cars("Lausir bílar")
+            elif choice == "3":
+                self.print_cars("Í útleigu")
+            elif choice == "4":
+                # self.__car_service.make_car()
                 pass
-            elif choice == 2:
-                pass
-            elif choice == 3:
-                pass
-            elif choice == 4:
-                pass
-            elif choice == 5:
-                pass
-
-        return choice
+            elif choice == "5":
+                licence_plate = input("Númer bíls: ")
+                # athuga hvort bíll sé á skrá.
+                self.__car_service.remove_car(licence_plate)
+                print("\nBíl með númerið {} hefur verið eytt!".format(
+                    licence_plate))
 
     def print_employee_header(self):
         '''Prentar haus fyrir starfmannayfirlit'''
@@ -157,9 +176,6 @@ class AdminUI(object):
             else:
                 print("Action aborted!")
                 choice = "h"
-
-    def new_car(self):
-        pass
 
     def quit(self):
         pass
