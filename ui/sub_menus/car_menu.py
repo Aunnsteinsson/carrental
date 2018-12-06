@@ -28,7 +28,7 @@ class CarUI(object):
             "Jeppi", "K1NG", "þriggjaDekkja"))
         # prenta upplýsingar um bíl
 
-    def car_menu(self):
+    def car_menu_admin(self):
         '''Bílayfirlit menu fyrir Kerfisstjóra'''
         choice = ""
         while choice not in HOMECOMMANDS:
@@ -36,12 +36,9 @@ class CarUI(object):
             choice = self.show_menu(
                 "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3. Í útleigu\n\t\
 4. Nýskrá bíl\n\t5. Afskrá bíl\n", "Veldu aðgerð: ")
-            if choice == "1":
-                self.print_cars("Allir bílar")
-            elif choice == "2":
-                self.print_cars("Lausir bílar")
-            elif choice == "3":
-                self.print_cars("Í útleigu")
+
+            if choice == "1" or "2" or "3":
+                choice = self.show_cars(choice)
             elif choice == "4":
                 new_car = self.add_new_car()
                 self.__car_service.make_car(new_car)
@@ -90,32 +87,36 @@ class CarUI(object):
             choice = self.__uistandard.show_menu(
                 """Bílayfirlit\n\t1. Allir Bílar
 \t2. Lausir Bílar\n\t3. Í útleigu""")
-            if choice == "1" or "2" or "3":
-                if choice == "1":
-                    menu = "sem eru lausir eða í útleigu"
-                    listi1 = ["Fratekinn", "Laus"]
-                if choice == "2":
-                    menu = "sem eru lausir "
-                    listi1 = ["Laus"]
-                if choice == "3":
-                    menu = "sem eru í útleigu"
-                    listi1 = ["Fratekinn"]
-                second_choice = input(
-                    "\t1. Allar gerðir\n\t2. Jeppar\n\t3. Fólksbílar"
-                    "\n\t4. Sendibílar")
-                if second_choice == "2":
-                    the_type = "Jeppar"
-                    listi2 = ["Jeppi"]
-                elif second_choice == "3":
-                    the_type = "Fólksbílar"
-                    listi2 = ["Fólksbill"]
-                elif second_choice == "4":
-                    the_type = "Sendibílar"
-                    listi2 = ["Sendibill"]
-                else:
-                    the_type = "all_cars"
-                    listi2 = ["Sendibill", "Folksbill", "Jeppi"]
-            choice = self.second_car_menu(the_type, menu, listi1, listi2)
+            choice = self.show_cars(choice)
+        return choice
+
+    def show_cars(self, choice):
+        if choice == "1" or "2" or "3":
+            if choice == "1":
+                menu = "sem eru lausir eða í útleigu"
+                listi1 = ["Fratekinn", "Laus"]
+            if choice == "2":
+                menu = "sem eru lausir "
+                listi1 = ["Laus"]
+            if choice == "3":
+                menu = "sem eru í útleigu"
+                listi1 = ["Fratekinn"]
+            second_choice = input(
+                "\t1. Allar gerðir\n\t2. Jeppar\n\t3. Fólksbílar"
+                "\n\t4. Sendibílar")
+            if second_choice == "2":
+                the_type = "Jeppar"
+                listi2 = ["Jeppi"]
+            elif second_choice == "3":
+                the_type = "Fólksbílar"
+                listi2 = ["Fólksbill"]
+            elif second_choice == "4":
+                the_type = "Sendibílar"
+                listi2 = ["Sendibill"]
+            else:
+                the_type = "all_cars"
+                listi2 = ["Sendibill", "Folksbill", "Jeppi"]
+        choice = self.second_car_menu(the_type, menu, listi1, listi2)
         return choice
 
     def second_car_menu(self, the_type, menu, listi1, listi2):
