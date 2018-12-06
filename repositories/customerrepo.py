@@ -21,10 +21,12 @@ class CustomerRepo(object):
     def remove_customer(self, ssn):
         for kennitala, value in self.customer_dict.items():
             if kennitala == ssn:
-                self.__customer_dict[ssn].pop()
+                self.customer_dict[ssn].pop()
 
     def get_customer(self, ssn):
-        return self.__customer[ssn]
+        for kennitala, value in self.customer_dict.items():
+            if kennitala == ssn:
+                return self.customer_dict[ssn]
 
     def overview_customers(self):
         return self.__customer
