@@ -1,5 +1,9 @@
 from models.customer import Customer
 import csv
+KENNITALA = 0
+NAFN = 1
+SIMI = 2
+KREDIT = 3
 
 
 class CustomerRepo(object):
@@ -43,13 +47,31 @@ class CustomerRepo(object):
         return None
 
     def overview_customers(self):
-        list_of_employees = []
+        list_of_customers = []
         with open("./data/customers.csv", "r") as customer_file:
             csv_reader = csv.reader(customer_file)
             for line in csv_reader:
                 if line[0] != "kennitala":
-                    list_of_employees.append(line)
-        return list_of_employees
+                    list_of_customers.append(line)
+        return list_of_customers
+
+    def customer_dict(self):
+        customer_list = list_of_customers
+        customer_dict = {}
+        for customer in customer_list:
+            customer_class = Customer(
+                customer[KENNITALA], customer[NAFN], customer[SIMI], customer[KREDIT])
+            kennitala = Customer(ssn)
+            customer_dict[kennitala] = customer_class
+        return customer_dict
+
+    """def get_indicators(list_of_employees):
+    Tekur við lista og flokkar eftir kennitölu, nafni, símanr og kreditkorti
+    kennitala = [lst[KENNITALA] for lst in list_of_employees]
+    nafn = [lst[NAFN] for lst in list_of_employees]
+    simi = [lst[SIMI] for lst in list_of_employees]
+    kreditkort = [lst[KREDIT] for lst in list_of_employees]
+    return kennitala, nafn, simi, kreditkort"""
 
 
 """with open("./data/customers.csv") as customer_file:

@@ -1,5 +1,9 @@
 import csv
 
+KENNITALA = 0
+NAFN = 1
+SIMI = 2
+KREDIT = 3
 
 """def bla(x):
     with open("./data/customers.csv", "r") as customer_input:
@@ -38,5 +42,17 @@ def overview_customers():
     return list_of_employees
 
 
-bla = overview_customers()
-print(bla)
+list_of_employees = overview_customers()
+
+
+def get_indicators(risk_factor_list):
+    ''' Extracts and returns the individual indicators from the given list '''
+    kennitala = [lst[KENNITALA] for lst in list_of_employees]
+    nafn = [lst[NAFN] for lst in list_of_employees]
+    simi = [lst[SIMI] for lst in list_of_employees]
+    kreditkort = [lst[KREDIT] for lst in list_of_employees]
+    return kennitala, nafn, simi, kreditkort
+
+
+blabla = get_indicators(list_of_employees)
+print(blabla)
