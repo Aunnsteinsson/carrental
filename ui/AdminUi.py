@@ -1,6 +1,7 @@
 import os
 import time
 from datetime import date
+from ui.sub_menus.car_menu import CarUI
 from models.car import Car
 from models.employee import Employee
 from services.employeeservice import EmployeeService
@@ -17,6 +18,7 @@ class AdminUI(object):
         self.__employee_service = EmployeeService()
         self.__car_service = CarService()
         self.__employee_repo = EmployeeRepo()
+        self.__car_ui = CarUI(self.__username)
 
     def print_header(self):
         '''Prentar haus fyrir Kerfisstjóra'''
@@ -47,7 +49,7 @@ class AdminUI(object):
             elif choice == "2":
                 choice = self.new_employee()
             elif choice == "3":
-                choice = self.car_menu()
+                choice = self.__car_ui.car_menu_admin()
 
     def print_employee_header(self):
         '''Prentar haus fyrir starfmannayfirlit'''
