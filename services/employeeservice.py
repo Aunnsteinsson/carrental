@@ -15,17 +15,17 @@ class EmployeeService(object):
             username = value[0]
             password = value[1]
             name = value[2]
-            position = value[3]
+            address = value[3]
             phone = value[4]
-            address = value[5]
+            position = value[5]
 
             if boss_or_admin == 0:
                 list_with_data_in_string.append("\
-{:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<20s}".format(
+{:<25s}| {:<10s}| {:<25s}| {:<10s}| {:<12s}".format(
                     name, username, address, phone, position))
             else:
                 list_with_data_in_string.append("\
-{:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<10s}| {:<20s}".format(
+{:<10s}| {:<10s}| {:<25s}| {:<25s}| {:<10s}| {:<12s}".format(
                     username, password, name, address, phone, position))
         return list_with_data_in_string
 
