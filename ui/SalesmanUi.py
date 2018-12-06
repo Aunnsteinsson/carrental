@@ -204,13 +204,13 @@ class SalesmanUI(object):
             if choice == "1" or "2" or "3":
                 if choice == "1":
                     menu = "sem eru lausir eða í útleigu"
-                    listi1 = ["Frátekinn", "Laus"]
+                    listi1 = ["Fratekinn", "Laus"]
                 if choice == "2":
                     menu = "sem eru lausir "
                     listi1 = ["Laus"]
                 if choice == "3":
                     menu = "sem eru í útleigu"
-                    listi1 = ["Frátekinn"]
+                    listi1 = ["Fratekinn"]
                 second_choice = input(
                     "\t1. Allar gerðir\n\t2. Jeppar\n\t3. Fólksbílar"
                     "\n\t4. Sendibílar")
@@ -219,13 +219,13 @@ class SalesmanUI(object):
                     listi2 = ["Jeppi"]
                 elif second_choice == "3":
                     the_type = "Fólksbílar"
-                    listi2 = ["Fólksbíll"]
+                    listi2 = ["Fólksbill"]
                 elif second_choice == "4":
                     the_type = "Sendibílar"
-                    listi2 = ["Sendibíll"]
+                    listi2 = ["Sendibill"]
                 else:
                     the_type = "all_cars"
-                    listi2 = ["Sendibíll", "Fólksbíll", "Jeppi"]
+                    listi2 = ["Sendibill", "Folksbill", "Jeppi"]
             choice = self.second_car_menu(the_type, menu, listi1, listi2)
         return choice
 
@@ -235,6 +235,7 @@ class SalesmanUI(object):
         print("\tTegund | Bílnúmer | Staða\n\t", "-"*23)
         strengur = self.__car_service.get_list_of_cars(listi2, listi1)
         print(strengur)
+        choice = ""
         while choice not in HOMECOMMANDS:
             choice = input("Veldu aðgerð: ")
         return choice
