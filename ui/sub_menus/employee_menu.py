@@ -27,8 +27,8 @@ class EmployeeUI(object):
 
     def print_employee_header_boss(self):
         '''Prentar haus fyrir starfmannayfirlit'''
-        print("{:<10s}| {:<25s}| {:<25s}| {:<10s}| {:<12s}".format(
-            "Notandi", "Nafn", "Heimilisfang", "Sími", "Hlutverk"))
+        print("{:<10s}| {:<12s}| {:<25s}| {:<25s}| {:<10s}".format(
+            "Notandi", "Hlutverk", "Nafn", "Heimilisfang", "Sími"))
         print("-"*100)
 
     def employee_menu(self):
@@ -136,7 +136,7 @@ class EmployeeUI(object):
         os.system('clear')
         self.__uistandard.print_header()
         self.print_employee_header_boss()
-        employees_list = self.__employee_service.get_employees(1)
+        employees_list = self.__employee_service.get_employees()
         for employee in employees_list:
             print(employee)
         choice = ""
