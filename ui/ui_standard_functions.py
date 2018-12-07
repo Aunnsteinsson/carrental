@@ -14,7 +14,7 @@ class UIStandard(object):
         return choice
 
     def print_header(self):
-        '''Prentar haus fyrir Kerfisstjóra'''
+        '''Prentar haus á síðu sem notandi er staddur á'''
         print("{:40s} {:>55}".format(
             "{} - notandi: {}".format(self.__a_type, self.__name), str(
                 date.today())))
