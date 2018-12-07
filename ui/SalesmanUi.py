@@ -11,8 +11,8 @@ class SalesmanUI(object):
     def __init__(self, name):
         self.__name = name
         self.__uistandard = UIStandard(self.__name, "Sölumaður")
-        self.__order_ui = OrderUI(self.__name)
-        self.__customer_ui = CustomerUI(self.__name)
+        self.__order_ui = OrderUI(self.__name, "Sölumaður")
+        self.__customer_ui = CustomerUI(self.__name, "Sölumaður")
         self.__car_ui = CarUI(self.__name, "Sölumaður")
 
     def main_menu(self):
@@ -20,7 +20,7 @@ class SalesmanUI(object):
         while choice != HOMECOMMANDS[2] and choice != HOMECOMMANDS[3]:
             choice = self.__uistandard.show_menu(
                 """ \t1. Pantanir\n\t2. Bílayfirlit
-\t3. Viðskiptavinir\n\t4. Verðlisti\n""")
+\t3. Viðskiptavinir\n\t4. Verðlisti\n""", "Veldu aðgerð")
             if choice == "1":
                 choice = self.__order_ui.order_menu()
             elif choice == "2":

@@ -7,10 +7,10 @@ HOMECOMMANDS = ["h", "H", "s", "S"]
 class CustomerUI(object):
     """Klasi sem sér um viðmót Sölumanns og ferðir þar um"""
 
-    def __init__(self, name):
+    def __init__(self, name, a_type):
         self.__name = name
         self.__customer_service = CustomerService()
-        self.__uistandard = UIStandard(name)
+        self.__uistandard = UIStandard(name, a_type)
 
     def customer_menu(self):
         """Prentar viðskiptavinaviðmót sölumanns og tekur við input"""
@@ -18,7 +18,7 @@ class CustomerUI(object):
         while choice not in HOMECOMMANDS:
             choice = self.__uistandard.show_menu(
                 """Viðskiptavinir\n\t1. Leita eftir kennitölu
-    \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur""")
+    \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur""", "Veldu aðgerð")
             if choice == "1":
                 ssn = input("Kennitala: ")
                 customer = self.__customer_service.find_customer(ssn)

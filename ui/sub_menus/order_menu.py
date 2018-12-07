@@ -7,10 +7,10 @@ HOMECOMMANDS = ["h", "H", "s", "S"]
 class OrderUI(object):
     """Klasi sem sér um viðmót Sölumanns og ferðir þar um"""
 
-    def __init__(self, name):
+    def __init__(self, name, a_type):
         self.__name = name
         self.__order_service = OrderService()
-        self.__uistandard = UIStandard(name)
+        self.__uistandard = UIStandard(name, a_type)
 
     def order_menu(self):
         """Prentar pantana viðmót tekur við inputi"""
@@ -18,7 +18,7 @@ class OrderUI(object):
         while choice not in HOMECOMMANDS:  # Placeholder þangað til ég næ að
             # lata while loopuna virka betur
             choice = self.__uistandard.show_menu(
-                "Pantanir\n\t1. Yfirlit pantana\n\t2. Ný pöntun")
+                "Pantanir\n\t1. Yfirlit pantana\n\t2. Ný pöntun", "Veldu aðgerð")
             if choice == "1":
                 choice = self.order_list_menu()
             elif choice == "2":
@@ -31,7 +31,7 @@ class OrderUI(object):
         while choice not in HOMECOMMANDS:  # Placeholder
             choice = self.__uistandard.show_menu(
                 """Pantanir - Yfirlit pantana\n\tSækjaupplýsingar út frá:
-\t1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir""")
+\t1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir""", "Veldu aðgerð")
             if choice == "1":  # TODO Þurfum að geta tengt viðskiptavin við pöntun
                 pass
             if choice == "2":  # TODO Þurfum að gefa pöntunarnúmer
