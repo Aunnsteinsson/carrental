@@ -1,5 +1,5 @@
 from repositories.orderrepo import OrderRepo
-from models.order import order
+from models.order import Order
 
 
 class OrderService(object):
