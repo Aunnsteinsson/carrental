@@ -1,9 +1,16 @@
 class Order(object):
-    def __init__(self, start_date, end_date, car, insurance=False):
+    '''Pöntunar klasi, tekur inn pöntunarnúmer, upphafsdag, 
+    skiladag, bílaflokk og viðbótartryggingu'''
+
+    def __init__(self, order_number, start_date, end_date, car, insurance=False):
+        self.__order_number = order_number
         self.__start_date = start_date
         self.__end_date = end_date
         self.__car = car
         self.__insurance = insurance
+
+    def get_order_number(self):
+        return self.__order_number
 
     def get_start(self):
         return self.__start_date
@@ -23,18 +30,20 @@ class Order(object):
     def change_end(self, new_end):
         self.__end_date = new_end
 
-    def change_insurance(self, new_ins):
-        self.__insurance = new_ins
+    def change_insurance(self, new_insurance):
+        self.__insurance = new_insurance
 
     def change_car(self, new_car):
         self.__car = new_car
 
     def __str__(self):
         '''Prentaðar út þær upplýsingar sem tilheyra pöntun.'''
-        return "Upphafsdagur: {}, Skiladagur {}, Bíll {}, \
-        Viðbótartrygging {}".format(self.__start_date, self.__end_date,
-                                    self.__car, self.__insurance)
+        return "Pöntunarnúmer: {} Upphafsdagur: {}, Skiladagur {}, Bíll {}, \
+        Viðbótartrygging {}".format(self.__order_number, self.__start_date,
+                                    self.__end_date, self.__car,
+                                    self.__insurance)
 
     def __repr__(self):
-        return "{},{},{},{}".format(self.__start_date, self.__end_date,
-                                    self.__car, self.__insurance)
+        return "{},{},{},{},{}".format(self.__order_number, self.__start_date,
+                                       self.__end_date, self.__car,
+                                       self.__insurance)
