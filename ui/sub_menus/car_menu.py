@@ -27,8 +27,8 @@ class CarUI(object):
     #    self.print_car_header(status)
     #    # sækja upplýsingar til prentunar út frá "status" í parameter
 
-        print("\t{:<20} | {:<20} | {:<20}".format(
-            "Jeppi", "K1NG", "þriggjaDekkja"))
+        # print("\t{:<20} | {:<20} | {:<20}".format(
+        #     "Jeppi", "K1NG", "þriggjaDekkja"))
         # prenta upplýsingar um bíl
 
     def car_menu_admin(self):
