@@ -25,6 +25,12 @@ class EmployeeUI(object):
             "Notandi", "Lykilorð", "Nafn", "Heimilisfang", "Sími", "Hlutverk"))
         print("-"*100)
 
+    def print_employee_header_boss(self):
+        '''Prentar haus fyrir starfmannayfirlit'''
+        print("{:<10s}| {:<25s}| {:<25s}| {:<10s}| {:<12s}".format(
+            "Notandi", "Nafn", "Heimilisfang", "Sími", "Hlutverk"))
+        print("-"*100)
+
     def employee_menu(self):
         '''Yfirlit yfir alla starfsmenn fyrirtækis,
         Möguleiki á að eyða starfsmanni'''
@@ -124,3 +130,16 @@ class EmployeeUI(object):
                 print("\nHætt við aðgerð - Fer á upphafssíðu!")
             time.sleep(2)
             choice = "h"
+
+    def show_employees(self):
+        """ Prentar út alla starfsmenn í kerfi fyrir yfirmann"""
+        os.system('clear')
+        self.__uistandard.print_header()
+        self.print_employee_header_boss()
+        employees_list = self.__employee_service.get_employees(1)
+        for employee in employees_list:
+            print(employee)
+        choice = ""
+        while choice not in HOMECOMMANDS:
+            choice = input("")
+        return choice
