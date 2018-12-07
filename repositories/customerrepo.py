@@ -12,23 +12,20 @@ class CustomerRepo(object):
 
     def add_customer(self, new_customer):
         ssn = new_customer.get__ssn()
-        name = new_customer.get_name()
-        phone_number = new_customer.get_phone_number()
-        creditcard_number = new_customer.get_creditcard_number()
-        new_customer = Customer.__repr__(new_customer)
         self.__customer[ssn] = new_customer
 
     def remove_customer(self, ssn):
         for kennitala, value in self.__customer.items():
             if kennitala == ssn:
-                self.customer_dict = self.__customer.pop(ssn)
+                del self.__customer[ssn]
+                return self.__customer
+        return False
 
     def get_customer(self, ssn):
         for kennitala, value in self.__customer.items():
             if kennitala == ssn:
                 return self.__customer[ssn]
-            else:
-                return False
+        return False
 
     def overview_customers(self):
         return self.__customer
@@ -50,7 +47,6 @@ class CustomerRepo(object):
             csv_writer = csv.writer(customer_file)
             for customer in self.__customer:
                 csv_writer.writerow(customer)
-        return self.__customer
 
 
 #####################################GEYMSLA####################################################
