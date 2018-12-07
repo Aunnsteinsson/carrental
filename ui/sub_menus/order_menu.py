@@ -18,7 +18,7 @@ class OrderUI(object):
         while choice not in HOMECOMMANDS:  # Placeholder þangað til ég næ að
             # lata while loopuna virka betur
             choice = self.__uistandard.show_menu(
-                "Pantanir\n\t1. Yfirlit pantana\n\t2. Ný pöntun", "Veldu aðgerð")
+                "Pantanir\n\t1. Yfirlit pantana\n\t2. Ný pöntun\n", "Veldu aðgerð: ")
             if choice == "1":
                 choice = self.order_list_menu()
             elif choice == "2":
@@ -31,7 +31,7 @@ class OrderUI(object):
         while choice not in HOMECOMMANDS:  # Placeholder
             choice = self.__uistandard.show_menu(
                 """Pantanir - Yfirlit pantana\n\tSækjaupplýsingar út frá:
-\t1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir""", "Veldu aðgerð")
+\t1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir\n""", "Veldu aðgerð: ")
             if choice == "1":  # TODO Þurfum að geta tengt viðskiptavin við pöntun
                 pass
             if choice == "2":  # TODO Þurfum að gefa pöntunarnúmer
@@ -51,27 +51,28 @@ class OrderUI(object):
     def new_order_menu(self):
         self.__uistandard.print_header()
         print("Pantanir - Ný pöntun\n\tTímabil\n\t--------")
-        begin_date = input("Upphafsdagsetning: ")
-        end_date = input("Skiladagsetning: ")
-        print("\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
-        type_of_car = input("Flokkur: ")
+        begin_date = input("\tUpphafsdagsetning: ")
+        end_date = input("\tSkiladagsetning: ")
+        print("\n\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
+        type_of_car = input("\tFlokkur: ")
         insurance_price = 100  # Hér þarf að sækja verð
         insurance = input(
-            "Viðbótartrygging (verð {} á dag) (J)á/(N)ei: ".format(
+            "\tViðbótartrygging (verð {} á dag) (J)á/(N)ei: ".format(
                 insurance_price))
         format(insurance_price)
-        discount = input("Afsláttur(0-20%): ")
+        discount = input("\tAfsláttur(0-20%): ")
+        print()
         total_price = 10000  # hér þarð að nota aðra klasa
-        SSN = input("Kennitala viðskiptavinar: ")
+        SSN = input("\tKennitala viðskiptavinar: ")
         # if setning til að athuga hvort manneskjan sé til. Ef svo er
         # þá prentast út upplýsingar um hana, annars er sótt fall til
         # að gera nýjan viðskiptavin
         customer_name = "Siggi Gunnars"
-        print("{}".format(customer_name))
-        payment = input("Greiðslumáti: (D)ebit, (K)redit, (P)eningar: ")
+        print("\n\tViðskiptavinur: {}".format(customer_name))
+        payment = input("\tGreiðslumáti: (D)ebit, (K)redit, (P)eningar: ")
         # self, start_date, end_date, car, insurance=False
-        an_order = Order(begin_date, end_date, type_of_car, insurance)
-        self.__order_service.make_order(an_order)
+        # an_order = Order(begin_date, end_date, type_of_car, insurance)
+        # self.__order_service.make_order(an_order)
 
         # kallar á föll og býr til klasa
         print("---------------------\nPöntun Staðfest\n")
