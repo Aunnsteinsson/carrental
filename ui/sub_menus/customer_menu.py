@@ -88,3 +88,6 @@ class CustomerUI(object):
         credit_card_number = input("\tKreditkort: ")
         a_customer = Customer(ssn, name, phone_number, credit_card_number)
         self.__customer_service.make_customer(a_customer)
+
+    def save_program(self):
+        self.__customer_service.save_program()

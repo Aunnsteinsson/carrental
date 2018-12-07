@@ -29,5 +29,6 @@ class SalesmanUI(object):
                 self.__customer_ui.customer_menu()
             elif choice == "4":
                 pass
+        self.__customer_ui.save_program()
 
-                # ég hef ekki hugmynd um hvernig við ætlum að sýna verðlistann
+        # ég hef ekki hugmynd um hvernig við ætlum að sýna verðlistann
