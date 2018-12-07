@@ -1,4 +1,4 @@
-#Teddi sér um þennan fæl
+# Teddi sér um þennan fæl
 from ui.sub_menus.car_menu import CarUI
 from datetime import date
 import os
@@ -6,12 +6,13 @@ HOMECOMMANDS = ["h", "s"]
 POSSIBLE_ACTIONS = "\t1. Pantanir\n\t2. Bílayfirlit\n\
 \t3. Viðskiptavinir\n\t4. Starfsmenn\n\t5. Verðlisti\n\t6. Tekjur\n"
 
+
 class BossUI(object):
-    #Sér um viðmót yfirmanns
+    # Sér um viðmót yfirmanns
     def __init__(self, username):
-        self.__username = username #strengur sem inniheldur notendanafn
-        self.__car_ui = CarUI(self.__username)
-    
+        self.__username = username  # strengur sem inniheldur notendanafn
+        self.__car_ui = CarUI(self.__username, "Yfirmaður")
+
     def print_header(self):
         '''prints header for sign-in screen'''
         print("{:40s} {:>54}".format(
@@ -29,7 +30,7 @@ class BossUI(object):
 
     def main_menu(self):
         os.system('clear')
-        #Sýnir upphafsviðmót yfirmanns
+        # Sýnir upphafsviðmót yfirmanns
         choice = ""
         while choice.lower() != HOMECOMMANDS[1]:
             os.system('clear')
@@ -56,9 +57,9 @@ class BossUI(object):
         while choice not in HOMECOMMANDS:
             choice = input("")
         return choice
-        
+
     def car_menu(self):
-        #Sýnir bílayfirlitsviðmót yfirmanns og kallar á klasa eftir því sem við á
+        # Sýnir bílayfirlitsviðmót yfirmanns og kallar á klasa eftir því sem við á
         """Prints car menu and follows up on commands"""
         os.system('clear')
         choice = ""
@@ -83,7 +84,7 @@ class BossUI(object):
         while choice not in HOMECOMMANDS:
             choice = input("")
         return choice
-    
+
     def show_employees(self):
         os.system('clear')
         self.print_header()
@@ -94,25 +95,27 @@ class BossUI(object):
         return choice
 
     def price_menu(self):
-        #Sýnir verðlistaviðmót yfirmanns og kallar á klasa eftir því sem við á
+        # Sýnir verðlistaviðmót yfirmanns og kallar á klasa eftir því sem við á
         os.system('clear')
         self.print_header()
-        print("Verðlisti\n\t{:<12} | {:<12}".format("Jeppi","10000/dag"))
-        print("\t{:<12} | {:<12}".format("Fólksbíll","500/dag"))
-        print("\t{:<12} | {:<12}".format("Sendibíll","7000/dag"))
-        print("\t{:<12} | {:<12}".format("Aukatrygging","5000/dag"))
+        print("Verðlisti\n\t{:<12} | {:<12}".format("Jeppi", "10000/dag"))
+        print("\t{:<12} | {:<12}".format("Fólksbíll", "500/dag"))
+        print("\t{:<12} | {:<12}".format("Sendibíll", "7000/dag"))
+        print("\t{:<12} | {:<12}".format("Aukatrygging", "5000/dag"))
         choice = ""
         while choice not in HOMECOMMANDS:
-            choice = input("\nBreyta verði (F)ólksbíll, (J)eppi, (S)endibíll, (A)uka trygging: ")
+            choice = input(
+                "\nBreyta verði (F)ólksbíll, (J)eppi, (S)endibíll, (A)uka trygging: ")
         return choice
-    
+
     def revenue(self):
         os.system('clear')
         self.print_header()
-        print("Tekjur\n\t{:<25} | {:<10}\n\t".format("Pöntunarnúmer","Tekjur")+("-")*38)
+        print("Tekjur\n\t{:<25} | {:<10}\n\t".format(
+            "Pöntunarnúmer", "Tekjur")+("-")*38)
         print("\t{:<25} | {:>10}".format("000001", "120.000 kr"))
         print("\t{:<25} | {:>10}".format("000002", "10.000 kr"))
-        print("\n\t{:<25} | {:<10}\n\t".format("Mánuður","Tekjur")+("-")*38)
+        print("\n\t{:<25} | {:<10}\n\t".format("Mánuður", "Tekjur")+("-")*38)
         print("\t{:<25} | {:>10}".format("11", "130.000 kr"))
         choice = ""
         while choice not in HOMECOMMANDS:
@@ -120,12 +123,9 @@ class BossUI(object):
         return choice
 
     def quit(self):
-        #Fer á upphafsskjá
+        # Fer á upphafsskjá
         pass
+
 
 k1 = BossUI("User1")
 k1.main_menu()
-
-
-    
-    

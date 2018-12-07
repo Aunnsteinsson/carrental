@@ -10,49 +10,33 @@ HOMECOMMANDS = ["h", "H", "s", "S"]
 class CarUI(object):
     """Klasi sem sér um viðmót Sölumanns og ferðir þar um"""
 
-    def __init__(self, name):
+    def __init__(self, name, a_type):
         self.__username = name
         self.__car_service = CarService()
-        self.__uistandard = UIStandard(name)
+        self.__uistandard = UIStandard(name, a_type)
 
-    def print_car_header(self, status_of_car):
-        self.print_header()
-        print("Bílayfirlit - {}".format(status_of_car))
-        print("\t{:<20} | {:<20} | {:<20}".format(
-            "Tegund", "Bílnúmer", "Staða"))
-        print("\t{}".format("-"*60))
+    # def print_car_header(self, status_of_car):  #Það er aldrei kallað í þetta fall. Á líklega að setja það í second car menu
+    #    self.__uistandard.print_header()
+    #    print("Bílayfirlit - {}".format(status_of_car))
+    #    print("\t{:<20} | {:<20} | {:<20}".format(
+    #        "Tegund", "Bílnúmer", "Staða"))
+    #    print("\t{}".format("-"*60))
 
-    def print_cars(self, status):
-        os.system('cls')
-        self.print_car_header(status)
-        # sækja upplýsingar til prentunar út frá "status" í parameter
+    # def print_cars(self, status):       #Það er aldrei kallað í þetta fall, Veit ekki alveg í hvað á að nota það
+    #    os.system('cls')
+    #    self.print_car_header(status)
+    #    # sækja upplýsingar til prentunar út frá "status" í parameter
 
         print("\t{:<20} | {:<20} | {:<20}".format(
             "Jeppi", "K1NG", "þriggjaDekkja"))
         # prenta upplýsingar um bíl
-
-    def print_header(self):
-        '''Prentar haus fyrir Kerfisstjóra'''
-        print("{:40s} {:>55}".format(
-            "Kerfisstjóri - notandi: {}".format(self.__username), str(
-                date.today())))
-        print(("-"*100))
-
-    def show_menu(self, text, prompt):
-        '''Prentar það menu sem notandi er staddur á.'''
-        self.print_header()
-        print(text)
-
-        choice = input(prompt)
-
-        return choice
 
     def car_menu_admin(self):
         '''Bílayfirlit menu fyrir Kerfisstjóra'''
         choice = ""
         while choice not in HOMECOMMANDS:
             os.system('cls')
-            choice = self.show_menu(
+            choice = self.__uistandard.show_menu(
                 "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3. Í útleigu\n\t\
 4. Nýskrá bíl\n\t5. Afskrá bíl\n", "Veldu aðgerð: ")
 
@@ -81,7 +65,7 @@ class CarUI(object):
         approve_plate = ""
         while approve_plate.lower() != "j":
             os.system('cls')
-            self.print_header()
+            self.__uistandard.print_header()
             print("\tFlokkar\n\t{}".format("-"*10))
             print("\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
             a_type = input("Flokkur: ")

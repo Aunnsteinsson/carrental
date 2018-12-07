@@ -16,7 +16,7 @@ class AdminUI(object):
         self.__username = username
         self.__employee_service = EmployeeService()
         self.__employee_repo = EmployeeRepo()
-        self.__car_ui = CarUI(self.__username)
+        self.__car_ui = CarUI(self.__username, "Kerfisstjóri")
 
     def print_header(self):
         '''Prentar haus fyrir Kerfisstjóra'''

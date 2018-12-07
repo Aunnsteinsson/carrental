@@ -13,7 +13,7 @@ class SalesmanUI(object):
         self.__uistandard = UIStandard(self.__name)
         self.__order_ui = OrderUI(self.__name)
         self.__customer_ui = CustomerUI(self.__name)
-        self.__car_ui = CarUI(self.__name)
+        self.__car_ui = CarUI(self.__name, "Sölumaður")
 
     def main_menu(self):
         choice = ""
