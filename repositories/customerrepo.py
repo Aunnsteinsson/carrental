@@ -58,14 +58,19 @@ class CustomerRepo(object):
 
     def overwrite_customer_data(self):
         """Þegar keyrslu er hætt, þá skrifum við inn allar upplýsingar aftur inn
-        i datafile sem heldur utan um viðskiptavini og þannig breytum við skránni"""
-        list_of_customers = [
-            ["kennitala", "nafn", "símanumer", "kreditkortanúmer"]]
+        i datafile sem heldur utan um viðskiptavini og
+        þannig breytum við skránni"""
+        list_of_customers = ["kennitala", "nafn",
+                             "símanumer", "kreditkortanúmer"]
         with open("./data/customers.csv", "w", newline="") as customer_file:
+            list_of_customers.append(customer)
             csv_writer = csv.writer(customer_file)
+            csv_writer.writerow(list_of_customers)
             for customer in self.__customer:
-                list_of_customers.append(customer)
-                csv_writer.writerow(list_of_customers)
+                temp_list = []
+                customer = Customer.__repr__().split(",")
+                temp_list.append(customer)
+                csv_writer.writerow(temp_list)
 
 
 #####################################GEYMSLA####################################################
