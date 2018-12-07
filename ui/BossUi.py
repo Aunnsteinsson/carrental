@@ -8,18 +8,19 @@ POSSIBLE_ACTIONS = "\t1. Pantanir\n\t2. Bílayfirlit\n\
 
 
 class BossUI(object):
-    # Sér um viðmót yfirmanns
+    """ Klasi sem sér um viðmót yfirmanns í kerfi """
     def __init__(self, username):
         self.__username = username  # strengur sem inniheldur notendanafn
         self.__car_ui = CarUI(self.__username, "Yfirmaður")
 
     def print_header(self):
-        '''prints header for sign-in screen'''
+        ''' Prentar út haus fyrir UI '''
         print("{:40s} {:>54}".format(
             "Yfirmaður - notandi: {}".format(self.__username), str(date.today())))
         print(("-"*100))
 
     def show_menu(self, possible_operations):
+        """ Fall sem prentar mögulegar aðgerðir og tekur við skipun """
         os.system('clear')
         self.print_header()
         print(possible_operations)
@@ -29,6 +30,7 @@ class BossUI(object):
         return choice
 
     def main_menu(self):
+        """ Fall sem sýnir aðalviðmót yfirmanns og færir hann á milli falla """
         os.system('clear')
         # Sýnir upphafsviðmót yfirmanns
         choice = ""
@@ -49,6 +51,7 @@ class BossUI(object):
                 self.revenue()
 
     def show_all_orders(self):
+        """ Fall sem prentar út allar pantanir í kerfinu """
         #from services import orderservice
         os.system('clear')
         self.print_header()
@@ -59,8 +62,7 @@ class BossUI(object):
         return choice
 
     def car_menu(self):
-        # Sýnir bílayfirlitsviðmót yfirmanns og kallar á klasa eftir því sem við á
-        """Prints car menu and follows up on commands"""
+        """  Sýnir bílayfirlitsviðmót yfirmanns og kallar á klasa eftir því sem við á """
         os.system('clear')
         choice = ""
         while choice not in HOMECOMMANDS:  # Placeholder
@@ -76,7 +78,7 @@ class BossUI(object):
         return choice
 
     def show_customers(self):
-        """Prints all customers for boss"""
+        """ Prentar út alla viðskiptavini á skrá """
         os.system('clear')
         self.print_header()
         print("\tKennitala  |  Nafn  |  Sími\n"+("-")*100)
@@ -86,6 +88,7 @@ class BossUI(object):
         return choice
 
     def show_employees(self):
+        """ Prentar út alla starfsmenn í kerfi """
         os.system('clear')
         self.print_header()
         print("\tNotendanafn  |  Hlutverk  |  Nafn  |  Sími  |  Heimilisfang\n"+("-")*100)
@@ -95,7 +98,7 @@ class BossUI(object):
         return choice
 
     def price_menu(self):
-        # Sýnir verðlistaviðmót yfirmanns og kallar á klasa eftir því sem við á
+        """ Sýnir verðlistaviðmót yfirmanns og kallar á klasa eftir því sem við á """
         os.system('clear')
         self.print_header()
         print("Verðlisti\n\t{:<12} | {:<12}".format("Jeppi", "10000/dag"))
@@ -109,6 +112,7 @@ class BossUI(object):
         return choice
 
     def revenue(self):
+        """ Prentar út tekjur bílaleigu """
         os.system('clear')
         self.print_header()
         print("Tekjur\n\t{:<25} | {:<10}\n\t".format(
@@ -123,9 +127,5 @@ class BossUI(object):
         return choice
 
     def quit(self):
-        # Fer á upphafsskjá
+        """ Fer á upphafsskjá """
         pass
-
-
-k1 = BossUI("User1")
-k1.main_menu()
