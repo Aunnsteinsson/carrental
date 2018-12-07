@@ -46,7 +46,7 @@ class CustomerRepo(object):
         with open("./data/customers.csv", "w", newline="") as customer_file:
             csv_writer = csv.writer(customer_file)
             for customer in self.__customer:
-                csv_writer.writerow(customer)
+                csv_writer.writerow(Customer.__repr__(customer))
 
 
 #####################################GEYMSLA####################################################
