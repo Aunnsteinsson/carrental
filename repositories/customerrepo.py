@@ -28,13 +28,13 @@ class CustomerRepo(object):
         return customer_dict
 
     def add_customer(self, new_customer):
-        """Tekur við kennitölu nýs viðskiptavinar og bætir honum við í 
+        """Tekur við kennitölu nýs viðskiptavinar og bætir honum við í
         customer dictionary"""
         ssn = new_customer.get__ssn()
         self.__customer[ssn] = new_customer
 
     def remove_customer(self, ssn):
-        """Finnur key sem er kennitala viðskiptavinar, ef key passar við 
+        """Finnur key sem er kennitala viðskiptavinar, ef key passar við
         kennitöluna sem við starfsmaður leitar að þá eyðum við þeim
         viðskiptavini út úr dictionary"""
         for kennitala, value in self.__customer.items():
@@ -59,10 +59,13 @@ class CustomerRepo(object):
     def overwrite_customer_data(self):
         """Þegar keyrslu er hætt, þá skrifum við inn allar upplýsingar aftur inn
         i datafile sem heldur utan um viðskiptavini og þannig breytum við skránni"""
+        list_of_customers = [
+            ["kennitala", "nafn", "símanumer", "kreditkortanúmer"]]
         with open("./data/customers.csv", "w", newline="") as customer_file:
             csv_writer = csv.writer(customer_file)
             for customer in self.__customer:
-                csv_writer.writerow(Customer.__repr__(customer))
+                list_of_customers.append(customer)
+                csv_writer.writerow(list_of_customers)
 
 
 #####################################GEYMSLA####################################################
