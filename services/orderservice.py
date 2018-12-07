@@ -1,15 +1,16 @@
-# DENNI
+from repositories.orderrepo import OrderRepo
+from models.order import order
 
 
 class OrderService(object):
     def __init__(self):
-        pass
+        self.__order_repo = OrderRepo()
 
-    def make_order(self):
-        pass
+    def make_order(self, order):
+        self.__order_repo.add_order(order)
 
-    def remove_order(self):
-        pass
+    def remove_order(self, order_number):
+        self.__order_repo.remove_order(order_number)
 
     def check_availability(self):
         pass
@@ -21,4 +22,9 @@ class OrderService(object):
         pass
 
     def show_orders(self):
-        pass
+        order_dict = self.__order_repo.get_orders()
+        string_of_orders = ""
+        for kennitala, value in order_dict.items():
+            order_string = value.__str__()
+            string_of_orders += order_string + "\n"
+        return string_of_orders

@@ -12,7 +12,7 @@ class CustomerRepo(object):
         lesa gögn um viðskiptavini og færa þau í dictionary"""
         self.__customer = self.customer_dict()
 
-     def customer_dict(self):
+    def customer_dict(self):
         """Tekur við data úr customer.py og les það inn í dictionary
         þar sem kennitalan er notuð sem key og hver customer er hluti af
         customer klasanum er notað sem value"""
