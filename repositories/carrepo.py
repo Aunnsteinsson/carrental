@@ -56,11 +56,7 @@ class CarRepo(object):
                         csv_writer.writerow(row)
 
     def change_status(self, licence_plate, new_status):
-<<<<<<< Updated upstream
         """Breytir stöðu bíls"""
-=======
-        # Breytir stöðu bíls
->>>>>>> Stashed changes
         with open("./data/cars.csv", "r") as car_input:
             with open("./data/cars_edit.csv", "w", newline="") as car_output:
                 csv_reader = csv.reader(car_input)

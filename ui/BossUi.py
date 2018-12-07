@@ -1,7 +1,10 @@
 # Teddi sér um þennan fæl
 from ui.sub_menus.car_menu import CarUI
 from datetime import date
+from services.employeeservice import EmployeeService
+from repositories.employeerepo import EmployeeRepo
 import os
+
 HOMECOMMANDS = ["h", "s"]
 POSSIBLE_ACTIONS = "\t1. Pantanir\n\t2. Bílayfirlit\n\
 \t3. Viðskiptavinir\n\t4. Starfsmenn\n\t5. Verðlisti\n\t6. Tekjur\n"
@@ -12,12 +15,20 @@ class BossUI(object):
     def __init__(self, username):
         self.__username = username  # strengur sem inniheldur notendanafn
         self.__car_ui = CarUI(self.__username, "Yfirmaður")
+        self.__employee_service = EmployeeService()
 
     def print_header(self):
         ''' Prentar út haus fyrir UI '''
         print("{:40s} {:>54}".format(
             "Yfirmaður - notandi: {}".format(self.__username), str(date.today())))
         print(("-"*100))
+    
+    def print_employee_header(self):
+        #Tekið úr AdminUI
+        '''Prentar haus fyrir starfmannayfirlit'''
+        print("{:<10s}| {:<10s}| {:<25s}| {:<25s}| {:<10s}| {:<12s}".format(
+            "Notandi", "Lykilorð", "Nafn", "Heimilisfang", "Sími", "Hlutverk"))
+        print("-"*100)
 
     def show_menu(self, possible_operations):
         """ Fall sem prentar mögulegar aðgerðir og tekur við skipun """
@@ -90,8 +101,10 @@ class BossUI(object):
     def show_employees(self):
         """ Prentar út alla starfsmenn í kerfi """
         os.system('clear')
-        self.print_header()
-        print("\tNotendanafn  |  Hlutverk  |  Nafn  |  Sími  |  Heimilisfang\n"+("-")*100)
+        self.print_employee_header()
+        employees_list = self.__employee_service.get_employees(1)
+        for employee in employees_list:
+            print(employee)
         choice = ""
         while choice not in HOMECOMMANDS:
             choice = input("")
