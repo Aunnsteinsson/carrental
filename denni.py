@@ -1,9 +1,18 @@
-import csv
+
+from ui.SalesmanUi import SalesmanUI
+from ui.BossUi import BossUI
+
+
+k1 = SalesmanUI("johannes")
+k1.main_menu()
+
+
+"""import csv
 from models.customer import Customer
 KENNITALA = 0
 NAFN = 1
 SIMI = 2
-KREDIT = 3
+KREDIT = 3"""
 
 """def bla(x):
     with open("./data/customers.csv", "r") as customer_input:
@@ -31,7 +40,7 @@ joi = bla("1234")
 print(joi)
 """
 
-
+"""
 def overview_customers():
     #list_of_employees = []
     customer_dict = {}
@@ -50,7 +59,7 @@ def overview_customers():
 
 overview_customers()
 #list_of_customers = overview_customers()
-
+"""
 
 """def customer_dict(list_of_customers):
     customer_list = list_of_customers

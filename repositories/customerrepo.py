@@ -43,6 +43,13 @@ class CustomerRepo(object):
                     customer_dict[kennitala] = customer_class
         return customer_dict
 
+    def overwrite_customer_data(self):
+        with open("./data/customers.csv", "w", newline="") as customer_file:
+            csv_writer = csv.writer(customer_file)
+            for customer in self.__customer:
+                csv_writer.writerow(customer)
+        return self.__customer
+
 
 #####################################GEYMSLA####################################################
 
