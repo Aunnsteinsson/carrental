@@ -92,7 +92,7 @@ class CarUI(object):
         while choice not in HOMECOMMANDS:  # Placeholder
             choice = self.__uistandard.show_menu(
                 """Bílayfirlit\n\t1. Allir Bílar
-\t2. Lausir Bílar\n\t3. Í útleigu""")
+\t2. Lausir Bílar\n\t3. Í útleigu""", "Veldu Aðgerð")
             choice = self.show_cars(choice)
         return choice
 

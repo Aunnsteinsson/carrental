@@ -10,7 +10,7 @@ class SalesmanUI(object):
 
     def __init__(self, name):
         self.__name = name
-        self.__uistandard = UIStandard(self.__name)
+        self.__uistandard = UIStandard(self.__name, "Sölumaður")
         self.__order_ui = OrderUI(self.__name)
         self.__customer_ui = CustomerUI(self.__name)
         self.__car_ui = CarUI(self.__name, "Sölumaður")
