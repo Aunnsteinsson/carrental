@@ -42,9 +42,10 @@ class OrderUI(object):
 
     def all_orders(self):
         self.__uistandard.print_header()
-        print("dagsetning | Pönt.nr |  Nafn  |  Kennitala  | Tegund",
-              "Bílnr.  | Staða")
-        print("\t", "-"*80)
+        print(" {:11}| {:5}| {:25}| {:11}| {:10}| {:6}| {:10}".format(
+            "Dagsetning", "Pöntunarnúmer", "Nafn", "Kennitala",
+            "Tegund", "Bílnúmer", "Staða"))
+        print("\t", "-"*100)
         # Sæki drasl1
 
     def new_order_menu(self):
