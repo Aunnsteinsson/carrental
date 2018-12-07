@@ -11,12 +11,12 @@ class CustomerRepo(object):
         self.__customer = self.customer_dict()
 
     def add_customer(self, new_customer):
-        """ssn = customer.get__ssn()
-        name = customer.get_name()
-        phone_number = customer.get_phone_number()
-        creditcard_number = customer.get_creditcard_number()"""
+        ssn = new_customer.get__ssn()
+        name = new_customer.get_name()
+        phone_number = new_customer.get_phone_number()
+        creditcard_number = new_customer.get_creditcard_number()
         new_customer = Customer.__repr__(new_customer)
-        self.customer_dict.append(new_customer)
+        self.__customer[ssn] = new_customer
 
     def remove_customer(self, ssn):
         for kennitala, value in self.__customer.items():
@@ -27,6 +27,8 @@ class CustomerRepo(object):
         for kennitala, value in self.__customer.items():
             if kennitala == ssn:
                 return self.__customer[ssn]
+            else:
+                return False
 
     def overview_customers(self):
         return self.__customer
