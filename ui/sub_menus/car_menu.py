@@ -107,9 +107,9 @@ class CarUI(object):
             if choice == "3":
                 menu = "sem eru í útleigu"
                 listi1 = ["Fratekinn"]
-            second_choice = input(
-                "\t1. Allar gerðir\n\t2. Jeppar\n\t3. Fólksbílar"
-                "\n\t4. Sendibílar")
+            print("\n\t1. Allar gerðir\n\t2. Jeppar\n\t3. Fólksbílar"
+                  "\n\t4. Sendibílar\n")
+            second_choice = input("Veldu síðu: ")
             if second_choice == "2":
                 the_type = "Jeppar"
                 listi2 = ["Jeppi"]
@@ -128,7 +128,9 @@ class CarUI(object):
     def second_car_menu(self, the_type, menu, listi1, listi2):
         self.__uistandard.print_header()
         print("Bílayfirlit - {} {}".format(the_type, menu))
-        print("\tTegund | Bílnúmer | Staða\n\t", "-"*23)
+        print("\t{:<20} | {:<20} | {:<20}".format(
+            "Tegund", "Bílnúmer", "Staða"))
+        print("\t{}".format("-"*60))
         strengur = self.__car_service.get_list_of_cars(listi2, listi1)
         print(strengur)
         choice = input("Veldu aðgerð: ")
