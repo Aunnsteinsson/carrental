@@ -2,12 +2,12 @@ from models.car import Car
 import csv
 
 class CarRepo(object):
-    # Sér um geymslu á bílum innan kerfis
+    """Sér um geymslu á bílum innan kerfis """
     def __init__(self):
         self.__car = {}
 
     def add_car(self, car):
-        # Bætir bíl inn í geymslu
+        """Bætir bíl inn í geymslu"""
         with open("./data/cars.csv", "a+") as car_file:
             licence_plate = car.get_licence_plate()
             a_type = car.get_type()
@@ -16,7 +16,7 @@ class CarRepo(object):
                 licence_plate, a_type, status))
     
     def get_car(self, licence_plate):
-        """ Sækir upplýsingar um bíl. Kallar á __str__ fall úr class Car"""
+        """Sækir upplýsingar um bíl. Kallar á __str__ fall úr class Car"""
         with open("./data/cars.csv", "r") as car_file:
             csv_reader = csv.reader(car_file)
             for row in csv_reader:
@@ -26,6 +26,7 @@ class CarRepo(object):
         return None
 
     def get_all_cars(self):
+        """Sækir lista af öllum bílum"""
         list_of_cars = []
         with open("./data/cars.csv", "r") as car_file:
             csv_reader = csv.reader(car_file)
@@ -54,7 +55,7 @@ class CarRepo(object):
                         csv_writer.writerow(row)
 
     def change_status(self, licence_plate, new_status):
-        #Breytir stöðu bíls
+        """Breytir stöðu bíls"""
         with open("./data/cars.csv", "r") as car_input:
             with open("./data/cars_edit.csv", "w", newline = "") as car_output:
                 csv_reader = csv.reader(car_input)
