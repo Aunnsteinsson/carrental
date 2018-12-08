@@ -17,18 +17,20 @@ class SalesmanUI(object):
         self.__employee_service = EmployeeService()
 
     def main(self):
-        a_customer = Employee("gunnarboss", "abc1234",
-                              "Gunnar Pall")
-        self.__employee_service.add_employee(a_customer)
-        yesno = input("remove?")
-        if yesno == "y":
-            self.__employee_service.remove_employee("gunnarboss")
+        # a_customer = Employee("gunnarboss", "abc1234",
+        #                       "Gunnar Pall")
+        # self.__employee_service.add_employee(a_customer)
+        # yesno = input("remove?")
+        # if yesno == "y":
+        #     self.__employee_service.remove_employee("gunnarboss")
         # username = input("username: ")
         # numer = input("skrifaðu 2: ")
         # nytt_nafn = input("skrifaðu nýja nafnið: ")
         # self.__employee_service.change_employee(username, numer, nytt_nafn)
         # username = ("username: ")
         # self.__employee_service.remove_employee(username)
+        atli = self.__employee_service.get_employees()
+        print(atli)
 
 
 k1 = SalesmanUI()
