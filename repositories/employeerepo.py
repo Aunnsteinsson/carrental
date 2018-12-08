@@ -36,15 +36,15 @@ class EmployeeRepo(object):
         return self.__employee
 
     def add_employee(self, username, password,
-                     name, address="N/A", phonenumber="N/A",
-                     emp_type="soludeild"):
+                     name, address, phonenumber,
+                     emp_type):
         self.__employee_changes_and_additions[username] = username, password, name, address, phonenumber, emp_type
+
+    def remove_employee(self, username):
+        del self.__employee_changes_and_additions[username]
 
     def change_info_of_employee(self, username_of_user_to_change, choice,
                                 new_value):
         for username, _ in self.__employee.items():
             if username == username_of_user_to_change:
                 return self.__employee[username]
-
-    def remove_employee(self, username):
-        pass
