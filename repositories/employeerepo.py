@@ -1,11 +1,11 @@
 from models.employee import Employee
 import csv
 NOTENDANAFN = 0
-NAFN = 1
-LYKILORD = 2
-HLUTVERK = 3
+LYKILORD = 1
+NAFN = 2
+HEIMILISFANG = 3
 SIMI = 4
-HEIMILISFANG = 5
+HLUTVERK = 5
 
 
 class EmployeeRepo(object):
@@ -24,8 +24,8 @@ class EmployeeRepo(object):
             next(csv_reader)
             for employee in csv_reader:
                 employee_class = Employee(
-                    employee[NOTENDANAFN], employee[NAFN], employee[LYKILORD],
-                    employee[HLUTVERK], employee[SIMI], employee[HEIMILISFANG])
+                    employee[NOTENDANAFN], employee[LYKILORD], employee[NAFN],
+                    employee[HEIMILISFANG], employee[SIMI], employee[HLUTVERK])
                 username = employee[NOTENDANAFN]
                 employee_dict[username] = employee_class
         return employee_dict
@@ -37,7 +37,8 @@ class EmployeeRepo(object):
     def add_employee(self, username, password,
                      name, address="N/A", phonenumber="N/A",
                      emp_type="soludeild"):
-        pass
+        self.__employee[username] = username, password, name, address,
+        phonenumber, emp_type
 
     def change_info_of_employee(self, username_of_user_to_change, choice,
                                 new_value):

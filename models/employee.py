@@ -6,11 +6,11 @@ class Employee(object):
     def __init__(self, username, password,
                  name, address="N/A", phonenumber="N/A", emp_type="soludeild"):
         self.__username = username
-        self.__name = name
         self.__password = password
-        self.__emp_type = emp_type
-        self.__phone_number = phonenumber
+        self.__name = name
         self.__address = address
+        self.__phone_number = phonenumber
+        self.__emp_type = emp_type
 
     # Hér eru nokkur get föll sett inn til að nálgast breyturnar í fallinu
     def get_name(self):
