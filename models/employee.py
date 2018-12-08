@@ -39,11 +39,20 @@ class Employee(object):
                  self.__address, self.__phone_number,
                  self.__emp_type)
 
-    def __repr__(self):
-        """Hér eru allar upplýsingar prentaðar
-         með kommu á milli. Þetta er gert fyrir admin"""
-        return "{:<10s}| {:<10s}| {:<25s}|\
-         {:<25s}| {:<10s}| {:<12s}".format(self.__username, self.__password,
-                                           self.__name, self.__address,
-                                           self.__phone_number,
-                                           self.__emp_type)
+    def __repr__(self, admin=0):
+        """Hér eru allar upplýsingar prentaðar.
+         Þetta er gert fyrir admin, einnig skilar
+         fallið upplýsingum með kommu á milli
+         ef það er gefið 1
+         """
+        if admin == 0:
+            return "{:<10s}| {:<10s}| {:<25s}|\
+            {:<25s}| {:<10s}| {:<12s}".format(self.__username, self.__password,
+                                              self.__name, self.__address,
+                                              self.__phone_number,
+                                              self.__emp_type)
+        else:
+            return "{},{},{},{},{},{}".format(self.__username, self.__password,
+                                              self.__name, self.__address,
+                                              self.__phone_number,
+                                              self.__emp_type)

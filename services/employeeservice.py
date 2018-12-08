@@ -9,14 +9,15 @@ class EmployeeService(object):
         self.__employee_repo.add_employee(employee)
 
     def get_employees(self, boss_or_admin=0):
-        # komið
+        '''kallar á Employee klasann og sækir 
+        __str__ fyrir BossUI eða __repr fyrir AdminUi'''
         employees_dict = self.__employee_repo.get_employees()
         employees = ""
         for _, value in employees_dict.items():
             if boss_or_admin == 0:
                 employee_string = value.__str__()
             else:
-                employee_string = value.__repr__()
+                employee_string = value.__repr__(1)
             employees += employee_string + "\n"
         return employees
 
@@ -24,5 +25,6 @@ class EmployeeService(object):
         self.__employee_repo.remove_employee(username)
 
     def change_employee(self, username, choice, new_value):
-        self.__employee_repo.change_info_of_employee(
+        object_of_user = self.__employee_repo.change_info_of_employee(
             username, choice, new_value)
+        userdata = object_of_user.__repr__(1)

@@ -29,8 +29,12 @@ class SalesmanUI(object):
         # self.__employee_service.change_employee(username, numer, nytt_nafn)
         # username = ("username: ")
         # self.__employee_service.remove_employee(username)
-        atli = self.__employee_service.get_employees()
-        print(atli)
+        # atli = self.__employee_service.get_employees()
+        # print(atli)
+
+        # bjarki = self.__employee_service.change_employee("jonjones", "", "")
+        # gunnar = bjarki.__repr__(1)
+        # print(gunnar)
 
 
 k1 = SalesmanUI()
