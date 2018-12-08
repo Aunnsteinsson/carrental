@@ -6,7 +6,8 @@ class EmployeeService(object):
         self.__employee_repo = EmployeeRepo()
 
     def add_employee(self, employee):
-        self.__employee_repo.add_employee(employee)
+        pass
+        # self.__employee_repo.add_employee(employee)
 
     def get_employees(self, boss_or_admin=0):
         '''kallar á Employee klasann og sækir 
@@ -25,6 +26,8 @@ class EmployeeService(object):
         self.__employee_repo.remove_employee(username)
 
     def change_employee(self, username, choice, new_value):
-        object_of_user = self.__employee_repo.change_info_of_employee(
-            username, choice, new_value)
-        userdata = object_of_user.__repr__(1)
+        pass
+    #     object_of_user = self.__employee_repo.change_info_of_employee(
+    #         username, choice, new_value)
+    #     userdata = object_of_user.__repr__(1)
+    #     #gera remove hér og síðan setja inn nýjan með nýju uppl.
