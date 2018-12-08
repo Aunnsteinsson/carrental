@@ -1,11 +1,11 @@
 from models.employee import Employee
 import csv
-NOTENDANAFN = 0
-LYKILORD = 1
-NAFN = 2
-HEIMILISFANG = 3
-SIMI = 4
-HLUTVERK = 5
+USERNAME = 0
+PASSWORD = 1
+NAME = 2
+ADDRESS = 3
+PHONE = 4
+EMP_TYPE = 5
 
 
 class EmployeeRepo(object):
@@ -13,6 +13,7 @@ class EmployeeRepo(object):
         """Employee er hér sama og employers_dict sem var notað til að
         lesa gögn um starfsmenn og færa þau í dictionary"""
         self.__employee = self.employee_dict()
+        self.__employee_changes_and_additions = self.__employee
 
     def employee_dict(self):
         """Tekur við data úr employee og les það inn í dictionary
@@ -24,9 +25,9 @@ class EmployeeRepo(object):
             next(csv_reader)
             for employee in csv_reader:
                 employee_class = Employee(
-                    employee[NOTENDANAFN], employee[LYKILORD], employee[NAFN],
-                    employee[HEIMILISFANG], employee[SIMI], employee[HLUTVERK])
-                username = employee[NOTENDANAFN]
+                    employee[USERNAME], employee[PASSWORD], employee[NAME],
+                    employee[ADDRESS], employee[PHONE], employee[EMP_TYPE])
+                username = employee[USERNAME]
                 employee_dict[username] = employee_class
         return employee_dict
 
@@ -37,8 +38,7 @@ class EmployeeRepo(object):
     def add_employee(self, username, password,
                      name, address="N/A", phonenumber="N/A",
                      emp_type="soludeild"):
-        self.__employee[username] = username, password, name, address,
-        phonenumber, emp_type
+        self.__employee_changes_and_additions[username] = username, password, name, address, phonenumber, emp_type
 
     def change_info_of_employee(self, username_of_user_to_change, choice,
                                 new_value):
