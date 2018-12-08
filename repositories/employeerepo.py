@@ -48,3 +48,13 @@ class EmployeeRepo(object):
         for username, _ in self.__employee.items():
             if username == username_of_user_to_change:
                 return self.__employee[username]
+
+    def save(self):
+        list_of_employees = [
+            "Notendanafn,lykilord,nafn,heimilisfang,simi,hlutverk"]
+        with open("./data/employees.csv", "w", newline="") as employees_file:
+            csv_writer = csv.writer(employees_file)
+            csv_writer.writerow(list_of_employees)
+            for _, value in self.__employee_changes_and_additions.items():
+                employee_string = value.__repr__(1)
+                csv_writer.writerow(employee_string)
