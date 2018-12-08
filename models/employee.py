@@ -4,7 +4,7 @@ class Employee(object):
      breytur séu sóttar og þeim breytt með föllum"""
 
     def __init__(self, username, password,
-                 name, address="N/A", phonenumber="N/A", emp_type="soludeild"):
+                 name, address, phonenumber, emp_type):
         self.__username = username
         self.__password = password
         self.__name = name
@@ -46,11 +46,11 @@ class Employee(object):
          ef það er gefið 1
          """
         if admin == 0:
-            return "{:<10s}| {:<10s}| {:<25s}|\
-            {:<25s}| {:<10s}| {:<12s}".format(self.__username, self.__password,
-                                              self.__name, self.__address,
-                                              self.__phone_number,
-                                              self.__emp_type)
+            return "{:<10s}| {:<10s}| {:<25s}| "\
+                "{:<25s}| {:<10s}| {:<12s}".format(self.__username, self.__password,
+                                                   self.__name, self.__address,
+                                                   self.__phone_number,
+                                                   self.__emp_type)
         else:
             return "{},{},{},{},{},{}".format(self.__username, self.__password,
                                               self.__name, self.__address,

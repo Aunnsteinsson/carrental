@@ -43,8 +43,7 @@ class EmployeeUI(object):
             self.print_employee_header()
             # Prentar lista yfir starfsmenn fyrir admin (með passwordi)
             employees_list = self.__employee_service.get_employees(get_pass)
-            for employee in employees_list:
-                print(employee)
+            print(employees_list)
             # aðgerðir tengdar starfsmanni (eyða, breyta)
             print("\nEyða starfsmanni?\n{}".format("-"*40))
             print("1. Eyða\n2. Breyta\n")
@@ -118,12 +117,11 @@ class EmployeeUI(object):
                 emp_type = "yfirmadur"
             else:
                 emp_type = "soludeild"
-            an_employee = Employee(username, password, name,
-                                   address, phonenumber, emp_type)
             choice = input(
                 "\tStaðfesta nýjan notanda {} ((J)á/(N)ei): ".format(username))
             if choice.lower() == "j":
-                self.__employee_service.add_employee(an_employee)
+                self.__employee_service.add_employee(
+                    username, password, name, address, phonenumber, emp_type)
                 print("\n{}\nNýr notandi hefur verið skráður!\n".format(
                     "-"*40))
             else:

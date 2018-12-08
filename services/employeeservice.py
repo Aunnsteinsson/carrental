@@ -5,9 +5,9 @@ class EmployeeService(object):
     def __init__(self):
         self.__employee_repo = EmployeeRepo()
 
-    def add_employee(self, employee):
-        pass
-        # self.__employee_repo.add_employee(employee)
+    def add_employee(self, username, password, name, address, phonenumber, emp_type):
+        self.__employee_repo.add_employee(
+            username, password, name, address, phonenumber, emp_type)
 
     def get_employees(self, boss_or_admin=0):
         '''kallar á Employee klasann og sækir 
@@ -18,7 +18,7 @@ class EmployeeService(object):
             if boss_or_admin == 0:
                 employee_string = value.__str__()
             else:
-                employee_string = value.__repr__(1)
+                employee_string = value.__repr__()
             employees += employee_string + "\n"
         return employees
 
