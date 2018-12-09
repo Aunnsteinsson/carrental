@@ -63,13 +63,10 @@ class CustomerRepo(object):
         list_of_customers = ["kennitala", "nafn",
                              "símanumer", "kreditkortanúmer"]
         with open("./data/customers.csv", "w", newline="") as customer_file:
-            list_of_customers.append(customer)
             csv_writer = csv.writer(customer_file)
             csv_writer.writerow(list_of_customers)
-            for customer in self.__customer:
-                temp_list = []
-                customer = Customer.__repr__().split(",")
-                temp_list.append(customer)
+            for ssn, customer in self.__customer.items():
+                temp_list = customer.__repr__().split(",")
                 csv_writer.writerow(temp_list)
 
 
