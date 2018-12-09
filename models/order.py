@@ -38,10 +38,10 @@ class Order(object):
 
     def __str__(self):
         '''Prentaðar út þær upplýsingar sem tilheyra pöntun.'''
-        return "Pöntunarnúmer: {} Upphafsdagur: {}, Skiladagur {}, Bíll {}, \
-        Viðbótartrygging {}".format(self.__order_number, self.__start_date,
-                                    self.__end_date, self.__car,
-                                    self.__insurance)
+        return "Pöntunarnúmer: {}, Upphafsdagur: {}, Skiladagur: {}, Bíll: {}, \
+Viðbótartrygging: {}".format(self.__order_number, self.__start_date,
+                             self.__end_date, self.__car,
+                             self.__insurance)
 
     def __repr__(self):
         return "{},{},{},{},{}".format(self.__order_number, self.__start_date,
