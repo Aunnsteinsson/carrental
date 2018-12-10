@@ -1,5 +1,4 @@
 from models.employee import Employee
-import copy
 import csv
 USERNAME = 0
 PASSWORD = 1
@@ -10,9 +9,10 @@ EMP_TYPE = 5
 
 
 class EmployeeRepo(object):
-    def __init__(self, employee_dict):
+    def __init__(self):
         """Employee er hér sama og employers_dict sem var notað til að
         lesa gögn um starfsmenn og færa þau í dictionary"""
+        global employee_dict
         self.__employee = employee_dict
 
     def get_employees(self):
@@ -61,9 +61,4 @@ def employees_dict():
     return dict_for_emp
 
 
-def main():
-    employee_dict = employees_dict()
-    EmployeeRepo(employee_dict)
-
-
-main()
+employee_dict = employees_dict()
