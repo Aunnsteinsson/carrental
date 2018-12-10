@@ -1,5 +1,7 @@
 from repositories.employeerepo import EmployeeRepo
 
+employees_dict = self.__employee_repo.get_employees()
+
 
 class EmployeeService(object):
     def __init__(self):
@@ -13,7 +15,7 @@ class EmployeeService(object):
     def get_employees(self, boss_or_admin=0):
         '''kallar á employee klasann og sækir
          __str__ fyrir BossUI eða __repr fyrir AdminUi'''
-        employees_dict = self.__employee_repo.get_employees()
+        global employees_dict
         employees = ""
         for _, value in employees_dict.items():
             if boss_or_admin == 0:
@@ -22,6 +24,13 @@ class EmployeeService(object):
                 employee_string = value.__repr__()
             employees += employee_string + "\n"
         return employees
+
+    def check_if_valid(self, usern_to_check):
+        global employees_dict
+        for _, value in employees_dict.items():
+            if value == usern_to_check:
+                return
+        return False
 
     def remove_employee(self, username):
         self.__employee_repo.remove_employee(username)
