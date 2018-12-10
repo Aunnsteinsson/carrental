@@ -100,38 +100,39 @@ class CarUI(object):
         if choice == "1" or choice == "2" or choice == "3":
             if choice == "1":
                 menu = "sem eru lausir eða í útleigu"
-                listi1 = ["Fratekinn", "Laus"]
+                status_list = ["Fratekinn", "Laus"]
             if choice == "2":
                 menu = "sem eru lausir "
-                listi1 = ["Laus"]
+                status_list = ["Laus"]
             if choice == "3":
                 menu = "sem eru í útleigu"
-                listi1 = ["Fratekinn"]
+                status_list = ["Fratekinn"]
             print("\n\t1. Allar gerðir\n\t2. Jeppar\n\t3. Fólksbílar"
                   "\n\t4. Sendibílar\n")
             second_choice = input("Veldu síðu: ")
             if second_choice == "2":
                 the_type = "Jeppar"
-                listi2 = ["Jeppi"]
+                type_list = ["Jeppi"]
             elif second_choice == "3":
                 the_type = "Fólksbílar"
-                listi2 = ["Fólksbill"]
+                type_list = ["Fólksbill"]
             elif second_choice == "4":
                 the_type = "Sendibílar"
-                listi2 = ["Sendibill"]
+                type_list = ["Sendibill"]
             else:
                 the_type = "all_cars"
-                listi2 = ["Sendibill", "Folksbill", "Jeppi"]
-        choice = self.second_car_menu(the_type, menu, listi1, listi2)
+                type_list = ["Sendibill", "Folksbill", "Jeppi"]
+            choice = self.second_car_menu(
+                the_type, menu, status_list, type_list)
         return choice
 
-    def second_car_menu(self, the_type, menu, listi1, listi2):
+    def second_car_menu(self, the_type, menu, status_list, type_list):
         self.__uistandard.print_header()
         print("Bílayfirlit - {} {}".format(the_type, menu))
         print("\t{:<20} | {:<20} | {:<20}".format(
             "Tegund", "Bílnúmer", "Staða"))
         print("\t{}".format("-"*60))
-        strengur = self.__car_service.get_list_of_cars(listi2, listi1)
+        strengur = self.__car_service.get_list_of_cars(type_list, status_list)
         print(strengur)
         choice = input("Veldu aðgerð: ")
         return choice
