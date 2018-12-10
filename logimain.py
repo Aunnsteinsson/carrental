@@ -11,7 +11,7 @@ repo = OrderRepo()
 
 # print(repo.order_dict())
 
-order_number = "001"
+order_number = "003"
 
 order = Order(order_number, start, end, car, insur)
 print(order)
@@ -30,7 +30,7 @@ if save == "1":
     repo.save_new_orders()
 # # pontun = Order("001", "upphf", "endir", "jepps", "no")
 
-
+# logi
 # # k1 = AdminUI("logigeir")
 
 # # k1.main_menu()
