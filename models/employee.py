@@ -35,9 +35,8 @@ class Employee(object):
         """Her ery prentaðar allar upplýsingar nema password
          því það eiga ekki allir að hafa aðgang að passwordi"""
         return "{:<25s}| {:<10s}| {:<25s}| {:<10s}| {:<12s}\
-        ".format(self.__name, self.__username,
-                 self.__address, self.__phone_number,
-                 self.__emp_type)
+        ".format(self.__name, self.__username, self.__address,
+                 self.__phone_number, self.__emp_type)
 
     def __repr__(self, admin=0):
         """Hér eru allar upplýsingar prentaðar.
@@ -47,12 +46,16 @@ class Employee(object):
          """
         if admin == 0:
             return "{:<10s}| {:<10s}| {:<25s}| "\
-                "{:<25s}| {:<10s}| {:<12s}".format(self.__username, self.__password,
-                                                   self.__name, self.__address,
+                "{:<25s}| {:<10s}| {:<12s}".format(self.__username,
+                                                   self.__password,
+                                                   self.__name,
+                                                   self.__address,
                                                    self.__phone_number,
                                                    self.__emp_type)
         else:
-            return "{},{},{},{},{},{}".format(self.__username, self.__password,
-                                              self.__name, self.__address,
+            return "{},{},{},{},{},{}".format(self.__username,
+                                              self.__password,
+                                              self.__name,
+                                              self.__address,
                                               self.__phone_number,
                                               self.__emp_type)

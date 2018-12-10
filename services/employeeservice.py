@@ -5,13 +5,14 @@ class EmployeeService(object):
     def __init__(self):
         self.__employee_repo = EmployeeRepo()
 
-    def add_employee(self, username, password, name, address, phonenumber, emp_type):
+    def add_employee(self, username, password, name,
+                     address, phonenumber, emp_type):
         self.__employee_repo.add_employee(
             username, password, name, address, phonenumber, emp_type)
 
     def get_employees(self, boss_or_admin=0):
-        '''kallar á Employee klasann og sækir 
-        __str__ fyrir BossUI eða __repr fyrir AdminUi'''
+        '''kallar á Employee klasann og sækir
+         __str__ fyrir BossUI eða __repr fyrir AdminUi'''
         employees_dict = self.__employee_repo.get_employees()
         employees = ""
         for _, value in employees_dict.items():
