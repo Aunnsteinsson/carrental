@@ -72,9 +72,9 @@ class EmployeeUI(object):
                         "-"*40))
                 time.sleep(2)
                 choice = "h"
-        else:
-            print("\nNotandanafn ekki á skrá.")
-            time.sleep(2)
+            else:
+                print("\nNotandanafn ekki á skrá.")
+                time.sleep(2)
 
     def edit_employee(self):
         '''Menu fyrir breytingu á starfsmanni'''
