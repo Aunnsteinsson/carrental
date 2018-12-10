@@ -10,8 +10,7 @@ EMP_TYPE = 5
 
 class EmployeeRepo(object):
     def __init__(self):
-        """Employee er hér sama og employers_dict sem var notað til að
-        lesa gögn um starfsmenn og færa þau í dictionary"""
+        """tekur global employee_dict og gefur self.__employee dictionaryið"""
         global employee_dict
         self.__employee = employee_dict
 
@@ -22,19 +21,24 @@ class EmployeeRepo(object):
     def add_employee(self, username, password,
                      name, address, phonenumber,
                      emp_type):
+        '''bætir við staki af employee í __employee'''
         self.__employee[username] = Employee(
             username, password, name, address, phonenumber, emp_type)
 
     def remove_employee(self, username):
+        '''tekur stak úr __employee'''
         del self.__employee[username]
 
-    def change_info_of_employee(self, username_of_user_to_change, choice,
-                                new_value):
+    def change_info_of_employee(self, username_of_user_to_change):
+        '''sendir __employee sem á að breyta til'''
         for username, _ in self.__employee.items():
             if username == username_of_user_to_change:
-                return self.__employee[username]
+                del self.__employee[username]
+                return self.__employee
+        return False
 
     def save(self):
+        '''afritar stak af hlutum í __employee og skráir það í employees.csv'''
         list_of_employees = [
             "Notendanafn,lykilord,nafn,heimilisfang,simi,hlutverk"]
         with open("./data/employees.csv", "w", newline="") as employees_file:

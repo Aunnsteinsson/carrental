@@ -1,4 +1,5 @@
 from repositories.employeerepo import EmployeeRepo
+from models.employee import Employee
 
 
 class EmployeeService(object):
@@ -11,7 +12,7 @@ class EmployeeService(object):
             username, password, name, address, phonenumber, emp_type)
 
     def get_employees(self, boss_or_admin=0):
-        '''kallar á Employee klasann og sækir
+        '''kallar á employee klasann og sækir
          __str__ fyrir BossUI eða __repr fyrir AdminUi'''
         employees_dict = self.__employee_repo.get_employees()
         employees = ""
@@ -27,8 +28,12 @@ class EmployeeService(object):
         self.__employee_repo.remove_employee(username)
 
     def change_employee(self, username, choice, new_value):
-        pass
-    #     object_of_user = self.__employee_repo.change_info_of_employee(
-    #         username, choice, new_value)
-    #     userdata = object_of_user.__repr__(1)
-    #     #gera remove hér og síðan setja inn nýjan með nýju uppl.
+        employee = self.__employee_repo.change_info_of_employee(username)
+        if choice == 1:
+            employee.change_password(new_value)
+        elif choice == 2:
+            employee.change_name(new_value)
+        elif choice == 3:
+            employee.change_address(new_value)
+        else:
+            employee.change_phone_number(new_value)

@@ -31,6 +31,24 @@ class Employee(object):
     def get_phone_number(self):
         return self.__phone_number
 
+    def change_name(self, new_name):
+        self.__name = new_name
+
+    def change_address(self, new_address):
+        self.__address = new_address
+
+    def change_username(self, new_username):
+        self.__username = new_username
+
+    def change_password(self, new_password):
+        self.__password = new_password
+
+    def change_type(self, new_type):
+        self.__emp_type = new_type
+
+    def change_phone_number(self, new_phone_number):
+        self.__phone_number = new_phone_number
+
     def __str__(self):
         """Her ery prentaðar allar upplýsingar nema password
          því það eiga ekki allir að hafa aðgang að passwordi"""
