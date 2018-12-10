@@ -46,6 +46,8 @@ class OrderUI(object):
             "Dagsetning", "Pöntunarnúmer", "Nafn", "Kennitala",
             "Tegund", "Bílnúmer", "Staða"))
         print("\t", "-"*100)
+        string = self.__order_service.show_orders()
+        print(string)
         # Sæki drasl1
 
     def new_order_menu(self):
