@@ -14,7 +14,6 @@ class EmployeeRepo(object):
         """Employee er hér sama og employers_dict sem var notað til að
         lesa gögn um starfsmenn og færa þau í dictionary"""
         self.__employee = self.employee_dict()
-        self.__employee_changes_and_additions = copy.deepcopy(self.__employee)
 
     def employee_dict(self):
         """Tekur við data úr employee og les það inn í dictionary
@@ -39,10 +38,10 @@ class EmployeeRepo(object):
     def add_employee(self, username, password,
                      name, address, phonenumber,
                      emp_type):
-        self.__employee_changes_and_additions[username] = username, password, name, address, phonenumber, emp_type
+        self.__employee[username] = username, password, name, address, phonenumber, emp_type
 
     def remove_employee(self, username):
-        del self.__employee_changes_and_additions[username]
+        del self.__employee[username]
 
     def change_info_of_employee(self, username_of_user_to_change, choice,
                                 new_value):
@@ -56,6 +55,6 @@ class EmployeeRepo(object):
         with open("./data/employees.csv", "w", newline="") as employees_file:
             csv_writer = csv.writer(employees_file)
             csv_writer.writerow(list_of_employees)
-            for _, info in self.__employee_changes_and_additions.items():
-                order_string = info.__repr__(1).split(",")
-                csv_writer.writerow(order_string)
+            for _, info in self.__employee.items():
+                employees_string = info.__repr__(1).split(",")
+                csv_writer.writerow(employees_string)

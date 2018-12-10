@@ -38,9 +38,6 @@ class SalesmanUI(object):
         # gunnar = bjarki.__repr__(1)
         # print(gunnar)
 
-        # k1 = SalesmanUI()
-        # k1.main()
-
 
 a1 = AdminUI("jonj")
 
