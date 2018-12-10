@@ -5,6 +5,7 @@ from services.employeeservice import EmployeeService
 from ui.ui_standard_functions import UIStandard
 from ui.sub_menus.car_menu import CarUI
 from ui.sub_menus.employee_menu import EmployeeUI
+from services.orderservice import OrderService
 
 HOMECOMMANDS = ["h", "s"]
 
@@ -17,6 +18,7 @@ class BossUI(object):
         self.__employee_ui = EmployeeUI(self.__username, "Yfirmaður")
         self.__uistandard = UIStandard(self.__username, "Yfirmaður")
         self.__employee_service = EmployeeService()
+        self.__order_service = OrderService()
 
     def main_menu(self):
         """ Fall sem sýnir aðalviðmót yfirmanns og færir hann á milli falla """
@@ -46,6 +48,7 @@ class BossUI(object):
         """ Fall sem prentar út allar pantanir í kerfinu """
         #from services import orderservice
         print("\tdagsetning  |  Pönt.nr.  |  Nafn  |  Kennitala  |  Tegund  |  Bílnr.  |  Staða\n" + ("-")*100)
+        self.__order_service.show_orders()
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             choice = input("\n(H)eim - (S)krá út: ")
