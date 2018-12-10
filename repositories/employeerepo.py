@@ -10,26 +10,10 @@ EMP_TYPE = 5
 
 
 class EmployeeRepo(object):
-    def __init__(self):
+    def __init__(self, employee_dict):
         """Employee er hér sama og employers_dict sem var notað til að
         lesa gögn um starfsmenn og færa þau í dictionary"""
-        self.__employee = self.employee_dict()
-
-    def employee_dict(self):
-        """Tekur við data úr employee og les það inn í dictionary
-         þar sem notendanafn er notað sem key og hver starfsmaður
-         er hluti af Employee klasanum og notað sem value"""
-        employee_dict = {}
-        with open("./data/employees.csv", "r") as employees_file:
-            csv_reader = csv.reader(employees_file)
-            next(csv_reader)
-            for employee in csv_reader:
-                employee_class = Employee(
-                    employee[USERNAME], employee[PASSWORD], employee[NAME],
-                    employee[ADDRESS], employee[PHONE], employee[EMP_TYPE])
-                username = employee[USERNAME]
-                employee_dict[username] = employee_class
-        return employee_dict
+        self.__employee = employee_dict
 
     def get_employees(self):
         '''skilar öllum starfmönnum'''
@@ -58,3 +42,28 @@ class EmployeeRepo(object):
             for _, info in self.__employee.items():
                 employees_string = info.__repr__(1).split(",")
                 csv_writer.writerow(employees_string)
+
+
+def employees_dict():
+    """Tekur við data úr employee og les það inn í dictionary
+        þar sem notendanafn er notað sem key og hver starfsmaður
+        er hluti af Employee klasanum og notað sem value"""
+    dict_for_emp = {}
+    with open("./data/employees.csv", "r") as employees_file:
+        csv_reader = csv.reader(employees_file)
+        next(csv_reader)
+        for employee in csv_reader:
+            employee_class = Employee(
+                employee[USERNAME], employee[PASSWORD], employee[NAME],
+                employee[ADDRESS], employee[PHONE], employee[EMP_TYPE])
+            username = employee[USERNAME]
+            dict_for_emp[username] = employee_class
+    return dict_for_emp
+
+
+def main():
+    employee_dict = employees_dict()
+    EmployeeRepo(employee_dict)
+
+
+main()
