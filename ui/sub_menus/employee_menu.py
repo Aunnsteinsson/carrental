@@ -9,7 +9,7 @@ VALIDJOB = ["k", "s", "y"]
 
 
 class EmployeeUI(object):
-    ''' 
+    '''
     Klasi sem sér um employee menu, fyrir kerfisstjóra.
     '''
 
@@ -42,34 +42,39 @@ class EmployeeUI(object):
             self.__uistandard.print_header()
             self.print_employee_header()
             # Prentar lista yfir starfsmenn fyrir admin (með passwordi)
-            employees_list = self.__employee_service.get_employees(get_pass)
-            print(employees_list)
+            employees_list_string = self.__employee_service.get_employees(
+                get_pass)
+            print(employees_list_string)
             # aðgerðir tengdar starfsmanni (eyða, breyta)
             print("\nEyða starfsmanni?\n{}".format("-"*40))
             print("1. Eyða\n2. Breyta\n")
             choice = input("Veldu aðgerð: ")
             if choice == "1":
                 # Eyða employee
-                print("\nEyða\n{}".format("-"*40))
-                username = input("Notandanafn: ")
-                # athugar hvort notandi sé í kerfi
-                for employee_info in employees_list:
-                    if username in str(employee_info):
-                        choice = input("Ertu viss? ((J)á/(N)ei): ")
-                        if choice.lower() == "j":
-                            self.__employee_service.remove_employee(username)
-                            print("{}\nNotanda hefur verið eytt!\n".format("-"*40))
-                        elif choice.lower() == "n":
-                            print("{}\nHætt við aðgerð - Fer á upphafssíðu!\n".format(
-                                "-"*40))
-                        time.sleep(2)
-                        choice = "h"
-                else:
-                    print("\nNotandanafn ekki á skrá.")
-                    time.sleep(2)
+                self.delete_employee(employees_list_string)
             elif choice == "2":
                 # Breyta einhverju við employee
                 self.edit_employee()
+
+    def delete_employee(self, employees_list_string):
+        print("\nEyða\n{}".format("-"*40))
+        username = input("Notandanafn: ")
+        # athugar hvort notandi sé í kerfi
+        employee_list = employees_list_string.split("\n")
+        for employee_info in employee_list:
+            if username in employee_info:
+                choice = input("Ertu viss? ((J)á/(N)ei): ")
+                if choice.lower() == "j":
+                    self.__employee_service.remove_employee(username)
+                    print("{}\nNotanda hefur verið eytt!\n".format("-"*40))
+                elif choice.lower() == "n":
+                    print("{}\nHætt við aðgerð - Fer á upphafssíðu!\n".format(
+                        "-"*40))
+                time.sleep(2)
+                choice = "h"
+        else:
+            print("\nNotandanafn ekki á skrá.")
+            time.sleep(2)
 
     def edit_employee(self):
         '''Menu fyrir breytingu á starfsmanni'''
