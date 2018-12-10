@@ -1,18 +1,16 @@
-# Teddi sér um þennan fæl
+import os
+from datetime import date
+from repositories.employeerepo import EmployeeRepo
+from services.employeeservice import EmployeeService
+from ui.ui_standard_functions import UIStandard
 from ui.sub_menus.car_menu import CarUI
 from ui.sub_menus.employee_menu import EmployeeUI
-from ui.ui_standard_functions import UIStandard
-from datetime import date
-from services.employeeservice import EmployeeService
-from repositories.employeerepo import EmployeeRepo
-import os
 
 HOMECOMMANDS = ["h", "s"]
-POSSIBLE_ACTIONS = "\t1. Pantanir\n\t2. Bílayfirlit\n\
-\t3. Viðskiptavinir\n\t4. Starfsmenn\n\t5. Verðlisti\n\t6. Tekjur\n"
 
 class BossUI(object):
     """ Klasi sem sér um viðmót yfirmanns í kerfi """
+
     def __init__(self, username):
         self.__username = username  # strengur sem inniheldur notendanafn
         self.__car_ui = CarUI(self.__username, "Yfirmaður")
@@ -34,8 +32,10 @@ class BossUI(object):
         # Sýnir upphafsviðmót yfirmanns
         choice = ""
         while choice.lower() != HOMECOMMANDS[1]:
-            choice = self.show_menu(POSSIBLE_ACTIONS)
-            os.system('clear')            
+            os.system('clear') 
+            choice = self.__uistandard.show_menu("\t1. Pantanir\n\t2. Bílayfirlit\n\
+\t3. Viðskiptavinir\n\t4. Starfsmenn\n\t5. Verðlisti\n\t6. Tekjur\n", "\nVeldu síðu: ")
+            os.system('clear') 
             self.__uistandard.print_header()
             if choice == "1":
                 choice = self.show_all_orders()
@@ -53,25 +53,10 @@ class BossUI(object):
     def show_all_orders(self):
         """ Fall sem prentar út allar pantanir í kerfinu """
         #from services import orderservice
-        print("\tdagsetning  |  Pönt.nr.  |  Nafn  |  Kennitala  |  Tegund  |  Bílnr.  |  Staða\n"+("-")*100)
+        print("\tdagsetning  |  Pönt.nr.  |  Nafn  |  Kennitala  |  Tegund  |  Bílnr.  |  Staða\n" + ("-")*100)
         choice = ""
         while choice not in HOMECOMMANDS:
-            choice = input("")
-        return choice
-
-    def car_menu(self):
-        """  Sýnir bílayfirlitsviðmót yfirmanns og kallar á klasa eftir því sem við á """
-        choice = ""
-        while choice not in HOMECOMMANDS:  # Placeholder
-            choice = self.show_menu(
-                """Bílayfirlit\n\t1. Allir Bílar
-\t2. Lausir Bílar\n\t3. Í útleigu""")
-            if choice == "1":
-                pass
-            if choice == "2":
-                pass
-            if choice == "3":
-                pass
+            choice = input("\n(H)eim: ")
         return choice
 
     def show_customers(self):
@@ -79,7 +64,7 @@ class BossUI(object):
         print("\tKennitala  |  Nafn  |  Sími\n"+("-")*100)
         choice = ""
         while choice not in HOMECOMMANDS:
-            choice = input("")
+            choice = input("\n(H)eim: ")
         return choice
 
     def price_menu(self):
@@ -104,7 +89,7 @@ class BossUI(object):
         print("\t{:<25} | {:>10}".format("11", "130.000 kr"))
         choice = ""
         while choice not in HOMECOMMANDS:
-            choice = input("")
+            choice = input("\n(H)eim: ")
         return choice
 
     def quit(self):
