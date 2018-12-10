@@ -26,7 +26,7 @@ class SalesmanUI(object):
             elif choice == "2":
                 choice = self.__car_ui.boss_and_salesman_car_menu()
             elif choice == "3":
-                self.__customer_ui.customer_menu()
+                choice = self.__customer_ui.customer_menu()
             elif choice == "4":
                 pass
         self.__customer_ui.save_program()
