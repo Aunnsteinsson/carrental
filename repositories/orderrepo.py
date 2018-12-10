@@ -33,13 +33,12 @@ class OrderRepo(object):
                 return order_dict
         return order_dict
 
-    def save_new_orders(self, new_orders):
+    def save_new_orders(self):
         orders_header = "order_number,start,end,car,insurance"
         with open("./data/orders.csv", "w", newline="") as orders_file:
             csv_writer = csv.writer(orders_file)
             csv_writer.writerow(orders_header.split(','))
-            for order_number, info in new_orders.items():
-                info = info.strip()
+            for order_number, info in self.__new_orders.items():
                 order_string = info.__repr__().split(",")
                 csv_writer.writerow(order_string)
 
@@ -47,10 +46,7 @@ class OrderRepo(object):
         '''
         Bætir við pöntun í dictionary sem unnið er með.
         '''
-        order_info = order.__repr__()
-        self.__new_orders[order_number] = order_info
-
-        return self.__new_orders
+        self.__new_orders[order_number] = order
 
     def remove_order(self, order_number):
         '''

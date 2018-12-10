@@ -22,7 +22,8 @@ class EmployeeRepo(object):
     def add_employee(self, username, password,
                      name, address, phonenumber,
                      emp_type):
-        self.__employee[username] = username, password, name, address, phonenumber, emp_type
+        self.__employee[username] = Employee(
+            username, password, name, address, phonenumber, emp_type)
 
     def remove_employee(self, username):
         del self.__employee[username]

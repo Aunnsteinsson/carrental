@@ -11,20 +11,7 @@ repo = OrderRepo()
 
 # print(repo.order_dict())
 
-order_number = "009"
-
-order = Order(order_number, start, end, car, insur)
-print(order)
-
-repo.add_order(order_number, order)
-
-start = "2112"
-end = "2323"
-car = "Jeppi"
-insur = "no"
-# print(repo.order_dict())
-
-order_number = "008"
+order_number = "001"
 
 order = Order(order_number, start, end, car, insur)
 print(order)
@@ -40,7 +27,7 @@ print(new_orders)
 
 save = input("Save")
 if save == "1":
-    repo.save_new_orders(new_orders)
+    repo.save_new_orders()
 # # pontun = Order("001", "upphf", "endir", "jepps", "no")
 
 

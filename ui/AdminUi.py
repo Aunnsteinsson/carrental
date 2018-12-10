@@ -55,7 +55,7 @@ class AdminUI(object):
         car = input("car")
         insurance = input("ins")
         new_order = Order(ordernr, start, end, car, insurance)
-        self.orderservice.make_order(new_order)
+        return self.orderservice.make_order(new_order)
 
     def quit(self):
         pass
