@@ -1,5 +1,7 @@
 # Teddi sér um þennan fæl
 from ui.sub_menus.car_menu import CarUI
+from ui.sub_menus.employee_menu import EmployeeUI
+from ui.ui_standard_functions import UIStandard
 from datetime import date
 from services.employeeservice import EmployeeService
 from repositories.employeerepo import EmployeeRepo
@@ -15,6 +17,8 @@ class BossUI(object):
     def __init__(self, username):
         self.__username = username  # strengur sem inniheldur notendanafn
         self.__car_ui = CarUI(self.__username, "Yfirmaður")
+        self.__employee_ui = EmployeeUI(self.__username, "Yfirmaður")
+        self.__uistandard = UIStandard(self.__username, "Yfirmaður")
         self.__employee_service = EmployeeService()
 
     def print_header(self):
@@ -22,13 +26,6 @@ class BossUI(object):
         print("{:40s} {:>54}".format(
             "Yfirmaður - notandi: {}".format(self.__username), str(date.today())))
         print(("-"*100))
-    
-    def print_employee_header(self):
-        #Tekið úr AdminUI
-        '''Prentar haus fyrir starfmannayfirlit'''
-        print("{:<10s}| {:<10s}| {:<25s}| {:<25s}| {:<10s}| {:<12s}".format(
-            "Notandi", "Lykilorð", "Nafn", "Heimilisfang", "Sími", "Hlutverk"))
-        print("-"*100)
 
     def show_menu(self, possible_operations):
         """ Fall sem prentar mögulegar aðgerðir og tekur við skipun """
@@ -55,7 +52,7 @@ class BossUI(object):
             elif choice == "3":
                 choice = self.show_customers()
             elif choice == "4":
-                self.show_employees()
+                self.__employee_ui.show_employees()
             elif choice == "5":
                 self.price_menu()
             elif choice == "6":
@@ -93,18 +90,6 @@ class BossUI(object):
         os.system('clear')
         self.print_header()
         print("\tKennitala  |  Nafn  |  Sími\n"+("-")*100)
-        choice = ""
-        while choice not in HOMECOMMANDS:
-            choice = input("")
-        return choice
-
-    def show_employees(self):
-        """ Prentar út alla starfsmenn í kerfi """
-        os.system('clear')
-        self.print_employee_header()
-        employees_list = self.__employee_service.get_employees(1)
-        for employee in employees_list:
-            print(employee)
         choice = ""
         while choice not in HOMECOMMANDS:
             choice = input("")
