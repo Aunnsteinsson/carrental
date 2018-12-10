@@ -15,8 +15,9 @@ class OrderService(object):
     def check_availability(self):
         pass
 
-    def change_time(self):
-        pass
+    def change_time(self, order_number, new_time):
+        order = self.__order_repo.get_orders(order_number)
+        order.change_time(new_time)
 
     def change_insurance(self):
         pass
