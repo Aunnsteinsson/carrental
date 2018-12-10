@@ -30,7 +30,7 @@ if save == "1":
     repo.save_new_orders()
 # # pontun = Order("001", "upphf", "endir", "jepps", "no")
 
-
+# logi
 # # k1 = AdminUI("logigeir")
 
 # # k1.main_menu()

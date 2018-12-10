@@ -3,6 +3,7 @@ import os
 from models.employee import Employee
 from services.employeeservice import EmployeeService
 from ui.ui_standard_functions import UIStandard
+# logi
 
 HOMECOMMANDS = ["h", "H", "s", "S"]
 VALIDJOB = ["k", "s", "y"]

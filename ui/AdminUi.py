@@ -41,3 +41,4 @@ class AdminUI(object):
 
     def quit(self):
         pass
+# logi
