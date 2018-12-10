@@ -12,7 +12,7 @@ class CustomerService(object):
     def find_customer(self, ssn):
         customer = self.__customer_repo.get_customer(ssn)
         if customer == None:
-            return None
+            return False
         return customer
 
     def remove_customer(self, ssn):

@@ -1,5 +1,8 @@
 from models.order import Order
+from models.customer import Customer
 from services.orderservice import OrderService
+from services.customerservice import CustomerService
+from ui.sub_menus.customer_menu import CustomerUI
 from ui.ui_standard_functions import UIStandard
 HOMECOMMANDS = ["h", "H", "s", "S"]
 
@@ -10,6 +13,8 @@ class OrderUI(object):
     def __init__(self, name, a_type):
         self.__name = name
         self.__order_service = OrderService()
+        self.__customer_service = CustomerService()
+        self.__customer_menu = CustomerUI(name, a_type)
         self.__uistandard = UIStandard(name, a_type)
 
     def order_menu(self):
@@ -61,20 +66,44 @@ class OrderUI(object):
         insurance = input(
             "\tViðbótartrygging (verð {} á dag) (J)á/(N)ei: ".format(
                 insurance_price))
+        if insurance == "j" or insurance == "J":
+            insurance = True
+        else:
+            insurance = False
         format(insurance_price)
         discount = input("\tAfsláttur(0-20%): ")
-        print()
         total_price = 10000  # hér þarð að nota aðra klasa
-        SSN = input("\tKennitala viðskiptavinar: ")
+        ssn = input("\tKennitala viðskiptavinar: ")
         # if setning til að athuga hvort manneskjan sé til. Ef svo er
         # þá prentast út upplýsingar um hana, annars er sótt fall til
         # að gera nýjan viðskiptavin
-        customer_name = "Siggi Gunnars"
+        customer = self.__customer_service.find_customer(ssn)
+        if customer:
+            customer_name = customer.get_name()
+        else:
+            print(
+                "Viðskiptavinur ekki skráður í kerfið. Vinsamlegast skráðu nauðsynlegar upplýsingar.")
+            self.__uistandard.print_header  # Héðan og
+            print("Viðskiptavinir - Nýr viðskiptavinur\n")
+            ssn = input("\tKennitala: ")
+            name = input("\tNafn: ")
+            phone_number = input("\tSími: ")
+            credit_card_number = input("\tKreditkort: ")
+            a_customer = Customer(ssn, name, phone_number, credit_card_number)
+            self.__customer_service.make_customer(a_customer)
+            new_customer = self.__customer_service.find_customer(ssn)
+            print("{:>20}{:>30}{:>20}".format("Kennitala", "Nafn", "Sími"))
+            # hingað er fall sem að er alveg eins og í customer ui en er ekki hægt að vísa beint í því að
+            print(new_customer)
+            # þegar ég bý til viðskiptavininn í repoinu sem að customer ui vísar í verður hann ekki til hér.
+            # Vanar eitthvað sniðugt workaround hér
+            customer = self.__customer_service.find_customer(ssn)
+            customer_name = customer.get_name()
+
         print("\n\tViðskiptavinur: {}".format(customer_name))
         payment = input("\tGreiðslumáti: (D)ebit, (K)redit, (P)eningar: ")
-        # self, start_date, end_date, car, insurance=False
-        # an_order = Order(begin_date, end_date, type_of_car, insurance)
-        # self.__order_service.make_order(an_order)
+        order = Order(begin_date, end_date, type_of_car, insurance)
+        self.__order_service.make_order(order)
 
         # kallar á föll og býr til klasa
         print("---------------------\nPöntun Staðfest\n")
