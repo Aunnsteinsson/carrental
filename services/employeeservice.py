@@ -1,5 +1,4 @@
 from repositories.employeerepo import EmployeeRepo
-from models.employee import Employee
 
 
 class EmployeeService(object):
@@ -29,11 +28,11 @@ class EmployeeService(object):
 
     def change_employee(self, username, choice, new_value):
         employee = self.__employee_repo.change_info_of_employee(username)
-        if choice == 1:
+        if choice == "1":
             employee.change_password(new_value)
-        elif choice == 2:
+        elif choice == "2":
             employee.change_name(new_value)
-        elif choice == 3:
+        elif choice == "3":
             employee.change_address(new_value)
         else:
             employee.change_phone_number(new_value)

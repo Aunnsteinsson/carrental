@@ -33,8 +33,7 @@ class EmployeeRepo(object):
         '''sendir __employee sem á að breyta til'''
         for username, _ in self.__employee.items():
             if username == username_of_user_to_change:
-                del self.__employee[username]
-                return self.__employee
+                return self.__employee[username]
         return False
 
     def save(self):
