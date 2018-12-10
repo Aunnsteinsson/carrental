@@ -7,6 +7,7 @@ from services.carservice import CarService
 from services.customerservice import CustomerService
 from services.employeeservice import EmployeeService
 from services.orderservice import OrderService
+from ui.AdminUi import AdminUI
 HOMECOMMANDS = ["h", "H", "s", "S"]
 
 
@@ -17,6 +18,7 @@ class SalesmanUI(object):
         self.__employee_service = EmployeeService()
 
     def main(self):
+        pass
         # a_customer = Employee("gunnarboss", "abc1234",
         #                       "Gunnar Pall")
         # self.__employee_service.add_employee(a_customer)
@@ -36,6 +38,10 @@ class SalesmanUI(object):
         # gunnar = bjarki.__repr__(1)
         # print(gunnar)
 
+        # k1 = SalesmanUI()
+        # k1.main()
 
-k1 = SalesmanUI()
-k1.main()
+
+a1 = AdminUI("jonj")
+
+a1.main_menu()
