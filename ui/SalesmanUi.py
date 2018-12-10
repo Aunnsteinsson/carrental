@@ -8,19 +8,20 @@ HOMECOMMANDS = ["h", "H", "s", "S"]
 class SalesmanUI(object):
     """Klasi sem sér um viðmót Sölumanns og ferðir þar um"""
 
-    def __init__(self, name):
+    def __init__(self, name, a_type):
+        self.__a_type = a_type
         self.__name = name
-        self.__uistandard = UIStandard(self.__name, "Sölumaður")
-        self.__order_ui = OrderUI(self.__name, "Sölumaður")
-        self.__customer_ui = CustomerUI(self.__name, "Sölumaður")
-        self.__car_ui = CarUI(self.__name, "Sölumaður")
+        self.__uistandard = UIStandard(self.__name, self.__a_type)
+        self.__order_ui = OrderUI(self.__name, self.__a_type)
+        self.__customer_ui = CustomerUI(self.__name, self.__a_type)
+        self.__car_ui = CarUI(self.__name, self.__a_type)
 
     def main_menu(self):
         choice = ""
         while choice != HOMECOMMANDS[2] and choice != HOMECOMMANDS[3]:
             choice = self.__uistandard.show_menu(
                 """ \t1. Pantanir\n\t2. Bílayfirlit
-\t3. Viðskiptavinir\n\t4. Verðlisti\n""", "Veldu aðgerð")
+\t3. Viðskiptavinir\n\t4. Verðlisti\n""", "Veldu aðgerð: ")
             if choice == "1":
                 choice = self.__order_ui.order_menu()
             elif choice == "2":
