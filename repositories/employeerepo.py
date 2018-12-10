@@ -1,4 +1,5 @@
 from models.employee import Employee
+import copy
 import csv
 USERNAME = 0
 PASSWORD = 1
@@ -13,7 +14,7 @@ class EmployeeRepo(object):
         """Employee er hér sama og employers_dict sem var notað til að
         lesa gögn um starfsmenn og færa þau í dictionary"""
         self.__employee = self.employee_dict()
-        self.__employee_changes_and_additions = self.__employee
+        self.__employee_changes_and_additions = copy.deepcopy(self.__employee)
 
     def employee_dict(self):
         """Tekur við data úr employee og les það inn í dictionary
@@ -55,6 +56,6 @@ class EmployeeRepo(object):
         with open("./data/employees.csv", "w", newline="") as employees_file:
             csv_writer = csv.writer(employees_file)
             csv_writer.writerow(list_of_employees)
-            for _, value in self.__employee_changes_and_additions.items():
-                employee_string = value.__repr__(1)
-                csv_writer.writerow(employee_string)
+            for _, info in self.__employee_changes_and_additions.items():
+                order_string = info.__repr__(1).split(",")
+                csv_writer.writerow(order_string)
