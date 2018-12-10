@@ -37,5 +37,5 @@ class EmployeeService(object):
         else:
             employee.change_phone_number(new_value)
 
-    def save(self):
+    def save_employees(self):
         self.__employee_repo.save()
