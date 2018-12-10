@@ -25,9 +25,9 @@ class EmployeeService(object):
 
     def check_if_valid(self, usern_to_check):
         employees_dict = self.__employee_repo.get_employees()
-        for _, value in employees_dict.items():
-            if value == usern_to_check:
-                return
+        for username, _ in employees_dict.items():
+            if username == usern_to_check:
+                return True
         return False
 
     def remove_employee(self, username):

@@ -61,8 +61,9 @@ class EmployeeUI(object):
         print("\nEyða\n{}".format("-"*40))
         username = input("Notandanafn: ")
         # athugar hvort notandi sé í kerfi
-        employee_list = employees_list_string.split("\n")
-        if username in str(employee_list):
+        check = self.__employee_service.check_if_valid(username)
+
+        if check:
             choice = input("Ertu viss? ((J)á/(N)ei): ")
             if choice.lower() == "j":
                 self.__employee_service.remove_employee(username)
