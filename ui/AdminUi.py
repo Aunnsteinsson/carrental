@@ -5,6 +5,7 @@ from ui.ui_standard_functions import UIStandard
 from services.orderservice import OrderService
 from models.order import Order
 from repositories.employeerepo import EmployeeRepo
+from repositories.orderrepo import OrderRepo
 
 HOMECOMMANDS = ["h", "H", "s", "S"]
 
@@ -21,6 +22,7 @@ class AdminUI(object):
         self.__employee_ui = EmployeeUI(self.__username, "Kerfisstjóri")
         self.__uistandard = UIStandard(self.__username, "Kerfisstjóri")
         self.__eplrepo = EmployeeRepo()
+        self.__orderrepo = OrderRepo()
 
     def main_menu(self):
         '''Upphafssíða fyrir kerfisstjóra'''
@@ -36,26 +38,6 @@ class AdminUI(object):
                 choice = self.__employee_ui.new_employee()
             elif choice == "3":
                 choice = self.__car_ui.car_menu_admin()
-            elif choice == "4":
-                choice = self.remove_order()
-            elif choice == "5":
-                choice = self.add_order()
-            elif choice == "6":
-                choice = self.__eplrepo.save()
-
-    def remove_order(self):
-        print("Eyða pöntun")
-        ordernr = input("Pöntnr? ")
-        self.orderservice.remove_order(ordernr)
-
-    def add_order(self):
-        ordernr = input("nr")
-        start = input("start")
-        end = input("end")
-        car = input("car")
-        insurance = input("ins")
-        new_order = Order(ordernr, start, end, car, insurance)
-        return self.orderservice.make_order(new_order)
 
     def quit(self):
         pass

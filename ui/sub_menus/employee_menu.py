@@ -61,17 +61,16 @@ class EmployeeUI(object):
         username = input("Notandanafn: ")
         # athugar hvort notandi sé í kerfi
         employee_list = employees_list_string.split("\n")
-        for employee_info in employee_list:
-            if username in employee_info:
-                choice = input("Ertu viss? ((J)á/(N)ei): ")
-                if choice.lower() == "j":
-                    self.__employee_service.remove_employee(username)
-                    print("{}\nNotanda hefur verið eytt!\n".format("-"*40))
-                elif choice.lower() == "n":
-                    print("{}\nHætt við aðgerð - Fer á upphafssíðu!\n".format(
-                        "-"*40))
-                time.sleep(2)
-                choice = "h"
+        if username in str(employee_list):
+            choice = input("Ertu viss? ((J)á/(N)ei): ")
+            if choice.lower() == "j":
+                self.__employee_service.remove_employee(username)
+                print("{}\nNotanda hefur verið eytt!\n".format("-"*40))
+            elif choice.lower() == "n":
+                print("{}\nHætt við aðgerð - Fer á upphafssíðu!\n".format(
+                    "-"*40))
+            time.sleep(2)
+            choice = "h"
         else:
             print("\nNotandanafn ekki á skrá.")
             time.sleep(2)
