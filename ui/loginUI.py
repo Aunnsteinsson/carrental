@@ -1,11 +1,11 @@
+from repositories.employeerepo import EmployeeRepo
 from datetime import date
 from getpass import getpass
-import csv
 
 
 class LoginUI(object):
     def __init__(self):
-        pass
+        self.__employee_repo = EmployeeRepo()
 
     def print_header(self):
         '''
@@ -28,13 +28,16 @@ class LoginUI(object):
          og hvort það passi við lykilorðið, það skilar síðan
          hlutverki og notendanafni
         '''
-        with open("./data/employees.csv", "r") as employees_file:
-            csv_reader = csv.reader(employees_file)
-            next(csv_reader)
-            for employee in csv_reader:
-                if username == employee[0]:
-                    if password == employee[1]:
-                        return employee[5]
+        # with open("./data/employees.csv", "r") as employees_file:
+        #     csv_reader = csv.reader(employees_file)
+        #     next(csv_reader)
+        employee_dict = self.__employee_repo.get_employees()
+        for employee, value in employee_dict.items():
+            if username == employee:
+                value = employee_dict[username].__repr__(1)
+                value_list = value.split(",")
+                if password == value_list[1]:
+                    return value_list[5], username
 
     def main_menu(self):
         '''
@@ -43,4 +46,4 @@ class LoginUI(object):
         '''
         self.print_header()
         username, password = self.ask_for_username_password()
-        return(self.check_employee_type(username, password))
+        print(self.check_employee_type(username, password))

@@ -1,6 +1,10 @@
 class Customer(object):
-    '''Custumer klassi, tekur inn kennitölu, nafn, síma og kreditkorta
-    númer'''
+    '''
+     Breytur í þessum klasa eru kennitala, nafn, sími, og kreditkorta númer
+     einnig inniheldur klasin föll sem eru gerð til að kalla á breytur eða 
+     breyta breytum, __str__ fallið inniheldur ekki kreditkorta númerið en
+      __repr__ gerir það
+    '''
 
     def __init__(self, ssn, name, phone_number, creditcard_number):
         self.__ssn = ssn
@@ -8,17 +12,7 @@ class Customer(object):
         self.__phone_number = phone_number
         self.__creditcard_number = creditcard_number
 
-    def change_name(self, new_name):
-        self.__name = new_name
-
-    def change_phone_number(self, new_phone_number):
-        self.__phone_number = new_phone_number
-
-    def change_credit_card(self, new_card_number):
-        self.__creditcard_number = new_card_number
-
-    # Föllin hér að neðan eru hugsuð til að sækja
-    # einhverja eina sérstaka breytu
+    # Hér eru nokkur get föll sett inn til að nálgast breyturnar í fallinu
     def get__ssn(self):
         return self.__ssn
 
@@ -31,14 +25,28 @@ class Customer(object):
     def get_creditcard_number(self):
         return self.__creditcard_number
 
+    # Hér eru nokkur get föll sett inn til að breyta breytunum í fallinu
+    def change_name(self, new_name):
+        self.__name = new_name
+
+    def change_phone_number(self, new_phone_number):
+        self.__phone_number = new_phone_number
+
+    def change_credit_card(self, new_card_number):
+        self.__creditcard_number = new_card_number
+
     def __str__(self):
-        '''String fall sem prentar allt nema kreditkorta upplýsingar'''
+        '''
+         String fall sem prentar allar breytur nema
+         kreditkorta upplýsingar
+        '''
         return "{:>20}| {:>30}| {:>20}|".format(
             self.__ssn, self.__name, self.__phone_number)
 
     def __repr__(self):
-        '''Fall tileinkað kerfisstjóra til að sækja allar
-         upplýsingar notanda'''
+        '''
+         String fall sem prentar allar breytur
+        '''
         return "{},{},{},{}".format(
             self.__ssn, self.__name, self.__phone_number,
             self.__creditcard_number)

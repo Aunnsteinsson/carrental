@@ -7,12 +7,18 @@ class EmployeeService(object):
 
     def add_employee(self, username, password, name,
                      address, phonenumber, emp_type):
+        '''
+         Bætir við nýjum starfsmanni inn í dictionaryið í employee_repo
+        '''
         self.__employee_repo.add_employee(
             username, password, name, address, phonenumber, emp_type)
 
     def get_employees(self, boss_or_admin=0):
-        '''kallar á employee klasann og sækir
-         __str__ fyrir BossUI eða __repr fyrir AdminUi'''
+        '''
+         Kallar á get_employees í EmployeRepo klasann og sækir
+         __str__ fyrir BossUI eða __repr__ fyrir AdminUi ef fallið
+         er geið eitthvað annað en 0
+        '''
         employees_dict = self.__employee_repo.get_employees()
         employees = ""
         for _, value in employees_dict.items():
