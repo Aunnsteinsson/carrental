@@ -5,11 +5,11 @@ class Car(object):
     """Þessi klasi býr til bíl, með númeraplötu og hvernig týpa
     af bíl hann er"""
 
-    def __init__(self, licence_plate, a_type, status="Laus"):
+    def __init__(self, licence_plate, a_type, price_dict, status="laus"):
         self.__licence_plate = licence_plate
         self.__a_type = a_type
         self.__status = status
-        self.__price = "100"
+        self.__price = price_dict
 
     def __str__(self):
         return "Bíltegund: {} - númeraplata: {} - verð: {} - staða: {}".format(self.__a_type, self.__licence_plate, self.__price, self.__status)
@@ -18,23 +18,21 @@ class Car(object):
         """Skilar númeraplötu"""
         return self.__licence_plate
 
-    def price_jeep(self, a_type):
+    def price_vehicle(self):
         """Ef flokkur bíls er jeppi, þá er verðið á honum 10.000"""
-        if a_type.lower() == "jeppi":
-            self.__price = 10000
-        return self.__price
+        vehicle_price = self.__price[self.__a_type]
+        return vehicle_price
 
-    def price_small_car(self, a_type):
-        """Ef flokkur bíls er fólksbíll, þá er verðið á honum 5000"""
-        if a_type.lower() == "fólksbíll":
-            self.__price = 5000
-        return self.__price
+    #def price_small_car(self, a_type):
+      #  """Ef flokkur bíls er fólksbíll, þá er verðið á honum 5000"""
+       # self.__price = 5000
+        #return self.__price
 
-    def price_van(self, a_type):
-        """Ef flokkur bíls er sendibíll, þá er verðið á honum 15.000"""
-        if a_type.lower() == "sendibíll":
-            self.__price = 15000
-        return self.__price
+#    def price_van(self, a_type):
+ #       """Ef flokkur bíls er sendibíll, þá er verðið á honum 15.000"""
+  #      if a_type.lower() == "sendibíll":
+   #         self.__price = 15000
+    #    return self.__price"""
 
     def get_type(self):
         """Skilar flokki bíls"""

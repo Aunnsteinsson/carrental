@@ -6,6 +6,7 @@ from ui.sub_menus.car_menu import CarUI
 from ui.sub_menus.employee_menu import EmployeeUI
 from services.orderservice import OrderService
 from ui.sub_menus.customer_menu import CustomerUI
+from services.carservice import CarService
 
 HOMECOMMANDS = ["h", "s"]
 
@@ -21,6 +22,7 @@ class BossUI(object):
         self.__employee_service = EmployeeService()
         self.__order_service = OrderService()
         self.__customer_ui = CustomerUI(self.__username, emp_type)
+        self.__car_service = CarService()
 
     def main_menu(self):
         """ Fall sem sýnir aðalviðmót yfirmanns og færir hann á milli falla """
@@ -62,17 +64,35 @@ class BossUI(object):
             choice = input("\n(H)eim - (S)krá út: ")
         return choice
 
+    def get_price_dict(self):
+        price_dict = self.__car_service.get_car_prices()
+        return price_dict
+
     def price_menu(self):
         """ Sýnir verðlistaviðmót yfirmanns og kallar á klasa eftir því sem við á """
-        print("Verðlisti\n\t{:<12} | {:<12}".format("Jeppi", "10000/dag"))
-        print("\t{:<12} | {:<12}".format("Fólksbíll", "500/dag"))
-        print("\t{:<12} | {:<12}".format("Sendibíll", "7000/dag"))
-        print("\t{:<12} | {:<12}".format("Aukatrygging", "5000/dag"))
+        price_dict = self.get_price_dict()
+        for types, price in price_dict.items():
+            print("Verðlisti\n\t{:<12} | {:<12}".format(types, price))
+  #      print("\t{:<12} | {:<12}".format("Fólksbíll", "500/dag"))
+   #     print("\t{:<12} | {:<12}".format("Sendibíll", "7000/dag"))
+    #    print("\t{:<12} | {:<12}".format("Aukatrygging", "5000/dag"))
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
-            choice = input(
+            car_choice = input(
                 "\nBreyta verði (F)ólksbíll, (J)eppi, (S)endibíll, (A)uka trygging: ")
+            if car_choice.lower() == "f":
+                a_type = "folksbill"
+            elif car_choice.lower() == "j":
+                a_type = "jeppi"
+            elif car_choice.lower() == "s":
+                a_type = "sendibill"
+            elif car_choice.lower() == "a":
+                a_type = "trygging"
+            new_price = input("Nýtt verð: ")
+            self.__car_service.change_price_of_type(a_type, new_price)
+            choice = input("skrifaði home")
         return choice
+
 
     def revenue(self):
         """ Prentar út tekjur bílaleigu """

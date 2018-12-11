@@ -45,6 +45,15 @@ class CarService(object):
                         car[0], car[1], car[2])
                     car_list.append(car_class) """    
         return string
+    
+    def get_car_prices(self):
+        car_prices = self.__car_repo.get_car_prices()
+        return car_prices
+
+    def change_price_of_type(self, a_type, new_price):
+        self.__car_repo.change_price_of_type(a_type, new_price)
+        self.__car_repo.save_price_data()
+
 
     def save_cars(self):
         self.__car_repo.save_car_data()

@@ -7,8 +7,8 @@ STATUS = 2
 class CarRepo(object):
     """Sér um geymslu á bílum innan kerfis """
     def __init__(self):
+        self.__price = self.price_dict()        
         self.__car = self.car_dict()
-        self.__price = {}
 
     def car_dict(self):
         car_dict = {}
@@ -16,10 +16,19 @@ class CarRepo(object):
             csv_reader = csv.reader(car_file)
             for car in csv_reader:
                 if car[0] != "licence_plate":
-                    car_class = Car(car[LICENCE_PLATE], car[A_TYPE], car[STATUS])
+                    car_class = Car(car[LICENCE_PLATE], car[A_TYPE], self.__price, car[STATUS])
                     licence_plate = car[LICENCE_PLATE]
                     car_dict[licence_plate] = car_class
         return car_dict
+
+    def price_dict(self):
+        price_dict = {}
+        with open("./data/price_list.csv", "r") as price_file:
+            csv_reader = csv.reader(price_file)
+            for price in csv_reader:
+                if price[0] != "gerd_bils":
+                    price_dict[price[0]] = price[1]
+            return price_dict    
 
     def add_car(self, new_car):
         """Bætir bíl inn í geymslu"""
@@ -80,3 +89,17 @@ class CarRepo(object):
                 temp_car_list = temp_car_string.split(",")
                 csv_writer.writerow(temp_car_list)
 
+    def save_price_data(self):
+        list_of_prices = ["gerd_bils", "verd"]
+        with open ("./data/price_list.csv", "w", newline="") as price_file:
+            csv_writer = csv.writer(price_file)
+            csv_writer.writerow(list_of_prices)
+            for the_type, the_price in self.__price.items():
+                listi = [the_type, the_price]
+                csv_writer.writerow(listi)
+
+    def get_car_prices(self):
+        return self.__price
+
+    def change_price_of_type(self, a_type, new_price):
+        self.__price[a_type] = new_price

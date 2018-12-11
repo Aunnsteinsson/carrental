@@ -59,6 +59,10 @@ class CarUI(object):
                 else:
                     print("\nHætt við aðgerð!")
                 time.sleep(2)
+    
+    def get_car_prices_dict(self):
+        price_dict = self.__car_service.get_car_prices()
+        return price_dict
 
     def add_new_car(self):
         os.system('cls')
@@ -80,7 +84,8 @@ class CarUI(object):
             approve_plate = input("Skrá {} með númerið {}\
  ((J)á/(N)ei)? ".format(
                 a_type, license_plate))
-            new_car = Car(license_plate, a_type)
+            price_dict = self.get_car_prices_dict()    
+            new_car = Car(license_plate, a_type, price_dict)
         else:
             print("\nBíll hefur verið skráður!")
             time.sleep(2)
