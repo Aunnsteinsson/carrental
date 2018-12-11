@@ -95,7 +95,6 @@ class OrderUI(object):
             print(
                 "Viðskiptavinur ekki skráður í kerfið. Vinsamlegast skráðu nauðsynlegar upplýsingar.")
             self.__customer_menu.new_customer_menu()
-            self.__customer_menu.save_program()
             customer = self.__customer_menu.get_the_customer(ssn)
             customer_name = customer.get_name()
 
