@@ -47,10 +47,12 @@ class OrderUI(object):
                     print(customer)
                 else:
                     print("Enginn viðskiptavinur með þessu nafni")
+                choice = input("B - tilbaka, H - Heim, S - Útskrá: ")
             if choice == "2":  # TODO Þurfum að gefa pöntunarnúmer
                 pass
             if choice == "3":
                 self.all_orders()
+                choice = input("B - tilbaka, H - Heim, S - Útskrá: ")
         return choice
 
     def all_orders(self):
