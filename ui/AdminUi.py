@@ -34,12 +34,7 @@ class AdminUI(object):
             elif choice == "3":
                 choice = self.__car_ui.car_menu_admin()
             elif choice == "4":
-                choice = self.save_employees()
-
-    def save_employees(self):
-        save = input("Vista breytingar? ((J)á/(N)ei) ")
-        if save.lower() == 'j':
-            self.__employee_service.save_employees()
+                choice = self.__employee_ui.save_employees()
 
     # order_number, start_date, end_date, name, ssn, car, car_number, status_of_car, insurance=False):
 
