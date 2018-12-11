@@ -12,11 +12,11 @@ class AdminUI(object):
     Klasi fyrir viðmót kerfisstjóra
     '''
 
-    def __init__(self, username):
+    def __init__(self, username, emp_type):
         self.__username = username
-        self.__car_ui = CarUI(self.__username, "Kerfisstjóri")
-        self.__employee_ui = EmployeeUI(self.__username, "Kerfisstjóri")
-        self.__uistandard = UIStandard(self.__username, "Kerfisstjóri")
+        self.__car_ui = CarUI(self.__username, emp_type)
+        self.__employee_ui = EmployeeUI(self.__username, emp_type)
+        self.__uistandard = UIStandard(self.__username, emp_type)
 
     def main_menu(self):
         '''Upphafssíða fyrir kerfisstjóra'''

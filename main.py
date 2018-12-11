@@ -8,10 +8,10 @@ user = LoginUI()
 emp_type, username = user.main_menu()
 
 if emp_type == "admin":
-    user = AdminUI(username)
+    user = AdminUI(username, "Kerfisstjóri")
 elif emp_type == "yfirmadur":
-    user = BossUI(username)
+    user = BossUI(username, "Yfirmaður")
 elif emp_type == "soludeild":
-    user = SalesmanUI(username)
+    user = SalesmanUI(username, "Söludeild")
 
 user.main_menu()

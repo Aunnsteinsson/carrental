@@ -13,18 +13,17 @@ HOMECOMMANDS = ["h", "s"]
 class BossUI(object):
     """ Klasi sem sér um viðmót yfirmanns í kerfi """
 
-    def __init__(self, username):
+    def __init__(self, username, emp_type):
         self.__username = username  # strengur sem inniheldur notendanafn
-        self.__car_ui = CarUI(self.__username, "Yfirmaður")
-        self.__employee_ui = EmployeeUI(self.__username, "Yfirmaður")
-        self.__uistandard = UIStandard(self.__username, "Yfirmaður")
+        self.__car_ui = CarUI(self.__username, emp_type)
+        self.__employee_ui = EmployeeUI(self.__username, emp_type)
+        self.__uistandard = UIStandard(self.__username, emp_type)
         self.__employee_service = EmployeeService()
         self.__order_service = OrderService()
-        self.__customer_ui = CustomerUI(self.__username, "Yfirmaður")
+        self.__customer_ui = CustomerUI(self.__username, emp_type)
 
     def main_menu(self):
         """ Fall sem sýnir aðalviðmót yfirmanns og færir hann á milli falla """
-        self.__uistandard.clear_screen()
         # Sýnir upphafsviðmót yfirmanns
         choice = ""
         while choice.lower() != HOMECOMMANDS[1]:
