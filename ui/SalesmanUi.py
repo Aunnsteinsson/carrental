@@ -24,10 +24,10 @@ class SalesmanUI(object):
 \t3. Viðskiptavinir\n\t4. Verðlisti\n""", "Veldu aðgerð: ")
             if choice == "1":
                 choice = self.__order_ui.order_menu()
+                self.__customer_ui = CustomerUI(self.__name, self.__a_type)
             elif choice == "2":
                 choice = self.__car_ui.boss_and_salesman_car_menu()
             elif choice == "3":
-                self.__customer_ui = CustomerUI(self.__name, self.__a_type)
                 choice = self.__customer_ui.customer_menu()
                 self.__customer_ui.save_program()
             elif choice == "4":

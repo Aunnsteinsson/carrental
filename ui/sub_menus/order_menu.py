@@ -1,7 +1,5 @@
 from models.order import Order
-from models.customer import Customer
 from services.orderservice import OrderService
-from services.customerservice import CustomerService
 from ui.sub_menus.customer_menu import CustomerUI
 from ui.ui_standard_functions import UIStandard
 HOMECOMMANDS = ["h", "H", "s", "S"]
@@ -12,9 +10,8 @@ class OrderUI(object):
 
     def __init__(self, name, a_type):
         self.__name = name
+        self.__a_type = a_type
         self.__order_service = OrderService()
-        self.__customer_service = CustomerService()
-        self.__customer_menu = CustomerUI(name, a_type)
         self.__uistandard = UIStandard(name, a_type)
 
     def order_menu(self):
@@ -77,6 +74,7 @@ class OrderUI(object):
         # if setning til að athuga hvort manneskjan sé til. Ef svo er
         # þá prentast út upplýsingar um hana, annars er sótt fall til
         # að gera nýjan viðskiptavin
+        self.__customer_menu = CustomerUI(self.__name, self.__a_type)
         customer = self.__customer_menu.get_the_customer(ssn)
         if customer:
             customer_name = customer.get_name()
