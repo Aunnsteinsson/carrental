@@ -26,16 +26,26 @@ class CarService(object):
 
     def get_list_of_cars(self, a_type, status):
         """ Fall sem sækir lista af öllum bílum """
-        list = self.__car_repo.get_all_cars()
-        car_list = []
-        for car in list:
-            if len(car) == 3:
-                if car[1] in a_type and car[2] in status:
+
+        """ dict = self.__car_repo.get_all_cars() 
+        cars = ""
+        for licence_plate, car in dict.items():
+            car_string = car.__str__()
+            cars += car_string + "\n"
+            print(cars)
+        return cars """
+        
+        
+        dict = self.__car_repo.get_all_cars()
+        string = ""
+        for licence_plate, item in dict.items():
+            type_of_car = item.get_type()
+            status_of_car = item.get_status()
+            if type_of_car in a_type and status_of_car in status:
+                car_string = item.__str__()
+                string += car_string + "\n"
+                """ if car[1] in a_type and car[2] in status:
                     car_class = Car(
                         car[0], car[1], car[2])
-                    car_list.append(car_class)
-        string = ""
-        for car in car_list:
-            car_string = car.__str__()
-            string += car_string + "\n"
+                    car_list.append(car_class) """    
         return string

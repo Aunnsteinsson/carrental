@@ -12,10 +12,10 @@ class CarRepo(object):
 
     def car_dict(self):
         car_dict = {}
-        with open("./data/cars.csv", "a+") as car_file:
+        with open("./data/cars.csv", "r") as car_file:
             csv_reader = csv.reader(car_file)
             for car in csv_reader:
-                if car[LICENCE_PLATE] != "licence_plate":
+                if car[0] != "licence_plate":
                     car_class = Car(car[LICENCE_PLATE], car[A_TYPE], car[STATUS])
                     licence_plate = car[LICENCE_PLATE]
                     car_dict[licence_plate] = car_class
@@ -50,13 +50,16 @@ class CarRepo(object):
 
     def get_all_cars(self):
         """Sækir lista af öllum bílum"""
-        list_of_cars = []
+        
+        return self.__car
+        
+        """ list_of_cars = []
         with open("./data/cars.csv", "r") as car_file:
             csv_reader = csv.reader(car_file)
             for line in csv_reader:
                 if line[0] != "númeraplata":
                     list_of_cars.append(line)
-        return list_of_cars
+        return list_of_cars """
 
     def remove_car(self, licence_plate):
         """Eyðir bíl úr geymslu"""
