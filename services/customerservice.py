@@ -8,6 +8,7 @@ class CustomerService(object):
 
     def make_customer(self, customer):
         self.__customer_repo.add_customer(customer)
+        self.save_program()
 
     def find_customer(self, ssn):
         customer = self.__customer_repo.get_customer(ssn)
@@ -17,18 +18,22 @@ class CustomerService(object):
 
     def remove_customer(self, ssn):
         self.__customer_repo.remove_customer(ssn)
+        self.save_program()
 
     def change_card(self, ssn, new_credit):
         customer = self.__customer_repo.get_customer(ssn)
         customer.change_credit_card(new_credit)
+        self.save_program()
 
     def change_phone_number(self, ssn, new_phone_number):
         customer = self.__customer_repo.get_customer(ssn)
         customer.change_phone_number(new_phone_number)
+        self.save_program()
 
     def change_name(self, ssn, new_name):
         customer = self.__customer_repo.get_customer(ssn)
         customer.change_name(new_name)
+        self.save_program()
 
     def get_list(self):
         dict = self.__customer_repo.overview_customers()
