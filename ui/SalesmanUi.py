@@ -23,13 +23,19 @@ class SalesmanUI(object):
                 """ \t1. Pantanir\n\t2. Bílayfirlit
 \t3. Viðskiptavinir\n\t4. Verðlisti\n""", "Veldu aðgerð: ")
             if choice == "1":
+                self.__customer_ui.save_program()
+                # Ef að viðskiptavinalistanum var breytt þarf að vista það
+                # áður en nýjar pantanir eru gerðar.
                 choice = self.__order_ui.order_menu()
                 self.__customer_ui = CustomerUI(self.__name, self.__a_type)
+                # Við það að búa til nýtt order gæti hafa þurft að búa til
+                #  nýjan viðskiptavin  Hér les klasinn aftur upp út gögnunum
+                # til að nýji viðskiptavinurinn sé líka í því customerrepo
+                #  sem tengist customer menu
             elif choice == "2":
                 choice = self.__car_ui.boss_and_salesman_car_menu()
             elif choice == "3":
                 choice = self.__customer_ui.customer_menu()
-                self.__customer_ui.save_program()
             elif choice == "4":
                 pass
 
