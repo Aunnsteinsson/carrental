@@ -1,5 +1,5 @@
 licence_plate,a_type,status
-GG123,Folksbill,Laus
-AA111,Jeppi,Laus
-HH333,Sendibill,Laus
-LL888,Jeppi,Laus
+Folksbill,GG123,Laus
+Jeppi,AA111,Laus
+Sendibill,HH333,Laus
+Jeppi,LL888,Laus

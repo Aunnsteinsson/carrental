@@ -11,14 +11,20 @@ class CarService(object):
     def make_car(self, new_car):
         """ Nýskráir bíl í kerfi """
         self.__car_repo.add_car(new_car)
+        self.save_cars()
 
     def remove_car(self, licence_plate):
         """ Fjarlægir bíl úr kerfi """
         self.__car_repo.remove_car(licence_plate)
+        self.save_cars()
 
     def change_status(self, licence_plate, new_status):
         """ Breytir stöðu bíls """
-        self.__car_repo.change_status(licence_plate, new_status)
+        car = self.__car_repo.get_car(licence_plate)
+        car.chagne_status(new_status)
+        self.save_cars()
+
+        """ self.__car_repo.change_status(licence_plate, new_status) """
 
     def show_cars(self, licence_plate):
         """ Fall sem sýnir upplýsingar um bíl """

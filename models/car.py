@@ -49,9 +49,8 @@ class Car(object):
         self.__status = new_status
 
     def __repr__(self):
-        return "{},{},{},{}".format
-        (self.__a_type,
-         self.__licence_plate, self.__price, self.__status)
+        return "{},{},{}".format(self.__a_type,
+         self.__licence_plate, self.__status)
 
 
 """class Jeep(Car):
