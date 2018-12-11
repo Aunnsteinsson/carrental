@@ -1,7 +1,12 @@
 class Employee(object):
-    """Þessi klasi er með nokkrar breytur, (phonenumber og address eru default
-     því það er ekki bráðnauðsynlegar upplýsingar) og heimilar það að þær
-     breytur séu sóttar og þeim breytt með föllum"""
+    """
+     Breytur í þessum klasa eru notendanafn, lykilorð, nafn, heimilisfang
+     sími og hlutverk starfsmanns, einnig inniheldur klasin föll sem eru gerð
+     til að kalla á breytur eða breyta breytum, __str__ fallið er fyrir
+     yfirmann og __repr__ er fyrir kerfisstjóra, það er einnig hægt að gefa
+     __repr__ fallinu einhvað annað en 0 og þú skilar öllum breytum skiptum
+     með kommu
+    """
 
     def __init__(self, username, password,
                  name, address, phonenumber, emp_type):
@@ -31,6 +36,7 @@ class Employee(object):
     def get_phone_number(self):
         return self.__phone_number
 
+    # Hér eru nokkur change föll sett inn til að breyta breytum í fallinu
     def change_name(self, new_name):
         self.__name = new_name
 
@@ -44,17 +50,19 @@ class Employee(object):
         self.__phone_number = new_phone_number
 
     def __str__(self):
-        """Her ery prentaðar allar upplýsingar nema password
-         því það eiga ekki allir að hafa aðgang að passwordi"""
+        """ 
+         Skilar öllum breytum nema lykilorði, þetta fall er fyrir yfirmann
+        """
         return "{:<25s}| {:<10s}| {:<25s}| {:<10s}| {:<12s}\
         ".format(self.__name, self.__username, self.__address,
                  self.__phone_number, self.__emp_type)
 
     def __repr__(self, admin=0):
-        """Hér eru allar upplýsingar prentaðar.
+        """
+         Skilar öllum breytum.
          Þetta er gert fyrir admin, einnig skilar
          fallið upplýsingum með kommu á milli
-         ef það er gefið 1
+         ef það er gefið 1/eitthvað annað en 0
          """
         if admin == 0:
             return "{:<10s}| {:<10s}| {:<25s}| "\
