@@ -1,45 +1,46 @@
-# from datetime import date
-# from getpass import getpass
+from datetime import date
+from getpass import getpass
+import csv
 
 
-# def txt_userdata_to_list():
-#     '''makes a list from the txt file for readability'''
-#     userslist = []
-#     with open("data/usern_passw.txt") as signin_data:
-#         for line in signin_data:
-#             temp_list = []
-#             temp_list = line.split()
-#             userslist.append(temp_list)
-#     return userslist
+class LoginUI(object):
+    def __init__(self):
+        pass
 
+    def print_header(self):
+        '''
+         Prentar haus fyrir innskráningu
+        '''
+        print("{:40s} {:>55}".format("Innskráning", str(date.today())))
+        print(("-"*100))
 
-# def print_header():
-#     '''prints header for sign-in screen'''
-#     print("{} {:>65}".format("Innskráning", str(date.today())))
-#     print(("-"*80))
+    def ask_for_username_password(self):
+        '''
+         Spyr starfsmann um notandanafn og lykilorð
+        '''
+        username = input("Notendanafn: ")
+        password = getpass(prompt="Lykilorð: ")
+        return username, password
 
+    def check_employee_type(self, username, password):
+        '''
+         Kíkir hvort notendanafnið sé í employee.csv
+         og hvort það passi við lykilorðið, það skilar síðan
+         hlutverki og notendanafni
+        '''
+        with open("./data/employees.csv", "r") as employees_file:
+            csv_reader = csv.reader(employees_file)
+            next(csv_reader)
+            for employee in csv_reader:
+                if username == employee[0]:
+                    if password == employee[1]:
+                        return employee[5]
 
-# def check_if_correct(name, passw, signin_data):
-#     '''checks if usern and passw match'''
-#     userposition = False
-#     for value in signin_data:
-#         if value[0] == name and value[1] == passw:
-#             userposition = value[2]
-#     return userposition
-
-
-# def main():
-#     print_header()
-#     username = input("Notendanafn: ")
-#     password = getpass(prompt="Lykilorð: ")
-#     list_of_userdata = txt_userdata_to_list()
-#     checked_position = check_if_correct(username, password, list_of_userdata)
-#     if not checked_position:
-#         print("\nVitlaust notendanafn eða lykilorð, vinsamlegast hafðu"
-#               "samband\nvið kerfisstjóra "
-#               "ef þú hefur gleymt notendanafni eða lykilorði\n")
-#     else:
-#         print(checked_position)
-
-
-# main()
+    def main_menu(self):
+        '''
+         Þetta fall kallar í öll innri föllin og skilar
+         notendanafni og hluthverki starfsmanns
+        '''
+        self.print_header()
+        username, password = self.ask_for_username_password()
+        return(self.check_employee_type(username, password))

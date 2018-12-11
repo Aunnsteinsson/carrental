@@ -50,7 +50,7 @@ class Employee(object):
         self.__phone_number = new_phone_number
 
     def __str__(self):
-        """ 
+        """
          Skilar öllum breytum nema lykilorði, þetta fall er fyrir yfirmann
         """
         return "{:<25s}| {:<10s}| {:<25s}| {:<10s}| {:<12s}\

@@ -11,7 +11,7 @@ EMP_TYPE = 5
 class EmployeeRepo(object):
     def __init__(self):
         """
-         kallar í employee_dict fallið og gefur self.__employee dictionaryið
+         Kallar í employee_dict fallið og gefur self.__employee dictionaryið
         """
         self.__employee = self.employees_dict()
 
@@ -25,20 +25,20 @@ class EmployeeRepo(object):
                      name, address, phonenumber,
                      emp_type):
         '''
-         bætir við staki af employee í __employee
+         Bætir við staki af employee í __employee
         '''
         self.__employee[username] = Employee(
             username, password, name, address, phonenumber, emp_type)
 
     def remove_employee(self, username):
         '''
-         tekur stak úr __employee
+         Tekur stak úr __employee
         '''
         del self.__employee[username]
 
     def change_info_of_employee(self, username_of_user_to_change):
         '''
-         sendir __employee sem á að breyta til
+         Sendir __employee sem á að breyta til
         '''
         for username, _ in self.__employee.items():
             if username == username_of_user_to_change:
@@ -47,7 +47,7 @@ class EmployeeRepo(object):
 
     def save(self):
         '''
-         afritar stak af hlutum í __employee og skráir það í employees.csv
+         Afritar stak af hlutum í __employee og skráir það í employees.csv
         '''
         list_of_employees = [
             "Notendanafn,lykilord,nafn,heimilisfang,simi,hlutverk"]
