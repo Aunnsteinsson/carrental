@@ -52,7 +52,6 @@ class BossUI(object):
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             choice = input("\n(H)eim - (S)krá út: ")
-            self.signout_checker(choice)
         return choice
 
     def show_customers(self):
@@ -61,7 +60,6 @@ class BossUI(object):
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             choice = input("\n(H)eim - (S)krá út: ")
-            self.signout_checker(choice)
         return choice
 
     def price_menu(self):
@@ -74,7 +72,6 @@ class BossUI(object):
         while choice.lower() not in HOMECOMMANDS:
             choice = input(
                 "\nBreyta verði (F)ólksbíll, (J)eppi, (S)endibíll, (A)uka trygging: ")
-            self.signout_checker(choice)
         return choice
 
     def revenue(self):
@@ -88,10 +85,5 @@ class BossUI(object):
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             choice = input("\n(H)eim - (S)krá út: ")
-            self.signout_checker(choice)
         return choice
 
-    def signout_checker(self, choice):
-        """ Fer á upphafsskjá """
-        if choice.lower() == HOMECOMMANDS[1]:
-            return choice
