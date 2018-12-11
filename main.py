@@ -1,4 +1,4 @@
-from ui.loginUi import LoginUI
+from ui.LoginUi import LoginUI
 from ui.AdminUi import AdminUI
 from ui.BossUi import BossUI
 from ui.SalesmanUi import SalesmanUI
