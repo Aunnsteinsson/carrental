@@ -6,6 +6,7 @@ from ui.ui_standard_functions import UIStandard
 from ui.sub_menus.car_menu import CarUI
 from ui.sub_menus.employee_menu import EmployeeUI
 from services.orderservice import OrderService
+from ui.sub_menus.customer_menu import CustomerUI
 
 HOMECOMMANDS = ["h", "s"]
 
@@ -19,6 +20,7 @@ class BossUI(object):
         self.__uistandard = UIStandard(self.__username, "Yfirmaður")
         self.__employee_service = EmployeeService()
         self.__order_service = OrderService()
+        self.__customer_ui = CustomerUI(self.__username, "Yfirmaður")
 
     def main_menu(self):
         """ Fall sem sýnir aðalviðmót yfirmanns og færir hann á milli falla """
@@ -30,13 +32,12 @@ class BossUI(object):
             choice = self.__uistandard.show_menu("\t1. Pantanir\n\t2. Bílayfirlit\n\
 \t3. Viðskiptavinir\n\t4. Starfsmenn\n\t5. Verðlisti\n\t6. Tekjur\n", "\nVeldu síðu: ")
             os.system('clear') 
-            self.__uistandard.print_header()
             if choice == "1":
                 choice = self.show_all_orders()
             elif choice == "2":
                 choice = self.__car_ui.boss_and_salesman_car_menu()
             elif choice == "3":
-                choice = self.show_customers()
+                choice = self.__customer_ui.get_customer_list()
             elif choice == "4":
                 choice = self.__employee_ui.show_employees()
             elif choice == "5":
