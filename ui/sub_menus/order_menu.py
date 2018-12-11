@@ -16,6 +16,8 @@ class OrderUI(object):
 
     def order_menu(self):
         """Prentar pantana viðmót tekur við inputi"""
+        self.__customer_menu = CustomerUI(
+            self.__name, self.__a_type)  # PAssar að það sé lesið upp úr customer menu í upphafi
         choice = ""
         while choice not in HOMECOMMANDS:  # Placeholder þangað til ég næ að
             # lata while loopuna virka betur
@@ -34,8 +36,17 @@ class OrderUI(object):
             choice = self.__uistandard.show_menu(
                 """Pantanir - Yfirlit pantana\n\tSækjaupplýsingar út frá:
 \t1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir\n""", "Veldu aðgerð: ")
-            if choice == "1":  # TODO Þurfum að geta tengt viðskiptavin við pöntun
-                pass
+            if choice == "1":
+                # TODO Þurfum að geta tengt viðskiptavin við pöntun
+                ssn = input("\tKennitala viðskiptavinar: ")
+                # if setning til að athuga hvort manneskjan sé til. Ef svo er
+                # þá prentast út upplýsingar um hana, annars er sótt fall til
+                # að gera nýjan viðskiptavin
+                customer = self.__customer_menu.get_the_customer(ssn)
+                if customer:
+                    print(customer)
+                else:
+                    print("Enginn viðskiptavinur með þessu nafni")
             if choice == "2":  # TODO Þurfum að gefa pöntunarnúmer
                 pass
             if choice == "3":
@@ -74,7 +85,6 @@ class OrderUI(object):
         # if setning til að athuga hvort manneskjan sé til. Ef svo er
         # þá prentast út upplýsingar um hana, annars er sótt fall til
         # að gera nýjan viðskiptavin
-        self.__customer_menu = CustomerUI(self.__name, self.__a_type)
         customer = self.__customer_menu.get_the_customer(ssn)
         if customer:
             customer_name = customer.get_name()
