@@ -88,10 +88,7 @@ class CustomerUI(object):
         string = self.__customer_service.get_list()
         print(string)
         choice = input("B - tilbaka, H - Heim, S - Útskrá: ")
-        if choice in HOMECOMMANDS:
-            return choice
-        else:
-            return None
+        return choice
 
     def new_customer_menu(self):
         """biður um nauðsynlegar upplýsingar og býr til viðskiptavin"""
