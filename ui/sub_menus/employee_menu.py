@@ -28,8 +28,8 @@ class EmployeeUI(object):
 
     def print_employee_header_boss(self):
         '''Prentar haus fyrir starfmannayfirlit'''
-        print("{:<10s}| {:<12s}| {:<25s}| {:<25s}| {:<10s}".format(
-            "Notandi", "Hlutverk", "Nafn", "Heimilisfang", "Sími"))
+        print("{:<25s}| {:<10s}| {:<25s}| {:<10s}| {:<12s}".format(
+            "Nafn", "Notandi", "Heimilisfang", "Sími", "Hlutverk"))
         print("-"*100)
 
     def employee_menu(self):
@@ -140,9 +140,8 @@ class EmployeeUI(object):
         os.system('clear')
         self.__uistandard.print_header()
         self.print_employee_header_boss()
-        employees_list = self.__employee_service.get_employees()
-        for employee in employees_list:
-            print(employee)
+        employees_list_string = self.__employee_service.get_employees()
+        print(employees_list_string)
         choice = ""
         while choice not in HOMECOMMANDS:
             choice = input("")

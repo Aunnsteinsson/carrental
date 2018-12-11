@@ -18,7 +18,6 @@ class AdminUI(object):
         self.__car_ui = CarUI(self.__username, "Kerfisstjóri")
         self.__employee_ui = EmployeeUI(self.__username, "Kerfisstjóri")
         self.__uistandard = UIStandard(self.__username, "Kerfisstjóri")
-        self.__employee_service = EmployeeService()
 
     def main_menu(self):
         '''Upphafssíða fyrir kerfisstjóra'''

@@ -1,5 +1,5 @@
 class Order(object):
-    '''Pöntunar klasi, tekur inn pöntunarnúmer, upphafsdag, 
+    '''Pöntunar klasi, tekur inn pöntunarnúmer, upphafsdag,
     skiladag, bílaflokk og viðbótartryggingu'''
 
     def __init__(self, order_number, start_date, end_date, name, ssn, car,
@@ -55,7 +55,12 @@ class Order(object):
                 self.__start_date, self.__order_number, self.__name,
                 self.__ssn, self.__car, self.__car_number, self.__status)
 
-    def __repr__(self, ):
-        return "{},{},{},{},{}".format(self.__order_number, self.__start_date,
-                                       self.__end_date, self.__car,
-                                       self.__insurance)
+    def __repr__(self):
+        '''
+        Skrifar upplýsingar um pöntun
+        '''
+        return "{},{},{},{},{},{},{}".format(self.__start_date,
+                                             self.__order_number,
+                                             self.__name,
+                                             self.__ssn, self.__car,
+                                             self.__car_number, self.__status)
