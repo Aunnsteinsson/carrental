@@ -26,16 +26,6 @@ class CarService(object):
 
     def get_list_of_cars(self, a_type, status):
         """ Fall sem sækir lista af öllum bílum """
-
-        """ dict = self.__car_repo.get_all_cars() 
-        cars = ""
-        for licence_plate, car in dict.items():
-            car_string = car.__str__()
-            cars += car_string + "\n"
-            print(cars)
-        return cars """
-        
-        
         dict = self.__car_repo.get_all_cars()
         string = ""
         for licence_plate, item in dict.items():
@@ -49,3 +39,6 @@ class CarService(object):
                         car[0], car[1], car[2])
                     car_list.append(car_class) """    
         return string
+
+    def save_cars(self):
+        self.__car_repo.save_car_data()

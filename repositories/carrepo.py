@@ -63,7 +63,9 @@ class CarRepo(object):
 
     def remove_car(self, licence_plate):
         """Eyðir bíl úr geymslu"""
-        with open("./data/cars.csv", "r") as car_input:
+        del self.__car[licence_plate]
+
+        """ with open("./data/cars.csv", "r") as car_input:
             with open("./data/cars_edit.csv", "w", newline="") as car_output:
                 csv_reader = csv.reader(car_input)
                 csv_writer = csv.writer(car_output)
@@ -78,7 +80,7 @@ class CarRepo(object):
                 csv_writer = csv.writer(new_car_file)
                 for row in csv_reader:
                     if row:
-                        csv_writer.writerow(row)
+                        csv_writer.writerow(row) """
 
     def change_status(self, licence_plate, new_status):
         """Breytir stöðu bíls"""
@@ -99,3 +101,13 @@ class CarRepo(object):
                 for row in csv_reader:
                     if row:
                         csv_writer.writerow(row)
+
+    def save_car_data(self):
+        list_of_cars = ["licence_plate", "a_type", "status"]
+        with open ("./data/cars.csv", "w", newline="") as car_file:
+            csv_writer = csv.writer(car_file)
+            csv_writer.writerow(list_of_cars)
+            for licence_plate, car in self.__car.items():
+                temp_car_list = car.__repr__().split(",")
+                csv_writer.writerow(temp_car_list)
+

@@ -21,5 +21,5 @@ with open("./data/cars.csv", "r") as car_input:
 #a_type og status """
 
 
-k1 = AdminUI("User1")
+k1 = AdminUI("User1", "Kerfisstjóri")
 k1.main_menu()
