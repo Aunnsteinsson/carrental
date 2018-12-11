@@ -24,14 +24,14 @@ class BossUI(object):
 
     def main_menu(self):
         """ Fall sem sýnir aðalviðmót yfirmanns og færir hann á milli falla """
-        self.__uistandad.clear_screen()
+        self.__uistandard.clear_screen()
         # Sýnir upphafsviðmót yfirmanns
         choice = ""
         while choice.lower() != HOMECOMMANDS[1]:
-            self.__uistandad.clear_screen()
+            self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu("\t1. Pantanir\n\t2. Bílayfirlit\n\
 \t3. Viðskiptavinir\n\t4. Starfsmenn\n\t5. Verðlisti\n\t6. Tekjur\n", "\nVeldu síðu: ")
-            self.__uistandad.clear_screen()
+            self.__uistandard.clear_screen()
             if choice == "1":
                 choice = self.show_all_orders()
             elif choice == "2":

@@ -22,7 +22,7 @@ class AdminUI(object):
         '''Upphafssíða fyrir kerfisstjóra'''
         choice = ""
         while choice.lower() != HOMECOMMANDS[1]:
-            self.__uistandad.clear_screen()
+            self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu("\n\t1. Starfsmenn\n\t\
 2. Nýr starfsmaður\n\t3. Bílayfirlit\n\t4. Save_employees\n", "Veldu síðu: ")
             if choice == "1":
