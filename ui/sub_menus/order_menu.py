@@ -55,7 +55,8 @@ class OrderUI(object):
 
     def all_orders(self):
         self.__uistandard.print_header()
-        print(" {:11}| {:5}| {:25}| {:11}| {:10}| {:6}| {:10}".format(
+        print("Pantanir - Yfirlit pantana - Allar pantanir")
+        print("\t {:11}| {:14}| {:25}| {:11}| {:10}| {:9}| {:10}".format(
             "Dagsetning", "Pöntunarnúmer", "Nafn", "Kennitala",
             "Tegund", "Bílnúmer", "Staða"))
         print("\t", "-"*100)

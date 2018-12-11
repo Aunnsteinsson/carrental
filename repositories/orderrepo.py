@@ -3,8 +3,12 @@ import csv
 ORDERNR = 0
 STARTDATE = 1
 ENDDATE = 2
-CAR = 3
-INSURANCE = 4
+NAME = 3
+SSN = 4
+CAR = 5
+CARNR = 6
+STATUS = 7
+INSURANCE = 8
 # lgoi
 
 
@@ -38,7 +42,7 @@ class OrderRepo(object):
         return self.__orders
 
     def save_new_orders(self):
-        orders_header = "order_number,start,end,car,insurance"
+        orders_header = "order_number,start,end,name,ssn,car,car_number,status_of_car,insurance"
         with open("./data/orders.csv", "w", newline="") as orders_file:
             csv_writer = csv.writer(orders_file)
             csv_writer.writerow(orders_header.split(','))
@@ -54,8 +58,15 @@ def order_dict():
         next(csv_reader)
         for order in csv_reader:
             order_class = Order(
-                order[ORDERNR], order[STARTDATE], order[ENDDATE],
-                order[CAR], order[INSURANCE])
+                order[ORDERNR],
+                order[STARTDATE],
+                order[ENDDATE],
+                order[NAME],
+                order[SSN],
+                order[CAR],
+                order[CARNR],
+                order[STATUS],
+                order[INSURANCE])
             order_number = order[ORDERNR]
             order_dict[order_number] = order_class
     return order_dict

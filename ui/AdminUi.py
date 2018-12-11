@@ -41,6 +41,8 @@ class AdminUI(object):
         if save.lower() == 'j':
             self.__employee_service.save_employees()
 
+    # order_number, start_date, end_date, name, ssn, car, car_number, status_of_car, insurance=False):
+
     def quit(self):
         pass
 # logi

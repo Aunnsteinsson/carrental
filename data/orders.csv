@@ -1,2 +1,2 @@
-order_number,start,end,car,insurance
-001,2112,2323,Jeppi,no
+order_number,start,end,name,ssn,car,car_number,status_of_car,insurance
+001,2112,2323,Jon Jonsson,12312313,Jeppi,AA111,OUT,no
