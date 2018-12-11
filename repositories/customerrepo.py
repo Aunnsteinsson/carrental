@@ -1,9 +1,9 @@
 from models.customer import Customer
 import csv
-KENNITALA = 0
-NAFN = 1
-SIMI = 2
-KREDIT = 3
+SSN = 0
+NAME = 1
+PHONE = 2
+CREDIT = 3
 
 
 class CustomerRepo(object):
@@ -19,12 +19,13 @@ class CustomerRepo(object):
         customer_dict = {}
         with open("./data/customers.csv", "r") as customer_file:
             csv_reader = csv.reader(customer_file)
+            next(csv_reader)
             for customer in csv_reader:
-                if customer[KENNITALA] != "kennitala":
-                    customer_class = Customer(
-                        customer[KENNITALA], customer[NAFN], customer[SIMI], customer[KREDIT])
-                    kennitala = customer[KENNITALA]
-                    customer_dict[kennitala] = customer_class
+                customer_class = Customer(
+                    customer[SSN], customer[NAME], customer[PHONE],
+                    customer[CREDIT])
+                ssn_number = customer[SSN]
+                customer_dict[ssn_number] = customer_class
         return customer_dict
 
     def add_customer(self, new_customer):
@@ -37,7 +38,7 @@ class CustomerRepo(object):
         """Finnur key sem er kennitala viðskiptavinar, ef key passar við
         kennitöluna sem við starfsmaður leitar að þá eyðum við þeim
         viðskiptavini út úr dictionary"""
-        for kennitala, value in self.__customer.items():
+        for kennitala, _ in self.__customer.items():
             if kennitala == ssn:
                 del self.__customer[ssn]
                 return self.__customer
@@ -47,7 +48,7 @@ class CustomerRepo(object):
         """Ef að kennitalan sem starfsmaður leitar að passar við
         kennitölu í dictionary, þá skilum við þeim viðskiptavini. Annars
         skilum við False"""
-        for kennitala, value in self.__customer.items():
+        for kennitala, _ in self.__customer.items():
             if kennitala == ssn:
                 return self.__customer[ssn]
         return False
@@ -61,7 +62,7 @@ class CustomerRepo(object):
         i datafile sem heldur utan um viðskiptavini og
         þannig breytum við skránni"""
         list_of_customers = ["kennitala", "nafn",
-                             "símanumer", "kreditkortanúmer"]
+                             "simanumer", "kreditkortanúmer"]
         with open("./data/customers.csv", "w", newline="") as customer_file:
             csv_writer = csv.writer(customer_file)
             csv_writer.writerow(list_of_customers)
