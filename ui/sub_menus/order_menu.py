@@ -100,8 +100,11 @@ class OrderUI(object):
 
         print("\n\tViðskiptavinur: {}".format(customer_name))
         payment = input("\tGreiðslumáti: (D)ebit, (K)redit, (P)eningar: ")
-        order = Order(begin_date, end_date, type_of_car, insurance)
-        # self.__order_service.make_order(order)
+        order_number = self.__order_service.make_order_number()
+        order = Order(order_number, begin_date, end_date, "viðskiptavinur",
+                      "kennitala", type_of_car, "1kkk", "laus", insurance)
+
+        self.__order_service.make_order(order, order_number)
 
         # kallar á föll og býr til klasa
         print("---------------------\nPöntun Staðfest\n")
