@@ -1,12 +1,21 @@
-
-from ui.SalesmanUi import SalesmanUI
+from datetime import timedelta, date
+"""from ui.SalesmanUi import SalesmanUI
 from ui.BossUi import BossUI
 
 
 k1 = SalesmanUI("johannes", "solumadur")
 k1.main_menu()
+"""
 
-
+startyear, month, day = 2018, 12, 11
+endyear, endmon, endday = 2018, 12, 18
+start = date(startyear, month, day)
+end = date(endyear, endmon, endday)
+days_of_rent = end.day - start.day
+dagar = int(days_of_rent)
+print(int(days_of_rent))
+price = 12
+print(dagar*price)
 """import csv
 from models.customer import Customer
 KENNITALA = 0

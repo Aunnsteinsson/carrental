@@ -71,3 +71,18 @@ class OrderService(object):
             order_string = value.__str__()
             string_of_orders += order_string + "\n"
         return string_of_orders
+
+    def price_of_rent(self, order):
+        a_type = order.get_car()
+        insurance = order.get_insurance()
+        start = order.get_start()
+        end = order.get_end()
+        # fá verð frá Tedda
+        days_of_rent = date(end).day - date(start).day
+        days_of_rent = int(days_of_rent)
+        price_of_rent = days_of_rent * price_of_rent
+        if insurance:
+            final_price = price_of_insurance * days_of_rent + price_of_rent
+            return final_price
+        else:
+            return price_of_rent
