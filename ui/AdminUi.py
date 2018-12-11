@@ -5,7 +5,7 @@ from ui.ui_standard_functions import UIStandard
 from services.employeeservice import EmployeeService
 
 
-HOMECOMMANDS = ["h", "H", "s", "S"]
+HOMECOMMANDS = ["h", "s"]
 
 
 class AdminUI(object):
@@ -22,7 +22,7 @@ class AdminUI(object):
     def main_menu(self):
         '''Upphafssíða fyrir kerfisstjóra'''
         choice = ""
-        while choice not in HOMECOMMANDS:
+        while choice.lower() != HOMECOMMANDS[1]:
             os.system('cls')
             choice = self.__uistandard.show_menu("\n\t1. Starfsmenn\n\t2. Nýr starfsmaður\n\t3. Bílayfirlit\n\t4. Save_employees\n",
                                                  "Veldu síðu: ")
