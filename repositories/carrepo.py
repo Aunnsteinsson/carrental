@@ -25,13 +25,6 @@ class CarRepo(object):
         """Bætir bíl inn í geymslu"""
         licence_plate = new_car.get_licence_plate()
         self.__car[licence_plate] = new_car
-        
-        """         with open("./data/cars.csv", "a+") as car_file:
-            licence_plate = car.get_licence_plate()
-            a_type = car.get_type()
-            status = car.get_status()
-            car_file.write("{},{},{}\n".format(
-                licence_plate, a_type, status)) """
 
     def get_car(self, licence_plate):
         """Sækir upplýsingar um bíl. Kallar á __str__ fall úr class Car"""
@@ -40,17 +33,8 @@ class CarRepo(object):
                 return self.__car[licence_plate]
         return False
 
-        """ with open("./data/cars.csv", "r") as car_file:
-            csv_reader = csv.reader(car_file)
-            for row in csv_reader:
-                if row:
-                    if row[0] == licence_plate:
-                        return row
-        return None """
-
     def get_all_cars(self):
-        """Sækir lista af öllum bílum"""
-        
+        """ Sækir bíla fyrir útlistun af bílum """
         return self.__car
         
         """ list_of_cars = []
@@ -64,23 +48,6 @@ class CarRepo(object):
     def remove_car(self, licence_plate):
         """Eyðir bíl úr geymslu"""
         del self.__car[licence_plate]
-
-        """ with open("./data/cars.csv", "r") as car_input:
-            with open("./data/cars_edit.csv", "w", newline="") as car_output:
-                csv_reader = csv.reader(car_input)
-                csv_writer = csv.writer(car_output)
-                for row in csv_reader:
-                    if row:
-                        if row[0] != licence_plate:
-                            csv_writer.writerow(row)
-
-        with open("./data/cars.csv", "w", newline="") as new_car_file:
-            with open("./data/cars_edit.csv", "r") as new_car_edit:
-                csv_reader = csv.reader(new_car_edit)
-                csv_writer = csv.writer(new_car_file)
-                for row in csv_reader:
-                    if row:
-                        csv_writer.writerow(row) """
 
     def change_status(self, licence_plate, new_status):
         """Finnur __bíl sem á að breyta og sendir í service"""

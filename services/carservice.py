@@ -21,7 +21,7 @@ class CarService(object):
     def change_status(self, licence_plate, new_status):
         """ Breytir stöðu bíls """
         car = self.__car_repo.get_car(licence_plate)
-        car.chagne_status(new_status)
+        car.change_status(new_status)
         self.save_cars()
 
         """ self.__car_repo.change_status(licence_plate, new_status) """
