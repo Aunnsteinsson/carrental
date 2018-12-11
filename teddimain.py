@@ -2,6 +2,7 @@ from repositories.carrepo import CarRepo
 from services.carservice import CarService
 from models.car import Car
 from ui.BossUi import BossUI
+from ui.AdminUi import AdminUI
 
 """ geymsla = CarRepo()
 Bíll = Car("AA111","Jeppi")
@@ -20,5 +21,5 @@ with open("./data/cars.csv", "r") as car_input:
 #a_type og status """
 
 
-k1 = BossUI("User1")
+k1 = AdminUI("User1")
 k1.main_menu()

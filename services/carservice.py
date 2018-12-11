@@ -7,10 +7,10 @@ class CarService(object):
     """ Sér um aðgerðir með bíla """
     def __init__(self):
         self.__car_repo = CarRepo()
-
-    def make_car(self, car):
+   
+    def make_car(self, new_car):
         """ Nýskráir bíl í kerfi """
-        self.__car_repo.add_car(car)
+        self.__car_repo.add_car(new_car)
 
     def remove_car(self, licence_plate):
         """ Fjarlægir bíl úr kerfi """

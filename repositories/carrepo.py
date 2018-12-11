@@ -1,30 +1,52 @@
 from models.car import Car
 import csv
-
+LICENCE_PLATE = 0
+A_TYPE = 1
+STATUS = 2
 
 class CarRepo(object):
     """Sér um geymslu á bílum innan kerfis """
     def __init__(self):
-        self.__car = {}
+        self.__car = self.car_dict()
+        self.__price = {}
 
-    def add_car(self, car):
-        """Bætir bíl inn í geymslu"""
+    def car_dict(self):
+        car_dict = {}
         with open("./data/cars.csv", "a+") as car_file:
+            csv_reader = csv.reader(car_file)
+            for car in csv_reader:
+                if car[LICENCE_PLATE] != "licence_plate":
+                    car_class = Car(car[LICENCE_PLATE], car[A_TYPE], car[STATUS])
+                    licence_plate = car[LICENCE_PLATE]
+                    car_dict[licence_plate] = car_class
+        return car_dict
+
+    def add_car(self, new_car):
+        """Bætir bíl inn í geymslu"""
+        licence_plate = new_car.get_licence_plate()
+        self.__car[licence_plate] = new_car
+        
+        """         with open("./data/cars.csv", "a+") as car_file:
             licence_plate = car.get_licence_plate()
             a_type = car.get_type()
             status = car.get_status()
             car_file.write("{},{},{}\n".format(
-                licence_plate, a_type, status))
+                licence_plate, a_type, status)) """
 
     def get_car(self, licence_plate):
         """Sækir upplýsingar um bíl. Kallar á __str__ fall úr class Car"""
-        with open("./data/cars.csv", "r") as car_file:
+        for licence, value in self.__car.items():
+            if licence == licence_plate:
+                return self.__car[licence_plate]
+        return False
+
+        """ with open("./data/cars.csv", "r") as car_file:
             csv_reader = csv.reader(car_file)
             for row in csv_reader:
                 if row:
                     if row[0] == licence_plate:
                         return row
-        return None
+        return None """
 
     def get_all_cars(self):
         """Sækir lista af öllum bílum"""
