@@ -49,22 +49,22 @@ class OrderRepo(object):
                 order_string = info.__repr__().split(",")
                 csv_writer.writerow(order_string)
 
-        def order_dict():
-            order_dict = {}
-            with open("./data/orders.csv", "r") as orders_file:
-                csv_reader = csv.reader(orders_file)
-                next(csv_reader)
-                for order in csv_reader:
-                    order_class = Order(
-                        order[ORDERNR],
-                        order[STARTDATE],
-                        order[ENDDATE],
-                        order[NAME],
-                        order[SSN],
-                        order[CAR],
-                        order[CARNR],
-                        order[STATUS],
-                        order[INSURANCE])
-                    order_number = order[ORDERNR]
-                    order_dict[order_number] = order_class
-            return order_dict
+    def order_dict(self):
+        order_dict = {}
+        with open("./data/orders.csv", "r") as orders_file:
+            csv_reader = csv.reader(orders_file)
+            next(csv_reader)
+            for order in csv_reader:
+                order_class = Order(
+                    order[ORDERNR],
+                    order[STARTDATE],
+                    order[ENDDATE],
+                    order[NAME],
+                    order[SSN],
+                    order[CAR],
+                    order[CARNR],
+                    order[STATUS],
+                    order[INSURANCE])
+                order_number = order[ORDERNR]
+                order_dict[order_number] = order_class
+        return order_dict
