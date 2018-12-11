@@ -11,9 +11,11 @@ class OrderService(object):
         self.__order_repo = OrderRepo()
 
     def make_order(self, order, order_number):
+        """Bætir við pöntun í kerfið"""
         self.__order_repo.add_order(order, order_number)
 
     def make_order_number(self):
+        """Býr til pöntunarnúmer fyrir nýja pöntun"""
         new_order_number = 0
         for order_number in self.__order_repo.get_orders():
             order_num = int(order_number)
@@ -23,9 +25,14 @@ class OrderService(object):
         return new_order_number
 
     def remove_order(self, order_number):
+        """Eyðir út pöntun"""
         self.__order_repo.remove_order(order_number)
 
     def check_availability(self, start_date, finish_date):
+        """Tekur við upphafsdagsetningu, lokadagsetningu,
+        setur það í sitthvorn lista sem síðan breytir því í dagsetningu
+        býr síðan til lista á milli beggja dagsetninganna og bætir við
+        þeim dögum inn í lista sem sýnir þá daga sem bílar eru uppteknir"""
         list_startdate = start_date.split("/")
         list_finishdate = finish_date.split("/")
         start_year, start_month, start_day = int(list_startdate[2]), int(
@@ -44,10 +51,13 @@ class OrderService(object):
         pass
 
     def get_customer_name(self, customer):
+        """Nær í nafn á viðskiptavini"""
         name = customer.get_name()
         return name
 
     def customer_orders(self, ssn):
+        """Skilar streng þar sem allar pantanir viðskiptavins
+        koma fram"""
         order = self.__order_repo.get_orders()
         string_of_orders = ""
         for key, orders in order.items():
@@ -57,14 +67,17 @@ class OrderService(object):
         return string_of_orders
 
     def change_time(self, order_number, new_time):
+        """Breytir tíma á pöntun"""
         order = self.__order_repo.get_orders(order_number)
         order.change_time(new_time)
 
     def change_insurance(self, order_number, new_insurance):
+        """Breytir stöðu á tryggingu"""
         order = self.__order_repo.get_orders(order_number)
         order.change_insurance(new_insurance)
 
     def show_orders(self):
+        """Sýnir allar pantanir og skilar þeim sem streng"""
         order_dict = self.__order_repo.get_orders()
         string_of_orders = ""
         for order, value in order_dict.items():
@@ -73,6 +86,7 @@ class OrderService(object):
         return string_of_orders
 
     def price_of_rent(self, order):
+        """Reiknar út verð á pöntun"""
         a_type = order.get_car()
         insurance = order.get_insurance()
         start = order.get_start()
