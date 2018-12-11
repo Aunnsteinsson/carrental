@@ -29,6 +29,9 @@ class Order(object):
     def get_car(self):
         return self.__car
 
+    def get_ssn(self):
+        return self.__ssn
+
     def change_start(self, new_start):
         self.__start_date = new_start
 

@@ -44,10 +44,17 @@ class OrderService(object):
         pass
 
     def get_customer_name(self, customer):
-        pass
+        name = customer.get_name()
+        return name
 
     def customer_orders(self, ssn):
-        pass
+        order = self.__order_repo.get_orders()
+        string_of_orders = ""
+        for key, orders in order.items():
+            if ssn == orders.get_ssn():
+                order_string = orders.__str__()
+                string_of_orders += order_string + "\n"
+        return string_of_orders
 
     def change_time(self, order_number, new_time):
         order = self.__order_repo.get_orders(order_number)

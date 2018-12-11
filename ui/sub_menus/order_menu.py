@@ -39,15 +39,17 @@ class OrderUI(object):
             if choice == "1":
                 # TODO Þurfum að geta tengt viðskiptavin við pöntun
                 ssn = input("\tKennitala viðskiptavinar: ")
+                strengur = self.__order_service.customer_orders(ssn)
+                print(strengur)
                 # if setning til að athuga hvort manneskjan sé til. Ef svo er
                 # þá prentast út upplýsingar um hana, annars er sótt fall til
                 # að gera nýjan viðskiptavin
-                customer = self.__customer_menu.get_the_customer(ssn)
+                """customer = self.__customer_menu.get_the_customer(ssn)
                 if customer:
                     print(customer)
                 else:
                     print("Enginn viðskiptavinur með þessu nafni")
-                choice = input("B - tilbaka, H - Heim, S - Útskrá: ")
+                choice = input("B - tilbaka, H - Heim, S - Útskrá: ")"""
             if choice == "2":  # TODO Þurfum að gefa pöntunarnúmer
                 pass
             if choice == "3":
