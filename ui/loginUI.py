@@ -28,9 +28,6 @@ class LoginUI(object):
          og hvort það passi við lykilorðið, það skilar síðan
          hlutverki og notendanafni
         '''
-        # with open("./data/employees.csv", "r") as employees_file:
-        #     csv_reader = csv.reader(employees_file)
-        #     next(csv_reader)
         employee_dict = self.__employee_repo.get_employees()
         for employee, value in employee_dict.items():
             if username == employee:
@@ -46,4 +43,4 @@ class LoginUI(object):
         '''
         self.print_header()
         username, password = self.ask_for_username_password()
-        print(self.check_employee_type(username, password))
+        return self.check_employee_type(username, password)
