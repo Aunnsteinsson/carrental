@@ -24,8 +24,8 @@ class AdminUI(object):
         choice = ""
         while choice.lower() != HOMECOMMANDS[1]:
             os.system('cls')
-            choice = self.__uistandard.show_menu("\n\t1. Starfsmenn\n\t2. Nýr starfsmaður\n\t3. Bílayfirlit\n\t4. Save_employees\n",
-                                                 "Veldu síðu: ")
+            choice = self.__uistandard.show_menu("\n\t1. Starfsmenn\n\t\
+2. Nýr starfsmaður\n\t3. Bílayfirlit\n\t4. Save_employees\n", "Veldu síðu: ")
             if choice == "1":
                 choice = self.__employee_ui.employee_menu()
             elif choice == "2":
@@ -34,8 +34,6 @@ class AdminUI(object):
                 choice = self.__car_ui.car_menu_admin()
             elif choice == "4":
                 choice = self.__employee_ui.save_employees()
-
-    # order_number, start_date, end_date, name, ssn, car, car_number, status_of_car, insurance=False):
 
     def quit(self):
         pass
