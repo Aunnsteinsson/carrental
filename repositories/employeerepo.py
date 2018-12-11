@@ -11,8 +11,7 @@ EMP_TYPE = 5
 class EmployeeRepo(object):
     def __init__(self):
         """tekur global employee_dict og gefur self.__employee dictionaryið"""
-        global employee_dict
-        self.__employee = employee_dict
+        self.__employee = self.employees_dict()
 
     def get_employees(self):
         '''skilar öllum starfmönnum'''
@@ -47,22 +46,18 @@ class EmployeeRepo(object):
                 employees_string = info.__repr__(1).split(",")
                 csv_writer.writerow(employees_string)
 
-
-def employees_dict():
-    """Tekur við data úr employee og les það inn í dictionary
-        þar sem notendanafn er notað sem key og hver starfsmaður
-        er hluti af Employee klasanum og notað sem value"""
-    dict_for_emp = {}
-    with open("./data/employees.csv", "r") as employees_file:
-        csv_reader = csv.reader(employees_file)
-        next(csv_reader)
-        for employee in csv_reader:
-            employee_class = Employee(
-                employee[USERNAME], employee[PASSWORD], employee[NAME],
-                employee[ADDRESS], employee[PHONE], employee[EMP_TYPE])
-            username = employee[USERNAME]
-            dict_for_emp[username] = employee_class
-    return dict_for_emp
-
-
-employee_dict = employees_dict()
+    def employees_dict(self):
+        """Tekur við data úr employee og les það inn í dictionary
+            þar sem notendanafn er notað sem key og hver starfsmaður
+            er hluti af Employee klasanum og notað sem value"""
+        dict_for_emp = {}
+        with open("./data/employees.csv", "r") as employees_file:
+            csv_reader = csv.reader(employees_file)
+            next(csv_reader)
+            for employee in csv_reader:
+                employee_class = Employee(
+                    employee[USERNAME], employee[PASSWORD], employee[NAME],
+                    employee[ADDRESS], employee[PHONE], employee[EMP_TYPE])
+                username = employee[USERNAME]
+                dict_for_emp[username] = employee_class
+        return dict_for_emp
