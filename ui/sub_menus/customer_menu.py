@@ -13,16 +13,20 @@ class CustomerUI(object):
         self.__customer_service = CustomerService()
         self.__uistandard = UIStandard(name, a_type)
 
+    def get_the_customer(self, ssn):
+        customer = self.__customer_service.find_customer(ssn)
+        return customer
+
     def customer_menu(self):
         """Prentar viðskiptavinaviðmót sölumanns og tekur við input"""
         choice = ""
         while choice not in HOMECOMMANDS:
             choice = self.__uistandard.show_menu(
                 """Viðskiptavinir\n\t1. Leita eftir kennitölu
-    \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur""", "Veldu aðgerð")
+    \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur""", "Veldu aðgerð: ")
             if choice == "1":
                 ssn = input("Kennitala: ")
-                customer = self.__customer_service.find_customer(ssn)
+                customer = self.get_the_customer(ssn)
                 # returnar None ef að hann finnst ekki
                 if customer:
                     self.find_customer(ssn, customer)

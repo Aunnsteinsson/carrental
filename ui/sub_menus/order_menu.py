@@ -77,33 +77,21 @@ class OrderUI(object):
         # if setning til að athuga hvort manneskjan sé til. Ef svo er
         # þá prentast út upplýsingar um hana, annars er sótt fall til
         # að gera nýjan viðskiptavin
-        customer = self.__customer_service.find_customer(ssn)
+        customer = self.__customer_menu.get_the_customer(ssn)
         if customer:
             customer_name = customer.get_name()
         else:
             print(
                 "Viðskiptavinur ekki skráður í kerfið. Vinsamlegast skráðu nauðsynlegar upplýsingar.")
-            self.__uistandard.print_header  # Héðan og
-            print("Viðskiptavinir - Nýr viðskiptavinur\n")
-            ssn = input("\tKennitala: ")
-            name = input("\tNafn: ")
-            phone_number = input("\tSími: ")
-            credit_card_number = input("\tKreditkort: ")
-            a_customer = Customer(ssn, name, phone_number, credit_card_number)
-            self.__customer_service.make_customer(a_customer)
-            new_customer = self.__customer_service.find_customer(ssn)
-            print("{:>20}{:>30}{:>20}".format("Kennitala", "Nafn", "Sími"))
-            # hingað er fall sem að er alveg eins og í customer ui en er ekki hægt að vísa beint í því að
-            print(new_customer)
-            # þegar ég bý til viðskiptavininn í repoinu sem að customer ui vísar í verður hann ekki til hér.
-            # Vanar eitthvað sniðugt workaround hér
-            customer = self.__customer_service.find_customer(ssn)
+            self.__customer_menu.new_customer_menu()
+            self.__customer_menu.save_program()
+            customer = self.__customer_menu.get_the_customer(ssn)
             customer_name = customer.get_name()
 
         print("\n\tViðskiptavinur: {}".format(customer_name))
         payment = input("\tGreiðslumáti: (D)ebit, (K)redit, (P)eningar: ")
         order = Order(begin_date, end_date, type_of_car, insurance)
-        self.__order_service.make_order(order)
+        # self.__order_service.make_order(order)
 
         # kallar á föll og býr til klasa
         print("---------------------\nPöntun Staðfest\n")

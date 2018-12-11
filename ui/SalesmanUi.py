@@ -27,9 +27,10 @@ class SalesmanUI(object):
             elif choice == "2":
                 choice = self.__car_ui.boss_and_salesman_car_menu()
             elif choice == "3":
+                self.__customer_ui = CustomerUI(self.__name, self.__a_type)
                 choice = self.__customer_ui.customer_menu()
+                self.__customer_ui.save_program()
             elif choice == "4":
                 pass
-        self.__customer_ui.save_program()
 
         # ég hef ekki hugmynd um hvernig við ætlum að sýna verðlistann
