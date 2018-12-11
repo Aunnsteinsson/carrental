@@ -35,6 +35,7 @@ class LoginUI(object):
                 value_list = value.split(",")
                 if password == value_list[1]:
                     return value_list[5], username
+        return False
 
     def main_menu(self):
         '''
