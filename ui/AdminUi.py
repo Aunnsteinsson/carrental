@@ -1,4 +1,3 @@
-import os
 from ui.sub_menus.car_menu import CarUI
 from ui.sub_menus.employee_menu import EmployeeUI
 from ui.ui_standard_functions import UIStandard
@@ -23,7 +22,7 @@ class AdminUI(object):
         '''Upphafssíða fyrir kerfisstjóra'''
         choice = ""
         while choice.lower() != HOMECOMMANDS[1]:
-            os.system('cls')
+            self.__uistandad.clear_screen()
             choice = self.__uistandard.show_menu("\n\t1. Starfsmenn\n\t\
 2. Nýr starfsmaður\n\t3. Bílayfirlit\n\t4. Save_employees\n", "Veldu síðu: ")
             if choice == "1":

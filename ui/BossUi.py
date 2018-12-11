@@ -1,4 +1,3 @@
-import os
 from datetime import date
 from repositories.employeerepo import EmployeeRepo
 from services.employeeservice import EmployeeService
@@ -9,6 +8,7 @@ from services.orderservice import OrderService
 from ui.sub_menus.customer_menu import CustomerUI
 
 HOMECOMMANDS = ["h", "s"]
+
 
 class BossUI(object):
     """ Klasi sem sér um viðmót yfirmanns í kerfi """
@@ -24,14 +24,14 @@ class BossUI(object):
 
     def main_menu(self):
         """ Fall sem sýnir aðalviðmót yfirmanns og færir hann á milli falla """
-        os.system('clear')
+        self.__uistandad.clear_screen()
         # Sýnir upphafsviðmót yfirmanns
         choice = ""
         while choice.lower() != HOMECOMMANDS[1]:
-            os.system('clear') 
+            self.__uistandad.clear_screen()
             choice = self.__uistandard.show_menu("\t1. Pantanir\n\t2. Bílayfirlit\n\
 \t3. Viðskiptavinir\n\t4. Starfsmenn\n\t5. Verðlisti\n\t6. Tekjur\n", "\nVeldu síðu: ")
-            os.system('clear') 
+            self.__uistandad.clear_screen()
             if choice == "1":
                 choice = self.show_all_orders()
             elif choice == "2":
@@ -87,4 +87,3 @@ class BossUI(object):
         while choice.lower() not in HOMECOMMANDS:
             choice = input("\n(H)eim - (S)krá út: ")
         return choice
-

@@ -1,3 +1,4 @@
+import os
 from datetime import date
 
 
@@ -19,3 +20,6 @@ class UIStandard(object):
             "{} - notandi: {}".format(self.__a_type, self.__name), str(
                 date.today())))
         print(("-"*100))
+
+    def clear_screen(self):
+        os.system("cls" if os.name == "nt" else "clear")
