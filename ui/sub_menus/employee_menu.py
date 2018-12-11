@@ -147,3 +147,8 @@ class EmployeeUI(object):
         while choice not in HOMECOMMANDS:
             choice = input("")
         return choice
+
+    def save_employees(self):
+        save = input("Vista breytingar? ((J)á/(N)ei) ")
+        if save.lower() == 'j':
+            self.__employee_service.save_employees()
