@@ -28,7 +28,7 @@ class OrderService(object):
         """Eyðir út pöntun"""
         self.__order_repo.remove_order(order_number)
 
-    def check_availability(self, start_date, finish_date):
+    def list_of_days(self, start_date, finish_date):
         """Tekur við upphafsdagsetningu, lokadagsetningu,
         setur það í sitthvorn lista sem síðan breytir því í dagsetningu
         býr síðan til lista á milli beggja dagsetninganna og bætir við
@@ -46,6 +46,25 @@ class OrderService(object):
         while start_date <= finish_date:
             unavailable_list.append(start_date)
             start_date += step
+        return unavailable_list
+
+    def find_available_cars(self, a_type, start_date, finish_date):
+        desired_days = self.list_of_days(start_date, finish_date)
+        car_dict = self.__car_repo.get_all_cars()
+        unavailable_cars = []
+        available_cars_string = ""
+        for licence_plate, cars in dict.items():
+            type_of_car = cars.get_type()
+            if type_of_car in a_type:
+                not_available = cars.get_status()
+                for nested_day_list in not_available:
+                    for day in nested_day_list:
+                        if day in desired_days:
+                            unavailable_cars.append(cars)
+            if cars not in unavailable_cars:
+                cars_string = cars.__str__()
+                available_cars_string += cars_string + "\n"
+        return available_cars_string
 
     def get_car(self, a_type, duration):
         pass
