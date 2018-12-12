@@ -33,7 +33,7 @@ class LoginUI(object):
     #     print("{:72} ||||     ~~~~~~~     ||||".format(" "))
     #     print("{:72} `--'                 `--'".format(" "))
         print(("-"*100))
-        print("{:40s}{:>20}    {}{:>15}".format("Innskráning",
+        print("{:40s}{:>27}    {}{:>15}".format("Innskráning",
                                                 "Senda inn (a)thugasemd",
                                                 "(L)oka kerfi",
                                                 str(date.today())))
