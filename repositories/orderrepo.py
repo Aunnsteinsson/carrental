@@ -1,14 +1,13 @@
 from models.order import Order
 import csv
 ORDERNR = 0
-STARTDATE = 1
-ENDDATE = 2
-NAME = 3
-SSN = 4
-CAR = 5
-CARNR = 6
-STATUS = 7
-INSURANCE = 8
+LIST_OF_DATES = 1
+NAME = 2
+SSN = 3
+CAR = 4
+CARNR = 5
+STATUS = 6
+INSURANCE = 7
 # lgoi
 
 
@@ -74,8 +73,7 @@ status_of_car,insurance"
             for order in csv_reader:
                 order_class = Order(
                     order[ORDERNR],
-                    order[STARTDATE],
-                    order[ENDDATE],
+                    order[LIST_OF_DATES],
                     order[NAME],
                     order[SSN],
                     order[CAR],
