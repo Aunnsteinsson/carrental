@@ -53,7 +53,8 @@ class EmployeeRepo(object):
         '''
         list_of_employees = [
             "Notendanafn,lykilord,nafn,heimilisfang,simi,hlutverk"]
-        with open("./data/employees.csv", "w", newline="") as employees_file:
+        with open("./data/employees.csv", "w", newline="",
+                  encoding="utf-8") as employees_file:
             csv_writer = csv.writer(employees_file)
             csv_writer.writerow(list_of_employees)
             for _, info in self.__employee.items():
@@ -67,7 +68,8 @@ class EmployeeRepo(object):
          er hluti af Employee klasanum og er notaður sem gildi
         '''
         dict_for_emp = {}
-        with open("./data/employees.csv", "r") as employees_file:
+        with open("./data/employees.csv", "r",
+                  encoding="utf-8") as employees_file:
             csv_reader = csv.reader(employees_file)
             next(csv_reader)
             for employee in csv_reader:
