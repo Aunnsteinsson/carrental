@@ -30,10 +30,10 @@ class OrderService(object):
         self.remove_order_from_car(order_number)
         self.__order_repo.remove_order(order_number)
 
-    def remove_order_from_car(self, order_number, car):
+    def remove_order_from_car(self, order_number):
         the_order = self.__order_repo.get_order(order_number)
         licence_plate = the_order.get_licence_plate()
-        self.__car_repo.get_car(licence_plate)
+        car = self.__car_repo.get_car(licence_plate)
         car.remove_order(order_number)
 
     def list_of_days(self, start_date, finish_date):
@@ -56,11 +56,10 @@ class OrderService(object):
             start_date += step
         return unavailable_list
 
-    def find_available_cars(self, a_type, start_date, finish_date):
+    def find_unavailable_cars(self, a_type, start_date, finish_date):
         desired_days = self.list_of_days(start_date, finish_date)
         car_dict = self.__car_repo.get_all_cars()
         unavailable_cars = []
-        available_cars_string = ""
         for licence_plate, cars in car_dict.items():
             type_of_car = cars.get_type()
             if type_of_car in a_type:
@@ -69,9 +68,17 @@ class OrderService(object):
                     for day in date_list:
                         if day in desired_days:
                             unavailable_cars.append(cars)
-                if cars not in unavailable_cars:
-                    cars_string = cars.__str__()
-                    available_cars_string += cars_string + "\n"
+        return unavailable_cars
+
+    def find_available_cars(self, a_type, start_date, finish_date):
+        unavailable_cars = self.find_unavailable_cars(
+            a_type, start_date, finish_date)
+        available_cars_string = ""
+        car_dict = self.__car_repo.get_all_cars()
+        for licence_plate, cars in car_dict.items():
+            if cars not in unavailable_cars:
+                cars_string = cars.__str__()
+                available_cars_string += cars_string + "\n"
         return available_cars_string
 
     def add_dates_to_car(self, start_date, finish_date, licence_plate, order_number):
@@ -79,8 +86,6 @@ class OrderService(object):
         car_unavailable = self.list_of_days(start_date, finish_date)
         the_car = car_dict[licence_plate]
         the_car.add_rented_days(car_unavailable, order_number)
-        status = the_car.get_status()
-        return status
 
     def get_customer_name(self, customer):
         """Nær í nafn á viðskiptavini"""
@@ -100,9 +105,21 @@ class OrderService(object):
 
     def change_time(self, order_number, new_start_time, new_end_time):
         """Breytir tíma á pöntun"""
-        order = self.__order_repo.get_orders(order_number)
-
-        order.change_time(new_time)
+        order = self.__order_repo.get_order(order_number)
+        licence_plate = order.get_licence_plate()
+        the_car = self.__car_repo.get_car(licence_plate)
+        a_type = the_car.get_type()
+        self.remove_order_from_car(order_number)
+        unavailable_cars = self.find_unavailable_cars(
+            a_type, new_start_time, new_end_time)
+        if the_car not in unavailable_cars:
+            self.add_dates_to_car(
+                new_start_time, new_end_time, licence_plate, order_number)
+            return "Breyting tókst!"
+        else:
+            available_cars = self.find_available_cars(
+                a_type, new_start_time, new_end_time)
+            return "Bíll ekki í boði. Vinsamlegast veldu einhvern af þessum bílum. \n {}".format(available_cars)
 
     def change_customer(self, order_number, new_ssn):
         """Breytir hver viðskiptavinur er á pöntun"""
