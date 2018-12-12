@@ -1,6 +1,9 @@
 class Order(object):
-    '''Pöntunar klasi, tekur inn pöntunarnúmer, upphafsdag,
-    skiladag, bílaflokk og viðbótartryggingu'''
+    '''Klasi fyrir pantanir. Breytur í þessum klasa eru pöntunarnúmer, upphafsdagur,
+    skiladagur, nafn viðskiptavinar, kennitala viðskiptavinar, bíltegund, bílnúmer, 
+    staða bíls og hvort pöntun innihaldi aukatryggingu eður ei.
+    Klasinn inniheldur föll til að hægt sé að kalla á breytur eða breyta þeim.
+    Hægt er að fá __str__ á tvo mismunandi vegu.'''
 
     def __init__(self, order_number, start_date, end_date, name, ssn, car,
                  car_number, status_of_car, insurance=False):
@@ -13,6 +16,8 @@ class Order(object):
         self.__car_number = car_number
         self.__status = status_of_car
         self.__insurance = insurance
+
+    # Föll hér að neðan er hægt að kalla í til að nálgast breyturnar
 
     def get_order_number(self):
         return self.__order_number
@@ -31,6 +36,8 @@ class Order(object):
 
     def get_ssn(self):
         return self.__ssn
+
+    # Föll hér að neðan er hægt að nýta til að breyta gildi breytanna
 
     def change_start(self, new_start):
         self.__start_date = new_start
