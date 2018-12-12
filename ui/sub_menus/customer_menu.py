@@ -1,5 +1,7 @@
 from models.customer import Customer
+from models.order import Order
 from services.customerservice import CustomerService
+from services.orderservice import OrderService
 from ui.ui_standard_functions import UIStandard
 import time
 HOMECOMMANDS = ["h", "H", "s", "S"]
@@ -10,6 +12,7 @@ class CustomerUI(object):
 
     def __init__(self, name, a_type):
         self.__name = name
+        self.__order_service = OrderService()
         self.__customer_service = CustomerService()
         self.__uistandard = UIStandard(name, a_type)
 
@@ -22,8 +25,8 @@ class CustomerUI(object):
         choice = ""
         while choice not in HOMECOMMANDS:
             choice = self.__uistandard.show_menu(
-                """Viðskiptavinir\n\t1. Leita eftir kennitölu
-    \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur""", "Veldu aðgerð: ")
+                """Viðskiptavinir\n\n\t1. Leita eftir kennitölu
+    \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur\n""", "Veldu aðgerð: ")
             if choice == "1":
                 ssn = input("Kennitala: ")
                 customer = self.get_the_customer(ssn)
@@ -41,13 +44,21 @@ class CustomerUI(object):
         return choice
 
     def find_customer(self, ssn, customer):
+        self.__uistandard.clear_screen()
         self.__uistandard.print_header()
-        print("Viðskiptavinir - Nánari upplýsingar\n")
-        print("{:>20}{:>30}{:>20}".format("Kennitala", "Nafn", "Sími"))
-        print(customer)
+
+        print("Viðskiptavinir - Yfirlit pantana - Kennitala\n")
+        print("\t{} - {}\n\t{}".format(
+            customer.get_ssn(), customer.get_name(), "-"*80))
+        print("\t{:13}| {:9}| {:12}| {:7}| {:10}".format(
+            "Upphafsdagur", "Pönt.nr.", "Tegund", "Bílnr.", "Staða"))
+        print("\t{}".format("-"*80))
+####################################
+        print("\t{:13}| {:9}| {:12}| {:7}| {:10}".format(
+            "Upphafsdagur", "Pönt.nr.", "Tegund", "Bílnr.", "Staða"))
         # self.__order_service.showorders(customer)
         # þetta vantar alveg inn
-        choice = input("\t1. Breyta\n\t2. Eyða\n\tVeldu aðgerð: ")
+        choice = input("\n1. Breyta\n2. Eyða\n\nVeldu aðgerð: ")
         if choice == "1":
             self.change_menu(ssn)
         elif choice == "2":

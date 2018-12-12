@@ -13,7 +13,7 @@ class Customer(object):
         self.__creditcard_number = creditcard_number
 
     # Hér eru nokkur get föll sett inn til að nálgast breyturnar í fallinu
-    def get__ssn(self):
+    def get_ssn(self):
         return self.__ssn
 
     def get_name(self):
@@ -40,7 +40,7 @@ class Customer(object):
          String fall sem prentar allar breytur nema
          kreditkorta upplýsingar
         '''
-        return "{:>20}| {:>30}| {:>20}|".format(
+        return "{:11}| {:30}| {:9}".format(
             self.__ssn, self.__name, self.__phone_number)
 
     def __repr__(self):

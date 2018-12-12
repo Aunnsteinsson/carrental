@@ -106,7 +106,7 @@ class OrderService(object):
         string_of_orders = ""
         for key, orders in order.items():
             if ssn == orders.get_ssn():
-                order_string = orders.__str__()
+                order_string = orders.__repr__()
                 string_of_orders += order_string + "\n"
         return string_of_orders
 

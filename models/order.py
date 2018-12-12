@@ -54,7 +54,7 @@ class Order(object):
         return self.__insurance
 
     def get_car(self):
-        return self.__car
+        return self.__car_number
 
     def get_ssn(self):
         return self.__ssn
@@ -82,7 +82,7 @@ class Order(object):
         end_date = self.__list_of_dates[-1]
         if info_to_print == 1:
             return "\t {:11}| {:14}| {:10}| {:9}| {:10}".format(
-                start_date, self.__order_number, self.__car,
+                start_date, self.__order_number, self.__car_number,
                 self.__car_number, end_date)
         else:
             return "\t {:11}| {:14}| {:25}| {:11}| {:10}| {:9}| {:10}".format(
