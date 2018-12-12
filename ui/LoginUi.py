@@ -14,6 +14,7 @@ class LoginUI(object):
         '''
          Prentar haus fyrir innskráningu
         '''
+        today = date.today()
     #     print()
     #     print("{:72}        __-------__".format(" "))
     #     print("{:72}      / _---------_ \\".format(" "))
@@ -33,10 +34,11 @@ class LoginUI(object):
     #     print("{:72} ||||     ~~~~~~~     ||||".format(" "))
     #     print("{:72} `--'                 `--'".format(" "))
         print(("-"*100))
-        print("{:40s}{:>27}    {}{:>15}".format("Innskráning",
-                                                "Senda inn (a)thugasemd",
-                                                "(L)oka kerfi",
-                                                str(date.today())))
+        print("{:40s}{:>27}   {}     \
+{:%d. %b %Y}".format("Innskráning",
+                     "Senda inn (a)thugasemd",
+                     "(L)oka kerfi",
+                     today))
         print(("-"*100))
 
     def tjasl_rental_header(self):

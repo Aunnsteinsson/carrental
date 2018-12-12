@@ -16,10 +16,11 @@ class UIStandard(object):
 
     def print_header(self):
         '''Prentar haus á síðu sem notandi er staddur á'''
+        today = date.today()
         print()
-        print("{:40s}{:>32}   {}{:>15}".format(
+        print("{:40s}{:>32}   {}   {:%d. %b %Y}".format(
             "{} - notandi: {}".format(self.__a_type, self.__name),
-            "(H)eim", "(S)krá út", str(date.today())))
+            "(H)eim", "(S)krá út", today))
         print(("-"*100))
 
     def clear_screen(self):
