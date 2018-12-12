@@ -196,7 +196,7 @@ class OrderUI(object):
         print("\n\tViðskiptavinur: {}".format(customer_name))
         payment = input("\tGreiðslumáti: (D)ebit, (K)redit, (P)eningar: ")
         order_number = self.__order_service.make_order_number()
-        order = Order(order_number, list_of_days, ssn,
+        order = Order(order_number, list_of_days, ssn, customer_name,
                       licence_plate, total_price, insurance, discount)
         self.__order_service.add_dates_to_car(
             begin_date, end_date, licence_plate, order_number)

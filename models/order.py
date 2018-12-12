@@ -8,10 +8,11 @@ class Order(object):
     Klasinn inniheldur föll til að hægt sé að kalla á breytur eða breyta þeim.
     Hægt er að fá __str__ á tvo mismunandi vegu.'''
 
-    def __init__(self, order_number, list_of_dates, ssn, car_number, price, insurance=False, discount=0.000):
+    def __init__(self, order_number, list_of_dates, ssn, name, car_number, price, insurance=False, discount=0.000):
         self.__order_number = order_number
-        self.__list_of_dates = list_of_dates
+        self.__list_of_dates = self.dates_string_to_list(list_of_dates)
         self.__ssn = ssn
+        self.__name = name
         self.__car_number = car_number
         self.__insurance = insurance
         self.__discount = discount
@@ -44,11 +45,11 @@ class Order(object):
         list_of_dates = self.__list_of_dates
         string_of_dates = ""
         for date in list_of_dates:
-            string_of_dates += str(date) + ","
+            string_of_dates += str(date) + ":"
         return string_of_dates
 
     def dates_string_to_list(self, dates_string):
-        date_list = dates_string.strip(',').split(',')
+        date_list = dates_string.strip(":").split(':')
         return date_list
 
     def get_insurance(self):
@@ -82,21 +83,21 @@ class Order(object):
         start_date = self.__list_of_dates[0]
         end_date = self.__list_of_dates[-1]
         if info_to_print == 1:
-            return "\t {:11}| {:14}| {:10}| {:9}| {:10}".format(
-                start_date, self.__order_number, self.__car_number,
+            return "\t {:11}| {:14}| {:10}| {:9}| {:10}{}{}".format(
+                start_date, self.__order_number, self.__name, self.__ssn, self.__car_number,
                 self.__car_number, end_date)
         else:
             return "\t {:11}| {:14}| {:25}| {:11}| {:10}| {:9}| {:10}".format(
-                start_date, self.__order_number, self.__price,
-                self.__ssn, self.__price, self.__car_number, end_date)
+                start_date, self.__order_number, self.__name,
+                self.__ssn, self.__car_number, self.__car_number, end_date)
 
     def __repr__(self):
         '''
         Skrifar upplýsingar um pöntun
         '''
         string_of_dates = self.dates_list_to_string()
-        return "{},{},{},{},{},{},{}".format(self.__order_number,
-                                             string_of_dates,
-                                             self.__ssn,
-                                             self.__car_number, self.__price,
-                                             self.__insurance, self.__discount)
+        return "{},{},{},{},{},{},{},{}".format(self.__order_number,
+                                                string_of_dates,
+                                                self.__ssn, self.__name,
+                                                self.__car_number, self.__price,
+                                                self.__insurance, self.__discount)

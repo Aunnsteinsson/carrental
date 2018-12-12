@@ -3,10 +3,11 @@ import csv
 ORDERNR = 0
 LIST_OF_DATES = 1
 SSN = 2
-CAR = 3
-PRICE = 4
-INSURANCE = 5
-DISCOUNT = 6
+NAME = 3
+CAR = 4
+PRICE = 5
+INSURANCE = 6
+DISCOUNT = 7
 # lgoi
 
 
@@ -73,6 +74,7 @@ class OrderRepo(object):
                     order[ORDERNR],
                     order[LIST_OF_DATES],
                     order[SSN],
+                    order[NAME],
                     order[CAR],
                     order[PRICE],
                     order[INSURANCE],
