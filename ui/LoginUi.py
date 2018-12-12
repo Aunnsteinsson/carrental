@@ -1,3 +1,4 @@
+import sys
 from repositories.employeerepo import EmployeeRepo
 from datetime import date
 from getpass import getpass
@@ -11,7 +12,8 @@ class LoginUI(object):
         '''
          Prentar haus fyrir innskráningu
         '''
-        print("{:40s} {:>55}".format("Innskráning", str(date.today())))
+        print("{:40s}{:>40}{:>15}".format(
+            "Innskráning", "(L)oka kerfi", str(date.today())))
         print(("-"*100))
 
     def ask_for_username_password(self):
@@ -19,8 +21,11 @@ class LoginUI(object):
          Spyr starfsmann um notandanafn og lykilorð
         '''
         username = input("Notendanafn: ")
-        password = getpass(prompt="Lykilorð: ")
-        return username, password
+        if username.lower() == "l":
+            sys.exit(0)
+        else:
+            password = getpass(prompt="Lykilorð: ")
+            return username, password
 
     def check_employee_type(self, username, password):
         '''

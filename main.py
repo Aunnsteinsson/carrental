@@ -1,18 +1,27 @@
+import time
+import os
 from ui.LoginUi import LoginUI
 from ui.AdminUi import AdminUI
 from ui.BossUi import BossUI
 from ui.SalesmanUi import SalesmanUI
 
-user = LoginUI()
-try:
-    emp_type, username = user.main_menu()
-    if emp_type == "admin":
-        user = AdminUI(username, "Kerfisstjóri")
-    elif emp_type == "yfirmadur":
-        user = BossUI(username, "Yfirmaður")
-    elif emp_type == "soludeild":
-        user = SalesmanUI(username, "Söludeild")
 
-    user.main_menu()
-except TypeError:
-    print("Notandi ekki á skrá")
+system_is_on = True
+user = LoginUI()
+
+while system_is_on:
+    os.system("cls" if os.name == "nt" else "clear")
+    try:
+        emp_type, username = user.main_menu()
+        if emp_type == "admin":
+            user = AdminUI(username, "Kerfisstjóri")
+        elif emp_type == "yfirmadur":
+            user = BossUI(username, "Yfirmaður")
+        elif emp_type == "soludeild":
+            user = SalesmanUI(username, "Söludeild")
+
+        user.main_menu()
+
+    except TypeError:
+        print("Notandi ekki á skrá")
+        time.sleep(1.5)
