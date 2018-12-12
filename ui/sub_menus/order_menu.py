@@ -26,6 +26,7 @@ class OrderUI(object):
         choice = ""
         while choice not in HOMECOMMANDS:  # Placeholder þangað til ég næ að
             # lata while loopuna virka betur
+            self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
                 "Pantanir\n\t1. Yfirlit pantana\n\t2. Ný pöntun\n",
                 "Veldu aðgerð: ")
@@ -38,8 +39,9 @@ class OrderUI(object):
     def order_list_menu(self):
         """Prentar innra pantana viðmót og tekur við input"""
         choice = ""
-        self.__uistandard.clear_screen()
+
         while choice not in HOMECOMMANDS:  # Placeholder
+            self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
                 """Pantanir - Yfirlit pantana\n\nSækja upplýsingar út frá:\n\n\t\
 1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir\n""", "Veldu aðgerð: ")
@@ -61,6 +63,7 @@ class OrderUI(object):
             if choice == "2":  # TODO Þurfum að gefa pöntunarnúmer
                 self.get_single_order()
             if choice == "3":
+                self.__uistandard.clear_screen()
                 self.all_orders()
                 choice = input("B - tilbaka, H - Heim, S - Útskrá: ")
         return choice

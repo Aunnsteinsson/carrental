@@ -72,15 +72,13 @@ class BossUI(object):
         print("Tekjur\n\n{:^15} | {:^15}\n".format(
             "Pönt.nr.", "Tekjur")+("-")*36)
         order_dict = self.__order_service.get_orders()
-        
+
         for _, value in order_dict.items():
             order = value.get_order_number()
             income = value.get_price()
             print("{:^15} | {:^15}".format(
-            order, income))
-        
-        
-        
+                order, income))
+
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             choice = input("\n(H)eim - (S)krá út: ")
