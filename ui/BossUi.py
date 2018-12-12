@@ -50,18 +50,12 @@ class BossUI(object):
             elif choice == "6":
                 choice = self.revenue()
 
-    def show_all_orders(self):
-        """ Fall sem prentar út allar pantanir í kerfinu """
+    """ def show_all_orders(self):
+        """"""
         #from services import orderservice
-        print("\tdagsetning  |  Pönt.nr.  |  Nafn  |  Kennitala  |  Tegund  |  Bílnr.  |  Staða\n" + ("-")*100)
+        print("\tdagsetning  |  Pönt.nr.  |  Nafn  |  Kennitala  |  Tegund  |  Bílnr.  |  Staða\n")
+        self.__uistandard.line_seperator()
         self.__order_service.show_orders()
-        choice = ""
-        while choice.lower() not in HOMECOMMANDS:
-            choice = input("\n(H)eim - (S)krá út: ")
-        return choice
-
-    """ def show_customers(self):
-        print("\tKennitala  |  Nafn  |  Sími\n"+("-")*100)
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             choice = input("\n(H)eim - (S)krá út: ")

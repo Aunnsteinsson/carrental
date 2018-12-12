@@ -21,7 +21,10 @@ class UIStandard(object):
         print("{:40s}{:>32}   {}   {:%d. %b %Y}".format(
             "{} - notandi: {}".format(self.__a_type, self.__name),
             "(H)eim", "(S)krá út", today))
-        print(("-"*100))
+        self.line_seperator()
+    
+    def line_seperator(self):
+        print("-"*100)
 
     def clear_screen(self):
         os.system("cls" if os.name == "nt" else "clear")

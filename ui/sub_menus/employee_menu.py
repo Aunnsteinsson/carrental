@@ -28,15 +28,15 @@ class EmployeeUI(object):
         '''
         print("{:<10s}| {:<10s}| {:<25s}| {:<25s}| {:<10s}| {:<12s}".format(
             "Notandi", "Lykilorð", "Nafn", "Heimilisfang", "Sími", "Hlutverk"))
-        print("-"*100)
+        self.__uistandard.line_seperator()
 
     def print_employee_header_boss(self):
         '''
         Prentar haus fyrir starfmannayfirlit yfirmanns
         '''
-        print("{:<25s}| {:<10s}| {:<25s}| {:<10s}| {:<12s}".format(
+        print("{:^25s}| {:^10s}| {:^25s}| {:^10s}| {:^12s}".format(
             "Nafn", "Notandi", "Heimilisfang", "Sími", "Hlutverk"))
-        print("-"*100)
+        self.__uistandard.line_seperator()
 
     def employee_menu(self):
         '''
