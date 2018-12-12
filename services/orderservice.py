@@ -62,13 +62,17 @@ class OrderService(object):
                     for day in nested_day_list:
                         if day in desired_days:
                             unavailable_cars.append(cars)
-            if cars not in unavailable_cars:
-                cars_string = cars.__str__()
-                available_cars_string += cars_string + "\n"
+                if cars not in unavailable_cars:
+                    cars_string = cars.__str__()
+                    available_cars_string += cars_string + "\n"
         return available_cars_string
 
-    def get_car(self, a_type, duration):
-        pass
+    def add_dates_to_car(self, start_date, finish_date, licence_plate):
+        car_dict = self.__car_repo.get_all_cars()
+        car_unavailable = self.list_of_days(start_date, finish_date)
+        the_car = car_dict[licence_plate]
+        the_car.add_rented_days(car_unavailable)
+        self.__car_repo.save_car_data()
 
     def get_customer_name(self, customer):
         """Nær í nafn á viðskiptavini"""
