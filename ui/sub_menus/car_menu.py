@@ -1,10 +1,9 @@
-import os
 from datetime import date
 import time
 from models.car import Car
 from services.carservice import CarService
 from ui.ui_standard_functions import UIStandard
-HOMECOMMANDS = ["h", "H", "s", "S"]
+HOMECOMMANDS = ["h", "s"]
 
 
 class CarUI(object):
@@ -34,8 +33,8 @@ class CarUI(object):
     def car_menu_admin(self):
         '''Bílayfirlit menu fyrir Kerfisstjóra'''
         choice = ""
-        while choice not in HOMECOMMANDS:
-            os.system('cls')
+        while choice.lower() not in HOMECOMMANDS:
+            self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
                 "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3. Í útleigu\n\t\
 4. Nýskrá bíl\n\t5. Afskrá bíl\n", "Veldu aðgerð: ")
@@ -47,6 +46,7 @@ class CarUI(object):
                 self.__car_service.make_car(new_car)
             elif choice == "5":
                 licence_plate = input("Númer bíls til afskráningar: ")
+                # self.check_if_licence_plate()
                 # if licence_plate in `...... þarf að geta checkað hvort númeraplata sé á skrá??`
                 print()
                 approve_remove_car = input(
@@ -59,16 +59,19 @@ class CarUI(object):
                 else:
                     print("\nHætt við aðgerð!")
                 time.sleep(2)
-    
+
+    def check_if_licence_plate(self):
+        pass
+
     def get_car_prices_dict(self):
         price_dict = self.__car_service.get_car_prices()
         return price_dict
 
     def add_new_car(self):
-        os.system('cls')
+        self.__uistandard.clear_screen()
         approve_plate = ""
         while approve_plate.lower() != "j":
-            os.system('cls')
+            self.__uistandard.clear_screen()
             self.__uistandard.print_header()
             print("\tFlokkar\n\t{}".format("-"*10))
             print("\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
@@ -84,7 +87,7 @@ class CarUI(object):
             approve_plate = input("Skrá {} með númerið {}\
  ((J)á/(N)ei)? ".format(
                 a_type, license_plate))
-            price_dict = self.get_car_prices_dict()    
+            price_dict = self.get_car_prices_dict()
             new_car = Car(license_plate, a_type, price_dict)
         else:
             print("\nBíll hefur verið skráður!")
@@ -137,7 +140,8 @@ class CarUI(object):
         print("\t{:<20} | {:<20} | {:<20}".format(
             "Tegund", "Bílnúmer", "Staða"))
         print("\t{}".format("-"*60))
-        strengur = self.__car_service.get_list_of_cars(type_list, status_list)
+        strengur = self.__car_service.get_list_of_cars(
+            type_list, status_list)
         print(strengur)
         choice = input("Veldu aðgerð: ")
         return choice

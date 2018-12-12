@@ -1,5 +1,4 @@
 import time
-import os
 from models.employee import Employee
 from services.employeeservice import EmployeeService
 from ui.ui_standard_functions import UIStandard
@@ -16,7 +15,6 @@ class EmployeeUI(object):
 
     def __init__(self, username, job_title):
         self.__username = username
-        self.__job_title = job_title
         self.__employee_service = EmployeeService()
         self.__uistandard = UIStandard(username, job_title)
 
@@ -35,11 +33,11 @@ class EmployeeUI(object):
     def employee_menu(self):
         '''Yfirlit yfir alla starfsmenn fyrirtækis,
         Möguleiki á að eyða starfsmanni'''
-        os.system('cls')
+        self.__uistandard.clear_screen()
         choice = ""
         get_pass = 1
         while choice.lower() not in HOMECOMMANDS:
-            os.system('cls')
+            self.__uistandard.clear_screen()
             self.__uistandard.print_header()
             self.print_employee_header()
             # Prentar lista yfir starfsmenn fyrir admin (með passwordi)
@@ -116,7 +114,7 @@ class EmployeeUI(object):
 
     def new_employee(self):
         '''Býr til nýjan starfsmann'''
-        os.system('cls')
+        self.__uistandard.clear_screen()
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             self.__uistandard.print_header()
@@ -150,7 +148,7 @@ class EmployeeUI(object):
 
     def show_employees(self):
         """ Prentar út alla starfsmenn í kerfi fyrir yfirmann"""
-        os.system('clear')
+        self.__uistandard.clear_screen()
         self.__uistandard.print_header()
         self.print_employee_header_boss()
         employees_list_string = self.__employee_service.get_employees()
