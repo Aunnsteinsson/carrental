@@ -148,6 +148,9 @@ class OrderService(object):
         """Breytir stöðu á tryggingu"""
         order = self.__order_repo.get_orders(order_number)
         order.change_insurance(new_insurance)
+        discount = order.get_discount()
+        price = self.price_of_rent(order, discount, new_insurance)
+        self.change_price(order, price)
 
     def show_orders(self):
         """Sýnir allar pantanir og skilar þeim sem streng"""
@@ -158,12 +161,11 @@ class OrderService(object):
             string_of_orders += order_string + "\n"
         return string_of_orders
 
-    def price_of_rent(self, order):
+    def price_of_rent(self, order, discount, insurance):
         """Reiknar út verð á pöntun"""
         licence_plate = order.get_licence_plate()
         the_car = self.__car_repo.get_car(licence_plate)
         price_of_car = the_car.price_vehicle()
-        insurance = order.get_insurance()
         price_of_insurance = self.__car_repo.get_car_prices()
         price_of_insurance = price_of_insurance["trygging"]
         start = order.get_start()
@@ -171,11 +173,28 @@ class OrderService(object):
         days_of_rent = date(end).day - date(start).day
         days_of_rent = int(days_of_rent)
         price_of_rent = days_of_rent * price_of_car
+        discount = self.change_discount_to_float(discount)
+        if discount:
+            price_of_rent = price_of_rent * discount
         if insurance:
             final_price = price_of_insurance * days_of_rent + price_of_car
             return final_price
         else:
             return price_of_rent
+
+    def change_price(self, order, new_price):
+        order.change_price(new_price)
+
+    def change_discount(self, order_number, new_discount):
+        order = self.__order_repo.get_orders(order_number)
+        order.change_discount(new_discount)
+        insurance = order.get_insurance()
+        price = self.price_of_rent(order, new_discount, insurance)
+        self.change_price(order, price)
+
+    def change_discount_to_float(self, discount):
+        discount = float(discount)/100
+        return 1-discount
 
     def find_order(self, order_number):
         order_dict = self.__order_repo.get_orders()
