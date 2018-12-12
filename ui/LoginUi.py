@@ -50,7 +50,8 @@ class LoginUI(object):
             sys.exit(0)
         elif username.lower() == "a":
             webbrowser.open(
-                "https://github.com/steingrimure/carrental/issues/new")
+                "https://github.com/Aunnsteinsson/carrental_issue_repo\
+/issues/new")
         else:
             password = getpass(prompt="Lykilorð: ")
             return username, password
