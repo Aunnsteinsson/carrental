@@ -40,7 +40,17 @@ class Car(object):
 
     def get_status(self):
         """Skilar stöðu bíls"""
-        return self.__status
+        return self.__rented_days
+
+    def remove_order(self, list_of_days):
+        for list_of_rented_days in self.__rented_days:
+            for day in list_of_rented_days:
+                for order_day in list_of_days:
+                    if order_day == day:
+                        list_of_rented_days.pop(day)
+
+    def add_rented_days(self, list_of_days):
+        self.__rented_days.append(list_of_days)
 
     def change_status(self, new_status):
         """Breytir stöðu bíls, úr "laus" í "í útleigu" og öfugt"""
