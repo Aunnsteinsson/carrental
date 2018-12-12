@@ -138,10 +138,12 @@ class CarUI(object):
 
     def second_car_menu(self, the_type, menu, status_list, type_list):
         self.__uistandard.print_header()
+        line_seperator = ("-"*75)
         print("Bílayfirlit - {} {}".format(the_type, menu))
-        print("{:^8} | {:^12} | {:^15} | {:^20}".format(
-            "\nBílnúmer","Tegund","Verð/dag","Bókanir í tímaröð"))
-        print("{}".format("-"*70))
+        print(line_seperator)
+        print("{:^8} | {:^12} | {:^15} | {:^10} | {:^15} ".format(
+            "Bílnúmer","Tegund","Verð/dag","Staða bíls","Næsta bókun"))
+        print(line_seperator)
         strengur = self.__car_service.get_list_of_cars(
             type_list, status_list)
         print(strengur)
