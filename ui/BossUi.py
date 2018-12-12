@@ -44,7 +44,7 @@ class BossUI(object):
             elif choice == "4":
                 choice = self.__employee_ui.show_employees()
             elif choice == "5":
-                choice = self.__price_UI.price_menu()
+                choice = self.__price_UI.boss_change_price_menu()
             elif choice == "6":
                 choice = self.revenue()
 
