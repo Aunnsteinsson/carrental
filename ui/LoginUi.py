@@ -19,13 +19,13 @@ class LoginUI(object):
         print("{:72}      / _---------_ \\".format(" "))
         print("{:72}     / /           \\ \\".format(" "))
         print("{:72}     | |           | |".format(" "))
-        print((" "*16), "--,--         .   .-,--.         .      ."
-              "                   |_|___________|_|")
-        print((" "*16), "`- | . ,-. ,-. |    `|__/ ,-. ,-. |- ,-. |"
+        print((" "*16), " --,--         .     ,--.         .      ."
+              "                  |_|___________|_|")
+        print((" "*16), "   | . ,-. ,-. |     |__/ ,-. ,-. |- ,-. |"
               "              /-\\|                 |/-\\")
-        print((" "*16), " , | | ,-| `-. |     | \\  |-' | | |  ,-| "
+        print((" "*16), "   | | ,-| `-. |     | \\  |-' | | |  ,-| "
               "|             | _ |\\       0       /| _ |")
-        print((" "*16), " `-' | `-^ `-' `'  `-'  ` `-' ' ' `' `-^ `'"
+        print((" "*16), "   ' | `-^ `-' `'    '  ` `-' ' ' `' `-^ `'"
               "            |(_)| \\      !      / |(_)|")
         print((" "*16), "    `'                                     "
               "            |___|__\\_____!_____/__|___|")
@@ -49,9 +49,12 @@ class LoginUI(object):
             time.sleep(2)
             sys.exit(0)
         elif username.lower() == "a":
+            print("Fer á heimasíðu og loka kerfi...")
+            time.sleep(2)
             webbrowser.open(
                 "https://github.com/Aunnsteinsson/carrental_issue_repo\
 /issues/new")
+            sys.exit(0)
         else:
             password = getpass(prompt="Lykilorð: ")
             return username, password

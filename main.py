@@ -23,5 +23,6 @@ while system_is_on:
         user.main_menu()
 
     except TypeError:
-        print("Notandi ekki á skrá")
-        time.sleep(1.5)
+        print("Notendanafn eða lykilorð rangt, vinsamlegast \
+hafðu samband við kerfisstjóra")
+        time.sleep(2)
