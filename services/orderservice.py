@@ -5,6 +5,9 @@ from models.car import Car
 from models.customer import Customer
 from datetime import date, timedelta
 
+STARTDATE = 0
+ENDDATE = -1
+
 
 class OrderService(object):
     def __init__(self):
@@ -68,6 +71,8 @@ class OrderService(object):
                     for day in date_list:
                         if day in desired_days:
                             unavailable_cars.append(cars)
+            else:
+                unavailable_cars.append(cars)
         return unavailable_cars
 
     def find_available_cars(self, a_type, start_date, finish_date):
@@ -120,6 +125,19 @@ class OrderService(object):
             available_cars = self.find_available_cars(
                 a_type, new_start_time, new_end_time)
             return "Bíll ekki í boði. Vinsamlegast veldu einhvern af þessum bílum. \n {}".format(available_cars)
+
+    def change_car(self, a_type, order_number):
+        order = self.__order_repo.get_order(order_number)
+        list_of_days = order.get_duration()
+        start = list_of_days[STARTDATE]
+        end = list_of_days[ENDDATE]
+        self.remove_order_from_car(order_number)
+        string_car = self.find_available_cars(a_type, start, end)
+        return string_car
+
+    def change_car_again(self, new_car, order_number):
+        order = self.__order_repo.get_order(order_number)
+        order.change_car(new_car)
 
     def change_customer(self, order_number, new_ssn):
         """Breytir hver viðskiptavinur er á pöntun"""
