@@ -7,6 +7,7 @@ from ui.sub_menus.employee_menu import EmployeeUI
 from services.orderservice import OrderService
 from ui.sub_menus.customer_menu import CustomerUI
 from services.carservice import CarService
+from ui.sub_menus.price_menu import PriceUI
 
 HOMECOMMANDS = ["h", "s"]
 
@@ -23,6 +24,7 @@ class BossUI(object):
         self.__order_service = OrderService()
         self.__customer_ui = CustomerUI(self.__username, emp_type)
         self.__car_service = CarService()
+        self.__price_UI = PriceUI(self.__username, emp_type)
 
     def main_menu(self):
         """ Fall sem sýnir aðalviðmót yfirmanns og færir hann á milli falla """
@@ -42,7 +44,7 @@ class BossUI(object):
             elif choice == "4":
                 choice = self.__employee_ui.show_employees()
             elif choice == "5":
-                choice = self.price_menu()
+                choice = self.__price_UI.price_menu()
             elif choice == "6":
                 choice = self.revenue()
 
