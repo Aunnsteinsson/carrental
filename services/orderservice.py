@@ -73,6 +73,7 @@ class OrderService(object):
         the_car = car_dict[licence_plate]
         the_car.add_rented_days(car_unavailable)
         status = the_car.get_status()
+        self.__car_repo.save_car_data()
         return status
 
     def get_customer_name(self, customer):

@@ -1,5 +1,5 @@
 licence_plate,a_type,status
-GG123,Folksbill,Laus
-AA111,Jeppi,Laus
-HH333,Sendibill,Laus
-LL888,Jeppi,Laus
+GG123,folksbill,[]
+AA111,jeppi,[[datetime.date(2018, 12, 22), datetime.date(2018, 12, 23), datetime.date(2018, 12, 24), datetime.date(2018, 12, 25)]]
+HH333,sendibill,[]
+LL888,jeppi,[]

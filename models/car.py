@@ -5,14 +5,17 @@ class Car(object):
     """Þessi klasi býr til bíl, með númeraplötu og hvernig týpa
     af bíl hann er"""
 
-    def __init__(self, licence_plate, a_type, price_dict):
+    def __init__(self, licence_plate, a_type, price_dict, rented_days=[]):
         self.__licence_plate = licence_plate
         self.__a_type = a_type
         self.__price = price_dict
+        rented_days = rented_days.strip("[]")
+        rented_days = rented_days.split(",")
         self.__rented_days = []
+        self.__price_of_car = self.price_vehicle()
 
     def __str__(self):
-        return "Bíltegund: {} - númeraplata: {} - verð: {} - staða: {}".format(self.__a_type, self.__licence_plate, self.__price, self.__rented_days)
+        return "{:<20} | {:<20} | {:<20} | {:<20}".format(self.__a_type, self.__licence_plate, self.__price_of_car, str(self.__rented_days))
 
     def get_licence_plate(self):
         """Skilar númeraplötu"""
@@ -52,13 +55,9 @@ class Car(object):
     def add_rented_days(self, list_of_days):
         self.__rented_days.append(list_of_days)
 
-    def change_status(self, new_status):
-        """Breytir stöðu bíls, úr "laus" í "í útleigu" og öfugt"""
-        self.__status = new_status
-
     def __repr__(self):
         return "{},{},{}".format(self.__licence_plate,
-                                 self.__a_type, self.__status)
+                                 self.__a_type, self.__rented_days)
 
 
 """class Jeep(Car):

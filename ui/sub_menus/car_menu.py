@@ -122,16 +122,16 @@ class CarUI(object):
             second_choice = input("Veldu síðu: ")
             if second_choice == "2":
                 the_type = "Jeppar"
-                type_list = ["Jeppi"]
+                type_list = ["jeppi"]
             elif second_choice == "3":
                 the_type = "Fólksbílar"
-                type_list = ["Fólksbill"]
+                type_list = ["folksbill"]
             elif second_choice == "4":
                 the_type = "Sendibílar"
-                type_list = ["Sendibill"]
+                type_list = ["sendibill"]
             else:
                 the_type = "all_cars"
-                type_list = ["Sendibill", "Folksbill", "Jeppi"]
+                type_list = ["sendibill", "folksbill", "jeppi"]
             choice = self.second_car_menu(
                 the_type, menu, status_list, type_list)
         return choice
