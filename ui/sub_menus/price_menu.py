@@ -32,6 +32,13 @@ class PriceUI(object):
                 elif types == "trygging":
                     types = "Aukatrygging"
                 print("{:<15} | {:>12,.2f} {}".format(types, price, "ISK"))
+    
+    def salesman_get_price_menu(self):
+        self.print_price_menu()
+        choice = ""
+        while choice.lower() not in HOMECOMMANDS:
+            choice = input("\nVeldu aðgerð: ")
+        return choice
             
     def boss_change_price_menu(self):               
         self.print_price_menu()

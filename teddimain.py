@@ -3,6 +3,7 @@ from services.carservice import CarService
 from models.car import Car
 from ui.BossUi import BossUI
 from ui.AdminUi import AdminUI
+from ui.SalesmanUi import SalesmanUI
 """ ordabok = {}
 ordabok["Jeppi"] = 4444444
 geymsla = CarRepo()
@@ -24,5 +25,5 @@ print(verd)
 #a_type og status """
 
 
-k1 = BossUI("User1", "Yfirmaður")
+k1 = SalesmanUI("User1", "Sölumaður")
 k1.main_menu() 
