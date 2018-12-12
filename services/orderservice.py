@@ -162,6 +162,9 @@ class OrderService(object):
             order_string = value.__str__()
             string_of_orders += order_string + "\n"
         return string_of_orders
+    
+    def get_orders(self):
+        return self.__order_repo.get_orders()
 
     def get_price_of_insurance(self):
         price_of_insurance = self.__car_repo.get_car_prices()

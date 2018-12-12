@@ -9,6 +9,7 @@ from ui.sub_menus.customer_menu import CustomerUI
 from services.carservice import CarService
 from ui.sub_menus.price_menu import PriceUI
 from ui.sub_menus.order_menu import OrderUI
+from models.order import Order
 
 HOMECOMMANDS = ["h", "s"]
 
@@ -70,11 +71,20 @@ class BossUI(object):
         """ Prentar út tekjur bílaleigu """
         print("Tekjur\n\t{:<25} | {:<10}\n\t".format(
             "Pöntunarnúmer", "Tekjur")+("-")*38)
-        print("\t{:<25} | {:>10}".format("000001", "120.000 kr"))
-        print("\t{:<25} | {:>10}".format("000002", "10.000 kr"))
-        print("\n\t{:<25} | {:<10}\n\t".format("Mánuður", "Tekjur")+("-")*38)
-        print("\t{:<25} | {:>10}".format("11", "130.000 kr"))
+        order_dict = self.__order_service.get_orders()
+        
+        for price, value in order_dict.items():
+            price = value.get_price()
+            print(price)
+        
+        
+        
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             choice = input("\n(H)eim - (S)krá út: ")
         return choice
+
+        """ print("\t{:<25} | {:>10}".format("000001", "120.000 kr"))
+        print("\t{:<25} | {:>10}".format("000002", "10.000 kr"))
+        print("\n\t{:<25} | {:<10}\n\t".format("Mánuður", "Tekjur")+("-")*38)
+        print("\t{:<25} | {:>10}".format("11", "130.000 kr")) """
