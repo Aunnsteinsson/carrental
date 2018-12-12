@@ -112,16 +112,19 @@ class OrderService(object):
 
     def price_of_rent(self, order):
         """Reiknar út verð á pöntun"""
-        a_type = order.get_car()
+        licence_plate = order.get_licence_plate()
+        the_car = self.__car_repo.get_car(licence_plate)
+        price_of_car = the_car.price_vehicle()
         insurance = order.get_insurance()
+        price_of_insurance = self.__car_repo.get_car_prices()
+        price_of_insurance = price_of_insurance["trygging"]
         start = order.get_start()
         end = order.get_end()
-        # fá verð frá Tedda
         days_of_rent = date(end).day - date(start).day
         days_of_rent = int(days_of_rent)
-        price_of_rent = days_of_rent * price_of_rent
+        price_of_rent = days_of_rent * price_of_car
         if insurance:
-            final_price = price_of_insurance * days_of_rent + price_of_rent
+            final_price = price_of_insurance * days_of_rent + price_of_car
             return final_price
         else:
             return price_of_rent

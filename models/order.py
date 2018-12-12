@@ -22,6 +22,9 @@ class Order(object):
     def get_order_number(self):
         return self.__order_number
 
+    def get_licence_plate(self):
+        return self.__car_number
+
     def get_start(self):
         return self.__start_date
 
