@@ -72,7 +72,8 @@ class OrderService(object):
         car_unavailable = self.list_of_days(start_date, finish_date)
         the_car = car_dict[licence_plate]
         the_car.add_rented_days(car_unavailable, order_number)
-        self.__car_repo.save_car_data()
+        status = the_car.get_status()
+        return status
 
     def get_customer_name(self, customer):
         """Nær í nafn á viðskiptavini"""
@@ -124,3 +125,9 @@ class OrderService(object):
             return final_price
         else:
             return price_of_rent
+
+    def find_order(self, order_number):
+        order_dict = self.__order_repo.get_orders()
+        for order, value in order_dict.items():
+            if order == order_number:
+                return order_dict[order_number]
