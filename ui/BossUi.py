@@ -66,12 +66,12 @@ class BossUI(object):
             choice = input("\n(H)eim - (S)krá út: ")
         return choice
 
-    def get_price_dict(self):
+    """ def get_price_dict(self):
         price_dict = self.__car_service.get_car_prices()
         return price_dict
 
     def price_menu(self):
-        """ Sýnir verðlistaviðmót yfirmanns og kallar á klasa eftir því sem við á """
+         
         price_dict = self.get_price_dict()
         print("Verðlisti:\n\n{:^15} | {:^15}".format("Tegund", "Verð/dag")+("\n")+("-")*34)
         for types, price in price_dict.items():
@@ -105,7 +105,7 @@ class BossUI(object):
                 new_price = input("\nNýtt verð: ")
                 self.__car_service.change_price_of_type(a_type, new_price)
                 choice = input("\nVerði breytt!\n\nVeldu (H) til að fara heim, eða (S) til að skrá þig út: ")
-        return choice
+        return choice """
 
 
     def revenue(self):

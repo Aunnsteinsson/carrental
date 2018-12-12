@@ -25,5 +25,5 @@ print(verd)
 #a_type og status """
 
 
-k1 = SalesmanUI("User1", "Sölumaður")
+k1 = BossUI("User1", "Yfirmaður")
 k1.main_menu() 
