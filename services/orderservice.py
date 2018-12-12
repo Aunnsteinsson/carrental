@@ -58,8 +58,8 @@ class OrderService(object):
             type_of_car = cars.get_type()
             if type_of_car in a_type:
                 not_available = cars.get_status()
-                for nested_day_list in not_available:
-                    for day in nested_day_list:
+                for order_number, date_list in not_available.items():
+                    for day in date_list:
                         if day in desired_days:
                             unavailable_cars.append(cars)
                 if cars not in unavailable_cars:
@@ -67,11 +67,11 @@ class OrderService(object):
                     available_cars_string += cars_string + "\n"
         return available_cars_string
 
-    def add_dates_to_car(self, start_date, finish_date, licence_plate):
+    def add_dates_to_car(self, start_date, finish_date, licence_plate, order_number):
         car_dict = self.__car_repo.get_all_cars()
         car_unavailable = self.list_of_days(start_date, finish_date)
         the_car = car_dict[licence_plate]
-        the_car.add_rented_days(car_unavailable)
+        the_car.add_rented_days(car_unavailable, order_number)
         status = the_car.get_status()
         return status
 

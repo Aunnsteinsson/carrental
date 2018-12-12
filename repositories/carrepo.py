@@ -16,7 +16,7 @@ class CarRepo(object):
             csv_reader = csv.reader(car_file)
             for car in csv_reader:
                 if car[0] != "licence_plate":
-                    car_class = Car(car[LICENCE_PLATE], car[A_TYPE], self.__price)
+                    car_class = Car(car[LICENCE_PLATE], car[A_TYPE], self.__price, car[STATUS])
                     licence_plate = car[LICENCE_PLATE]
                     car_dict[licence_plate] = car_class
         return car_dict
