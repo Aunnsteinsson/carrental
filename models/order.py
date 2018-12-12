@@ -49,14 +49,21 @@ class Order(object):
         return string_of_dates
 
     def dates_string_to_list(self, dates_string):
-        date_list = dates_string.strip(":").split(':')
-        return date_list
+        try:
+            str(dates_string)
+            date_list = dates_string.strip(":").split(':')
+            return date_list
+        except Exception:
+            return dates_string
 
     def get_insurance(self):
         return self.__insurance
 
     def get_car(self):
         return self.__car_number
+
+    def change_duration(self, new_list):
+        self.__list_of_dates = [str(day) for day in new_list]
 
     def get_ssn(self):
         return self.__ssn
@@ -69,8 +76,11 @@ class Order(object):
     def change_insurance(self, new_insurance):
         self.__insurance = new_insurance
 
+    def change_name(self, new_name):
+        self.__name = new_name
+
     def change_car(self, new_car):
-        self.__car = new_car
+        self.__car_number = new_car
 
     def change_ssn(self, new_ssn):
         self.__ssn = new_ssn

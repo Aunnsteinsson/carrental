@@ -16,7 +16,7 @@ class OrderUI(object):
         self.__name = name
         self.__a_type = a_type
         self.__order_service = OrderService()
-        self.__car_service = CarService
+        self.__car_service = CarService()
         self.__uistandard = UIStandard(name, a_type)
 
     def order_menu(self):
@@ -88,10 +88,11 @@ class OrderUI(object):
         if choice == "1":
             begin_date = input("Nýi upphafsdagur")
             end_date = input("nýi lokadagur")
-            strengur = self.__order_service(order, begin_date, end_date)
+            strengur = self.__order_service.change_time(
+                order, begin_date, end_date)
             print(strengur)
             if len(strengur) > 20:
-                choice_of_car = input("Skrifaðu bílnúmers bíls")
+                choice_of_car = input("Skrifaðu bílnúmers bíls").upper()
                 self.__order_service.change_car_again(choice_of_car, order)
                 self.__order_service.add_dates_to_car(
                     begin_date, end_date, choice_of_car)
@@ -100,12 +101,12 @@ class OrderUI(object):
             the_car = self.__car_service.show_cars(licence_plate)
             type = the_car.get_type()
             string_of_cars = self.__order_service.change_car(type, order)
-            print(string)
-            choice_of_car = ("Skrifaði ´bilnúmer bíls")
+            print(string_of_cars)
+            choice_of_car = input("Skrifaði ´bilnúmer bíls").upper()
             listi = the_order.get_duration()
             self.__order_service.change_car_again(choice_of_car, order)
             self.__order_service.add_dates_to_car(
-                listi[0], listi[-1], choice_of_car)
+                listi[0], listi[-1], choice_of_car, order)
         if choice == "3":
             insurance = input("Viltu tryggingu? (J)á eða (N)ei")
             if insurance.lower() == "j":
@@ -118,8 +119,7 @@ class OrderUI(object):
             customer = self.__customer_menu.get_the_customer(ssn)
             if customer:
                 print(customer)
-                order = self.__order_service.customer_orders(ssn)
-                print(order)
+                self.__order_service.change_customer(order, ssn)
             else:
                 print("Enginn viðskiptavinur með þessu nafni")
         if choice == "5":
@@ -147,8 +147,8 @@ class OrderUI(object):
         end_day = input("\tSkiladagur: ")
         end_month = input("\tSkilamánuður")
         end_year = input("\tSkilaár")
-        begin_date = begin_day + "/" + begin_month + "/" + begin_year
-        end_date = end_day + "/" + end_month + "/" + end_year
+        begin_date = begin_day + "-" + begin_month + "-" + begin_year
+        end_date = end_day + "-" + end_month + "-" + end_year
         list_of_days = self.__order_service.list_of_days(begin_date, end_date)
         print("\n\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
         type_of_car = input("\tFlokkur: ")

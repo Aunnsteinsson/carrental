@@ -1,4 +1,5 @@
 from repositories.orderrepo import OrderRepo
+from repositories.customerrepo import CustomerRepo
 from models.order import Order
 from repositories.carrepo import CarRepo
 from models.car import Car
@@ -13,6 +14,7 @@ class OrderService(object):
     def __init__(self):
         self.__order_repo = OrderRepo()
         self.__car_repo = CarRepo()
+        self.__customer_repo = CustomerRepo()
 
     def make_order(self, order_number, order):
         """Bætir við pöntun í kerfið"""
@@ -33,6 +35,8 @@ class OrderService(object):
         """Eyðir út pöntun"""
         self.remove_order_from_car(order_number)
         self.__order_repo.remove_order(order_number)
+        self.__order_repo.save_new_orders()
+        self.__car_repo.save_car_data()
 
     def remove_order_from_car(self, order_number):
         the_order = self.__order_repo.get_order(order_number)
@@ -45,14 +49,14 @@ class OrderService(object):
         setur það í sitthvorn lista sem síðan breytir því í dagsetningu
         býr síðan til lista á milli beggja dagsetninganna og bætir við
         þeim dögum inn í lista sem sýnir þá daga sem bílar eru uppteknir"""
-        list_startdate = start_date.split("/")
-        list_finishdate = finish_date.split("/")
+        list_startdate = start_date.split("-")
+        list_finishdate = finish_date.split("-")
         start_year, start_month, start_day = int(list_startdate[2]), int(
             list_startdate[1]), int(list_startdate[0])
         finish_year, finish_month, finish_day = int(list_finishdate[2]), int(
             list_finishdate[1]), int(list_finishdate[0])
-        start_date = date(start_year, start_month, start_day)
-        finish_date = date(finish_year, finish_month, finish_day)
+        start_date = date(start_day, start_month, start_year)
+        finish_date = date(finish_day, finish_month, finish_year)
         step = timedelta(days=1)
         unavailable_list = []
         while start_date <= finish_date:
@@ -107,7 +111,7 @@ class OrderService(object):
         string_of_orders = ""
         for key, orders in order.items():
             if ssn == orders.get_ssn():
-                order_string = orders.__repr__()
+                order_string = orders.__str__()
                 string_of_orders += order_string + "\n"
         return string_of_orders
 
@@ -123,6 +127,9 @@ class OrderService(object):
         if the_car not in unavailable_cars:
             self.add_dates_to_car(
                 new_start_time, new_end_time, licence_plate, order_number)
+            new_list = self.list_of_days(new_start_time, new_end_time)
+            order.change_duration(new_list)
+            self.__order_repo.save_new_orders()
             return "Breyting tókst!"
         else:
             available_cars = self.find_available_cars(
@@ -133,7 +140,11 @@ class OrderService(object):
         order = self.__order_repo.get_order(order_number)
         list_of_days = order.get_duration()
         start = list_of_days[STARTDATE]
+        start = start.split("-")
+        start = start[0] + "-" + start[1] + "-" + start[2]
         end = list_of_days[ENDDATE]
+        end = end.split("-")
+        end = end[0] + "-" + end[1] + "-" + end[2]
         self.remove_order_from_car(order_number)
         string_car = self.find_available_cars(a_type, start, end)
         return string_car
@@ -141,19 +152,31 @@ class OrderService(object):
     def change_car_again(self, new_car, order_number):
         order = self.__order_repo.get_order(order_number)
         order.change_car(new_car)
+        self.__order_repo.save_new_orders()
+        self.__car_repo.save_car_data()
 
     def change_customer(self, order_number, new_ssn):
         """Breytir hver viðskiptavinur er á pöntun"""
-        order = self.__order_repo.get_orders(order_number)
-        order.change_customer(new_ssn)
+        order = self.__order_repo.get_order(order_number)
+        order.change_ssn(new_ssn)
+        customer = self.__customer_repo.get_customer(new_ssn)
+        name = customer.get_name()
+        order.change_name(name)
+        self.__order_repo.save_new_orders()
 
     def change_insurance(self, order_number, new_insurance):
         """Breytir stöðu á tryggingu"""
-        order = self.__order_repo.get_orders(order_number)
+        order = self.__order_repo.get_order(order_number)
         order.change_insurance(new_insurance)
         discount = order.get_discount()
-        price = self.price_of_rent(order, discount, new_insurance)
+        duration_list = order.get_duration()
+        licence_plate = order.get_car()
+        start = duration_list[STARTDATE]
+        end = duration_list[ENDDATE]
+        price = self.price_of_rent(
+            licence_plate, discount, new_insurance, start, end)
         self.change_price(order, price)
+        self.__order_repo.save_new_orders()
 
     def show_orders(self):
         """Sýnir allar pantanir og skilar þeim sem streng"""
@@ -175,7 +198,8 @@ class OrderService(object):
     def price_of_rent(self, licence_plate, discount, insurance, start_date, end_date):
         """Reiknar út verð á pöntun"""
         the_car = self.__car_repo.get_car(licence_plate)
-        price_of_car = float(the_car.price_vehicle())
+        price_of_car = the_car.price_vehicle()
+        price_of_car = float(price_of_car)
         price_of_insurance = self.get_price_of_insurance()
         list_of_days = self.list_of_days(start_date, end_date)
         start = list_of_days[STARTDATE]
@@ -196,11 +220,17 @@ class OrderService(object):
         order.change_price(new_price)
 
     def change_discount(self, order_number, new_discount):
-        order = self.__order_repo.get_orders(order_number)
+        order = self.__order_repo.get_order(order_number)
         order.change_discount(new_discount)
         insurance = order.get_insurance()
-        price = self.price_of_rent(order, new_discount, insurance)
+        duration_list = order.get_duration()
+        licence_plate = order.get_car()
+        start = duration_list[STARTDATE]
+        end = duration_list[ENDDATE]
+        price = self.price_of_rent(
+            licence_plate, new_discount, insurance, start, end)
         self.change_price(order, price)
+        self.__order_repo.save_new_orders()
 
     def change_discount_to_float(self, discount):
         discount = float(discount)/100

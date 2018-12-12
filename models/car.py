@@ -78,12 +78,8 @@ class Car(object):
         """Skilar stöðu bíls"""
         return self.__rented_days
 
-    def remove_order(self, list_of_days):
-        for list_of_rented_days in self.__rented_days:
-            for day in list_of_rented_days:
-                for order_day in list_of_days:
-                    if order_day == day:
-                        list_of_rented_days.pop(day)
+    def remove_order(self, order_number):
+        k = self.__rented_days.pop(order_number)
 
     def add_rented_days(self, list_of_days, order_number):
         list_of_days = [str(day) for day in list_of_days]
