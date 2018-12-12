@@ -7,19 +7,18 @@ from ui.SalesmanUi import SalesmanUI
 
 
 system_is_on = True
-user = LoginUI()
+login = LoginUI()
 
 while system_is_on:
     os.system("cls" if os.name == "nt" else "clear")
     try:
-        emp_type, username = user.main_menu()
+        emp_type, username = login.main_menu()
         if emp_type == "admin":
             user = AdminUI(username, "Kerfisstjóri")
         elif emp_type == "yfirmadur":
             user = BossUI(username, "Yfirmaður")
         elif emp_type == "soludeild":
             user = SalesmanUI(username, "Söludeild")
-
         user.main_menu()
 
     except TypeError:
