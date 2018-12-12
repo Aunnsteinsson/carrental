@@ -73,6 +73,7 @@ class BossUI(object):
         price_dict = self.get_price_dict()
         print("Verðlisti:\n\n{:^15} | {:^15}".format("Tegund", "Verð/dag")+("\n")+("-")*34)
         for types, price in price_dict.items():
+            #Þessi lykkja er nauðsynleg vegna þess að .csv skrár lesa ekki íslenska stafi
             price = float(price)
             if types == "folksbill":
                 types = "Fólksbíll"

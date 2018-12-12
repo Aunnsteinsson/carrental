@@ -79,11 +79,11 @@ class CarUI(object):
             print("\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
             a_type = input("Flokkur: ")
             if a_type.lower() == 'j':
-                a_type = "Jeppi"
+                a_type = "jeppi"
             elif a_type.lower() == 'f':
-                a_type = "Folksbill"
+                a_type = "folksbill"
             elif a_type.lower() == 's':
-                a_type = "Sendibill"
+                a_type = "sendibill"
             license_plate = input("Bílnúmer: ")
             print()
             approve_plate = input("Skrá {} með númerið {}\
