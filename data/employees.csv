@@ -1,7 +1,7 @@
 "Notendanafn,lykilord,nafn,heimilisfang,simi,hlutverk"
-admin,admin, thessi er ekki med,0,0,admin
-boss,boss, thessi er ekki med,0,0,yfirmadur
-sale,sale, thessi er ekki med,0,0,soludeild
+admin,admin,0,0,0,admin
+boss,boss,0,0,0,yfirmadur
+sale,sale,0,0,0,soludeild
 gunnarp,1357POOL,Gunnar Pall Sveinsson,Hagasmari 45,6934567,soludeild
 bjarkif,bluemoon12,Bjarki Freyr Gudmundsson,Fakahvarf 1,8688089,soludeild
 juanl,92Laurel92,Juan Lorez,Akrahlid 34,6597436,soludeild
