@@ -69,13 +69,15 @@ class BossUI(object):
 
     def revenue(self):
         """ Prentar út tekjur bílaleigu """
-        print("Tekjur\n\t{:<25} | {:<10}\n\t".format(
-            "Pöntunarnúmer", "Tekjur")+("-")*38)
+        print("Tekjur\n\n{:^15} | {:^15}\n".format(
+            "Pönt.nr.", "Tekjur")+("-")*36)
         order_dict = self.__order_service.get_orders()
         
         for price, value in order_dict.items():
-            price = value.get_price()
-            print(price)
+            order = value.get_order_number()
+            income = value.get_price()
+            print("{:^15} | {:^15}".format(
+            order, income))
         
         
         
