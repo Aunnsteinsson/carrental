@@ -19,7 +19,10 @@ class PriceUI(object):
             """ Sýnir verðlistaviðmót yfirmanns og kallar á klasa eftir því sem við á """
             self.__uistandard.print_header()
             price_dict = self.get_price_dict()
-            print("Verðlisti:\n\n{:^15} | {:^15}".format("Tegund", "Verð/dag")+("\n")+("-")*34)
+            print("\nVerðlisti - Yfirlit yfirmanns\n")
+            self.__uistandard.line_seperator()
+            print("{:^15} | {:^15}".format("Tegund", "Verð/dag"))
+            self.__uistandard.line_seperator()
             for types, price in price_dict.items():
                 #Þessi lykkja er nauðsynleg vegna þess að .csv skrár lesa ekki íslenska stafi
                 price = float(price)
@@ -43,9 +46,11 @@ class PriceUI(object):
     def boss_change_price_menu(self):               
         self.print_price_menu()
         choice = ""
+        print("\n\nMögulegar aðgerðir\n{}".format("-"*25))
+        print("1. Breyta verði á tegund\n")
         while choice.lower() not in HOMECOMMANDS:
-            choice = input("\n(H)eim - (S)krá út - (B)reyta verði: ")    
-            if choice.lower() == "b":
+            choice = input("\nVeldu aðgerð: ")    
+            if choice.lower() == "1":
                 car_choice = input(
                     "\nVeldu það verð sem þú vilt breyta - (F)ólksbíl, (J)eppi, (S)endibíll, (A)uka trygging: ")
                 if car_choice.lower() == "f":
