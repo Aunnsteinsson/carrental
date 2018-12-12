@@ -31,7 +31,7 @@ class BossUI(object):
         while choice.lower() != HOMECOMMANDS[1]:
             self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu("\t1. Pantanir\n\t2. Bílayfirlit\n\
-\t3. Viðskiptavinir\n\t4. Starfsmenn\n\t5. Verðlisti\n\t6. Tekjur\n", "\nVeldu síðu: ")
+\t3. Viðskiptavinir\n\t4. Starfsmenn\n\t5. Verðlisti\n\t6. Tekjur\n", "Veldu síðu: ")
             self.__uistandard.clear_screen()
             if choice == "1":
                 choice = self.show_all_orders()
@@ -86,21 +86,23 @@ class BossUI(object):
             print("{:<15} | {:>12,.2f} {}".format(types, price, "ISK"))
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
-            car_choice = input(
-                "\nBreyta verði (F)ólksbíll, (J)eppi, (S)endibíll, (A)uka trygging: ")
-            if car_choice.lower() == "f":
-                a_type = "folksbill"
-            elif car_choice.lower() == "j":
-                a_type = "jeppi"
-            elif car_choice.lower() == "s":
-                a_type = "sendibill"
-            elif car_choice.lower() == "a":
-                a_type = "trygging"
-            else:
-                return choice
-            new_price = input("Nýtt verð: ")
-            self.__car_service.change_price_of_type(a_type, new_price)
-            choice = input("skrifaði home")
+            choice = input("\n(H)eim - (S)krá út - (B)reyta verði: ")    
+            if choice.lower() == "b":
+                car_choice = input(
+                    "\nVeldu það verð sem þú vilt breyta - (F)ólksbíl, (J)eppi, (S)endibíll, (A)uka trygging: ")
+                if car_choice.lower() == "f":
+                    a_type = "folksbill"
+                elif car_choice.lower() == "j":
+                    a_type = "jeppi"
+                elif car_choice.lower() == "s":
+                    a_type = "sendibill"
+                elif car_choice.lower() == "a":
+                    a_type = "trygging"
+                else:
+                    return choice
+                new_price = input("\nNýtt verð: ")
+                self.__car_service.change_price_of_type(a_type, new_price)
+                choice = input("\nVerði breytt!\n\nVeldu (H) til að fara heim, eða (S) til að skrá þig út: ")
         return choice
 
 

@@ -2,6 +2,7 @@ from models.order import Order
 from services.orderservice import OrderService
 from ui.sub_menus.customer_menu import CustomerUI
 from ui.ui_standard_functions import UIStandard
+from datetime import date
 HOMECOMMANDS = ["h", "H", "s", "S"]
 
 
@@ -75,6 +76,23 @@ class OrderUI(object):
         end_date = input("\tSkiladagsetning: ")
         print("\n\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
         type_of_car = input("\tFlokkur: ")
+        if type_of_car == "j":
+            type_list = ["jeppi"]
+        elif type_of_car == "f":
+            type_list = ["folksbill"]
+        elif type_of_car == "s":
+            type_list = ["sendibill"]
+        else:
+            type_list = ["sendibill", "folksbill", "jeppi"]
+        availablecars = self.__order_service.find_available_cars(
+            type_list, begin_date, end_date)
+        print(availablecars)
+        licence_plate = input("Skrifa bílnúmer")
+        status = self.__order_service.add_dates_to_car(
+            begin_date, end_date, licence_plate)
+        for listi in status:
+            for dagur in listi:
+                print(dagur)
         insurance_price = 100  # Hér þarf að sækja verð
         insurance = input(
             "\tViðbótartrygging (verð {} á dag) (J)á/(N)ei: ".format(
