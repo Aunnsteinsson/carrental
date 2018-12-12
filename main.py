@@ -7,9 +7,10 @@ from ui.SalesmanUi import SalesmanUI
 
 
 system_is_on = True
-login = LoginUI()
+
 
 while system_is_on:
+    login = LoginUI()
     os.system("cls" if os.name == "nt" else "clear")
     try:
         emp_type, username = login.main_menu()
