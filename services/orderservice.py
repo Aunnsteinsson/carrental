@@ -9,6 +9,7 @@ from datetime import date, timedelta
 class OrderService(object):
     def __init__(self):
         self.__order_repo = OrderRepo()
+        self.__car_repo = CarRepo()
 
     def make_order(self, order, order_number):
         """Bætir við pöntun í kerfið"""
