@@ -93,6 +93,7 @@ class OrderService(object):
         car_unavailable = self.list_of_days(start_date, finish_date)
         the_car = car_dict[licence_plate]
         the_car.add_rented_days(car_unavailable, order_number)
+        self.__car_repo.save_car_data()
 
     def get_customer_name(self, customer):
         """Nær í nafn á viðskiptavini"""
@@ -162,7 +163,7 @@ class OrderService(object):
             order_string = value.__str__()
             string_of_orders += order_string + "\n"
         return string_of_orders
-    
+
     def get_orders(self):
         return self.__order_repo.get_orders()
 

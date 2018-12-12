@@ -86,6 +86,7 @@ class Car(object):
                         list_of_rented_days.pop(day)
 
     def add_rented_days(self, list_of_days, order_number):
+        list_of_days = [str(day) for day in list_of_days]
         self.__rented_days[order_number] = list_of_days
 
     def __repr__(self):
