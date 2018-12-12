@@ -13,7 +13,12 @@ class Car(object):
         self.__price_of_car = self.price_vehicle()
 
     def __str__(self):
-        return "{:<8} | {:<12} | {:>11,.2f} {} | {:<10} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("kr."), ("Í stæði"), str(self.__rented_days))
+        if self.__rented_days:
+            for order_number, date_list in self.__rented_days.items():
+                date = str(date_list[0])
+        else:
+            date = "Engar pantanir"
+        return "{:<8} | {:<12} | {:>11,.2f} {} | {:<10} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("kr."), ("Í stæði"), date)
 
     def dict_to_string(self, date_dict):
         string = ""

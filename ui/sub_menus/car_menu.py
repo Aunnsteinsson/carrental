@@ -34,7 +34,7 @@ class CarUI(object):
         '''Bílayfirlit menu fyrir Kerfisstjóra'''
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
-            self.__uistandard.clear_screen()
+            #self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
                 "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3. Í útleigu\n\t\
 4. Nýskrá bíl\n\t5. Afskrá bíl\n", "Veldu aðgerð: ")
@@ -142,7 +142,7 @@ class CarUI(object):
         print("Bílayfirlit - {} {}".format(the_type, menu))
         print(line_seperator)
         print("{:^8} | {:^12} | {:^15} | {:^10} | {:^15} ".format(
-            "Bílnúmer","Tegund","Verð/dag","Staða bíls","Næsta bókun"))
+            "Bílnúmer","Tegund","Verð/dag","Staða bíls","Laus fram að"))
         print(line_seperator)
         strengur = self.__car_service.get_list_of_cars(
             type_list, status_list)

@@ -12,17 +12,17 @@ system_is_on = True
 while system_is_on:
     login = LoginUI()
     os.system("cls" if os.name == "nt" else "clear")
-    try:
-        emp_type, username = login.main_menu()
-        if emp_type == "admin":
-            user = AdminUI(username, "Kerfisstjóri")
-        elif emp_type == "yfirmadur":
-            user = BossUI(username, "Yfirmaður")
-        elif emp_type == "soludeild":
-            user = SalesmanUI(username, "Söludeild")
-        user.main_menu()
+    #try:
+    emp_type, username = login.main_menu()
+    if emp_type == "admin":
+        user = AdminUI(username, "Kerfisstjóri")
+    elif emp_type == "yfirmadur":
+        user = BossUI(username, "Yfirmaður")
+    elif emp_type == "soludeild":
+        user = SalesmanUI(username, "Söludeild")
+    user.main_menu()
 
-    except TypeError:
-        print("Notendanafn eða lykilorð rangt, vinsamlegast \
-hafðu samband við kerfisstjóra")
-        time.sleep(2)
+#    except TypeError:
+ #       print("Notendanafn eða lykilorð rangt, vinsamlegast \
+#hafðu samband við kerfisstjóra")
+ #       time.sleep(2)
