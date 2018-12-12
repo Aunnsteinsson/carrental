@@ -102,7 +102,7 @@ class CarUI(object):
         while choice not in HOMECOMMANDS:  # Placeholder
             choice = self.__uistandard.show_menu(
                 """Bílayfirlit\n\t1. Allir Bílar
-\t2. Lausir Bílar\n\t3. Í útleigu""", "Veldu Aðgerð")
+\t2. Lausir Bílar\n\t3. Í útleigu\n""", "Veldu Aðgerð: ")
             choice = self.show_cars(choice)
         return choice
 
@@ -139,9 +139,9 @@ class CarUI(object):
     def second_car_menu(self, the_type, menu, status_list, type_list):
         self.__uistandard.print_header()
         print("Bílayfirlit - {} {}".format(the_type, menu))
-        print("\t{:<20} | {:<20} | {:<20}".format(
-            "Tegund", "Bílnúmer", "Staða"))
-        print("\t{}".format("-"*60))
+        print("{:^20} | {:^20} | {:^20}".format(
+            "\nTegund", "Bílnúmer", "Verð/dag"))
+        print("{}".format("-"*70))
         strengur = self.__car_service.get_list_of_cars(
             type_list, status_list)
         print(strengur)
