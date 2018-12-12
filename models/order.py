@@ -1,3 +1,6 @@
+import csv
+
+
 class Order(object):
     '''Klasi fyrir pantanir. Breytur í þessum klasa eru pöntunarnúmer, upphafsdagur,
     skiladagur, nafn viðskiptavinar, kennitala viðskiptavinar, bíltegund, bílnúmer, 
@@ -5,11 +8,10 @@ class Order(object):
     Klasinn inniheldur föll til að hægt sé að kalla á breytur eða breyta þeim.
     Hægt er að fá __str__ á tvo mismunandi vegu.'''
 
-    def __init__(self, order_number, start_date, end_date, name, ssn, car,
+    def __init__(self, order_number, list_of_dates, name, ssn, car,
                  car_number, status_of_car, insurance=False):
         self.__order_number = order_number
-        self.__start_date = start_date
-        self.__end_date = end_date
+        self.__list_of_dates = list_of_dates
         self.__name = name
         self.__ssn = ssn
         self.__car = car
@@ -25,11 +27,18 @@ class Order(object):
     def get_licence_plate(self):
         return self.__car_number
 
-    def get_start(self):
-        return self.__start_date
+    def get_duration(self):
+        return self.__list_of_dates
 
-    def get_end(self):
-        return self.__end_date
+    def dates_list_to_string(self, list_of_dates):
+        string_of_dates = ""
+        for date in list_of_dates:
+            string_of_dates += date + ","
+        return string_of_dates
+
+    def dates_string_to_list(self, dates_string):
+        date_list = dates_string.strip(',').split(',')
+        return date_list
 
     def get_insurance(self):
         return self.__insurance
