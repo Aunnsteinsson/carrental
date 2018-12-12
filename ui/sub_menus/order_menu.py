@@ -147,8 +147,8 @@ class OrderUI(object):
         end_day = input("\tSkiladagur: ")
         end_month = input("\tSkilamánuður")
         end_year = input("\tSkilaár")
-        begin_date = begin_day + "-" + begin_month + "-" + begin_year
-        end_date = end_day + "-" + end_month + "-" + end_year
+        begin_date = begin_year + "-" + begin_month + "-" + begin_day
+        end_date = end_year + "-" + end_month + "-" + end_day
         list_of_days = self.__order_service.list_of_days(begin_date, end_date)
         print("\n\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
         type_of_car = input("\tFlokkur: ")
