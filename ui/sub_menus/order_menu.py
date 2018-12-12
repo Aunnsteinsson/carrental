@@ -44,8 +44,9 @@ class OrderUI(object):
                 """Pantanir - Yfirlit pantana\n\nSækja upplýsingar út frá:\n\n\t\
 1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir\n""", "Veldu aðgerð: ")
             if choice == "1":
+                print("-"*40)
                 # TODO Þurfum að geta tengt viðskiptavin við pöntun
-                ssn = input("\tKennitala viðskiptavinar: ")
+                ssn = input("\n\tKennitala viðskiptavinar: ")
                 # if setning til að athuga hvort manneskjan sé til. Ef svo er
                 # þá prentast út upplýsingar um hana, annars er sótt fall til
                 # að gera nýjan viðskiptavin
@@ -56,7 +57,7 @@ class OrderUI(object):
                     print(order)
                 else:
                     print("Enginn viðskiptavinur með þessu nafni")
-                choice = input("B - tilbaka, H - Heim, S - Útskrá: ")
+                choice = input("B - til baka, H - Heim, S - Útskrá: ")
             if choice == "2":  # TODO Þurfum að gefa pöntunarnúmer
                 self.get_single_order()
             if choice == "3":

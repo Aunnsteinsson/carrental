@@ -8,6 +8,7 @@ from services.orderservice import OrderService
 from ui.sub_menus.customer_menu import CustomerUI
 from services.carservice import CarService
 from ui.sub_menus.price_menu import PriceUI
+from ui.sub_menus.order_menu import OrderUI
 
 HOMECOMMANDS = ["h", "s"]
 
@@ -24,11 +25,11 @@ class BossUI(object):
         self.__order_service = OrderService()
         self.__customer_ui = CustomerUI(self.__username, emp_type)
         self.__car_service = CarService()
-        self.__price_UI = PriceUI(self.__username, emp_type)
+        self.__price_ui = PriceUI(self.__username, emp_type)
+        self.__order_ui = OrderUI(self.__username, emp_type)
 
     def main_menu(self):
         """ Fall sem sýnir aðalviðmót yfirmanns og færir hann á milli falla """
-        # Sýnir upphafsviðmót yfirmanns
         choice = ""
         while choice.lower() != HOMECOMMANDS[1]:
             self.__uistandard.clear_screen()
@@ -36,7 +37,7 @@ class BossUI(object):
 \t3. Viðskiptavinir\n\t4. Starfsmenn\n\t5. Verðlisti\n\t6. Tekjur\n", "Veldu síðu: ")
             self.__uistandard.clear_screen()
             if choice == "1":
-                choice = self.show_all_orders()
+                choice = self.__order_ui.order_list_menu()
             elif choice == "2":
                 choice = self.__car_ui.boss_and_salesman_car_menu()
             elif choice == "3":
@@ -44,7 +45,7 @@ class BossUI(object):
             elif choice == "4":
                 choice = self.__employee_ui.show_employees()
             elif choice == "5":
-                choice = self.__price_UI.boss_change_price_menu()
+                choice = self.__price_ui.boss_change_price_menu()
             elif choice == "6":
                 choice = self.revenue()
 
@@ -58,55 +59,12 @@ class BossUI(object):
             choice = input("\n(H)eim - (S)krá út: ")
         return choice
 
-    def show_customers(self):
-        """ Prentar út alla viðskiptavini á skrá """
+    """ def show_customers(self):
         print("\tKennitala  |  Nafn  |  Sími\n"+("-")*100)
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             choice = input("\n(H)eim - (S)krá út: ")
-        return choice
-
-    """ def get_price_dict(self):
-        price_dict = self.__car_service.get_car_prices()
-        return price_dict
-
-    def price_menu(self):
-         
-        price_dict = self.get_price_dict()
-        print("Verðlisti:\n\n{:^15} | {:^15}".format("Tegund", "Verð/dag")+("\n")+("-")*34)
-        for types, price in price_dict.items():
-            #Þessi lykkja er nauðsynleg vegna þess að .csv skrár lesa ekki íslenska stafi
-            price = float(price)
-            if types == "folksbill":
-                types = "Fólksbíll"
-            elif types == "sendibill":
-                types = "Sendibíll"
-            elif types == "jeppi":
-                types = "Jeppi"
-            elif types == "trygging":
-                types = "Aukatrygging"
-            print("{:<15} | {:>12,.2f} {}".format(types, price, "ISK"))
-        choice = ""
-        while choice.lower() not in HOMECOMMANDS:
-            choice = input("\n(H)eim - (S)krá út - (B)reyta verði: ")    
-            if choice.lower() == "b":
-                car_choice = input(
-                    "\nVeldu það verð sem þú vilt breyta - (F)ólksbíl, (J)eppi, (S)endibíll, (A)uka trygging: ")
-                if car_choice.lower() == "f":
-                    a_type = "folksbill"
-                elif car_choice.lower() == "j":
-                    a_type = "jeppi"
-                elif car_choice.lower() == "s":
-                    a_type = "sendibill"
-                elif car_choice.lower() == "a":
-                    a_type = "trygging"
-                else:
-                    return choice
-                new_price = input("\nNýtt verð: ")
-                self.__car_service.change_price_of_type(a_type, new_price)
-                choice = input("\nVerði breytt!\n\nVeldu (H) til að fara heim, eða (S) til að skrá þig út: ")
         return choice """
-
 
     def revenue(self):
         """ Prentar út tekjur bílaleigu """
