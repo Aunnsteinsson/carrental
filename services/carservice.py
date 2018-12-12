@@ -5,9 +5,10 @@ from models.car import Car
 
 class CarService(object):
     """ Sér um aðgerðir með bíla """
+
     def __init__(self):
         self.__car_repo = CarRepo()
-   
+
     def make_car(self, new_car):
         """ Nýskráir bíl í kerfi """
         self.__car_repo.add_car(new_car)
@@ -28,13 +29,13 @@ class CarService(object):
 
     def show_cars(self, licence_plate):
         """ Fall sem sýnir upplýsingar um bíl """
-        self.__car_repo.get_car(licence_plate)
+        return self.__car_repo.get_car(licence_plate)
 
     def get_list_of_cars(self, a_type, status):
         """ Fall sem sækir lista af öllum bílum """
         dict = self.__car_repo.get_all_cars()
         string = ""
-        for licence_plate, item in dict.items():
+        for _, item in dict.items():
             type_of_car = item.get_type()
             status_of_car = item.get_status()
             if type_of_car in a_type and status_of_car in status:
@@ -43,9 +44,9 @@ class CarService(object):
                 """ if car[1] in a_type and car[2] in status:
                     car_class = Car(
                         car[0], car[1], car[2])
-                    car_list.append(car_class) """    
+                    car_list.append(car_class) """
         return string
-    
+
     def get_car_prices(self):
         car_prices = self.__car_repo.get_car_prices()
         return car_prices
@@ -53,7 +54,6 @@ class CarService(object):
     def change_price_of_type(self, a_type, new_price):
         self.__car_repo.change_price_of_type(a_type, new_price)
         self.__car_repo.save_price_data()
-
 
     def save_cars(self):
         self.__car_repo.save_car_data()
