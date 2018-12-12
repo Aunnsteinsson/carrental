@@ -93,9 +93,9 @@ class CustomerUI(object):
     def get_customer_list(self):
         """Prentar ut lista yfir alla viðskiptavini með grunnupplýsingum"""
         self.__uistandard.print_header()
-        print("Viðskiptavinir - Allir Viðskiptavinir")
-        print("{:>20}| {:>30}| {:>20}|".format("Kennitala", "Nafn", "Sími"))
-        print("-"*100)
+        line_seperator = ("-"*100)
+        print("{:<100}".format("\nViðskiptavinir - Allir Viðskiptavinir\n"))
+        print((line_seperator) + "\n{:^11}| {:^30}| {:^9} |\n".format("Kennitala", "Nafn", "Sími") + (line_seperator))
         string = self.__customer_service.get_list()
         print(string)
         choice = input("B - tilbaka, H - Heim, S - Útskrá: ")

@@ -73,7 +73,7 @@ class BossUI(object):
             "Pönt.nr.", "Tekjur")+("-")*36)
         order_dict = self.__order_service.get_orders()
         
-        for price, value in order_dict.items():
+        for _, value in order_dict.items():
             order = value.get_order_number()
             income = value.get_price()
             print("{:^15} | {:^15}".format(
