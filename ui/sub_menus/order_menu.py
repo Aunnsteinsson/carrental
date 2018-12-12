@@ -88,11 +88,9 @@ class OrderUI(object):
             type_list, begin_date, end_date)
         print(availablecars)
         licence_plate = input("Skrifa bílnúmer")
-        status = self.__order_service.add_dates_to_car(
-            begin_date, end_date, licence_plate)
-        for listi in status:
-            for dagur in listi:
-                print(dagur)
+        order_number = self.__order_service.make_order_number()
+        self.__order_service.add_dates_to_car(
+            begin_date, end_date, licence_plate, order_number)
         insurance_price = 100  # Hér þarf að sækja verð
         insurance = input(
             "\tViðbótartrygging (verð {} á dag) (J)á/(N)ei: ".format(
