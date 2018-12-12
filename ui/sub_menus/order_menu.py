@@ -3,6 +3,7 @@ from services.orderservice import OrderService
 from ui.sub_menus.customer_menu import CustomerUI
 from ui.ui_standard_functions import UIStandard
 from datetime import date
+import time
 HOMECOMMANDS = ["h", "H", "s", "S"]
 
 
@@ -52,11 +53,29 @@ class OrderUI(object):
                     print("Enginn viðskiptavinur með þessu nafni")
                 choice = input("B - tilbaka, H - Heim, S - Útskrá: ")
             if choice == "2":  # TODO Þurfum að gefa pöntunarnúmer
-                pass
+                self.get_single_order()
             if choice == "3":
                 self.all_orders()
                 choice = input("B - tilbaka, H - Heim, S - Útskrá: ")
         return choice
+
+    def get_single_order(self):
+        order = input("Hvaða pöntun viltu fá að sjá?")
+        the_order = self.__order_service.find_order(order)
+        strengur = "Pantanir - Yfirlit pantana- Pöntunarnúmar\n\Pöntun númer {}\n1. Breyta Pöntun\n2. Bakfæra pöntun\n3. Sjá upplýsingar".format(
+            order)
+        choice = self.__uistandard.show_menu(strengur, "Veldu aðgerð:")
+        if choice == "1":
+            self.change_order_menu(the_order)
+        if choice == "2":
+            self.__order_service.remove_order(order)
+        if choice == "3":
+            print(the_order)
+            time.sleep(5)
+
+    def change_order_menu(self, order):
+        choice = self.__uistandard.show_menu(
+            "Pantanir - Yfirlit pantana-\nHverju skal breyta?\n1. Tímabil\n2. Bíll\n3. Tryggingar\n4. Viðskiptavinur\n5. Verð", "Veldu aðgerð: ")
 
     def all_orders(self):
         self.__uistandard.print_header()
