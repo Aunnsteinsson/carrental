@@ -2,12 +2,11 @@ from models.order import Order
 import csv
 ORDERNR = 0
 LIST_OF_DATES = 1
-NAME = 2
-SSN = 3
-CAR = 4
-CARNR = 5
-STATUS = 6
-INSURANCE = 7
+SSN = 2
+CAR = 3
+PRICE = 4
+INSURANCE = 5
+DISCOUNT = 6
 # lgoi
 
 
@@ -74,12 +73,11 @@ status_of_car,insurance"
                 order_class = Order(
                     order[ORDERNR],
                     order[LIST_OF_DATES],
-                    order[NAME],
                     order[SSN],
                     order[CAR],
-                    order[CARNR],
-                    order[STATUS],
-                    order[INSURANCE])
+                    order[PRICE],
+                    order[INSURANCE],
+                    order[DISCOUNT])
                 order_number = order[ORDERNR]
                 order_dict[order_number] = order_class
         return order_dict
