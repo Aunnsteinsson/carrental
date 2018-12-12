@@ -24,7 +24,8 @@ class OrderUI(object):
         while choice not in HOMECOMMANDS:  # Placeholder þangað til ég næ að
             # lata while loopuna virka betur
             choice = self.__uistandard.show_menu(
-                "Pantanir\n\t1. Yfirlit pantana\n\t2. Ný pöntun\n", "Veldu aðgerð: ")
+                "Pantanir\n\t1. Yfirlit pantana\n\t2. Ný pöntun\n",
+                "Veldu aðgerð: ")
             if choice == "1":
                 choice = self.order_list_menu()
             elif choice == "2":
@@ -34,10 +35,11 @@ class OrderUI(object):
     def order_list_menu(self):
         """Prentar innra pantana viðmót og tekur við input"""
         choice = ""
+        self.__uistandard.clear_screen()
         while choice not in HOMECOMMANDS:  # Placeholder
             choice = self.__uistandard.show_menu(
-                """Pantanir - Yfirlit pantana\n\tSækjaupplýsingar út frá:
-\t1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir\n""", "Veldu aðgerð: ")
+                """Pantanir - Yfirlit pantana\n\nSækja upplýsingar út frá:\n\n\t\
+1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir\n""", "Veldu aðgerð: ")
             if choice == "1":
                 # TODO Þurfum að geta tengt viðskiptavin við pöntun
                 ssn = input("\tKennitala viðskiptavinar: ")
