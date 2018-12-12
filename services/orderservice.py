@@ -125,3 +125,9 @@ class OrderService(object):
             return final_price
         else:
             return price_of_rent
+
+    def find_order(self, order_number):
+        order_dict = self.__order_repo.get_orders()
+        for order, value in order_dict.items():
+            if order == order_number:
+                return order_dict[order_number]
