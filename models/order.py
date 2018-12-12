@@ -54,6 +54,9 @@ class Order(object):
     def change_car(self, new_car):
         self.__car = new_car
 
+    def change_ssn(self, new_ssn):
+        self.__ssn = new_ssn
+
     def __str__(self, info_to_print=0):
         '''Annars vegar skilar upplýsingum prentuðum með án kennitölu.
         Það er nýtt þegar pöntun er sköðuð út frá Kennitölu.

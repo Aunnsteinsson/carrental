@@ -37,6 +37,10 @@ class OrderRepo(object):
                 return self.__orders
         return False
 
+    def get_order(self, order_number):
+        order = self.__orders[order_number]
+        return order
+
     def get_orders(self):
         '''
         Skilar orders orðabók til vinnslu.

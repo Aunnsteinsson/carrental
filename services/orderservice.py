@@ -27,7 +27,14 @@ class OrderService(object):
 
     def remove_order(self, order_number):
         """Eyðir út pöntun"""
+        self.remove_order_from_car(order_number)
         self.__order_repo.remove_order(order_number)
+
+    def remove_order_from_car(self, order_number, car):
+        the_order = self.__order_repo.get_order(order_number)
+        licence_plate = the_order.get_licence_plate()
+        self.__car_repo.get_car(licence_plate)
+        car.remove_order(order_number)
 
     def list_of_days(self, start_date, finish_date):
         """Tekur við upphafsdagsetningu, lokadagsetningu,
@@ -91,10 +98,16 @@ class OrderService(object):
                 string_of_orders += order_string + "\n"
         return string_of_orders
 
-    def change_time(self, order_number, new_time):
+    def change_time(self, order_number, new_start_time, new_end_time):
         """Breytir tíma á pöntun"""
         order = self.__order_repo.get_orders(order_number)
+
         order.change_time(new_time)
+
+    def change_customer(self, order_number, new_ssn):
+        """Breytir hver viðskiptavinur er á pöntun"""
+        order = self.__order_repo.get_orders(order_number)
+        order.change_customer(new_ssn)
 
     def change_insurance(self, order_number, new_insurance):
         """Breytir stöðu á tryggingu"""
