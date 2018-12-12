@@ -13,7 +13,7 @@ class Car(object):
         self.__price_of_car = self.price_vehicle()
 
     def __str__(self):
-        return "{:<20} | {:<20} | {:<20} | {:<20}".format(self.__a_type, self.__licence_plate, self.__price_of_car, str(self.__rented_days))
+        return "{:<8} | {:<12} | {:<,.2f} {} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("kr."), str(self.__rented_days))
 
     def dict_to_string(self, date_dict):
         string = ""
@@ -22,6 +22,16 @@ class Car(object):
             for day in value:
                 string += str(day) + "$"
         return string
+    
+    def print_a_type(self, a_type):
+        if a_type == "folksbill":
+            return "Fólksbíll"
+        elif a_type == "jeppi":
+            return "Jeppi"
+        elif a_type == "sendibill":
+            return "Sendibíll"
+        elif a_type == "trygging":
+            return "Aukatrygging"
 
     def string_to_dict(self, order_string):
         dictionary = {}
@@ -46,6 +56,7 @@ class Car(object):
     def price_vehicle(self):
         """Ef flokkur bíls er jeppi, þá er verðið á honum 10.000"""
         vehicle_price = self.__price[self.__a_type]
+        vehicle_price = float(vehicle_price)
         return vehicle_price
 
     # def price_small_car(self, a_type):
