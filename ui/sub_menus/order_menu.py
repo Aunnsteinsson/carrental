@@ -1,5 +1,7 @@
 from models.order import Order
+from models.car import Car
 from services.orderservice import OrderService
+from services.carservice import CarService
 from ui.sub_menus.customer_menu import CustomerUI
 from ui.ui_standard_functions import UIStandard
 from datetime import date
@@ -14,6 +16,7 @@ class OrderUI(object):
         self.__name = name
         self.__a_type = a_type
         self.__order_service = OrderService()
+        self.__car_service = CarService
         self.__uistandard = UIStandard(name, a_type)
 
     def order_menu(self):
@@ -68,16 +71,57 @@ class OrderUI(object):
             order)
         choice = self.__uistandard.show_menu(strengur, "Veldu aðgerð:")
         if choice == "1":
-            self.change_order_menu(the_order)
+            self.change_order_menu(order, the_order)
         if choice == "2":
             self.__order_service.remove_order(order)
         if choice == "3":
             print(the_order)
             time.sleep(5)
 
-    def change_order_menu(self, order):
+    def change_order_menu(self, order, the_order):
         choice = self.__uistandard.show_menu(
-            "Pantanir - Yfirlit pantana-\nHverju skal breyta?\n1. Tímabil\n2. Bíll\n3. Tryggingar\n4. Viðskiptavinur\n5. Verð", "Veldu aðgerð: ")
+            "Pantanir - Yfirlit pantana-\nHverju skal breyta?\n1. Tímabil\n2. Bíll\n3. Tryggingar\n4. Viðskiptavinur\n5. Afsláttur\n", "Veldu aðgerð: ")
+        if choice == "1":
+            begin_date = input("Nýi upphafsdagur")
+            end_date = input("nýi lokadagur")
+            strengur = self.__order_service(order, begin_date, end_date)
+            print(strengur)
+            if len(strengur) > 20:
+                choice_of_car = input("Skrifaðu bílnúmers bíls")
+                self.__order_service.change_car_again(choice_of_car, order)
+                self.__order_service.add_dates_to_car(
+                    begin_date, end_date, choice_of_car)
+        if choice == "2":
+            licence_plate = the_order.get_car()
+            the_car = self.__car_service.show_cars(licence_plate)
+            type = the_car.get_type()
+            string_of_cars = self.__order_service.change_car(type, order)
+            print(string)
+            choice_of_car = ("Skrifaði ´bilnúmer bíls")
+            listi = the_order.get_duration()
+            self.__order_service.change_car_again(choice_of_car, order)
+            self.__order_service.add_dates_to_car(
+                listi[0], listi[-1], choice_of_car)
+        if choice == "3":
+            insurance = input("Viltu tryggingu? (J)á eða (N)ei")
+            if insurance.lower() == "j":
+                insurance = True
+            else:
+                insurance = False
+            self.__order_service.change_insurance(order, insurance)
+        if choice == "4":
+            ssn = input("Hver er kennitala viðskiptavinar? ")
+            customer = self.__customer_menu.get_the_customer(ssn)
+            if customer:
+                print(customer)
+                order = self.__order_service.customer_orders(ssn)
+                print(order)
+            else:
+                print("Enginn viðskiptavinur með þessu nafni")
+        if choice == "5":
+            discount = input(
+                "Hvað viltu að nýji afslátturinn sé mörg prósent?")
+            self.__order_service.change_discount(order, discount)
 
     def all_orders(self):
         self.__uistandard.print_header()

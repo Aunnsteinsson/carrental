@@ -9,7 +9,7 @@ class Order(object):
     Hægt er að fá __str__ á tvo mismunandi vegu.'''
 
     def __init__(self, order_number, list_of_dates, name, ssn, car,
-                 car_number, status_of_car, insurance=False):
+                 car_number, status_of_car, insurance=False, discount=0.000):
         self.__order_number = order_number
         self.__list_of_dates = list_of_dates
         self.__name = name
@@ -18,11 +18,18 @@ class Order(object):
         self.__car_number = car_number
         self.__status = status_of_car
         self.__insurance = insurance
+        self.__discount = discount
 
     # Föll hér að neðan er hægt að kalla í til að nálgast breyturnar
 
     def get_order_number(self):
         return self.__order_number
+
+    def get_discount(self):
+        return self.__discount
+
+    def change_discount(self, new_discount):
+        self.__discount = new_discount
 
     def get_licence_plate(self):
         return self.__car_number
