@@ -14,17 +14,20 @@ INSURANCE = 8
 
 class OrderRepo(object):
     def __init__(self):
+        '''
+        Kallar í order_dict fallið og gefur self.__orders orðabókina.
+        '''
         self.__orders = self.order_dict()
 
     def add_order(self, order_number, order):
         '''
-        Bætir við pöntun í dictionary sem unnið er með.
+        Bætir við pöntun í orðabók sem unnið er með.
         '''
         self.__orders[order_number] = order
 
     def remove_order(self, order_number):
         '''
-        Notar order_number sem key til að leita í dictionary með pöntunum,
+        Notar order_number sem key til að leita í orða með pöntunum,
         ef í dict, þá eyðir fallið þeirri pöntun.
         '''
         for ordernr, value in self.__orders.items():
@@ -36,12 +39,17 @@ class OrderRepo(object):
 
     def get_orders(self):
         '''
-        Skilar orders dictionary til vinnslu.
+        Skilar orders orðabók til vinnslu.
         '''
         return self.__orders
 
     def save_new_orders(self):
-        orders_header = "order_number,start,end,name,ssn,car,car_number,status_of_car,insurance"
+        '''
+        Vistar upplýsingar úr orðabók í csv skrá sem heldur utan
+        um upplýsingarnar.
+        '''
+        orders_header = "order_number,start,end,name,ssn,car,car_number,\
+status_of_car,insurance"
         with open("./data/orders.csv", "w", newline="") as orders_file:
             csv_writer = csv.writer(orders_file)
             csv_writer.writerow(orders_header.split(','))
@@ -50,6 +58,11 @@ class OrderRepo(object):
                 csv_writer.writerow(order_string)
 
     def order_dict(self):
+        '''
+        Tekur við gögnum, upplýsingum um pantanir, úr orders.csv og les inn í
+        orðabók. Þá er lykillinn pöntunarnúmerið og gildið er Orders
+        klasinn með upplýsingunum.
+        '''
         order_dict = {}
         with open("./data/orders.csv", "r") as orders_file:
             csv_reader = csv.reader(orders_file)

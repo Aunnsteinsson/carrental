@@ -62,7 +62,7 @@ class EmployeeRepo(object):
 
     def employees_dict(self):
         '''
-         Tekur við data úr employee.csv og les það inn í orðabók
+         Tekur við gögnum úr employee.csv og les það inn í orðabók
          þar sem notendanafn er notað sem lykill og hver starfsmaður
          er hluti af Employee klasanum og er notaður sem gildi
         '''
