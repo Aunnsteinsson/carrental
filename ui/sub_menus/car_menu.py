@@ -46,24 +46,24 @@ class CarUI(object):
                 self.__car_service.make_car(new_car)
             elif choice == "5":
                 licence_plate = input("Númer bíls til afskráningar: ")
-                self.check_if_licence_plate(licence_plate)
-                # if licence_plate in `...... þarf að geta checkað hvort númeraplata sé á skrá??`
-                print()
-                approve_remove_car = input(
-                    "Viltu eyða bíl með bílnúmerið {} ((J)á/(N)ei): ".format(
-                        licence_plate))
-                if approve_remove_car.lower() == 'j':
-                    self.__car_service.remove_car(licence_plate)
-                    print("\nBíl með númerið {} hefur verið eytt!".format(
-                        licence_plate))
+                if self.check_if_licence_plate(licence_plate) is False:
+                    print("Bílnúmer er ekki á skrá\n")
+                    time.sleep(2)
                 else:
-                    print("\nHætt við aðgerð!")
-                time.sleep(2)
+                    approve_remove_car = input(
+                        "Viltu eyða bíl með bílnúmerið {} ((J)á/(N)ei): ".format(
+                            licence_plate))
+                    if approve_remove_car.lower() == 'j':
+                        self.__car_service.remove_car(licence_plate)
+                        print("\nBíl með númerið {} hefur verið eytt!".format(
+                            licence_plate))
+                    else:
+                        print("\nHætt við aðgerð!")
+                    time.sleep(2)
             return choice
 
     def check_if_licence_plate(self, licence_plate):
-        value = self.__car_service.show_cars(licence_plate)
-        print(value)
+        return self.__car_service.show_cars(licence_plate)
 
     def get_car_prices_dict(self):
         price_dict = self.__car_service.get_car_prices()
