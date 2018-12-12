@@ -71,11 +71,18 @@ class BossUI(object):
     def price_menu(self):
         """ Sýnir verðlistaviðmót yfirmanns og kallar á klasa eftir því sem við á """
         price_dict = self.get_price_dict()
+        print("Verðlisti:\n\n{:^15} | {:^15}".format("Tegund", "Verð/dag")+("\n")+("-")*34)
         for types, price in price_dict.items():
-            print("Verðlisti\n\t{:<12} | {:<12}".format(types, price))
-  #      print("\t{:<12} | {:<12}".format("Fólksbíll", "500/dag"))
-   #     print("\t{:<12} | {:<12}".format("Sendibíll", "7000/dag"))
-    #    print("\t{:<12} | {:<12}".format("Aukatrygging", "5000/dag"))
+            price = float(price)
+            if types == "folksbill":
+                types = "Fólksbíll"
+            elif types == "sendibill":
+                types = "Sendibíll"
+            elif types == "jeppi":
+                types = "Jeppi"
+            elif types == "trygging":
+                types = "Aukatrygging"
+            print("{:<15} | {:>12,.2f} {}".format(types, price, "ISK"))
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             car_choice = input(
@@ -88,6 +95,8 @@ class BossUI(object):
                 a_type = "sendibill"
             elif car_choice.lower() == "a":
                 a_type = "trygging"
+            else:
+                return choice
             new_price = input("Nýtt verð: ")
             self.__car_service.change_price_of_type(a_type, new_price)
             choice = input("skrifaði home")
