@@ -2,6 +2,7 @@ import sys
 from repositories.employeerepo import EmployeeRepo
 from datetime import date
 from getpass import getpass
+from termcolor import colored
 
 
 class LoginUI(object):
@@ -12,6 +13,11 @@ class LoginUI(object):
         '''
          Prentar haus fyrir innskráningu
         '''
+        print("{:28},--,--         .   .-,--.         .      .  ".format(" "))
+        print("{:28}`- | . ,-. ,-. |    `|__/ ,-. ,-. |- ,-. |  ".format(" "))
+        print("{:28} , | | ,-| `-. |     | \\  |-' | | |  ,-| |  ".format(" "))
+        print("{:28} `-' | `-^ `-' `'  `-'  ` `-' ' ' `' `-^ `' ".format(" "))
+        print("{:28}    `'                                      ".format(" "))
         print("{:40s}{:>40}{:>15}".format(
             "Innskráning", "(L)oka kerfi", str(date.today())))
         print(("-"*100))
