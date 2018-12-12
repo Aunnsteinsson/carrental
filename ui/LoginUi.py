@@ -1,4 +1,5 @@
 import sys
+import time
 from repositories.employeerepo import EmployeeRepo
 from datetime import date
 from getpass import getpass
@@ -12,11 +13,25 @@ class LoginUI(object):
         '''
          Prentar haus fyrir innskráningu
         '''
-        print("{:28},--,--         .   .-,--.         .      .  ".format(" "))
-        print("{:28}`- | . ,-. ,-. |    `|__/ ,-. ,-. |- ,-. |  ".format(" "))
-        print("{:28} , | | ,-| `-. |     | \\  |-' | | |  ,-| |  ".format(" "))
-        print("{:28} `-' | `-^ `-' `'  `-'  ` `-' ' ' `' `-^ `' ".format(" "))
-        print("{:28}    `'                                      ".format(" "))
+        print(("-"*100))
+        print("{:72}        __-------__".format(" "))
+        print("{:72}      / _---------_ \\".format(" "))
+        print("{:72}     / /           \\ \\".format(" "))
+        print("{:72}     | |           | |".format(" "))
+        print((" "*16), "--,--         .   .-,--.         .      ."
+              "                   |_|___________|_|")
+        print((" "*16), "`- | . ,-. ,-. |    `|__/ ,-. ,-. |- ,-. |"
+              "              /-\\|                 |/-\\")
+        print((" "*16), " , | | ,-| `-. |     | \\  |-' | | |  ,-| "
+              "|             | _ |\\       0       /| _ |")
+        print((" "*16), " `-' | `-^ `-' `'  `-'  ` `-' ' ' `' `-^ `'"
+              "            |(_)| \\      !      / |(_)|")
+        print((" "*16), "    `'                                     "
+              "            |___|__\\_____!_____/__|___|")
+        print("{:72}[_________|TJASL|_________]".format(" "))
+        print("{:72} ||||     ~~~~~~~     ||||".format(" "))
+        print("{:72} `--'                 `--'".format(" "))
+        print(("-"*100))
         print("{:40s}{:>40}{:>15}".format(
             "Innskráning", "(L)oka kerfi", str(date.today())))
         print(("-"*100))
@@ -27,6 +42,8 @@ class LoginUI(object):
         '''
         username = input("Notendanafn: ")
         if username.lower() == "l":
+            print("Loka kerfi...")
+            time.sleep(2)
             sys.exit(0)
         else:
             password = getpass(prompt="Lykilorð: ")
