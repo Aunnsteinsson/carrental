@@ -54,7 +54,7 @@ class OrderService(object):
         car_dict = self.__car_repo.get_all_cars()
         unavailable_cars = []
         available_cars_string = ""
-        for licence_plate, cars in dict.items():
+        for licence_plate, cars in car_dict.items():
             type_of_car = cars.get_type()
             if type_of_car in a_type:
                 not_available = cars.get_status()
