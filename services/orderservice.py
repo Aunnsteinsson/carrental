@@ -54,7 +54,7 @@ class OrderService(object):
         car_dict = self.__car_repo.get_all_cars()
         unavailable_cars = []
         available_cars_string = ""
-        for licence_plate, cars in dict.items():
+        for licence_plate, cars in car_dict.items():
             type_of_car = cars.get_type()
             if type_of_car in a_type:
                 not_available = cars.get_status()
@@ -72,7 +72,8 @@ class OrderService(object):
         car_unavailable = self.list_of_days(start_date, finish_date)
         the_car = car_dict[licence_plate]
         the_car.add_rented_days(car_unavailable)
-        self.__car_repo.save_car_data()
+        status = the_car.get_status()
+        return status
 
     def get_customer_name(self, customer):
         """Nær í nafn á viðskiptavini"""
