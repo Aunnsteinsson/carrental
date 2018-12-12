@@ -1,2 +1,3 @@
-order_number,start,end,name,ssn,car,car_number,status_of_car,insurance
-69632.0,1,69632.0,kkk,69632.0,LL888,69632.0
+order_number,duration,ssn,car_number,price,insurance,discount
+1,2,0,1,8,-,1,2,-,1,2,,2018-12-13,2018-12-14,2018-12-15,,kkk
+2,2018-12-25,2018-12-26,2018-12-27,,kkk,LL888,64588.0,True,5

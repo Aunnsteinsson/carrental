@@ -40,10 +40,11 @@ class Order(object):
     def get_duration(self):
         return self.__list_of_dates
 
-    def dates_list_to_string(self, list_of_dates):
+    def dates_list_to_string(self):
+        list_of_dates = self.__list_of_dates
         string_of_dates = ""
         for date in list_of_dates:
-            string_of_dates += date + ","
+            string_of_dates += str(date) + ","
         return string_of_dates
 
     def dates_string_to_list(self, dates_string):
@@ -93,8 +94,9 @@ class Order(object):
         '''
         Skrifar upplýsingar um pöntun
         '''
-        return "{},{},{},{},{},{},{}".format(self.__price,
-                                             self.__order_number,
-                                             self.__price,
-                                             self.__ssn, self.__price,
-                                             self.__car_number, self.__price)
+        string_of_dates = self.dates_list_to_string()
+        return "{},{},{},{},{},{},{}".format(self.__order_number,
+                                             string_of_dates,
+                                             self.__ssn,
+                                             self.__car_number, self.__price,
+                                             self.__insurance, self.__discount)

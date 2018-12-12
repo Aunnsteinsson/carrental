@@ -50,8 +50,7 @@ class OrderRepo(object):
         Vistar upplýsingar úr orðabók í csv skrá sem heldur utan
         um upplýsingarnar.
         '''
-        orders_header = "order_number,start,end,name,ssn,car,car_number,\
-status_of_car,insurance"
+        orders_header = "order_number,duration,ssn,car_number,price,insurance,discount"
         with open("./data/orders.csv", "w", newline="") as orders_file:
             csv_writer = csv.writer(orders_file)
             csv_writer.writerow(orders_header.split(','))
