@@ -14,9 +14,10 @@ class OrderService(object):
         self.__order_repo = OrderRepo()
         self.__car_repo = CarRepo()
 
-    def make_order(self, order, order_number):
+    def make_order(self, order_number, order):
         """Bætir við pöntun í kerfið"""
-        self.__order_repo.add_order(order, order_number)
+        self.__order_repo.add_order(order_number, order)
+        self.__order_repo.save_new_orders()
 
     def make_order_number(self):
         """Býr til pöntunarnúmer fyrir nýja pöntun"""
@@ -61,12 +62,13 @@ class OrderService(object):
 
     def find_unavailable_cars(self, a_type, start_date, finish_date):
         desired_days = self.list_of_days(start_date, finish_date)
+        desired_days = [str(day) for day in desired_days]
         car_dict = self.__car_repo.get_all_cars()
         unavailable_cars = []
         for licence_plate, cars in car_dict.items():
             type_of_car = cars.get_type()
             if type_of_car in a_type:
-                not_available = cars.get_status()
+                not_available = cars.get_duration()
                 for order_number, date_list in not_available.items():
                     for day in date_list:
                         if day in desired_days:
@@ -161,16 +163,20 @@ class OrderService(object):
             string_of_orders += order_string + "\n"
         return string_of_orders
 
-    def price_of_rent(self, order, discount, insurance):
-        """Reiknar út verð á pöntun"""
-        licence_plate = order.get_licence_plate()
-        the_car = self.__car_repo.get_car(licence_plate)
-        price_of_car = the_car.price_vehicle()
+    def get_price_of_insurance(self):
         price_of_insurance = self.__car_repo.get_car_prices()
         price_of_insurance = price_of_insurance["trygging"]
-        start = order.get_start()
-        end = order.get_end()
-        days_of_rent = date(end).day - date(start).day
+        return float(price_of_insurance)
+
+    def price_of_rent(self, licence_plate, discount, insurance, start_date, end_date):
+        """Reiknar út verð á pöntun"""
+        the_car = self.__car_repo.get_car(licence_plate)
+        price_of_car = float(the_car.price_vehicle())
+        price_of_insurance = self.get_price_of_insurance()
+        list_of_days = self.list_of_days(start_date, end_date)
+        start = list_of_days[STARTDATE]
+        end = list_of_days[ENDDATE]
+        days_of_rent = end.day - start.day
         days_of_rent = int(days_of_rent)
         price_of_rent = days_of_rent * price_of_car
         discount = self.change_discount_to_float(discount)

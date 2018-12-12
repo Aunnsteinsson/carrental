@@ -22,7 +22,7 @@ class Car(object):
             for day in value:
                 string += str(day) + "$"
         return string
-    
+
     def print_a_type(self, a_type):
         if a_type == "folksbill":
             return "Fólksbíll"
@@ -74,7 +74,7 @@ class Car(object):
         """Skilar flokki bíls"""
         return self.__a_type
 
-    def get_status(self):
+    def get_duration(self):
         """Skilar stöðu bíls"""
         return self.__rented_days
 

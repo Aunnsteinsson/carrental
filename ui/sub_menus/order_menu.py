@@ -138,8 +138,15 @@ class OrderUI(object):
     def new_order_menu(self):
         self.__uistandard.print_header()
         print("Pantanir - Ný pöntun\n\tTímabil\n\t--------")
-        begin_date = input("\tUpphafsdagsetning: ")
-        end_date = input("\tSkiladagsetning: ")
+        begin_day = input("\tUpphafsdagur: ")
+        begin_month = input("\tUpphafsmánuður")
+        begin_year = input("\tUpphafsár")
+        end_day = input("\tSkiladagur: ")
+        end_month = input("\tSkilamánuður")
+        end_year = input("\tSkilaár")
+        begin_date = begin_day + "/" + begin_month + "/" + begin_year
+        end_date = end_day + "/" + end_month + "/" + end_year
+        list_of_days = self.__order_service.list_of_days(begin_date, end_date)
         print("\n\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
         type_of_car = input("\tFlokkur: ")
         if type_of_car == "j":
@@ -153,21 +160,25 @@ class OrderUI(object):
         availablecars = self.__order_service.find_available_cars(
             type_list, begin_date, end_date)
         print(availablecars)
-        licence_plate = input("Skrifa bílnúmer")
+        licence_plate = input("Skrifa bílnúmer: ").upper()
         order_number = self.__order_service.make_order_number()
-        self.__order_service.add_dates_to_car(
-            begin_date, end_date, licence_plate, order_number)
-        insurance_price = 100  # Hér þarf að sækja verð
+        price = self.__order_service.price_of_rent(
+            licence_plate, 0, False, begin_date, end_date)
+        print("Verð án trygginga: {}".format(price))
+        # Hér þarf að sækja verð
+        insurance_price = self.__order_service.get_price_of_insurance()
         insurance = input(
             "\tViðbótartrygging (verð {} á dag) (J)á/(N)ei: ".format(
                 insurance_price))
-        if insurance == "j" or insurance == "J":
+        if insurance.lower() == "j":
             insurance = True
         else:
             insurance = False
         format(insurance_price)
-        discount = input("\tAfsláttur(0-20%): ")
-        total_price = 10000  # hér þarð að nota aðra klasa
+        discount = input(
+            "\tSkrifaðu hversu mörg prósent afslátturinn á að vera ef einhver: ")
+        total_price = self.__order_service.price_of_rent(
+            licence_plate, discount, insurance, begin_date, end_date)  # hér þarð að nota aðra klasa
         ssn = input("\tKennitala viðskiptavinar: ")
         # if setning til að athuga hvort manneskjan sé til. Ef svo er
         # þá prentast út upplýsingar um hana, annars er sótt fall til
@@ -185,10 +196,12 @@ class OrderUI(object):
         print("\n\tViðskiptavinur: {}".format(customer_name))
         payment = input("\tGreiðslumáti: (D)ebit, (K)redit, (P)eningar: ")
         order_number = self.__order_service.make_order_number()
-        order = Order(order_number, begin_date, end_date, "viðskiptavinur",
-                      "kennitala", type_of_car, "1kkk", "laus", insurance)
+        order = Order(order_number, list_of_days, ssn,
+                      licence_plate, total_price, insurance, discount)
+        self.__order_service.add_dates_to_car(
+            begin_date, end_date, licence_plate, order_number)
 
-        self.__order_service.make_order(order, order_number)
+        self.__order_service.make_order(order_number, order)
 
         # kallar á föll og býr til klasa
         print("---------------------\nPöntun Staðfest\n")

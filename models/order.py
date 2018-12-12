@@ -96,5 +96,5 @@ class Order(object):
         return "{},{},{},{},{},{},{}".format(self.__price,
                                              self.__order_number,
                                              self.__price,
-                                             self.__ssn, self.__car,
+                                             self.__ssn, self.__price,
                                              self.__car_number, self.__price)
