@@ -5,17 +5,38 @@ class Car(object):
     """Þessi klasi býr til bíl, með númeraplötu og hvernig týpa
     af bíl hann er"""
 
-    def __init__(self, licence_plate, a_type, price_dict, rented_days=[]):
+    def __init__(self, licence_plate, a_type, price_dict, rented_days=":1&dagur1$"):
         self.__licence_plate = licence_plate
         self.__a_type = a_type
         self.__price = price_dict
-        rented_days = rented_days.strip("[]")
-        rented_days = rented_days.split(",")
-        self.__rented_days = []
+        self.__rented_days = self.string_to_dict(rented_days)
         self.__price_of_car = self.price_vehicle()
 
     def __str__(self):
         return "{:<20} | {:<20} | {:<20} | {:<20}".format(self.__a_type, self.__licence_plate, self.__price_of_car, str(self.__rented_days))
+
+    def dict_to_string(self, date_dict):
+            string = ""
+        for key, value in date_dict.items():
+            string += ":" + key + "&"
+            for day in value:
+                string += day + "$"
+
+
+    def string_to_dict(self, order_string):
+        dictionary = {}
+        string = order_string.split(":")
+        for value in string:
+            if value != "":
+                new_list = value.split("&")
+                the_list = new_list[1].split("$")
+                last_list = []
+                for day in the_list:
+                    if day != "":
+                        last_list.append(day)
+                dictionary[new_list[0]] = last_list
+        return dictionary
+
 
     def get_licence_plate(self):
         """Skilar númeraplötu"""
@@ -56,8 +77,9 @@ class Car(object):
         self.__rented_days.append(list_of_days)
 
     def __repr__(self):
+        days_string = self.dict_to_string(self.__rented_days)
         return "{},{},{}".format(self.__licence_plate,
-                                 self.__a_type, self.__rented_days)
+                                 self.__a_type, days_string)
 
 
 """class Jeep(Car):
