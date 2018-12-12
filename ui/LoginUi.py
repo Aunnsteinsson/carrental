@@ -1,5 +1,6 @@
 import sys
 import time
+import webbrowser
 from repositories.employeerepo import EmployeeRepo
 from datetime import date
 from getpass import getpass
@@ -13,7 +14,7 @@ class LoginUI(object):
         '''
          Prentar haus fyrir innskráningu
         '''
-        print(("-"*100))
+        print()
         print("{:72}        __-------__".format(" "))
         print("{:72}      / _---------_ \\".format(" "))
         print("{:72}     / /           \\ \\".format(" "))
@@ -32,8 +33,10 @@ class LoginUI(object):
         print("{:72} ||||     ~~~~~~~     ||||".format(" "))
         print("{:72} `--'                 `--'".format(" "))
         print(("-"*100))
-        print("{:40s}{:>40}{:>15}".format(
-            "Innskráning", "(L)oka kerfi", str(date.today())))
+        print("{:40s}{:>20}    {}{:>15}".format("Innskráning",
+                                                "Senda inn (a)thugasemd",
+                                                "(L)oka kerfi",
+                                                str(date.today())))
         print(("-"*100))
 
     def ask_for_username_password(self):
@@ -45,6 +48,9 @@ class LoginUI(object):
             print("Loka kerfi...")
             time.sleep(2)
             sys.exit(0)
+        elif username.lower() == "a":
+            webbrowser.open(
+                "https://github.com/steingrimure/carrental/issues/new")
         else:
             password = getpass(prompt="Lykilorð: ")
             return username, password
