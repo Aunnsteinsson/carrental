@@ -26,6 +26,8 @@ class EmployeeUI(object):
         Prentar haus fyrir starfmannayfirlit kerfisstjóra þar sem hann sér
         einnig lykilorð
         '''
+        print("{:<100}".format("\nStarfsmenn - Starfsmannayfirlit kerfisstjóra\n"))
+        self.__uistandard.line_seperator()
         print("{:<10s}| {:<10s}| {:<25s}| {:<25s}| {:<10s}| {:<12s}".format(
             "Notandi", "Lykilorð", "Nafn", "Heimilisfang", "Sími", "Hlutverk"))
         self.__uistandard.line_seperator()
@@ -34,6 +36,8 @@ class EmployeeUI(object):
         '''
         Prentar haus fyrir starfmannayfirlit yfirmanns
         '''
+        print("{:<100}".format("\nStarfsmenn - Starfsmannayfirlit yfirmanns\n"))
+        self.__uistandard.line_seperator()
         print("{:^25s}| {:^10s}| {:^25s}| {:^10s}| {:^12s}".format(
             "Nafn", "Notandi", "Heimilisfang", "Sími", "Hlutverk"))
         self.__uistandard.line_seperator()
@@ -173,8 +177,10 @@ class EmployeeUI(object):
         employees_list_string = self.__employee_service.get_employees()
         print(employees_list_string)
         choice = ""
+        print("\nMögulegar aðgerðir\n{}".format("-"*25))
+        print("1. Fara til baka\n")
         while choice.lower() not in HOMECOMMANDS:
-            choice = input("")
+            choice = input("\nVeldu aðgerð: ")
         return choice
 
     def save_employees(self):
