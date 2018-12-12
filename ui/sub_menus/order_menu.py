@@ -75,6 +75,17 @@ class OrderUI(object):
         end_date = input("\tSkiladagsetning: ")
         print("\n\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
         type_of_car = input("\tFlokkur: ")
+        if type_of_car == "j":
+            type_list = ["jeppi"]
+        elif type_of_car == "f":
+            type_list = ["folksbill"]
+        elif type_of_car == "s":
+            type_list = ["sendibill"]
+        else:
+            type_list = ["sendibill", "folksbill", "jeppi"]
+        availablecars = self.__order_service.find_available_cars(
+            type_list, begin_date, end_date)
+        print(availablecars)
         insurance_price = 100  # Hér þarf að sækja verð
         insurance = input(
             "\tViðbótartrygging (verð {} á dag) (J)á/(N)ei: ".format(
