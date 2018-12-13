@@ -28,7 +28,7 @@ class EmployeeUI(object):
         '''
         print("{:<100}".format("\nStarfsmenn - Starfsmannayfirlit kerfisstjóra\n"))
         self.__uistandard.line_seperator()
-        print("{:<10s}| {:<10s}| {:<25s}| {:<25s}| {:<10s}| {:<12s}".format(
+        print("{:^10s}| {:^10s}| {:^25s}| {:^25s}| {:^10s}| {:^12s}".format(
             "Notandi", "Lykilorð", "Nafn", "Heimilisfang", "Sími", "Hlutverk"))
         self.__uistandard.line_seperator()
 
@@ -109,27 +109,31 @@ class EmployeeUI(object):
                 choice = ""
                 new_value = ""
                 while choice.lower() not in HOMECOMMANDS:
-                    choice = input("Veldu aðgerð: ")
+                    choice = input("(hámarsklengd*)\nVeldu aðgerð: ")
                     if choice == "1":
-                        new_value = input("Nýtt lykilorð: ")
+                        new_value10 = input("Nýtt lykilorð(10*): ")
                     elif choice == "2":
-                        new_value = input("Nýtt nafn: ")
+                        new_value25 = input("Nýtt nafn(25*): ")
                     elif choice == "3":
-                        new_value = input("Nýtt heimilisfang: ")
+                        new_value25 = input("Nýtt heimilisfang(25*): ")
                     elif choice == "4":
-                        new_value = input("Nýr sími: ")
+                        new_value10 = input("Nýr sími(10*): ")
                     else:
                         print(choice, "er ekki valmöguleiki, fer til baka")
                         time.sleep(2)
                         return choice
+                    if new_value10 > 11 or new_value25 > 26:
+                        print("Passaðu að hafa innsetningu ekki of langa!")
+                        time.sleep(2)
+                        return choice
+                    else:
+                        self.__employee_service.change_employee(
+                            username, choice, new_value)
+                        self.save_employees()
+                        print("\nNotanda hefur verið breytt")
 
-                    self.__employee_service.change_employee(
-                        username, choice, new_value)
-                    self.save_employees()
-                    print("\nNotanda hefur verið breytt")
-
-                    time.sleep(2)
-                    return choice
+                        time.sleep(2)
+                        return choice
             else:
                 print("\nNotandanafn ekki á skrá.")
                 time.sleep(2)
@@ -142,11 +146,12 @@ class EmployeeUI(object):
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             self.__uistandard.print_header()
-            username = input("\tNotendanafn: ")
-            password = input("\tLykilorð: ")
-            name = input("\tNafn: ")
-            address = input("\tHeimilisfang: ")
-            phonenumber = input("\tSími: ")
+            print("(hámarkslengd*)")
+            username = input("\tNotendanafn(10*): ")
+            password = input("\tLykilorð(10*): ")
+            name = input("\tNafn(25*): ")
+            address = input("\tHeimilisfang(25*): ")
+            phonenumber = input("\tSími(10*): ")
             emp_type = ""
             while emp_type not in VALIDJOB:
                 emp_type = input(
@@ -162,7 +167,7 @@ class EmployeeUI(object):
                 print("\n\tPassaðu að hafa innsetningu á notendanafni, lykilorði\
  og síma ekki lengri en 10 stafi \n\tog nafn og heimilisfang ekki lengra en 25\
   stafi \n\t- fer á upphafssíðu!")
-                time.sleep(5)
+                time.sleep(7)
                 return choice
             else:
                 choice = input(
