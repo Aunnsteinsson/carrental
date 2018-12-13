@@ -31,7 +31,7 @@ class CustomerRepo(object):
     def add_customer(self, new_customer):
         """Tekur við kennitölu nýs viðskiptavinar og bætir honum við í
         customer dictionary"""
-        ssn = new_customer.get__ssn()
+        ssn = new_customer.get_ssn()
         self.__customer[ssn] = new_customer
 
     def remove_customer(self, ssn):
