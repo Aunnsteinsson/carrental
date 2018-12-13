@@ -118,17 +118,18 @@ class EmployeeUI(object):
                     elif choice == "4":
                         try:
                             new_value10 = int(input("Nýr sími(10*): "))
-                        except TypeError:
+                        except ValueError:
                             print("Passaðu að hafa símanúmer einungis \
-tölustafi")
+tölustafi - fer til baka")
                             time.sleep(2)
                             return choice
                     else:
-                        print(choice, "er ekki valmöguleiki, fer til baka")
+                        print(choice, "er ekki valmöguleiki, - fer til baka")
                         time.sleep(2)
                         return choice
                     if new_value10 > 11 or new_value25 > 26:
-                        print("Passaðu að hafa innsetningu ekki of langa!")
+                        print("Passaðu að hafa innsetningu ekki of langa! - fer til \
+baka")
                         time.sleep(2)
                         return choice
                     else:
@@ -156,9 +157,9 @@ tölustafi")
             password = input("\tLykilorð(10*): ")
             name = input("\tNafn(25*): ")
             address = input("\tHeimilisfang(25*): ")
-            phonenumber = input("\tSími(10*): ")
+            phonenumber = int(input("\tSími(10*): "))
             emp_type = ""
-            while emp_type not in VALIDJOB:
+            while emp_type.lower() not in VALIDJOB:
                 emp_type = input(
                     "\t(S)öludeild, (y)firmaður eða (k)erfisstjóri: ")
             if emp_type.lower() == "k":
@@ -167,14 +168,15 @@ tölustafi")
                 emp_type = "yfirmadur"
             else:
                 emp_type = "soludeild"
+
             if (len(username) > 10 or len(password) > 10 or len(name) > 25 or
                     len(address) > 25 or len(phonenumber) > 10):
                 print("\n\tPassaðu að hafa innsetningu á notendanafni, lykilorði\
  og síma ekki lengri en 10 stafi \n\tog nafn og heimilisfang ekki lengra en 25\
-  stafi \n\t einnig þarf kennitala og sími einungis að vera heiltölur - fer á \
-  upphafssíðu!")
+ stafi - fer á upphafssíðu!")
                 time.sleep(8)
                 return choice
+
             else:
                 choice = input(
                     "\tStaðfesta nýjan notanda {} ((J)á/(N)ei): ".format(username))
