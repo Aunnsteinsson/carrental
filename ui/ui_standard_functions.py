@@ -22,6 +22,11 @@ class UIStandard(object):
             "{} - notandi: {}".format(self.__a_type, self.__name),
             "(H)eim", "(S)krá út", today))
         self.line_seperator()
+
+    def print_location_header(self, location):
+        print("{:<100}".format("\n"+(location)+"\n"))
+        self.line_seperator()
+        
     
     def line_seperator(self):
         print("-"*100)
