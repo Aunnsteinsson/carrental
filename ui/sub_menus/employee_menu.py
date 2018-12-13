@@ -119,12 +119,16 @@ class EmployeeUI(object):
                         new_value = input("Nýtt heimilisfang: ")
                     elif choice == "4":
                         new_value = input("Nýr sími: ")
+                    else:
+                        print(choice, "er ekki valmöguleiki, fer til baka")
+                        time.sleep(2)
+                        return choice
 
-                    # Skoða bug
                     self.__employee_service.change_employee(
                         username, choice, new_value)
-                    print("\nNotanda hefur verið breytt")
                     self.save_employees()
+                    print("\nNotanda hefur verið breytt")
+
                     time.sleep(2)
                     return choice
             else:
