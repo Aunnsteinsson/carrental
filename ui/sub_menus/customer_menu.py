@@ -95,7 +95,8 @@ class CustomerUI(object):
         self.__uistandard.print_header()
         line_seperator = ("-"*100)
         print("{:<100}".format("\nViðskiptavinir - Allir Viðskiptavinir\n"))
-        print((line_seperator) + "\n{:^11}| {:^30}| {:^9} |\n".format("Kennitala", "Nafn", "Sími") + (line_seperator))
+        print((line_seperator) + "\n{:^11}| {:^30}| {:^9} |\n".format(
+            "Kennitala", "Nafn", "Sími") + (line_seperator))
         string = self.__customer_service.get_list()
         print(string)
         choice = input("B - tilbaka, H - Heim, S - Útskrá: ")
@@ -105,16 +106,30 @@ class CustomerUI(object):
         """biður um nauðsynlegar upplýsingar og býr til viðskiptavin"""
         self.__uistandard.print_header
         print("Viðskiptavinir - Nýr viðskiptavinur\n")
-        ssn = input("\tKennitala: ")
-        name = input("\tNafn: ")
-        phone_number = input("\tSími: ")
-        credit_card_number = input("\tKreditkort: ")
-        a_customer = Customer(ssn, name, phone_number, credit_card_number)
-        self.__customer_service.make_customer(a_customer)
-        new_customer = self.__customer_service.find_customer(ssn)
-        print("{:>20}{:>30}{:>20}".format("Kennitala", "Nafn", "Sími"))
-        print(new_customer)
-        time.sleep(2)
+        check_string = "1"
+        choice = "j"
+        while choice == "j":
+            ssn = input("\tKennitala: ")
+            name = input("\tNafn: ")
+            phone_number = input("\tSími: ")
+            credit_card_number = input("\tKreditkort: ")
+            check_string = self.__customer_service.test_values(
+                ssn, name, phone_number, credit_card_number)
+            if check_string:
+                print(check_string)
+            else:
+                print("Kennitala: {}\nNafn: {}\nSími: {}\nKreditkortanúmer: {}\nÖll gildi samþykkt. Er allt rétt skráð inn?".format(
+                    ssn, name, phone_number, credit_card_number))
+                time.sleep(3)
+            choice = input(
+                "Viltu endurtaka srkáningu?\nVeldu (J)á til að reyna aftur")
+        if check_string == "":
+            a_customer = Customer(ssn, name, phone_number, credit_card_number)
+            self.__customer_service.make_customer(a_customer)
+            new_customer = self.__customer_service.find_customer(ssn)
+            print("{:>20}{:>30}{:>20}".format("Kennitala", "Nafn", "Sími"))
+            print(new_customer)
+            time.sleep(2)
 
     def save_program(self):
         self.__customer_service.save_program()

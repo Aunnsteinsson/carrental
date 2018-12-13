@@ -6,6 +6,34 @@ class CustomerService(object):
     def __init__(self):
         self.__customer_repo = CustomerRepo()
 
+    def test_values(self, ssn, name, phone_number, credit_card_number):
+        new_ssn = ssn.replace(" ", "")
+        new_ssn = new_ssn.replace("-", "")
+        try:
+            int(new_ssn)
+        except ValueError:
+            return "Kennitalan {} er ekki samþykkt".format(ssn)
+        if len(new_ssn) < 9:
+            return "Kennitalan {} er ekki samþykkt".format(ssn)
+        if len(name) < 2:
+            return "Nafnið {} er ekki samþykkt".format(name)
+        new_phone_number = phone_number.replace(" ", "")
+        new_phone_number = new_phone_number.replace("-", "")
+        new_phone_number = new_phone_number.replace("+", "")
+        try:
+            int(new_phone_number)
+        except ValueError:
+            return "Simanúmerið {} er ekki samþykkt".format(phone_number)
+        new_credit_card_number = credit_card_number.replace(" ", "")
+        new_credit_card_number = new_credit_card_number.replace("-", "")
+        try:
+            int(new_credit_card_number)
+        except ValueError:
+            return "Kortanúmerið {} er ekki samþykkt".format(credit_card_number)
+        if len(new_credit_card_number) != 16:
+            return "Kortanúmerið {} er ekki samþykkt".format(credit_card_number)
+        return ""
+
     def make_customer(self, customer):
         self.__customer_repo.add_customer(customer)
         self.save_program()
