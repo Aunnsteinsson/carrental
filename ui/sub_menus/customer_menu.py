@@ -63,22 +63,27 @@ class CustomerUI(object):
             print(order)
             choice = input("\n1. Breyta\n2. Eyða\n\nVeldu aðgerð: ")
             if choice == "1":
-                self.change_menu(ssn)
+                self.change_menu(ssn, customer)
             elif choice == "2":
                 choice = input("Ertu viss? (J)á/(N)ei: ")
                 if choice.lower() == 'j':
                     self.__customer_service.remove_customer(ssn)
-                    print("Viðskiptavini hefur verið eytt")
+                    print("Viðskiptavini hefur verið eytt. Notandi færður aftur heim")
                     self.save_program()
+                    time.sleep(3)
+                    return("h")
                 time.sleep(2)
             elif choice not in HOMECOMMANDS:
                 print("Aðgerð ekki í boði")
                 time.sleep(2)
         return choice
 
-    def change_menu(self, ssn):
+    def change_menu(self, ssn, customer):
         choice = ""
         while choice not in HOMECOMMANDS:
+            name = customer.get_name()
+            phone_number = customer.get_phone_number()
+            credit_card_number = customer.get_creditcard_number()
             print("\nHverju skal breyta?\n{}".format("-"*30))
             choice = input("1. Breyta nafni"
                            "\n2. Breyta símanúmer"
@@ -86,19 +91,34 @@ class CustomerUI(object):
                            "\n\nVeldu aðgerð: ")
             if choice == "1":
                 new_name = input("Nýtt nafn: ")
-                self.__customer_service.change_name(ssn, new_name)
-                print("Nafni viðskiptavinar hefur verið breytt")
+                string = self.__customer_service.test_values(
+                    ssn, new_name, phone_number, credit_card_number)
+                if string:
+                    print(string)
+                else:
+                    self.__customer_service.change_name(ssn, new_name)
+                    print("Nafni viðskiptavinar hefur verið breytt")
                 time.sleep(2)
             elif choice == "2":
                 new_phone_number = input("Nýja símanúmerið: ")
-                self.__customer_service.change_phone_number(
-                    ssn, new_phone_number)
-                print("Símanúmeri viðskiptavinar hefur verið breytt")
+                string = self.__customer_service.test_values(
+                    ssn, name, new_phone_number, credit_card_number)
+                if string:
+                    print(string)
+                else:
+                    self.__customer_service.change_phone_number(
+                        ssn, new_phone_number)
+                    print("Símanúmeri viðskiptavinar hefur verið breytt")
                 time.sleep(2)
             elif choice == "3":
                 new_card_number = input("Nýja kortanúmerið: ")
-                self.__customer_service.change_card(ssn, new_card_number)
-                print("Kreditkortanúmeri viðskiptavinar hefur verið breytt")
+                string = self.__customer_service.test_values(
+                    ssn, name, phone_number, new_card_number)
+                if string:
+                    print(string)
+                else:
+                    self.__customer_service.change_card(ssn, new_card_number)
+                    print("Kreditkortanúmeri viðskiptavinar hefur verið breytt")
                 time.sleep(2)
             self.save_program()
         return choice
