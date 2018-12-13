@@ -38,7 +38,7 @@ class CarService(object):
         for _, item in dict.items():
             type_of_car = item.get_type()
             #status_of_car = item.get_status()
-            if type_of_car in a_type: #and status_of_car in status:
+            if type_of_car in a_type:  # and status_of_car in status:
                 car_string = item.__str__()
                 string += car_string + "\n"
                 """ if car[1] in a_type and car[2] in status:

@@ -3,11 +3,14 @@ import csv
 LICENCE_PLATE = 0
 A_TYPE = 1
 STATUS = 2
+DAYS = 3
+
 
 class CarRepo(object):
     """Sér um geymslu á bílum innan kerfis """
+
     def __init__(self):
-        self.__price = self.price_dict()        
+        self.__price = self.price_dict()
         self.__car = self.car_dict()
 
     def car_dict(self):
@@ -16,7 +19,8 @@ class CarRepo(object):
             csv_reader = csv.reader(car_file)
             for car in csv_reader:
                 if car[0] != "licence_plate":
-                    car_class = Car(car[LICENCE_PLATE], car[A_TYPE], self.__price, car[STATUS])
+                    car_class = Car(
+                        car[LICENCE_PLATE], car[A_TYPE], self.__price, car[STATUS], car[DAYS])
                     licence_plate = car[LICENCE_PLATE]
                     car_dict[licence_plate] = car_class
         return car_dict
@@ -28,7 +32,7 @@ class CarRepo(object):
             for price in csv_reader:
                 if price[0] != "gerd_bils":
                     price_dict[price[0]] = price[1]
-            return price_dict    
+            return price_dict
 
     def add_car(self, new_car):
         """Bætir bíl inn í geymslu"""
@@ -45,7 +49,7 @@ class CarRepo(object):
     def get_all_cars(self):
         """ Sækir bíla fyrir útlistun af bílum """
         return self.__car
-        
+
         """ list_of_cars = []
         with open("./data/cars.csv", "r") as car_file:
             csv_reader = csv.reader(car_file)
@@ -80,8 +84,8 @@ class CarRepo(object):
                         csv_writer.writerow(row) """
 
     def save_car_data(self):
-        list_of_cars = ["licence_plate", "a_type", "status"]
-        with open ("./data/cars.csv", "w", newline="") as car_file:
+        list_of_cars = ["licence_plate", "a_type", "status", "days"]
+        with open("./data/cars.csv", "w", newline="") as car_file:
             csv_writer = csv.writer(car_file)
             csv_writer.writerow(list_of_cars)
             for _, info in self.__car.items():
@@ -91,7 +95,7 @@ class CarRepo(object):
 
     def save_price_data(self):
         list_of_prices = ["gerd_bils", "verd"]
-        with open ("./data/price_list.csv", "w", newline="") as price_file:
+        with open("./data/price_list.csv", "w", newline="") as price_file:
             csv_writer = csv.writer(price_file)
             csv_writer.writerow(list_of_prices)
             for the_type, the_price in self.__price.items():

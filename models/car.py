@@ -1,25 +1,46 @@
 # DENNI
+from datetime import date
 
 
 class Car(object):
     """Þessi klasi býr til bíl, með númeraplötu og hvernig týpa
     af bíl hann er"""
 
-    def __init__(self, licence_plate, a_type, price_dict, rented_days="None"):
+    def __init__(self, licence_plate, a_type, price_dict, status="j", rented_days="None"):
         self.__licence_plate = licence_plate
         self.__a_type = a_type
         self.__price = price_dict
         self.__rented_days = self.string_to_dict(rented_days)
         self.__price_of_car = self.price_vehicle()
+        self.__status = status
+        self.__wherabouts = self.see_if_returned()
 
     def __str__(self):
         if self.__rented_days:
-            for _, date_list in self.__rented_days.items():
+            for order_number, date_list in self.__rented_days.items():
                 date = str(date_list[0])
-
         else:
             date = "Engar pantanir"
-        return "{:<8} | {:<12} | {:>11,.2f} {} | {:<10} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("kr."), ("Í stæði"), date)
+        return "{:<8} | {:<12} | {:>11,.2f} {} | {:<10} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("kr."), (self.__wherabouts), date)
+
+    def see_if_returned(self):
+        if self.__rented_days:
+            for order_number, list_of_days in self.__rented_days.items():
+                if str(date.today()) in list_of_days:
+                    if self.__status == "j":
+                        return "Í útleigu"
+                    if self.__status == "n":
+                        return "LEigður en ekki sóttur"
+        if self.__status == "j":
+            return "Tilbúinn til útleigu"
+        if self.__status == "n":
+            return "Hefur ekki enn verið skilað"
+
+    def get_status(self):
+        return self.__status
+
+    def change_status(self, new_status):
+        self.__status = new_status
 
     def dict_to_string(self, date_dict):
         string = ""
