@@ -105,6 +105,14 @@ class OrderService(object):
         name = customer.get_name()
         return name
 
+    def get_orders_of_customer_menu(self, ssn):
+        order = self.__order_repo.get_orders()
+        list_of_orders = []
+        for _, orders in order.items():
+            if ssn == orders.get_ssn():
+                list_of_orders.append(orders)
+        return list_of_orders
+
     def customer_orders(self, ssn, print_format):
         """Skilar streng þar sem allar pantanir viðskiptavins
         koma fram"""

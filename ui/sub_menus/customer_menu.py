@@ -71,7 +71,7 @@ class CustomerUI(object):
                     print("Viðskiptavini hefur verið eytt. Notandi færður aftur heim")
                     self.save_program()
                     time.sleep(3)
-                    return("h")
+                    choice = "h"
                 time.sleep(2)
             elif choice not in HOMECOMMANDS:
                 print("Aðgerð ekki í boði")
