@@ -157,8 +157,12 @@ class OrderService(object):
         end = list_of_days[ENDDATE]
         end = end.split("-")
         end = end[0] + "-" + end[1] + "-" + end[2]
+        type_list = ["sendibill", "folksbill", "jeppi"]
+        for index, value in enumerate(type_list):
+            if value == a_type:
+                k = type_list.pop(index)
         self.remove_order_from_car(order_number)
-        string_car = self.find_available_cars(a_type, start, end)
+        string_car = self.find_available_cars(type_list, start, end)
         return string_car
 
     def change_car_again(self, new_car, order_number):

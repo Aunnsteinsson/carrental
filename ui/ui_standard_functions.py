@@ -1,5 +1,6 @@
 import os
 from datetime import date
+HOMECOMMANDS = ["s", "h"]
 
 
 class UIStandard(object):

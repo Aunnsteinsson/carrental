@@ -50,6 +50,9 @@ class Order(object):
         return string_of_dates
 
     def dates_string_to_list(self, dates_string):
+        if type(dates_string) == list:
+            self.__list_of_dates = dates_string
+            dates_string = self.dates_list_to_string()
         try:
             str(dates_string)
             date_list = dates_string.strip(":").split(':')
@@ -95,12 +98,11 @@ class Order(object):
         end_date = self.__list_of_dates[-1]
 
         if info_to_print == 1:
-            return "\t{:11}| {:9}| {:11}| {:7} |{:11}".format(
+            return "\t{:11}| {:9}| {:11}| {:7} | ".format(
                 start_date,
                 self.__order_number,
                 self.__ssn,
-                self.__car_number,
-                end_date)
+                self.__car_number)
 
         elif info_to_print == 2:  # Hvernig pantanir prentast í sögu viðsk.v.
             return "\t{:13}| {:9}| {:7}| {:10}".format(
