@@ -80,6 +80,7 @@ class CustomerUI(object):
             elif choice not in HOMECOMMANDS:
                 print("Aðgerð ekki í boði")
                 time.sleep(2)
+            self.__order_service = OrderService()
             list_of_order_numbers = self.__order_service.get_orders_of_customer_menu(
                 ssn)
             for order_number in list_of_order_numbers:
@@ -162,7 +163,7 @@ class CustomerUI(object):
                 print(check_string)
             else:
                 print("\nKennitala: {}\nNafn: {}\nSími: {}\nKreditkortanúmer: {}\
-\nÖll gildi samþykkt. Er allt rétt skráð inn?".format(
+\nÖll gildi samþykkt. Inniheldur þetta einhverjar rangar upplýsingar?".format(
                     ssn, name, phone_number, credit_card_number))
                 time.sleep(2)
             choice = ""
