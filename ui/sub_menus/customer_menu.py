@@ -34,7 +34,7 @@ class CustomerUI(object):
                 customer = self.get_the_customer(ssn)
                 # returnar None ef að hann finnst ekki
                 if customer:
-                    self.find_customer(ssn, customer)
+                    choice = self.find_customer(ssn, customer)
                 else:
                     print("Enginn viðskiptavinur skráður á þessa kennitölu")
                     time.sleep(2)
@@ -49,12 +49,12 @@ class CustomerUI(object):
         choice = ""
         while choice not in HOMECOMMANDS:
             self.__uistandard.print_header()
-
+            line_seperator = ("-"*100)
             print("Viðskiptavinir - Kennitala\n")
             print("\tViðskiptavinur\n\t{}".format("-"*20))
-            print("\t{} - {} - S: {}".format(
-                customer.get_ssn(), customer.get_name(),
-                customer.get_phone_number()))
+            print((line_seperator) + "\n{:^11}| {:^30}| {:^9} |\n".format(
+                "Kennitala", "Nafn", "Sími") + (line_seperator))
+            print(customer)
             print("\n\tSaga pantana\n\t{}".format("-"*60))
             print("\t{:13}| {:9}| {:7}| {:10}".format(
                 "Upphafsdagur", "Pönt.nr.", "Bílnr.", "Verð"))
@@ -65,13 +65,13 @@ class CustomerUI(object):
             if choice == "1":
                 self.change_menu(ssn)
             elif choice == "2":
-                choice = input("Ertu viss? ((J)á/(N)ei: ")
+                choice = input("Ertu viss? (J)á/(N)ei: ")
                 if choice.lower() == 'j':
                     self.__customer_service.remove_customer(ssn)
                     print("Viðskiptavini hefur verið eytt")
                     self.save_program()
                 time.sleep(2)
-            else:
+            elif choice not in HOMECOMMANDS:
                 print("Aðgerð ekki í boði")
                 time.sleep(2)
         return choice
@@ -137,16 +137,21 @@ class CustomerUI(object):
 \nÖll gildi samþykkt. Er allt rétt skráð inn?".format(
                     ssn, name, phone_number, credit_card_number))
                 time.sleep(2)
-            choice = input(
-                "\nViltu endurtaka skráningu?\nVeldu (J)á til að reyna aftur: "
-            )
+            choice = ""
+            while choice != "j" and choice != "n":
+                choice = input(
+                    "\nViltu endurtaka skráningu?\nVeldu (J)á til að reyna aftur, (N) til að sleppa endurtekningu: "
+                ).lower()
         if check_string == "":
             a_customer = Customer(ssn, name, phone_number, credit_card_number)
             self.__customer_service.make_customer(a_customer)
-
-            # new_customer = self.__customer_service.find_customer(ssn)
-            # print("{:>20}{:>30}{:>20}".format("Kennitala", "Nafn", "Sími"))
-            # print(new_customer)
+            print("Hér eru upplýsingar um nýjan viðskiptavin: ")
+            new_customer = self.__customer_service.find_customer(ssn)
+            print("{:>20}{:>30}{:>20}".format("Kennitala", "Nafn", "Sími"))
+            print(new_customer)
+            time.sleep(2)
+        else:
+            print("Hætt við að búa til nýjan viðskiptavin")
             time.sleep(2)
         self.save_program()
 
