@@ -36,8 +36,7 @@ class EmployeeUI(object):
         '''
         Prentar haus fyrir starfmannayfirlit yfirmanns
         '''
-        self.__uistandard.print_location_header(
-            "Starfsmenn - Starfsmannayfirlit yfirmanns")
+        print("Starfsmenn - Starfsmannayfirlit yfirmanns")
         print("{:^25s}| {:^10s}| {:^25s}| {:^10s}| {:^12s}".format(
             "Nafn", "Notandi", "Heimilisfang", "Sími", "Hlutverk"))
         self.__uistandard.line_seperator()
