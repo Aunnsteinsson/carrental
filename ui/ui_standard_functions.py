@@ -28,3 +28,14 @@ class UIStandard(object):
 
     def clear_screen(self):
         os.system("cls" if os.name == "nt" else "clear")
+<<<<<<< Updated upstream
+=======
+
+    def back_input(self):
+        choice = ""
+        while choice.lower() != "b" and choice.lower() not in HOMECOMMANDS:
+            choice = input(
+                "Veldu aðgerð (H), (S) eða (B)akka: ")
+        return choice
+# yo
+>>>>>>> Stashed changes

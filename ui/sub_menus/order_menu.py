@@ -25,8 +25,7 @@ class OrderUI(object):
         self.__customer_menu = CustomerUI(
             self.__name, self.__a_type)  # PAssar að það sé lesið upp úr customer menu í upphafi
         choice = ""
-        while choice not in HOMECOMMANDS:  # Placeholder þangað til ég næ að
-            # lata while loopuna virka betur
+        while choice not in HOMECOMMANDS:
             self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
                 "Pantanir\n\t1. Yfirlit pantana\n\t2. Ný pöntun\n",
@@ -40,7 +39,12 @@ class OrderUI(object):
     def order_list_menu(self):
         """Prentar innra pantana viðmót og tekur við input"""
         choice = ""
+<<<<<<< Updated upstream
         while choice not in HOMECOMMANDS:  # Placeholder
+=======
+        self.__uistandard.clear_screen()
+        while choice not in HOMECOMMANDS:
+>>>>>>> Stashed changes
             self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
                 """Pantanir - Yfirlit pantana\n\nSækja upplýsingar út frá:\n\n\t\
@@ -48,8 +52,13 @@ class OrderUI(object):
             if choice == "1":
                 ssn = input("\nKennitala viðskiptavinar: ")
                 self.ssn_order_menu(ssn)
+<<<<<<< Updated upstream
                 choice = input("B - til baka, H - Heim, S - Útskrá: ")
             if choice == "2":
+=======
+                choice = self.__uistandard.back_input()
+            elif choice == "2":
+>>>>>>> Stashed changes
                 order_number = input("Hvaða pöntun viltu fá að sjá? ")
                 self.get_single_order(order_number)
             if choice == "3":
@@ -70,7 +79,7 @@ class OrderUI(object):
             order = self.__order_service.customer_orders(ssn, 1)
             print(order)
         else:
-            print("Enginn viðskiptavinur með þessu nafni")
+            print("Enginn viðskiptavinur með þessa kennitölu")
 
     def get_single_order(self, order_number):
         self.__uistandard.clear_screen()
@@ -112,7 +121,8 @@ class OrderUI(object):
                 order, begin_date, end_date)
             print(strengur)
             if len(strengur) > 20:
-                choice_of_car = input("Skrifaðu bílnúmers bíls").upper()
+                choice_of_car = input(
+                    "Bílnúmer bíls sem skal breyta: ").upper()
                 self.__order_service.change_car_again(choice_of_car, order)
                 self.__order_service.add_dates_to_car(
                     begin_date, end_date, choice_of_car)
@@ -127,14 +137,14 @@ class OrderUI(object):
             self.__order_service.change_car_again(choice_of_car, order)
             self.__order_service.add_dates_to_car(
                 listi[0], listi[-1], choice_of_car, order)
-        if choice == "3":
+        elif choice == "3":
             insurance = input("Viltu tryggingu? (J)á eða (N)ei")
             if insurance.lower() == "j":
                 insurance = True
             else:
                 insurance = False
             self.__order_service.change_insurance(order, insurance)
-        if choice == "4":
+        elif choice == "4":
             ssn = input("Hver er kennitala viðskiptavinar? ")
             customer = self.__customer_menu.get_the_customer(ssn)
             if customer:
@@ -142,7 +152,7 @@ class OrderUI(object):
                 self.__order_service.change_customer(order, ssn)
             else:
                 print("Enginn viðskiptavinur með þessu nafni")
-        if choice == "5":
+        elif choice == "5":
             discount = input(
                 "Hvað viltu að nýji afslátturinn sé mörg prósent?")
             self.__order_service.change_discount(order, discount)

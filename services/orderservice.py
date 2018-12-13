@@ -250,6 +250,7 @@ class OrderService(object):
 
     def find_order(self, order_number):
         order_dict = self.__order_repo.get_orders()
-        for order, value in order_dict.items():
+        for order, _ in order_dict.items():
             if order == order_number:
                 return order_dict[order_number]
+        return False
