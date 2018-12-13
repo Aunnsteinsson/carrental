@@ -40,49 +40,67 @@ class OrderUI(object):
     def order_list_menu(self):
         """Prentar innra pantana viðmót og tekur við input"""
         choice = ""
-
         while choice not in HOMECOMMANDS:  # Placeholder
             self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
                 """Pantanir - Yfirlit pantana\n\nSækja upplýsingar út frá:\n\n\t\
 1. Kennitölu\n\t2. Pöntunarnúmeri\n\t3. Allar Pantanir\n""", "Veldu aðgerð: ")
             if choice == "1":
-                print("-"*40)
-                # TODO Þurfum að geta tengt viðskiptavin við pöntun
-                ssn = input("\n\tKennitala viðskiptavinar: ")
-                # if setning til að athuga hvort manneskjan sé til. Ef svo er
-                # þá prentast út upplýsingar um hana, annars er sótt fall til
-                # að gera nýjan viðskiptavin
-                customer = self.__customer_menu.get_the_customer(ssn)
-                if customer:
-                    print(customer)
-                    order = self.__order_service.customer_orders(ssn)
-                    print(order)
-                else:
-                    print("Enginn viðskiptavinur með þessu nafni")
+                ssn = input("\nKennitala viðskiptavinar: ")
+                self.ssn_order_menu(ssn)
                 choice = input("B - til baka, H - Heim, S - Útskrá: ")
-            if choice == "2":  # TODO Þurfum að gefa pöntunarnúmer
-                self.get_single_order()
+            if choice == "2":
+                order_number = input("Hvaða pöntun viltu fá að sjá? ")
+                self.get_single_order(order_number)
             if choice == "3":
                 self.__uistandard.clear_screen()
                 self.all_orders()
                 choice = input("B - tilbaka, H - Heim, S - Útskrá: ")
         return choice
 
-    def get_single_order(self):
-        order = input("Hvaða pöntun viltu fá að sjá?")
-        the_order = self.__order_service.find_order(order)
-        strengur = "Pantanir - Yfirlit pantana- Pöntunarnúmar\n\
-Pöntun númer {}\n1. Breyta Pöntun\n2. Bakfæra pöntun\n3. Sjá upplýsingar\
-".format(order)
-        choice = self.__uistandard.show_menu(strengur, "Veldu aðgerð:")
-        if choice == "1":
-            self.change_order_menu(order, the_order)
-        if choice == "2":
-            self.__order_service.remove_order(order)
-        if choice == "3":
-            print(the_order)
-            time.sleep(5)
+    def ssn_order_menu(self, ssn):
+        self.__uistandard.clear_screen()
+        self.__uistandard.print_header()
+        customer = self.__customer_menu.get_the_customer(ssn)
+        if customer:
+            print("\t{} - {}\n\t{}".format(customer.get_name(), ssn, "-"*60))
+            print("\t{:11}| {:9}| {:11}| {:7} |{:11}".format(
+                "Upphafsd.", "Pönt.nr.", "Tegund", "Bílnr.", "Staða"))
+            print("\t{}".format("-"*60))
+            order = self.__order_service.customer_orders(ssn, 1)
+            print(order)
+        else:
+            print("Enginn viðskiptavinur með þessu nafni")
+
+    def get_single_order(self, order_number):
+        self.__uistandard.clear_screen()
+        choice = ""
+        while choice not in HOMECOMMANDS:
+            the_order = self.__order_service.find_order(order_number)
+            order_header = "{:11}| {:11}| {:9}| {:30}| {:11}| {:7}|\
+ {:10}| {:9}| {:6}\n\t{}".format(
+                "Upphafsd.",
+                "Skilad.",
+                "Pönt.nr.",
+                "Nafn",
+                "Kennitala",
+                "Bílnr.",
+                "Verð",
+                "Viðb.Try.",
+                "Afsl.",
+                "-"*120)
+            strengur = "Pantanir - Yfirlit pantana- Pöntunarnúmer\n\n\
+\tPöntun: {}\n\t{}\n\t{}\n\t{}\n\n1. Breyta Pöntun\n2. Bakfæra pöntun\n\
+3. Sjá upplýsingar\n".format(order_number, "-"*15, order_header, the_order)
+            choice = self.__uistandard.show_menu(strengur, "Veldu aðgerð: ")
+            if choice == "1":
+                self.change_order_menu(order_number, the_order)
+            elif choice == "2":
+                self.__order_service.remove_order(order_number)
+            elif choice == "3":
+                print(the_order)
+                time.sleep(5)
+        return choice
 
     def change_order_menu(self, order, the_order):
         choice = self.__uistandard.show_menu(

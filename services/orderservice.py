@@ -105,14 +105,14 @@ class OrderService(object):
         name = customer.get_name()
         return name
 
-    def customer_orders(self, ssn):
+    def customer_orders(self, ssn, print_format):
         """Skilar streng þar sem allar pantanir viðskiptavins
         koma fram"""
         order = self.__order_repo.get_orders()
         string_of_orders = ""
         for key, orders in order.items():
             if ssn == orders.get_ssn():
-                order_string = orders.__str__(2)
+                order_string = orders.__str__(print_format)
                 string_of_orders += order_string + "\n"
         return string_of_orders
 

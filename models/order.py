@@ -110,13 +110,17 @@ class Order(object):
                 self.__price)
 
         else:
-            return "\t{:11}| {:9}| {:25}| {:11}| {:7}| {:11}".format(
+            # Skilar öllum upplýsingum um pöntun.
+            return "{:11}| {:11}| {:9}| {:30}| {:11}| {:7}| {:10}| {:9}| {:6}".format(
                 start_date,
+                end_date,
                 self.__order_number,
                 self.__name,
                 self.__ssn,
                 self.__car_number,
-                end_date)
+                self.__price,
+                self.__insurance,
+                self.__discount)
 
     def __repr__(self):
         '''

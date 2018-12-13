@@ -46,32 +46,35 @@ class CustomerUI(object):
         return choice
 
     def find_customer(self, ssn, customer):
-        self.__uistandard.print_header()
+        choice = ""
+        while choice not in HOMECOMMANDS:
+            self.__uistandard.print_header()
 
-        print("Viðskiptavinir - Kennitala\n")
-        print("\tViðskiptavinur\n\t{}".format("-"*20))
-        print("\t{} - {} - S: {}".format(
-            customer.get_ssn(), customer.get_name(),
-            customer.get_phone_number()))
-        print("\n\tSaga pantana\n\t{}".format("-"*60))
-        print("\t{:13}| {:9}| {:7}| {:10}".format(
-            "Upphafsdagur", "Pönt.nr.", "Bílnr.", "Verð"))
-        print("\t{}".format("-"*60))
-        order = self.__order_service.customer_orders(ssn)
-        print(order)
-        choice = input("\n1. Breyta\n2. Eyða\n\nVeldu aðgerð: ")
-        if choice == "1":
-            self.change_menu(ssn)
-        elif choice == "2":
-            choice = input("Ertu viss? ((J)á/(N)ei: ")
-            if choice.lower() == 'j':
-                self.__customer_service.remove_customer(ssn)
-                print("Viðskiptavini hefur verið eytt")
-                self.save_program()
-            time.sleep(2)
-        else:
-            print("Aðgerð ekki í boði")
-            time.sleep(2)
+            print("Viðskiptavinir - Kennitala\n")
+            print("\tViðskiptavinur\n\t{}".format("-"*20))
+            print("\t{} - {} - S: {}".format(
+                customer.get_ssn(), customer.get_name(),
+                customer.get_phone_number()))
+            print("\n\tSaga pantana\n\t{}".format("-"*60))
+            print("\t{:13}| {:9}| {:7}| {:10}".format(
+                "Upphafsdagur", "Pönt.nr.", "Bílnr.", "Verð"))
+            print("\t{}".format("-"*60))
+            order = self.__order_service.customer_orders(ssn, 2)
+            print(order)
+            choice = input("\n1. Breyta\n2. Eyða\n\nVeldu aðgerð: ")
+            if choice == "1":
+                self.change_menu(ssn)
+            elif choice == "2":
+                choice = input("Ertu viss? ((J)á/(N)ei: ")
+                if choice.lower() == 'j':
+                    self.__customer_service.remove_customer(ssn)
+                    print("Viðskiptavini hefur verið eytt")
+                    self.save_program()
+                time.sleep(2)
+            else:
+                print("Aðgerð ekki í boði")
+                time.sleep(2)
+        return choice
 
     def change_menu(self, ssn):
         choice = ""
