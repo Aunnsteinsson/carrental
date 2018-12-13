@@ -24,14 +24,6 @@ class UIStandard(object):
             "(H)eim", "(S)krá út", today))
         self.line_seperator()
 
-<<<<<<< Updated upstream
-    def print_location_header(self, location):
-        print("{:<100}".format("\n"+(location)+"\n"))
-        self.line_seperator()
-        
-    
-=======
->>>>>>> Stashed changes
     def line_seperator(self):
         print("-"*100)
 
@@ -43,3 +35,4 @@ class UIStandard(object):
         while choice.lower() != "b" and choice.lower() not in HOMECOMMANDS:
             choice = input(
                 "Veldu aðgerð (H), (S) eða (B)akka: ")
+# yo
