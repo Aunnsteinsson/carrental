@@ -28,7 +28,7 @@ class Car(object):
             for order_number, list_of_days in self.__rented_days.items():
                 if str(date.today()) in list_of_days:
                     if self.__status == "j":
-                        return "Leigður en ekki sóttur"
+                        return "LEigður en ekki sóttur"
                     if self.__status == "n":
                         return "Í útleigu"
         if self.__status == "j":

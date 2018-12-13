@@ -97,12 +97,15 @@ class CarUI(object):
             return new_car
 
     def boss_and_salesman_car_menu(self):
-        """Prentar bílayfirlits viðmót og tekur við input"""
+        """Pprentar bílayfirlits viðmót og tekur við input"""
         choice = ""
         while choice not in HOMECOMMANDS:  # Placeholder
+<<<<<<< HEAD
           #  self.__uistandard.print_location_header("Yfirmaður - Bílayfirlit")
+=======
+>>>>>>> f33b8d56be9c4e13fac7d460109c477459f4058f
             choice = self.__uistandard.show_menu(
-                """\t1. Allir Bílar
+                """Bílayfirlit\n\t1. Allir Bílar
 \t2. Lausir Bílar\n\t3. Bílar sem eru ekki tilbúnir til útleigu\n\t4. Afhenda eða taka á móti bíl\n""", "Veldu Aðgerð: ")
             choice = self.show_cars(choice)
             choice = self.return_car_menu(choice)

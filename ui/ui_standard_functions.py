@@ -1,6 +1,5 @@
 import os
 from datetime import date
-HOMECOMMANDS = ["h", "s"]
 
 
 class UIStandard(object):
@@ -23,16 +22,9 @@ class UIStandard(object):
             "{} - notandi: {}".format(self.__a_type, self.__name),
             "(H)eim", "(S)krá út", today))
         self.line_seperator()
-
+    
     def line_seperator(self):
         print("-"*100)
 
     def clear_screen(self):
         os.system("cls" if os.name == "nt" else "clear")
-
-    def back_input(self):
-        choice = ""
-        while choice.lower() != "b" and choice.lower() not in HOMECOMMANDS:
-            choice = input(
-                "Veldu aðgerð (H), (S) eða (B)akka: ")
-# yo

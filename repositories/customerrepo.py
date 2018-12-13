@@ -17,7 +17,7 @@ class CustomerRepo(object):
         þar sem kennitalan er notuð sem key og hver customer er hluti af
         customer klasanum er notað sem value"""
         customer_dict = {}
-        with open("./data/customers.csv", "r", encoding="utf-8") as customer_file:
+        with open("./data/customers.csv", "r") as customer_file:
             csv_reader = csv.reader(customer_file)
             next(csv_reader)
             for customer in csv_reader:
@@ -62,8 +62,8 @@ class CustomerRepo(object):
         i datafile sem heldur utan um viðskiptavini og
         þannig breytum við skránni"""
         list_of_customers = ["kennitala", "nafn",
-                             "simanumer", "kreditkortanumer"]
-        with open("./data/customers.csv", "w", newline="", encoding="utf-8") as customer_file:
+                             "simanumer", "kreditkortanúmer"]
+        with open("./data/customers.csv", "w", newline="") as customer_file:
             csv_writer = csv.writer(customer_file)
             csv_writer.writerow(list_of_customers)
             for ssn, customer in self.__customer.items():

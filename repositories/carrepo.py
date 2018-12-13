@@ -41,7 +41,7 @@ class CarRepo(object):
 
     def get_car(self, licence_plate):
         """Sækir upplýsingar um bíl. Kallar á __str__ fall úr class Car"""
-        for licence,_ in self.__car.items():
+        for licence, value in self.__car.items():
             if licence == licence_plate:
                 return self.__car[licence_plate]
         return False
