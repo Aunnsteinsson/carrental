@@ -183,21 +183,27 @@ forminu 1,2,3... og ár á forminu 2018, 2019... ")
         order_number = self.__order_service.make_order_number()
         price = self.__order_service.price_of_rent(
             licence_plate, 0, False, begin_date, end_date)
-        print("Verð án trygginga: {}".format(price))
+        print("Verð án aukatrygginga: {}".format(price))
         # Hér þarf að sækja verð
-        insurance_price = self.__order_service.get_price_of_insurance()
+        extra_insurance_price = self.__order_service.get_price_of_extra_insurance()
         insurance = input(
             "\tViðbótartrygging (verð {} á dag) (J)á/(N)ei: ".format(
-                insurance_price))
+                extra_insurance_price))
         if insurance.lower() == "j":
             insurance = True
+            price = self.__order_service.price_of_rent(
+                licence_plate, 0, True, begin_date, end_date)
+            print("Verð með aukatryggingum: {}".format(price))
         else:
             insurance = False
-        format(insurance_price)
+
         discount = input(
             "\tSkrifaðu hversu mörg prósent afslátturinn á að vera ef einhver: ")
         total_price = self.__order_service.price_of_rent(
-            licence_plate, discount, insurance, begin_date, end_date)  # hér þarð að nota aðra klasa
+            licence_plate, discount, insurance, begin_date, end_date)
+        if total_price != price:
+            print("Heildarverð með afslætti: {}".format(
+                total_price))  # hér þarð að nota aðra klasa
         ssn = input("\tKennitala viðskiptavinar: ")
         # if setning til að athuga hvort manneskjan sé til. Ef svo er
         # þá prentast út upplýsingar um hana, annars er sótt fall til
