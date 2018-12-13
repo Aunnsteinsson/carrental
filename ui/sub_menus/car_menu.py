@@ -36,7 +36,7 @@ class CarUI(object):
         while choice.lower() not in HOMECOMMANDS:
             self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
-                "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3. Í útleigu\n\t\
+                "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3.Bílar sem ekki eru tilbúnir til útleigu\n\t\
 4. Nýskrá bíl\n\t5. Afskrá bíl\n", "Veldu aðgerð: ")
 
             if choice == "1" or choice == "2" or choice == "3":
@@ -102,7 +102,7 @@ class CarUI(object):
         while choice not in HOMECOMMANDS:  # Placeholder
             choice = self.__uistandard.show_menu(
                 """Bílayfirlit\n\t1. Allir Bílar
-\t2. Lausir Bílar\n\t3. Í útleigu\n\t4. Afhenda eða taka á móti bíl\n""", "Veldu Aðgerð: ")
+\t2. Lausir Bílar\n\t3. Bílar sem eru ekki tilbúnir til útleigu\n\t4. Afhenda eða taka á móti bíl\n""", "Veldu Aðgerð: ")
             choice = self.show_cars(choice)
             choice = self.return_car_menu(choice)
         return choice
@@ -151,7 +151,7 @@ class CarUI(object):
                 the_type = "Sendibílar"
                 type_list = ["sendibill"]
             else:
-                the_type = "all_cars"
+                the_type = "Allir bílar"
                 type_list = ["sendibill", "folksbill", "jeppi"]
             choice = self.second_car_menu(
                 the_type, menu, status_list, type_list)
