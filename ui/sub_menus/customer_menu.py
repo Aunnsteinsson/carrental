@@ -70,12 +70,20 @@ class CustomerUI(object):
                     self.__customer_service.remove_customer(ssn)
                     print("Viðskiptavini hefur verið eytt. Notandi færður aftur heim")
                     self.save_program()
+                    list_of_order_numbers = self.__order_service.get_orders_of_customer_menu(
+                        ssn)
+                    for order_number in list_of_order_numbers:
+                        self.__order_service.remove_order(order_number)
                     time.sleep(3)
                     choice = "h"
                 time.sleep(2)
             elif choice not in HOMECOMMANDS:
                 print("Aðgerð ekki í boði")
                 time.sleep(2)
+            list_of_order_numbers = self.__order_service.get_orders_of_customer_menu(
+                ssn)
+            for order_number in list_of_order_numbers:
+                self.__order_service.change_customer(order_number, ssn)
         return choice
 
     def change_menu(self, ssn, customer):
