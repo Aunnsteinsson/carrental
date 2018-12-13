@@ -42,7 +42,7 @@ class BossUI(object):
             elif choice == "2":
                 choice = self.__car_ui.boss_and_salesman_car_menu()
             elif choice == "3":
-                choice = self.__customer_ui.get_customer_list()
+                choice = self.__customer_menu.get_customer_list()
             elif choice == "4":
                 choice = self.__employee_ui.show_employees()
             elif choice == "5":
