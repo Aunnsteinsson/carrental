@@ -21,7 +21,7 @@ class Car(object):
                 date = str(date_list[0])
         else:
             date = "Engar pantanir"
-        return "{:<8} | {:<12} | {:>11,.2f} {} | {:<30} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("kr."), (self.__wherabouts), date)
+        return "{:<8} | {:<12} | {:<11,.0f} {:<} | {:<30} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("kr."), (self.__wherabouts), date)
 
     def see_if_returned(self):
         if self.__rented_days:
@@ -110,7 +110,7 @@ class Car(object):
         return self.__rented_days
 
     def remove_order(self, order_number):
-        del self.__rented_days[order_number]
+        self.__rented_days.pop(order_number, None)
 
     def add_rented_days(self, list_of_days, order_number):
         list_of_days = [str(day) for day in list_of_days]

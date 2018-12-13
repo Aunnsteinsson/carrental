@@ -25,6 +25,7 @@ class OrderUI(object):
 
     def order_menu(self):
         """Prentar pantana viðmót tekur við inputi"""
+        self.__order_service = OrderService()
         choice = ""
         while choice not in HOMECOMMANDS:
             self.__uistandard.clear_screen()
@@ -258,11 +259,11 @@ Pöntun: {}\n{}\n{}\n{}\n\n1. Breyta Pöntun\n2. Bakfæra pöntun\n\
         # if setning til að athuga hvort manneskjan sé til. Ef svo er
         # þá prentast út upplýsingar um hana, annars er sótt fall til
         # að gera nýjan viðskiptavin
+        choice = ""
         customer = self.__customer_menu.get_the_customer(ssn)
         if customer:
             customer_name = customer.get_name()
         else:
-            choice = ""
             while choice != "j" and choice != "n":
                 choice = input(
                         "Viðskiptavinur ekki skráður í kerfið. Má bjóða þér að skrá inn nýjan viðskiptavin? (J)á eða (N)ei? ").lower()

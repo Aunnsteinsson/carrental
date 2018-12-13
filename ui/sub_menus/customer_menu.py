@@ -163,20 +163,20 @@ class CustomerUI(object):
                 print(check_string)
             else:
                 print("\nKennitala: {}\nNafn: {}\nSími: {}\nKreditkortanúmer: {}\
-\nÖll gildi samþykkt. Inniheldur þetta einhverjar rangar upplýsingar?".format(
+\nÖll gildi samþykkt. Athugaðu hvort að þetta innihaldi einhverjar rangar upplýsingar.".format(
                     ssn, name, phone_number, credit_card_number))
                 time.sleep(2)
             choice = ""
             while choice != "j" and choice != "n":
                 choice = input(
-                    "\nViltu endurtaka skráningu?\nVeldu (J)á til að reyna aftur, (N) til að sleppa endurtekningu: "
+                    "\nViltu yfirskrifa þessa skráningu?\nVeldu (J)á til að reyna aftur, (N) til að sleppa endurtekningu: "
                 ).lower()
         if check_string == "":
             a_customer = Customer(ssn, name, phone_number, credit_card_number)
             self.__customer_service.make_customer(a_customer)
             print("Hér eru upplýsingar um nýjan viðskiptavin: ")
             new_customer = self.__customer_service.find_customer(ssn)
-            print("{:>20}{:>30}{:>20}".format("Kennitala", "Nafn", "Sími"))
+            print("{:<15}{:<30}{:<20}".format("Kennitala", "Nafn", "Sími"))
             print(new_customer)
             time.sleep(2)
         else:
