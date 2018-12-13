@@ -41,14 +41,11 @@ class CarService(object):
         string = ""
         for _, item in dict.items():
             type_of_car = item.get_type()
+            wherabouts = item.get_wherabouts()
             #status_of_car = item.get_status()
-            if type_of_car in a_type:  # and status_of_car in status:
+            if type_of_car in a_type and wherabouts in status:  # and status_of_car in status:
                 car_string = item.__str__()
                 string += car_string + "\n"
-                """ if car[1] in a_type and car[2] in status:
-                    car_class = Car(
-                        car[0], car[1], car[2])
-                    car_list.append(car_class) """
         return string
 
     def get_car_prices(self):

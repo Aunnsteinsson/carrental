@@ -129,13 +129,15 @@ class CarUI(object):
         if choice == "1" or choice == "2" or choice == "3":
             if choice == "1":
                 menu = "sem eru lausir eða í útleigu"
-                status_list = ["Fratekinn", "Laus"]
+                status_list = ["Hefur ekki enn verið skilað",
+                               "Leigður en ekki sóttur", "Í útleigu", "Tilbúinn til útleigu"]
             if choice == "2":
                 menu = "sem eru lausir "
-                status_list = ["Laus"]
+                status_list = ["Tilbúinn til útleigu"]
             if choice == "3":
-                menu = "sem eru í útleigu"
-                status_list = ["Fratekinn"]
+                menu = "sem eru ekki tilbúnir til útleigu"
+                status_list = ["Hefur ekki enn verið skilað",
+                               "Leigður en ekki sóttur", "Í útleigu"]
             print("\n\t1. Allar gerðir\n\t2. Jeppar\n\t3. Fólksbílar"
                   "\n\t4. Sendibílar\n")
             second_choice = input("Veldu síðu: ")

@@ -39,6 +39,9 @@ class Car(object):
     def get_status(self):
         return self.__status
 
+    def get_wherabouts(self):
+        return self.__wherabouts
+
     def change_status(self, new_status):
         self.__status = new_status
         self.__wherabouts = self.see_if_returned()
