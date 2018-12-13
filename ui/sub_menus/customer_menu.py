@@ -54,8 +54,12 @@ class CustomerUI(object):
             "Upphafsdagur", "Pönt.nr.", "Tegund", "Bílnr.", "Staða"))
         print("\t{}".format("-"*80))
 ####################################
+        order = self.__order_service.customer_orders(ssn)
+        print(order)
+
         print("\t{:13}| {:9}| {:12}| {:7}| {:10}".format(
             "Upphafsdagur", "Pönt.nr.", "Tegund", "Bílnr.", "Staða"))
+
         # self.__order_service.showorders(customer)
         # þetta vantar alveg inn
         choice = input("\n1. Breyta\n2. Eyða\n\nVeldu aðgerð: ")

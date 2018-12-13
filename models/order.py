@@ -2,13 +2,14 @@ import csv
 
 
 class Order(object):
-    '''Klasi fyrir pantanir. Breytur í þessum klasa eru pöntunarnúmer, upphafsdagur,
-    skiladagur, nafn viðskiptavinar, kennitala viðskiptavinar, bíltegund, bílnúmer, 
-    staða bíls og hvort pöntun innihaldi aukatryggingu eður ei.
-    Klasinn inniheldur föll til að hægt sé að kalla á breytur eða breyta þeim.
-    Hægt er að fá __str__ á tvo mismunandi vegu.'''
+    '''Klasi fyrir pantanir. Breytur í þessum klasa eru pöntunarnúmer,
+    upphafsdagur,skiladagur, nafn viðskiptavinar, kennitala viðskiptavinar,
+    bíltegund, bílnúmer, staða bíls og hvort pöntun innihaldi aukatryggingu
+    eður ei. Klasinn inniheldur föll til að hægt sé að kalla á breytur eða
+    breyta þeim. Hægt er að fá __str__ á tvo mismunandi vegu.'''
 
-    def __init__(self, order_number, list_of_dates, ssn, name, car_number, price, insurance=False, discount=0.000):
+    def __init__(self, order_number, list_of_dates, ssn, name, car_number,
+                 price, insurance=False, discount=0.000):
         self.__order_number = order_number
         self.__list_of_dates = self.dates_string_to_list(list_of_dates)
         self.__ssn = ssn
@@ -92,14 +93,22 @@ class Order(object):
         í geymslu.'''
         start_date = self.__list_of_dates[0]
         end_date = self.__list_of_dates[-1]
+        # Gera string fyrir customer order history
         if info_to_print == 1:
-            return "\t {:11}| {:14}| {:10}| {:9}| {:10}{}{}".format(
-                start_date, self.__order_number, self.__name, self.__ssn, self.__car_number,
-                self.__car_number, end_date)
+            return "\t {:11}| {:9}| {:11}| {:7} |{:11}".format(
+                start_date,
+                self.__order_number,
+                self.__ssn,
+                self.__car_number,
+                end_date)
         else:
-            return "\t {:11}| {:14}| {:25}| {:11}| {:10}| {:9}| {:10}".format(
-                start_date, self.__order_number, self.__name,
-                self.__ssn, self.__car_number, self.__car_number, end_date)
+            return "\t {:11}| {:9}| {:25}| {:11}| {:7}| {:11}".format(
+                start_date,
+                self.__order_number,
+                self.__name,
+                self.__ssn,
+                self.__car_number,
+                end_date)
 
     def __repr__(self):
         '''
@@ -108,6 +117,9 @@ class Order(object):
         string_of_dates = self.dates_list_to_string()
         return "{},{},{},{},{},{},{},{}".format(self.__order_number,
                                                 string_of_dates,
-                                                self.__ssn, self.__name,
-                                                self.__car_number, self.__price,
-                                                self.__insurance, self.__discount)
+                                                self.__ssn,
+                                                self.__name,
+                                                self.__car_number,
+                                                self.__price,
+                                                self.__insurance,
+                                                self.__discount)
