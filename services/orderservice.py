@@ -92,7 +92,8 @@ class OrderService(object):
                 available_cars_string += cars_string + "\n"
         return available_cars_string
 
-    def add_dates_to_car(self, start_date, finish_date, licence_plate, order_number):
+    def add_dates_to_car(self, start_date, finish_date,
+                         licence_plate, order_number):
         car_dict = self.__car_repo.get_all_cars()
         car_unavailable = self.list_of_days(start_date, finish_date)
         the_car = car_dict[licence_plate]
@@ -111,7 +112,7 @@ class OrderService(object):
         string_of_orders = ""
         for key, orders in order.items():
             if ssn == orders.get_ssn():
-                order_string = orders.__str__()
+                order_string = orders.__str__(2)
                 string_of_orders += order_string + "\n"
         return string_of_orders
 

@@ -93,16 +93,24 @@ class Order(object):
         í geymslu.'''
         start_date = self.__list_of_dates[0]
         end_date = self.__list_of_dates[-1]
-        # Gera string fyrir customer order history
+
         if info_to_print == 1:
-            return "\t {:11}| {:9}| {:11}| {:7} |{:11}".format(
+            return "\t{:11}| {:9}| {:11}| {:7} |{:11}".format(
                 start_date,
                 self.__order_number,
                 self.__ssn,
                 self.__car_number,
                 end_date)
+
+        elif info_to_print == 2:  # Hvernig pantanir prentast í sögu viðsk.v.
+            return "\t{:13}| {:9}| {:7}| {:10}".format(
+                start_date,
+                self.__order_number,
+                self.__car_number,
+                self.__price)
+
         else:
-            return "\t {:11}| {:9}| {:25}| {:11}| {:7}| {:11}".format(
+            return "\t{:11}| {:9}| {:25}| {:11}| {:7}| {:11}".format(
                 start_date,
                 self.__order_number,
                 self.__name,

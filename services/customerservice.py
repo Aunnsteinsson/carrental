@@ -29,9 +29,11 @@ class CustomerService(object):
         try:
             int(new_credit_card_number)
         except ValueError:
-            return "Kortanúmerið {} er ekki samþykkt".format(credit_card_number)
+            return "Kortanúmerið {} er ekki samþykkt".format(
+                credit_card_number)
         if len(new_credit_card_number) != 16:
-            return "Kortanúmerið {} er ekki samþykkt".format(credit_card_number)
+            return "Kortanúmerið {} er ekki samþykkt".format(
+                credit_card_number)
         return ""
 
     def make_customer(self, customer):

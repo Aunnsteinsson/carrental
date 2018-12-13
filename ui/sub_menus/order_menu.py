@@ -72,8 +72,9 @@ class OrderUI(object):
     def get_single_order(self):
         order = input("Hvaða pöntun viltu fá að sjá?")
         the_order = self.__order_service.find_order(order)
-        strengur = "Pantanir - Yfirlit pantana- Pöntunarnúmar\n\Pöntun númer {}\n1. Breyta Pöntun\n2. Bakfæra pöntun\n3. Sjá upplýsingar".format(
-            order)
+        strengur = "Pantanir - Yfirlit pantana- Pöntunarnúmar\n\
+Pöntun númer {}\n1. Breyta Pöntun\n2. Bakfæra pöntun\n3. Sjá upplýsingar\
+".format(order)
         choice = self.__uistandard.show_menu(strengur, "Veldu aðgerð:")
         if choice == "1":
             self.change_order_menu(order, the_order)
