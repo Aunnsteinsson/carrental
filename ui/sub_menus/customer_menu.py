@@ -80,6 +80,7 @@ class CustomerUI(object):
             elif choice not in HOMECOMMANDS:
                 print("Aðgerð ekki í boði")
                 time.sleep(2)
+            self.__order_service = OrderService()
             list_of_order_numbers = self.__order_service.get_orders_of_customer_menu(
                 ssn)
             for order_number in list_of_order_numbers:
