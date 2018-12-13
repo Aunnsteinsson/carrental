@@ -190,9 +190,14 @@ class OrderService(object):
     def get_orders(self):
         return self.__order_repo.get_orders()
 
-    def get_price_of_insurance(self):
+    def get_price_of_extra_insurance(self):
         price_of_insurance = self.__car_repo.get_car_prices()
-        price_of_insurance = price_of_insurance["trygging"]
+        price_of_insurance = price_of_insurance["aukatrygging"]
+        return float(price_of_insurance)
+
+    def get_price_of_mandated_insurance(self):
+        price_of_insurance = self.__car_repo.get_car_prices()
+        price_of_insurance = price_of_insurance["skyldutrygging"]
         return float(price_of_insurance)
 
     def price_of_rent(self, licence_plate, discount, insurance, start_date, end_date):
@@ -200,19 +205,25 @@ class OrderService(object):
         the_car = self.__car_repo.get_car(licence_plate)
         price_of_car = the_car.price_vehicle()
         price_of_car = float(price_of_car)
-        price_of_insurance = self.get_price_of_insurance()
+        price_of_extra_insurance = self.get_price_of_extra_insurance()
+        price_of_mandated_insurance = self.get_price_of_mandated_insurance()
         list_of_days = self.list_of_days(start_date, end_date)
         start = list_of_days[STARTDATE]
         end = list_of_days[ENDDATE]
         days_of_rent = end.day - start.day
         days_of_rent = int(days_of_rent)
         price_of_rent = days_of_rent * price_of_car
+        price_of_mandated = days_of_rent * price_of_mandated_insurance
+        price_of_rent += price_of_mandated
         discount = self.change_discount_to_float(discount)
+        if insurance:
+            final_price = price_of_extra_insurance * days_of_rent + price_of_rent
+            if discount:
+                final_price = final_price * discount
+            return final_price
         if discount:
             price_of_rent = price_of_rent * discount
-        if insurance:
-            final_price = price_of_insurance * days_of_rent + price_of_car
-            return final_price
+            return price_of_rent
         else:
             return price_of_rent
 
