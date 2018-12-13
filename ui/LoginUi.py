@@ -57,8 +57,7 @@ __   __  ______  ______  __        ")
                 "https://github.com/Aunnsteinsson/carrental_issue_repo\
 /issues/new")
             sys.exit(0)
-        elif username.lower() == "T,J,A,S,L eru upphafsstafir allra \
-höfunda":
+        elif username.lower() == "lexmachine":
             self.easter_egg()
         else:
             password = getpass(prompt="Lykilorð: ")
