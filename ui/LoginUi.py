@@ -40,30 +40,6 @@ __   __  ______  ______  __        ")
         print("       \\/_/\\/_____/\\/_/\\/_/\\/_____/\\/_____/     \\/_/ /_/\
 \\/_____/\\/_/ \\/_/  \\/_/  \\/_/\\/_/\\/_____/ ")
 
-    def sports_car(self):
-        '''
-         Prentar út bíl
-        '''
-#         print()
-#         print((" "*10), '                                   _._')
-#         print((" "*10), '                              _.-="_-         _')
-#         print((" "*10), '                         _.-="   _-          | ||"""""""---.\
-# _______     __..')
-#         print((" "*10), '             ___.===""""-.______-,,,,,,,,,,,,`-""----" """""\
-#        """""  __')
-#         print((" "*10), '      __.--""     __        ,""                  o \\         \
-#   __        z__|')
-#         print((" "*10), ' __-""=======.--""  ""--.=================================.--""\
-#   ""--.=======:')
-#         print((" "*10), '7       LwL : /        \\ : |========================|    : /  \
-#       \\ :  LwL :')
-#         print((" "*10), 'V___________:|          |: |========================|    :|    \
-#       |:   _-"')
-#         print((" "*10), ' V__________: \\        / :_|=======================/_____: \\    \
-#     / :__-"')
-#         print((" "*10), '            "  ""____""                                  ""  \
-# ""____""')
-
     def ask_for_username_password(self):
         '''
          Spyr starfsmann um notandanafn og lykilorð
@@ -104,7 +80,6 @@ __   __  ______  ______  __        ")
          notendanafni og hluthverki starfsmanns
         '''
         self.tjasl_rental_header()
-        self.sports_car()
         self.print_header()
         username, password = self.ask_for_username_password()
         return self.check_employee_type(username, password)
