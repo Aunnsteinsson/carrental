@@ -158,18 +158,26 @@ class EmployeeUI(object):
                 emp_type = "yfirmadur"
             else:
                 emp_type = "soludeild"
-            choice = input(
-                "\tStaðfesta nýjan notanda {} ((J)á/(N)ei): ".format(username))
-            if choice.lower() == "j":
-                self.__employee_service.add_employee(
-                    username, password, name, address, phonenumber, emp_type)
-                print("\n{}\nNýr notandi hefur verið skráður!\n".format(
-                    "-"*40))
-                self.save_employees()
+            if (len(username) > 10 or len(password) > 10 or len(name) > 25 or
+                    len(address) > 25 or len(phonenumber) > 10):
+                print("\n\tPassaðu að hafa innsetningu á notendanafni, lykilorði\
+ og síma ekki lengri en 10 stafi \n\tog nafn og heimilisfang ekki lengra en 25\
+  stafi \n\t- fer á upphafssíðu!")
+                time.sleep(5)
+                return choice
             else:
-                print("\nHætt við aðgerð - Fer á upphafssíðu!")
-            time.sleep(2)
-            return choice
+                choice = input(
+                    "\tStaðfesta nýjan notanda {} ((J)á/(N)ei): ".format(username))
+                if choice.lower() == "j":
+                    self.__employee_service.add_employee(
+                        username, password, name, address, phonenumber, emp_type)
+                    print("\n{}\nNýr notandi hefur verið skráður!\n".format(
+                        "-"*40))
+                    self.save_employees()
+                else:
+                    print("\nHætt við aðgerð - Fer á upphafssíðu!")
+                time.sleep(2)
+                return choice
 
     def show_employees(self):
         """
