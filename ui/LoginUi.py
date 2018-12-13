@@ -57,7 +57,8 @@ __   __  ______  ______  __        ")
                 "https://github.com/Aunnsteinsson/carrental_issue_repo\
 /issues/new")
             sys.exit(0)
-        elif username.lower() == "alex":
+        elif username.lower() == "T,J,A,S,L eru upphafsstafir allra \
+höfunda":
             self.easter_egg()
         else:
             password = getpass(prompt="Lykilorð: ")
@@ -109,29 +110,51 @@ __   __  ______  ______  __        ")
         print("        SLTJAS                                  LTJASL")
         print("        TJASL                      TJAS        LTJASL")
         print("        TJAS                      LTJAS LTJ   ASLTJA")
-        print("        SLTJ                      ASLTJASLTJ  ASLTJ                         ASLTJASLT")
-        print("       JASLT                      JASLTJASL  TJASL                        TJASLTJASLTJ")
-        print("       ASLTJ                     ASLTJASLTJ ASLTJ                       ASLTJA    SLTJ")
-        print("       ASLTJ                     ASLTJASLT  JASLT                     JASLTJA    SLTJA")
-        print("       SLTJA                    SLTJASLTJ  ASLTJA                   SLTJASL     TJASL")
-        print("       TJASL                    TJASLTJA   SLTJASLTJASLTJASLTJA   SLTJASL     TJASL")
-        print("        TJAS                   LTJASLTJ    ASLTJASLTJASLTJASLTJASLTJASL      TJASL")
-        print("        TJAS                   LTJASLT     JASLT   JASLT   JASLTJASLT      JASLTJ")
-        print("        ASLT                  JASLTJAS      LTJ   ASLTJASLTJASLTJAS      LTJASL")
+        print("        SLTJ                      ASLTJASLTJ  ASLTJ            \
+             ASLTJASLT")
+        print("       JASLT                      JASLTJASL  TJASL             \
+           TJASLTJASLTJ")
+        print("       ASLTJ                     ASLTJASLTJ ASLTJ               \
+        ASLTJA    SLTJ")
+        print("       ASLTJ                     ASLTJASLT  JASLT               \
+      JASLTJA    SLTJA")
+        print("       SLTJA                    SLTJASLTJ  ASLTJA               \
+    SLTJASL     TJASL")
+        print("       TJASL                    TJASLTJA   SLTJASLTJASLTJASLTJA\
+   SLTJASL     TJASL")
+        print("        TJAS                   LTJASLTJ    ASLTJASLTJASLTJASLTJA\
+SLTJASL      TJASL")
+        print("        TJAS                   LTJASLT     JASLT   JASLT   JASL\
+TJASLT      JASLTJ")
+        print("        ASLT                  JASLTJAS      LTJ   ASLTJASLTJASL\
+TJAS      LTJASL")
         print(
-            "        TJASL               TJASL TJASL         TJASLTJASLTJASLTJA     SLTJASL")
-        print("         TJAS             LTJAS  LTJASLT         JASLTJASLTJASLTJASL   TJASLTJA")
-        print("         SLTJA            SLTJASLTJASLTJ                     ASLTJASL    TJASLTJAS")
-        print("          LTJAS            LTJASLTJASLT              JASL       TJASLT  JASL TJASL")
-        print("          TJASLT              JASL                   TJAS        LTJASL  TJASLTJA")
-        print("           SLTJAS                                LTJ              ASLTJ    ASLT")
-        print("            JASLTJAS                            LTJA              SLTJA     SLTJ")
-        print("               ASLTJAS                          LTJA              SLTJASLTJASLTJ")
-        print("     ASL        TJASLTJASL                       TJAS           LTJASLTJASLTJAS")
-        print("    LTJASLT    JASLTJASLTJASLTJA                  SLT         JASLTJA    S")
-        print("    LTJASLTJASLTJA SLTJASLTJASLTJASLTJAS           LTJA    SLTJASL")
-        print("    TJAS LTJASLTJASLTJA    SLTJASLTJASLTJA SLTJASLTJASLTJASLTJAS")
-        print("     LTJA  SLTJASLTJA         SLTJASLTJAS LTJASLTJASLTJASLTJA")
+            "        TJASL               TJASL TJASL         TJASLTJASLTJASLTJ\
+    A     SLTJASL")
+        print("         TJAS             LTJAS  LTJASLT         JASLTJASLTJASL\
+TJASL   TJASLTJA")
+        print("         SLTJA            SLTJASLTJASLTJ                     ASLT\
+JASL    TJASLTJAS")
+        print("          LTJAS            LTJASLTJASLT              JASL       \
+TJASLT  JASL TJASL")
+        print("          TJASLT              JASL                   TJAS        \
+LTJASL  TJASLTJA")
+        print("           SLTJAS                                LTJ              \
+ASLTJ    ASLT")
+        print("            JASLTJAS                            LTJA             \
+ SLTJA     SLTJ")
+        print("               ASLTJAS                          LTJA             \
+ SLTJASLTJASLTJ")
+        print("     ASL        TJASLTJASL                       TJAS           L\
+TJASLTJASLTJAS")
+        print("    LTJASLT    JASLTJASLTJASLTJA                  SLT        \
+ JASLTJA    S")
+        print("    LTJASLTJASLTJA SLTJASLTJASLTJASLTJAS           LTJA   \
+ SLTJASL")
+        print("    TJAS LTJASLTJASLTJA    SLTJASLTJASLTJA SLTJASLTJ\
+ASLTJASLTJAS")
+        print("     LTJA  SLTJASLTJA         SLTJASLTJAS LTJASLTJASLTJ\
+ASLTJA")
         print("      SLTJ   ASLTJA         SLTJASLTJASL TJASL TJASLTJASLT")
         print("       JASLTJASLT           JASLTJASLTJ  ASLT")
         print("        JASLTJA              SLTJASLT   JASL")
