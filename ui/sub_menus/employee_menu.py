@@ -26,9 +26,14 @@ class EmployeeUI(object):
         Prentar haus fyrir starfmannayfirlit kerfisstjóra þar sem hann sér
         einnig lykilorð
         '''
+<<<<<<< HEAD
         print("{:<100}".format("\nStarfsmenn - Starfsmannayfirlit kerfisstjóra\n"))
         self.__uistandard.line_seperator()
         print("{:^10s}| {:^10s}| {:^25s}| {:^25s}| {:^10s}| {:^12s}".format(
+=======
+        self.__uistandard.print_location_header("Starfsmenn - Starfsmannayfirlit kerfisstjórans")
+        print("{:<10s}| {:<10s}| {:<25s}| {:<25s}| {:<10s}| {:<12s}".format(
+>>>>>>> 841fd9622195e5c43ae8e58565804da01d85da30
             "Notandi", "Lykilorð", "Nafn", "Heimilisfang", "Sími", "Hlutverk"))
         self.__uistandard.line_seperator()
 
@@ -36,8 +41,7 @@ class EmployeeUI(object):
         '''
         Prentar haus fyrir starfmannayfirlit yfirmanns
         '''
-        print("{:<100}".format("\nStarfsmenn - Starfsmannayfirlit yfirmanns\n"))
-        self.__uistandard.line_seperator()
+        self.__uistandard.print_location_header("Starfsmenn - Starfsmannayfirlit yfirmanns")
         print("{:^25s}| {:^10s}| {:^25s}| {:^10s}| {:^12s}".format(
             "Nafn", "Notandi", "Heimilisfang", "Sími", "Hlutverk"))
         self.__uistandard.line_seperator()
