@@ -110,7 +110,7 @@ class Car(object):
         return self.__rented_days
 
     def remove_order(self, order_number):
-        k = self.__rented_days.pop(order_number)
+        del self.__rented_days[order_number]
 
     def add_rented_days(self, list_of_days, order_number):
         list_of_days = [str(day) for day in list_of_days]

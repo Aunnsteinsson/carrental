@@ -24,7 +24,7 @@ class BossUI(object):
         self.__uistandard = UIStandard(self.__username, emp_type)
         self.__employee_service = EmployeeService()
         self.__order_service = OrderService()
-        self.__customer_ui = CustomerUI(self.__username, emp_type)
+        self.__customer_menu = CustomerUI(self.__username, emp_type)
         self.__car_service = CarService()
         self.__price_ui = PriceUI(self.__username, emp_type)
         self.__order_ui = OrderUI(self.__username, emp_type)
