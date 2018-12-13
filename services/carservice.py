@@ -31,6 +31,10 @@ class CarService(object):
         """ Fall sem sýnir upplýsingar um bíl """
         return self.__car_repo.get_car(licence_plate)
 
+    def change_status(self, new_status, car):
+        car.change_status(new_status)
+        self.__car_repo.save_car_data()
+
     def get_list_of_cars(self, a_type, status):
         """ Fall sem sækir lista af öllum bílum """
         dict = self.__car_repo.get_all_cars()

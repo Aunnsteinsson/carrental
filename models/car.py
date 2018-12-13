@@ -28,9 +28,9 @@ class Car(object):
             for order_number, list_of_days in self.__rented_days.items():
                 if str(date.today()) in list_of_days:
                     if self.__status == "j":
-                        return "Í útleigu"
-                    if self.__status == "n":
                         return "LEigður en ekki sóttur"
+                    if self.__status == "n":
+                        return "Í útleigu"
         if self.__status == "j":
             return "Tilbúinn til útleigu"
         if self.__status == "n":
@@ -41,6 +41,7 @@ class Car(object):
 
     def change_status(self, new_status):
         self.__status = new_status
+        self.__wherabouts = self.see_if_returned()
 
     def dict_to_string(self, date_dict):
         string = ""
@@ -114,8 +115,8 @@ class Car(object):
 
     def __repr__(self):
         days_string = self.dict_to_string(self.__rented_days)
-        return "{},{},{}".format(self.__licence_plate,
-                                 self.__a_type, days_string)
+        return "{},{},{},{}".format(self.__licence_plate,
+                                    self.__a_type, self.__status, days_string)
 
 
 """class Jeep(Car):

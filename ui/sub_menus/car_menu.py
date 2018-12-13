@@ -112,13 +112,15 @@ class CarUI(object):
             licence_plate = input(
                 "Hvert er bílnúmerið á bílnum sem þú vilt breyta stöðunni á?").upper()
             the_car = self.__car_service.show_cars(licence_plate)
-            print(the_car)
             if the_car:
+                print(the_car)
                 status = input("Er bíllinn í stæði? (J)á eða (N)ei").lower()
                 if status == "j" or status == "n":
-                    the_car.change_status(status)
+                    self.__car_service.change_status(status, the_car)
                 else:
                     print("Ekki rétt skipun. Engin breyting verður gerð")
+            else:
+                print("Enginn bíll með þetta bílnúmer")
             choice = input(
                 "Veldu aðgerð: (H)eim, (S)krá út eða eitthvað annað til að halda áfram að breyta stöðu bíla").lower()
         return choice
