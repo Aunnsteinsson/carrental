@@ -21,11 +21,11 @@ class SalesmanUI(object):
     def main_menu(self):
         choice = ""
         while choice != HOMECOMMANDS[2] and choice != HOMECOMMANDS[3]:
-            # self.__uistandard.clear_screen()
+            self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
                 """ \t1. Pantanir\n\t2. Bílayfirlit
 \t3. Viðskiptavinir\n\t4. Verðlisti\n""", "Veldu aðgerð: ")
-            # self.__uistandard.clear_screen()
+            self.__uistandard.clear_screen()
             if choice == "1":
                 choice = self.__order_ui.order_menu()
                 self.__customer_ui = CustomerUI(self.__name, self.__emp_type)
