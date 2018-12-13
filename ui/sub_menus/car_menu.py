@@ -100,10 +100,7 @@ class CarUI(object):
         """Pprentar bílayfirlits viðmót og tekur við input"""
         choice = ""
         while choice not in HOMECOMMANDS:  # Placeholder
-<<<<<<< HEAD
-          #  self.__uistandard.print_location_header("Yfirmaður - Bílayfirlit")
-=======
->>>>>>> f33b8d56be9c4e13fac7d460109c477459f4058f
+            #self.__uistandard.print_location_header("Yfirmaður - Bílayfirlit")
             choice = self.__uistandard.show_menu(
                 """Bílayfirlit\n\t1. Allir Bílar
 \t2. Lausir Bílar\n\t3. Bílar sem eru ekki tilbúnir til útleigu\n\t4. Afhenda eða taka á móti bíl\n""", "Veldu Aðgerð: ")
