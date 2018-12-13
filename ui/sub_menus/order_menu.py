@@ -29,7 +29,7 @@ class OrderUI(object):
             # lata while loopuna virka betur
             self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
-                "Pantanir\n\t1. Yfirlit pantana\n\t2. Ný pöntun\n",
+                "Pantanir\n\n\t1. Yfirlit pantana\n\t2. Ný pöntun\n",
                 "Veldu aðgerð: ")
             if choice == "1":
                 choice = self.order_list_menu()
@@ -40,6 +40,7 @@ class OrderUI(object):
     def order_list_menu(self):
         """Prentar innra pantana viðmót og tekur við input"""
         choice = ""
+        self.__uistandard.clear_screen()
         while choice not in HOMECOMMANDS:  # Placeholder
             self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
@@ -48,19 +49,21 @@ class OrderUI(object):
             if choice == "1":
                 ssn = input("\nKennitala viðskiptavinar: ")
                 self.ssn_order_menu(ssn)
-                choice = input("B - til baka, H - Heim, S - Útskrá: ")
-            if choice == "2":
+                self.__uistandard.back_input()
+            elif choice == "2":
                 order_number = input("Hvaða pöntun viltu fá að sjá? ")
                 self.get_single_order(order_number)
-            if choice == "3":
+            elif choice == "3":
                 self.__uistandard.clear_screen()
                 self.all_orders()
-                choice = input("B - tilbaka, H - Heim, S - Útskrá: ")
+                choice = input("Veldu aðgerð: ")
         return choice
 
     def ssn_order_menu(self, ssn):
         self.__uistandard.clear_screen()
         self.__uistandard.print_header()
+        print("Pantanir - Yfirlit pantana - Kennitala")
+        print()
         customer = self.__customer_menu.get_the_customer(ssn)
         if customer:
             print("\t{} - {}\n\t{}".format(customer.get_name(), ssn, "-"*60))
