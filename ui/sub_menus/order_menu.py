@@ -40,7 +40,12 @@ class OrderUI(object):
         """Prentar innra pantana viðmót og tekur við input"""
         choice = ""
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         while choice not in HOMECOMMANDS:  # Placeholder
+=======
+        self.__uistandard.clear_screen()
+        while choice not in HOMECOMMANDS:
+>>>>>>> Stashed changes
 =======
         self.__uistandard.clear_screen()
         while choice not in HOMECOMMANDS:
@@ -53,9 +58,12 @@ class OrderUI(object):
                 ssn = input("\nKennitala viðskiptavinar: ")
                 self.ssn_order_menu(ssn)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 choice = input("B - til baka, H - Heim, S - Útskrá: ")
             if choice == "2":
 =======
+=======
+>>>>>>> Stashed changes
                 choice = self.__uistandard.back_input()
             elif choice == "2":
 >>>>>>> Stashed changes
