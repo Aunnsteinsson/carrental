@@ -4,6 +4,7 @@ from services.orderservice import OrderService
 from services.carservice import CarService
 from ui.sub_menus.customer_menu import CustomerUI
 from ui.ui_standard_functions import UIStandard
+from datetime import datetime
 from datetime import date
 import time
 HOMECOMMANDS = ["h", "H", "s", "S"]
@@ -139,14 +140,29 @@ class OrderUI(object):
         # Sæki drasl1
 
     def new_order_menu(self):
+        dates_okay = False
         self.__uistandard.print_header()
         print("Pantanir - Ný pöntun\n\tTímabil\n\t--------")
-        begin_day = input("\tUpphafsdagur: ")
-        begin_month = input("\tUpphafsmánuður")
-        begin_year = input("\tUpphafsár")
-        end_day = input("\tSkiladagur: ")
-        end_month = input("\tSkilamánuður")
-        end_year = input("\tSkilaár")
+        while not dates_okay:
+            begin_day = input("\tUpphafsdagur: ")
+            begin_month = input("\tUpphafsmánuður: ")
+            begin_year = input("\tUpphafsár: ")
+            end_day = input("\tSkiladagur: ")
+            end_month = input("\tSkilamánuður: ")
+            end_year = input("\tSkilaár: ")
+            try:
+                begining_date = date(
+                    int(begin_year), int(begin_month), int(begin_day))
+                ending_date = date(
+                    int(end_year), int(end_month), int(end_day))
+                if begining_date < ending_date:
+                    dates_okay = True
+                else:
+                    print("Ekki hægt að leiga bíl í minna en einn dag")
+            except ValueError:
+                print("Vinsamlegast skráðu daga og mánuði á heiltölu \
+forminu 1,2,3... og ár á forminu 2018, 2019... ")
+
         begin_date = begin_year + "-" + begin_month + "-" + begin_day
         end_date = end_year + "-" + end_month + "-" + end_day
         list_of_days = self.__order_service.list_of_days(begin_date, end_date)
