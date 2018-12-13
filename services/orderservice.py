@@ -110,10 +110,13 @@ class OrderService(object):
         koma fram"""
         order = self.__order_repo.get_orders()
         string_of_orders = ""
-        for key, orders in order.items():
+        for _, orders in order.items():
             if ssn == orders.get_ssn():
+                licence_plate = orders.get_car()
+                the_car = self.__car_repo.get_car(licence_plate)
+                status = the_car.get_wherabouts()
                 order_string = orders.__str__(print_format)
-                string_of_orders += order_string + "\n"
+                string_of_orders += order_string + status + "\n"
         return string_of_orders
 
     def change_time(self, order_number, new_start_time, new_end_time):
