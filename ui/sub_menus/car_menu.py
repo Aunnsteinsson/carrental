@@ -154,6 +154,7 @@ class CarUI(object):
         return choice
 
     def second_car_menu(self, the_type, menu, status_list, type_list):
+        self.__uistandard.clear_screen()
         self.__uistandard.print_header()
         line_seperator = ("-"*75)
         print("Bílayfirlit - {} {}".format(the_type, menu))

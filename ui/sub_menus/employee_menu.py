@@ -68,8 +68,7 @@ class EmployeeUI(object):
             elif choice == "2":
                 # Breyta einhverju við employee
                 self.edit_employee()
-            else:
-                return choice
+            return choice
 
     def delete_employee(self, employees_list_string):
         '''
