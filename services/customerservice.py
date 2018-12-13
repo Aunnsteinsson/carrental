@@ -22,6 +22,7 @@ class CustomerService(object):
         new_phone_number = new_phone_number.replace("+", "")
         try:
             int(new_phone_number)
+            return new_phone_number
         except ValueError:
             return "Simanúmerið {} er ekki samþykkt".format(phone_number)
         new_credit_card_number = credit_card_number.replace(" ", "")

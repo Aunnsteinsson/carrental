@@ -8,6 +8,16 @@ class EmployeeService(object):
         '''
         self.__employee_repo = EmployeeRepo()
 
+    def check_phone(self, phone_number):
+        new_phone_number = phone_number.replace(" ", "")
+        new_phone_number = new_phone_number.replace("-", "")
+        new_phone_number = new_phone_number.replace("+", "")
+        try:
+            int(new_phone_number)
+            return new_phone_number
+        except ValueError:
+            return "Simanúmerið {} er ekki samþykkt".format(phone_number)
+
     def add_employee(self, username, password, name,
                      address, phonenumber, emp_type):
         '''
