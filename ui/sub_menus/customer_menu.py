@@ -23,8 +23,8 @@ class CustomerUI(object):
     def customer_menu(self):
         """Prentar viðskiptavinaviðmót sölumanns og tekur við input"""
         choice = ""
-        self.__uistandard.clear_screen()
         while choice not in HOMECOMMANDS:
+            self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
                 """Viðskiptavinir\n\n\t1. Leita eftir kennitölu
     \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur\n""",
@@ -141,7 +141,7 @@ class CustomerUI(object):
             "Kennitala", "Nafn", "Sími") + (line_seperator))
         string = self.__customer_service.get_list()
         print(string)
-        choice = input("B - tilbaka, H - Heim, S - Útskrá: ")
+        choice = self.__uistandard.back_input()
         return choice
 
     def new_customer_menu(self):

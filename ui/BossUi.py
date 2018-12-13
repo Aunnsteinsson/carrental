@@ -52,7 +52,7 @@ class BossUI(object):
 
     """ def show_all_orders(self):
         """"""
-        #from services import orderservice
+        # from services import orderservice
         print("\tdagsetning  |  Pönt.nr.  |  Nafn  |  Kennitala  |  Tegund  |  Bílnr.  |  Staða\n")
         self.__uistandard.line_seperator()
         self.__order_service.show_orders()
@@ -65,13 +65,22 @@ class BossUI(object):
         """ Prentar út tekjur bílaleigu """
         print("Tekjur\n\n{:^15} | {:^15}\n".format(
             "Pönt.nr.", "Tekjur")+("-")*36)
-        order_dict = self.__order_service.get_orders()
+        new_sday = input("Upphafsdagur tímabils (dd): ")
+        new_smon = input("Upphafsmánuður tímabils(mm): ")
+        new_syear = input("Upphafs ár tímabils (yyyy): ")
+        new_eday = input("Lokadagur tímabils (dd): ")
+        new_emon = input("Lokamánuður tímabils (mm): ")
+        new_eyear = input("Lokaár tímabils (yyyy): ")
+        begin_date = "{}-{}-{}".format(new_syear, new_smon, new_sday)
+        end_date = "{}-{}-{}".format(new_eyear, new_emon, new_eday)
+        total_rev = self.__order_service.get_total_rev(begin_date, end_date)
+        print(total_rev)
 
-        for _, value in order_dict.items():
+        """ for _, value in order_dict.items():
             order = value.get_order_number()
             income = value.get_price()
             print("{:^15} | {:^15}".format(
-                order, income))
+                order, income))"""
 
         choice = ""
         while choice.lower() not in HOMECOMMANDS:

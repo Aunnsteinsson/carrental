@@ -48,6 +48,13 @@ class CarService(object):
                 string += car_string + "\n"
         return string
 
+    def get_all_cars(self):
+        dict = self.__car_repo.get_all_cars()
+        list_of_cars = []
+        for _, value in dict.items():
+            list_of_cars.append(value)
+        return list_of_cars
+
     def get_car_prices(self):
         car_prices = self.__car_repo.get_car_prices()
         return car_prices

@@ -1,6 +1,6 @@
 licence_plate,a_type,status,days
-AA111,jeppi,n,:1&2018-12-12$2018-12-13$2018-12-14$2018-12-15$
-HH333,sendibill,n,:2&2018-12-12$2018-12-13$2018-12-14$2018-12-15$
+AA111,jeppi,n,
+HH333,sendibill,n,:1&2015-12-10$2015-12-11$2015-12-12$2015-12-13$2015-12-14$2015-12-15$
 LL888,jeppi,j,
 kk123,sendibill,j,
 LL666,folksbill,j,

@@ -1,3 +1,2 @@
 order_number,duration,ssn,car_number,price,insurance,discount
-1,2018-12-12:2018-12-13:2018-12-14:2018-12-15:,1005933279,Jóhannes Ingi Torfason,AA111,237600.0,True,1
-2,2018-12-12:2018-12-13:2018-12-14:2018-12-15:,1005933279,Jóhannes Ingi Torfason,HH333,39621780.0,True,1
+1,2015-12-10:2015-12-11:2015-12-12:2015-12-13:2015-12-14:2015-12-15:,1005933279,Jóhannes Ingi Torfason,HH333,60033000.0,True,0

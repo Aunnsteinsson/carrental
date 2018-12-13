@@ -52,7 +52,7 @@ class OrderUI(object):
 
             elif choice == "2":
                 order_number = input("Hvaða pöntun viltu fá að sjá? ")
-                self.get_single_order(order_number)
+                choice = self.get_single_order(order_number)
 
             elif choice == "3":
                 self.__uistandard.clear_screen()
@@ -83,32 +83,34 @@ class OrderUI(object):
             time.sleep(2)
             return customer
         else:
-            print("\t{} - {}\n\t{}".format(customer.get_name(), ssn, "-"*70))
-            print("\t{:^11}| {:^9}| {:^11}| {:^7} | {:^11}".format(
-                "Upphafsd.", "Pönt.nr.", "Tegund", "Bílnr.", "Staða"))
-            print("\t{}".format("-"*70))
+            print("\t{} - {}\n\t{}".format(customer.get_name(), ssn, "-"*50))
+            print("\t{:^11}| {:^9}| {:^11}| {:^7}".format(
+                "Upphafsd.", "Pönt.nr.", "Tegund", "Bílnr."))
+            print("\t{}".format("-"*50))
             order = self.__order_service.customer_orders(ssn, 1)
             print(order)
             choice = self.__uistandard.back_input()
         return choice
 
     def get_single_order(self, order_number):
-        self.__uistandard.clear_screen()
-        self.__uistandard.print_header()
         choice = ""
-        while choice not in HOMECOMMANDS and choice != "2":
+        self.__uistandard.clear_screen()
+        while choice not in HOMECOMMANDS and choice != "2" and choice != "b":
+            self.__uistandard.clear_screen()
+            self.__uistandard.print_header()
             the_order = self.__order_service.find_order(order_number)
             if not the_order:
                 print("Pöntunarnúmer ekki á skrá")
                 time.sleep(2)
                 return the_order
             else:
+                self.__uistandard.clear_screen()
                 order_header = self.print_full_order_header()
                 strengur = "Pantanir - Yfirlit pantana- Pöntunarnúmer\n\n\
 Pöntun: {}\n{}\n{}\n{}\n\n1. Breyta Pöntun\n2. Bakfæra pöntun\n\
 ".format(order_number, " -"*15, order_header, the_order)
                 choice = self.__uistandard.show_menu(
-                    strengur, "Veldu aðgerð: ")
+                    strengur, "Veldu aðgerð: ").lower()
                 if choice == "1":
                     self.change_order_menu(order_number, the_order)
                 elif choice == "2":
@@ -287,4 +289,5 @@ Pöntun: {}\n{}\n{}\n{}\n\n1. Breyta Pöntun\n2. Bakfæra pöntun\n\
 
         # kallar á föll og býr til klasa
             print("---------------------\nPöntun Staðfest\n")
+            time.sleep(2)
         return "h"

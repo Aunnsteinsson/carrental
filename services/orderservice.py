@@ -120,11 +120,8 @@ class OrderService(object):
         string_of_orders = ""
         for _, orders in order.items():
             if ssn == orders.get_ssn():
-                licence_plate = orders.get_car()
-                the_car = self.__car_repo.get_car(licence_plate)
-                status = the_car.get_wherabouts()
                 order_string = orders.__str__(print_format)
-                string_of_orders += order_string + status + "\n"
+                string_of_orders += order_string + "\n"
         return string_of_orders
 
     def change_time(self, order_number, new_start_time, new_end_time):
@@ -202,6 +199,23 @@ class OrderService(object):
             order_string = value.__str__()
             string_of_orders += order_string + "\n"
         return string_of_orders
+
+    def get_total_rev(self, begin_date, end_date):
+        list_of_dates = self.list_of_days(begin_date, end_date)
+        list_of_dates = [str(day)for day in list_of_dates]
+        dict_of_orders = self.get_orders()
+        total_revenue = 0
+        for _, order in dict_of_orders.items():
+            counter = 0
+            list_of_days = order.get_duration()
+            price_of_order = order.get_price()
+            for day in list_of_days:
+                if day in list_of_dates:
+                    counter += 1
+            ratio = counter/len(list_of_days)
+            price_of_order_in_month = ratio * float(price_of_order)
+            total_revenue += price_of_order_in_month
+        return total_revenue
 
     def get_orders(self):
         return self.__order_repo.get_orders()

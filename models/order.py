@@ -105,22 +105,22 @@ class Order(object):
                 self.__car_number)
 
         elif info_to_print == 2:  # Hvernig pantanir prentast í sögu viðsk.v.
-            return "\t{:13}| {:9}| {:7}| {:10}".format(
+            return "\t{:13}| {:9}| {:7}| {:10,.0f} ISK".format(
                 start_date,
                 self.__order_number,
                 self.__car_number,
-                self.__price)
+                float(self.__price))
 
         else:
             # Skilar öllum upplýsingum um pöntun.
-            return "{:11}| {:11}| {:9}| {:30}| {:11}| {:7}| {:10}| {:9}| {:6}".format(
+            return "{:11}| {:11}| {:9}| {:30}| {:11}| {:7}| {:10,.0f} ISK| {:9}| {:6}".format(
                 start_date,
                 end_date,
                 self.__order_number,
                 self.__name,
                 self.__ssn,
                 self.__car_number,
-                self.__price,
+                float(self.__price),
                 self.__insurance,
                 self.__discount)
 
@@ -134,6 +134,6 @@ class Order(object):
                                                 self.__ssn,
                                                 self.__name,
                                                 self.__car_number,
-                                                self.__price,
+                                                float(self.__price),
                                                 self.__insurance,
                                                 self.__discount)
