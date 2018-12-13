@@ -22,14 +22,12 @@ class UIStandard(object):
             "{} - notandi: {}".format(self.__a_type, self.__name),
             "(H)eim", "(S)krá út", today))
         self.line_seperator()
-    
+
     def line_seperator(self):
         print("-"*100)
 
     def clear_screen(self):
         os.system("cls" if os.name == "nt" else "clear")
-<<<<<<< Updated upstream
-=======
 
     def back_input(self):
         choice = ""
@@ -37,5 +35,4 @@ class UIStandard(object):
             choice = input(
                 "Veldu aðgerð (H), (S) eða (B)akka: ")
         return choice
-# yo
->>>>>>> Stashed changes
+#
