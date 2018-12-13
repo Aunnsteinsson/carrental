@@ -100,7 +100,7 @@ class CarUI(object):
         """Prentar bílayfirlits viðmót og tekur við input"""
         choice = ""
         while choice not in HOMECOMMANDS:  # Placeholder
-            self.__uistandard.print_location_header("Yfirmaður - Bílayfirlit")
+          #  self.__uistandard.print_location_header("Yfirmaður - Bílayfirlit")
             choice = self.__uistandard.show_menu(
                 """\t1. Allir Bílar
 \t2. Lausir Bílar\n\t3. Bílar sem eru ekki tilbúnir til útleigu\n\t4. Afhenda eða taka á móti bíl\n""", "Veldu Aðgerð: ")
@@ -111,19 +111,27 @@ class CarUI(object):
     def return_car_menu(self, choice):
         while choice not in HOMECOMMANDS:
             licence_plate = input(
-                "Hvert er bílnúmerið á bílnum sem þú vilt breyta stöðunni á?").upper()
+                "Hvert er bílnúmerið á bílnum sem þú vilt breyta stöðunni á? ").upper()
             the_car = self.__car_service.show_cars(licence_plate)
             if the_car:
+                print("{:^8} | {:^12} | {:^15} | {:^30} | {:^15} ".format(
+                    "Bílnúmer", "Tegund", "Verð/dag", "Staða bíls", "Næsta bókun"))
                 print(the_car)
-                status = input("Er bíllinn í stæði? (J)á eða (N)ei").lower()
+                status = input("Er bíllinn í stæði? (J)á eða (N)ei ").lower()
                 if status == "j" or status == "n":
                     self.__car_service.change_status(status, the_car)
+                    print("Breyting móttekin. Hér er núverandi staða bíls")
+                    print("{:^8} | {:^12} | {:^15} | {:^30} | {:^15} ".format(
+                        "Bílnúmer", "Tegund", "Verð/dag", "Staða bíls", "Næsta bókun"))
+                    print(the_car)
                 else:
                     print("Ekki rétt skipun. Engin breyting verður gerð")
             else:
                 print("Enginn bíll með þetta bílnúmer")
-            choice = input(
-                "Veldu aðgerð: (H)eim, (S)krá út eða eitthvað annað til að halda áfram að breyta stöðu bíla").lower()
+            choice = ""
+            while choice not in HOMECOMMANDS and choice != "a":
+                choice = input(
+                    "Veldu aðgerð: (H)eim, (S)krá út eða (A) til að halda áfram: ").lower()
         return choice
 
     def show_cars(self, choice):
@@ -151,9 +159,15 @@ class CarUI(object):
             elif second_choice == "4":
                 the_type = "Sendibílar"
                 type_list = ["sendibill"]
-            else:
+            elif second_choice in HOMECOMMANDS:
+                return second_choice
+            elif second_choice == "1":
                 the_type = "Allir bílar"
                 type_list = ["sendibill", "folksbill", "jeppi"]
+            else:
+                print("Val ekki í boði. Notandi sendur aftur heim")
+                time.sleep(3)
+                return "h"
             choice = self.second_car_menu(
                 the_type, menu, status_list, type_list)
         return choice
@@ -161,15 +175,20 @@ class CarUI(object):
     def second_car_menu(self, the_type, menu, status_list, type_list):
         self.__uistandard.clear_screen()
         self.__uistandard.print_header()
-        line_seperator = ("-"*75)
+        line_seperator = ("-"*100)
         print("Bílayfirlit - {} {}".format(the_type, menu))
         print(line_seperator)
-        print("{:^8} | {:^12} | {:^15} | {:^10} | {:^15} ".format(
+        print("{:^8} | {:^12} | {:^15} | {:^30} | {:^15} ".format(
             "Bílnúmer", "Tegund", "Verð/dag", "Staða bíls", "Næsta bókun"))
         print(line_seperator)
         strengur = self.__car_service.get_list_of_cars(
             type_list, status_list)
+        if strengur == "":
+            strengur = (
+                "\nÞví miður eru engir bílar sem uppfylla þessi leitarskilyrði\n")
         print(strengur)
-        choice = input(
-            "Veldu aðgerð: (H)eim, (S)krá út eða 4 fyrir að afhenda eða taka á móti bíl")
+        choice = ""
+        while choice not in HOMECOMMANDS and choice != "a":
+            choice = input(
+                "Veldu aðgerð: (H)eim, (S)krá út eða (A) fyrir að afhenda eða taka á móti bíl: ").lower()
         return choice

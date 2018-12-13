@@ -21,7 +21,7 @@ class Car(object):
                 date = str(date_list[0])
         else:
             date = "Engar pantanir"
-        return "{:<8} | {:<12} | {:>11,.2f} {} | {:<10} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("kr."), (self.__wherabouts), date)
+        return "{:<8} | {:<12} | {:>11,.2f} {} | {:<30} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("kr."), (self.__wherabouts), date)
 
     def see_if_returned(self):
         if self.__rented_days:
