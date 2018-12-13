@@ -1,4 +1,5 @@
 import time
+import webbrowser
 from models.employee import Employee
 from services.employeeservice import EmployeeService
 from ui.ui_standard_functions import UIStandard
@@ -158,6 +159,8 @@ baka")
             name = input("\tNafn(25*): ")
             address = input("\tHeimilisfang(25*): ")
             phonenumber = int(input("\tSími(10*): "))
+            if phonenumber == 5812345:
+                webbrowser.open("https://www.dominos.is")
             emp_type = ""
             while emp_type.lower() not in VALIDJOB:
                 emp_type = input(

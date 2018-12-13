@@ -226,9 +226,14 @@ class OrderService(object):
         list_of_days = self.list_of_days(start_date, end_date)
         start = list_of_days[STARTDATE]
         end = list_of_days[ENDDATE]
-        days_of_rent = end.day - start.day
-        days_of_rent = int(days_of_rent)
+        step = timedelta(days=1)
+        days_of_rent = 0
+        while start <= end:
+            days_of_rent += 1
+            start += step
         price_of_rent = days_of_rent * price_of_car
+        print("Verð bíls í {} daga án skyldutrygginga: {}".format(
+            days_of_rent, price_of_rent))
         price_of_mandated = days_of_rent * price_of_mandated_insurance
         price_of_rent += price_of_mandated
         discount = self.change_discount_to_float(discount)

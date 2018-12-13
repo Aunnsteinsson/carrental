@@ -42,7 +42,7 @@ class CustomerUI(object):
             if choice == "2":
                 choice = self.get_customer_list()
             if choice == "3":
-                self.new_customer_menu()
+                ssn = self.new_customer_menu()
         return choice
 
     def find_customer(self, ssn, customer):
@@ -183,6 +183,7 @@ class CustomerUI(object):
             print("Hætt við að búa til nýjan viðskiptavin")
             time.sleep(2)
         self.save_program()
+        return ssn
 
     def save_program(self):
         self.__customer_service.save_program()

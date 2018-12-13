@@ -8,7 +8,6 @@ from ui.SalesmanUi import SalesmanUI
 
 system_is_on = True
 
-
 while system_is_on:
     login = LoginUI()
     os.system("cls" if os.name == "nt" else "clear")
@@ -22,7 +21,7 @@ while system_is_on:
         user = SalesmanUI(username, "Söludeild")
     user.main_menu()
 
-#     except TypeError:
-#         print("Notendanafn eða lykilorð rangt, vinsamlegast \
+#    except TypeError:
+#        print("Notendanafn eða lykilorð rangt, vinsamlegast \
 # hafðu samband við kerfisstjóra")
-#         time.sleep(2)
+#        time.sleep(2)

@@ -62,7 +62,7 @@ class OrderUI(object):
     def print_full_order_header(self):
         return "{:^11}| {:^11}| {:^9}| {:^30}| {:^11}| {:^7}|\
  {:^10}| {:^9}| {:^6}\n{}".format(
-                    "Upphafsd.",
+            "Upphafsd.",
                     "Skilad.",
                     "Pönt.nr.",
                     "Nafn",
@@ -106,7 +106,8 @@ class OrderUI(object):
                 strengur = "Pantanir - Yfirlit pantana- Pöntunarnúmer\n\n\
 Pöntun: {}\n{}\n{}\n{}\n\n1. Breyta Pöntun\n2. Bakfæra pöntun\n\
 ".format(order_number, " -"*15, order_header, the_order)
-                choice=self.__uistandard.show_menu(strengur, "Veldu aðgerð: ")
+                choice = self.__uistandard.show_menu(
+                    strengur, "Veldu aðgerð: ")
                 if choice == "1":
                     self.change_order_menu(order_number, the_order)
                 elif choice == "2":
@@ -118,49 +119,49 @@ Pöntun: {}\n{}\n{}\n{}\n\n1. Breyta Pöntun\n2. Bakfæra pöntun\n\
     def change_order_menu(self, order, the_order):
         print("Hverju skal breyta?\n\n1. Tímabil\n2. Bíll\n3. Tryggingar\n\
 4. Viðskiptavinur\n5. Afsláttur\n")
-        choice=input("Veldu aðgerð: ")
+        choice = input("Veldu aðgerð: ")
         if choice == "1":
-            new_sday=input("Nýr upphafsdagur (dd): ")
-            new_smon=input("Nýr upphafsmánuður (mm): ")
-            new_syear=input("Nýtt upphafsár (yyyy): ")
-            new_eday=input("Nýr skiladagur (dd): ")
-            new_emon=input("Nýr skilamánuður (mm): ")
-            new_eyear=input("Nýtt skilaár (yyyy): ")
+            new_sday = input("Nýr upphafsdagur (dd): ")
+            new_smon = input("Nýr upphafsmánuður (mm): ")
+            new_syear = input("Nýtt upphafsár (yyyy): ")
+            new_eday = input("Nýr skiladagur (dd): ")
+            new_emon = input("Nýr skilamánuður (mm): ")
+            new_eyear = input("Nýtt skilaár (yyyy): ")
 
-            begin_date="{}-{}-{}".format(new_syear, new_smon, new_sday)
-            end_date="{}-{}-{}".format(new_eyear, new_emon, new_eday)
+            begin_date = "{}-{}-{}".format(new_syear, new_smon, new_sday)
+            end_date = "{}-{}-{}".format(new_eyear, new_emon, new_eday)
 
-            string_of_dates=self.__order_service.change_time(
+            string_of_dates = self.__order_service.change_time(
                 order, begin_date, end_date)
             print(string_of_dates)
             if len(string_of_dates) > 20:
-                choice_of_car=input(
+                choice_of_car = input(
                     "Bílnúmer bíls sem skal breyta: ").upper()
                 self.__order_service.change_car_again(choice_of_car, order)
                 self.__order_service.add_dates_to_car(
                     begin_date, end_date, choice_of_car)
             time.sleep(2)
         elif choice == "2":
-            licence_plate=the_order.get_car()
-            the_car=self.__car_service.show_cars(licence_plate)
-            car_type=the_car.get_type()
-            string_of_cars=self.__order_service.change_car(car_type, order)
+            licence_plate = the_order.get_car()
+            the_car = self.__car_service.show_cars(licence_plate)
+            car_type = the_car.get_type()
+            string_of_cars = self.__order_service.change_car(car_type, order)
             print(string_of_cars)
-            choice_of_car=input("Skráðu bílnúmer nýs bíls: ").upper()
-            listi=the_order.get_duration()
+            choice_of_car = input("Skráðu bílnúmer nýs bíls: ").upper()
+            listi = the_order.get_duration()
             self.__order_service.change_car_again(choice_of_car, order)
             self.__order_service.add_dates_to_car(
                 listi[0], listi[-1], choice_of_car, order)
         elif choice == "3":
-            insurance=input("Viltu tryggingu? ((J)á/(N)ei): ")
+            insurance = input("Viltu tryggingu? ((J)á/(N)ei): ")
             if insurance.lower() == "j":
-                insurance=True
+                insurance = True
             else:
-                insurance=False
+                insurance = False
             self.__order_service.change_insurance(order, insurance)
         elif choice == "4":
-            ssn=input("Hver er kennitala viðskiptavinar? ")
-            customer=self.__customer_menu.get_the_customer(ssn)
+            ssn = input("Hver er kennitala viðskiptavinar? ")
+            customer = self.__customer_menu.get_the_customer(ssn)
             if customer:
                 print(customer)
                 self.__order_service.change_customer(order, ssn)
@@ -168,7 +169,7 @@ Pöntun: {}\n{}\n{}\n{}\n\n1. Breyta Pöntun\n2. Bakfæra pöntun\n\
                 print("Enginn viðskiptavinur með þessa kennitölu")
                 time.sleep(3)
         elif choice == "5":
-            discount=input(
+            discount = input(
                 "Hvað viltu að nýji afslátturinn sé mörg prósent?")
             self.__order_service.change_discount(order, discount)
         return choice
@@ -177,99 +178,112 @@ Pöntun: {}\n{}\n{}\n{}\n\n1. Breyta Pöntun\n2. Bakfæra pöntun\n\
         self.__uistandard.print_header()
         print("Pantanir - Yfirlit pantana - Allar pantanir\n")
         print(self.print_full_order_header())
-        string=self.__order_service.show_orders()
+        string = self.__order_service.show_orders()
         print(string)
         # Sæki drasl1
 
     def new_order_menu(self):
-        dates_okay=False
-        self.__uistandard.print_header()
-        print("Pantanir - Ný pöntun\n\tTímabil\n\t--------")
-        while not dates_okay:
-            begin_day=input("\tUpphafsdagur: ")
-            begin_month=input("\tUpphafsmánuður: ")
-            begin_year=input("\tUpphafsár: ")
-            end_day=input("\tSkiladagur: ")
-            end_month=input("\tSkilamánuður: ")
-            end_year=input("\tSkilaár: ")
-            try:
-                begining_date=date(
-                    int(begin_year), int(begin_month), int(begin_day))
-                ending_date=date(
-                    int(end_year), int(end_month), int(end_day))
-                if begining_date < ending_date:
-                    dates_okay=True
-                else:
-                    print("Ekki hægt að leiga bíl í minna en einn dag")
-            except ValueError:
-                print("Vinsamlegast skráðu daga og mánuði á heiltölu \
-forminu 1,2,3... og ár á forminu 2018, 2019... ")
+        availablecars = ""
+        while availablecars == "":
+            dates_okay = False
+            self.__uistandard.print_header()
+            print("Pantanir - Ný pöntun\n\tTímabil\n\t--------")
+            while not dates_okay:
+                begin_day = input("\tUpphafsdagur: ")
+                begin_month = input("\tUpphafsmánuður: ")
+                begin_year = input("\tUpphafsár: ")
+                end_day = input("\tSkiladagur: ")
+                end_month = input("\tSkilamánuður: ")
+                end_year = input("\tSkilaár: ")
+                try:
+                    begining_date = date(
+                        int(begin_year), int(begin_month), int(begin_day))
+                    ending_date = date(
+                        int(end_year), int(end_month), int(end_day))
+                    if begining_date < ending_date:
+                        dates_okay = True
+                    else:
+                        print("Ekki hægt að leiga bíl í minna en einn dag")
+                except ValueError:
+                    print("Vinsamlegast skráðu daga og mánuði á heiltölu \
+    forminu 1,2,3... og ár á forminu 2018, 2019... ")
 
-        begin_date=begin_year + "-" + begin_month + "-" + begin_day
-        end_date=end_year + "-" + end_month + "-" + end_day
-        list_of_days=self.__order_service.list_of_days(begin_date, end_date)
-        print("\n\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
-        type_of_car=input("\tFlokkur: ")
-        if type_of_car == "j":
-            type_list=["jeppi"]
-        elif type_of_car == "f":
-            type_list=["folksbill"]
-        elif type_of_car == "s":
-            type_list=["sendibill"]
-        else:
-            type_list=["sendibill", "folksbill", "jeppi"]
-        availablecars=self.__order_service.find_available_cars(
-            type_list, begin_date, end_date)
+            begin_date = begin_year + "-" + begin_month + "-" + begin_day
+            end_date = end_year + "-" + end_month + "-" + end_day
+            list_of_days = self.__order_service.list_of_days(
+                begin_date, end_date)
+            print("\n\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
+            type_of_car = input("\tFlokkur: ")
+            if type_of_car == "j":
+                type_list = ["jeppi"]
+            elif type_of_car == "f":
+                type_list = ["folksbill"]
+            elif type_of_car == "s":
+                type_list = ["sendibill"]
+            else:
+                type_list = ["sendibill", "folksbill", "jeppi"]
+            availablecars = self.__order_service.find_available_cars(
+                type_list, begin_date, end_date)
+            if availablecars == "":
+                print("Engir bílar í boði af þessari gerð á þessum tíma.")
+                print("Vinsamlegast skráðu inn aðrar dagsetningar")
+                time.sleep(2)
         print(availablecars)
-        licence_plate=input("Skrifa bílnúmer: ").upper()
-        order_number=self.__order_service.make_order_number()
-        price=self.__order_service.price_of_rent(
+        licence_plate = input("Skrifa bílnúmer: ").upper()
+        order_number = self.__order_service.make_order_number()
+        price = self.__order_service.price_of_rent(
             licence_plate, 0, False, begin_date, end_date)
-        print("Verð án aukatrygginga: {}".format(price))
+        print("Verð með skyldutryggingu en án aukatrygginga: {}".format(price))
         # Hér þarf að sækja verð
-        extra_insurance_price=self.__order_service.get_price_of_extra_insurance()
-        insurance=input(
+        extra_insurance_price = self.__order_service.get_price_of_extra_insurance()
+        insurance = input(
             "\tViðbótartrygging (verð {} á dag) (J)á/(N)ei: ".format(
                 extra_insurance_price))
         if insurance.lower() == "j":
-            insurance=True
-            price=self.__order_service.price_of_rent(
+            insurance = True
+            price = self.__order_service.price_of_rent(
                 licence_plate, 0, True, begin_date, end_date)
             print("Verð með aukatryggingum: {}".format(price))
         else:
-            insurance=False
+            insurance = False
 
-        discount=input(
+        discount = input(
             "\tSkrifaðu hversu mörg prósent afslátturinn á að vera ef einhver: ")
-        total_price=self.__order_service.price_of_rent(
+        total_price = self.__order_service.price_of_rent(
             licence_plate, discount, insurance, begin_date, end_date)
         if total_price != price:
             print("Heildarverð með afslætti: {}".format(
                 total_price))  # hér þarð að nota aðra klasa
-        ssn=input("\tKennitala viðskiptavinar: ")
+        ssn = input("\tKennitala viðskiptavinar: ")
         # if setning til að athuga hvort manneskjan sé til. Ef svo er
         # þá prentast út upplýsingar um hana, annars er sótt fall til
         # að gera nýjan viðskiptavin
-        customer=self.__customer_menu.get_the_customer(ssn)
+        customer = self.__customer_menu.get_the_customer(ssn)
         if customer:
-            customer_name=customer.get_name()
+            customer_name = customer.get_name()
         else:
-            print(
-                "Viðskiptavinur ekki skráður í kerfið. Vinsamlegast skráðu nauðsynlegar upplýsingar.")
-            self.__customer_menu.new_customer_menu()
-            customer=self.__customer_menu.get_the_customer(ssn)
-            customer_name=customer.get_name()
+            choice = ""
+            while choice != "j" and choice != "n":
+                choice = input(
+                        "Viðskiptavinur ekki skráður í kerfið. Má bjóða þér að skrá inn nýjan viðskiptavin? (J)á eða (N)ei? ").lower()
+                if choice == "j":
+                    ssn = self.__customer_menu.new_customer_menu()
+                    customer = self.__customer_menu.get_the_customer(ssn)
+                    customer_name = customer.get_name()
+                if choice == "n":
+                    print("Enginn nýr viðskiptavinur skráður. Notandi sendur heim")
+                    time.sleep(2)
+        if choice != "n":
+            print("\n\tViðskiptavinur: {}".format(customer_name))
+            payment = input("\tGreiðslumáti: (D)ebit, (K)redit, (P)eningar: ")
+            order_number = self.__order_service.make_order_number()
+            order =Order(order_number, list_of_days, ssn, customer_name,
+                        licence_plate, total_price, insurance, discount)
+            self.__order_service.add_dates_to_car(
+                begin_date, end_date, licence_plate, order_number)
 
-        print("\n\tViðskiptavinur: {}".format(customer_name))
-        payment=input("\tGreiðslumáti: (D)ebit, (K)redit, (P)eningar: ")
-        order_number=self.__order_service.make_order_number()
-        order=Order(order_number, list_of_days, ssn, customer_name,
-                      licence_plate, total_price, insurance, discount)
-        self.__order_service.add_dates_to_car(
-            begin_date, end_date, licence_plate, order_number)
-
-        self.__order_service.make_order(order_number, order)
+            self.__order_service.make_order(order_number, order)
 
         # kallar á föll og býr til klasa
-        print("---------------------\nPöntun Staðfest\n")
+            print("---------------------\nPöntun Staðfest\n")
         return "h"
