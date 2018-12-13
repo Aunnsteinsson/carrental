@@ -35,8 +35,3 @@ class UIStandard(object):
             choice = input(
                 "Veldu aðgerð (H), (S) eða (B)akka: ")
         return choice
-<<<<<<< Updated upstream
-#
-=======
-# yo
->>>>>>> Stashed changes

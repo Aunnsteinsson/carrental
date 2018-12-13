@@ -39,17 +39,7 @@ class OrderUI(object):
     def order_list_menu(self):
         """Prentar innra pantana viðmót og tekur við input"""
         choice = ""
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        while choice not in HOMECOMMANDS:  # Placeholder
-=======
-        self.__uistandard.clear_screen()
         while choice not in HOMECOMMANDS:
->>>>>>> Stashed changes
-=======
-        self.__uistandard.clear_screen()
-        while choice not in HOMECOMMANDS:
->>>>>>> Stashed changes
             self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
                 """Pantanir - Yfirlit pantana\n\nSækja upplýsingar út frá:\n\n\t\
@@ -57,16 +47,10 @@ class OrderUI(object):
             if choice == "1":
                 ssn = input("\nKennitala viðskiptavinar: ")
                 self.ssn_order_menu(ssn)
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
                 choice = input("B - til baka, H - Heim, S - Útskrá: ")
             if choice == "2":
-=======
-=======
->>>>>>> Stashed changes
                 choice = self.__uistandard.back_input()
             elif choice == "2":
->>>>>>> Stashed changes
                 order_number = input("Hvaða pöntun viltu fá að sjá? ")
                 self.get_single_order(order_number)
             if choice == "3":
