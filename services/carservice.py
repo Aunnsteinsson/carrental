@@ -31,20 +31,21 @@ class CarService(object):
         """ Fall sem sýnir upplýsingar um bíl """
         return self.__car_repo.get_car(licence_plate)
 
+    def change_status(self, new_status, car):
+        car.change_status(new_status)
+        self.__car_repo.save_car_data()
+
     def get_list_of_cars(self, a_type, status):
         """ Fall sem sækir lista af öllum bílum """
         dict = self.__car_repo.get_all_cars()
         string = ""
         for _, item in dict.items():
             type_of_car = item.get_type()
+            wherabouts = item.get_wherabouts()
             #status_of_car = item.get_status()
-            if type_of_car in a_type:  # and status_of_car in status:
+            if type_of_car in a_type and wherabouts in status:  # and status_of_car in status:
                 car_string = item.__str__()
                 string += car_string + "\n"
-                """ if car[1] in a_type and car[2] in status:
-                    car_class = Car(
-                        car[0], car[1], car[2])
-                    car_list.append(car_class) """
         return string
 
     def get_car_prices(self):

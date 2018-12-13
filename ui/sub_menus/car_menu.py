@@ -36,7 +36,7 @@ class CarUI(object):
         while choice.lower() not in HOMECOMMANDS:
             self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
-                "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3. Í útleigu\n\t\
+                "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3.Bílar sem ekki eru tilbúnir til útleigu\n\t\
 4. Nýskrá bíl\n\t5. Afskrá bíl\n", "Veldu aðgerð: ")
 
             if choice == "1" or choice == "2" or choice == "3":
@@ -102,7 +102,7 @@ class CarUI(object):
         while choice not in HOMECOMMANDS:  # Placeholder
             choice = self.__uistandard.show_menu(
                 """Bílayfirlit\n\t1. Allir Bílar
-\t2. Lausir Bílar\n\t3. Í útleigu\n\t4. Afhenda eða taka á móti bíl\n""", "Veldu Aðgerð: ")
+\t2. Lausir Bílar\n\t3. Bílar sem eru ekki tilbúnir til útleigu\n\t4. Afhenda eða taka á móti bíl\n""", "Veldu Aðgerð: ")
             choice = self.show_cars(choice)
             choice = self.return_car_menu(choice)
         return choice
@@ -112,13 +112,15 @@ class CarUI(object):
             licence_plate = input(
                 "Hvert er bílnúmerið á bílnum sem þú vilt breyta stöðunni á?").upper()
             the_car = self.__car_service.show_cars(licence_plate)
-            print(the_car)
             if the_car:
+                print(the_car)
                 status = input("Er bíllinn í stæði? (J)á eða (N)ei").lower()
                 if status == "j" or status == "n":
-                    the_car.change_status(status)
+                    self.__car_service.change_status(status, the_car)
                 else:
                     print("Ekki rétt skipun. Engin breyting verður gerð")
+            else:
+                print("Enginn bíll með þetta bílnúmer")
             choice = input(
                 "Veldu aðgerð: (H)eim, (S)krá út eða eitthvað annað til að halda áfram að breyta stöðu bíla").lower()
         return choice
@@ -127,13 +129,15 @@ class CarUI(object):
         if choice == "1" or choice == "2" or choice == "3":
             if choice == "1":
                 menu = "sem eru lausir eða í útleigu"
-                status_list = ["Fratekinn", "Laus"]
+                status_list = ["Hefur ekki enn verið skilað",
+                               "Leigður en ekki sóttur", "Í útleigu", "Tilbúinn til útleigu"]
             if choice == "2":
                 menu = "sem eru lausir "
-                status_list = ["Laus"]
+                status_list = ["Tilbúinn til útleigu"]
             if choice == "3":
-                menu = "sem eru í útleigu"
-                status_list = ["Fratekinn"]
+                menu = "sem eru ekki tilbúnir til útleigu"
+                status_list = ["Hefur ekki enn verið skilað",
+                               "Leigður en ekki sóttur", "Í útleigu"]
             print("\n\t1. Allar gerðir\n\t2. Jeppar\n\t3. Fólksbílar"
                   "\n\t4. Sendibílar\n")
             second_choice = input("Veldu síðu: ")
@@ -147,7 +151,7 @@ class CarUI(object):
                 the_type = "Sendibílar"
                 type_list = ["sendibill"]
             else:
-                the_type = "all_cars"
+                the_type = "Allir bílar"
                 type_list = ["sendibill", "folksbill", "jeppi"]
             choice = self.second_car_menu(
                 the_type, menu, status_list, type_list)

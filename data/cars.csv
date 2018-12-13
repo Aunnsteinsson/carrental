@@ -1,5 +1,5 @@
 licence_plate,a_type,status,days
 GG123,folksbill,n,:2&2018-12-12$2018-12-13$2018-12-14$2018-12-15$
-AA111,jeppi,n,:1&2018-12-01$2018-12-02$
-HH333,sendibill,j,
+AA111,jeppi,j,:1&2018-12-01$2018-12-02$
+HH333,sendibill,n,
 LL888,jeppi,j,
