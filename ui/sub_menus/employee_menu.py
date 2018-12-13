@@ -109,7 +109,7 @@ class EmployeeUI(object):
                 choice = ""
                 new_value = ""
                 while choice.lower() not in HOMECOMMANDS:
-                    choice = input("(hámarsklengd*)\nVeldu aðgerð: ")
+                    choice = input("Veldu aðgerð: ")
                     if choice == "1":
                         new_value10 = input("Nýtt lykilorð(10*): ")
                     elif choice == "2":
@@ -117,7 +117,13 @@ class EmployeeUI(object):
                     elif choice == "3":
                         new_value25 = input("Nýtt heimilisfang(25*): ")
                     elif choice == "4":
-                        new_value10 = input("Nýr sími(10*): ")
+                        try:
+                            new_value10 = int(input("Nýr sími(10*): "))
+                        except TypeError:
+                            print("Passaðu að hafa símanúmer einungis \
+tölustafi")
+                            time.sleep(2)
+                            return choice
                     else:
                         print(choice, "er ekki valmöguleiki, fer til baka")
                         time.sleep(2)
@@ -146,7 +152,7 @@ class EmployeeUI(object):
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             self.__uistandard.print_header()
-            print("(hámarkslengd*)")
+            print("\t(hámarkslengd*)")
             username = input("\tNotendanafn(10*): ")
             password = input("\tLykilorð(10*): ")
             name = input("\tNafn(25*): ")
@@ -166,8 +172,9 @@ class EmployeeUI(object):
                     len(address) > 25 or len(phonenumber) > 10):
                 print("\n\tPassaðu að hafa innsetningu á notendanafni, lykilorði\
  og síma ekki lengri en 10 stafi \n\tog nafn og heimilisfang ekki lengra en 25\
-  stafi \n\t- fer á upphafssíðu!")
-                time.sleep(7)
+  stafi \n\t einnig þarf kennitala og sími einungis að vera heiltölur - fer á \
+  upphafssíðu!")
+                time.sleep(8)
                 return choice
             else:
                 choice = input(
