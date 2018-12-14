@@ -25,30 +25,30 @@ class CarService(object):
         car.change_status(new_status)
         self.save_cars()
 
-        """ self.__car_repo.change_status(licence_plate, new_status) """
-
     def show_cars(self, licence_plate):
         """ Fall sem sýnir upplýsingar um bíl """
         return self.__car_repo.get_car(licence_plate)
 
     def change_status(self, new_status, car):
+        """Skráir bíl í stæði eða úr stæði"""
         car.change_status(new_status)
         self.__car_repo.save_car_data()
 
     def get_list_of_cars(self, a_type, status):
-        """ Fall sem sækir lista af öllum bílum """
+        """ Fall sem tekur inn lista af þeim gerðum bíla sem notandinn vill
+        og þeim ástöndum sem hann vill bíl í og skilar bíl sem uppfyllir bæði skilyrði"""
         dict = self.__car_repo.get_all_cars()
         string = ""
         for _, item in dict.items():
             type_of_car = item.get_type()
             wherabouts = item.get_wherabouts()
-            #status_of_car = item.get_status()
-            if type_of_car in a_type and wherabouts in status:  # and status_of_car in status:
+            if type_of_car in a_type and wherabouts in status:
                 car_string = item.__str__()
                 string += car_string + "\n"
         return string
 
     def get_all_cars(self):
+        """Sækir lista með öllum bílum þar sem hver bíll er stak af klasa"""
         dict = self.__car_repo.get_all_cars()
         list_of_cars = []
         for _, value in dict.items():
@@ -56,12 +56,15 @@ class CarService(object):
         return list_of_cars
 
     def get_car_prices(self):
+        """Sækir dict þar sem verðandlag er key og verð er value"""
         car_prices = self.__car_repo.get_car_prices()
         return car_prices
 
     def change_price_of_type(self, a_type, new_price):
+        """TEkur inn verðandlag og verð og breytir verði verðandlags"""
         self.__car_repo.change_price_of_type(a_type, new_price)
         self.__car_repo.save_price_data()
 
     def save_cars(self):
+        """Vistar gögnin inn í csv skjal"""
         self.__car_repo.save_car_data()

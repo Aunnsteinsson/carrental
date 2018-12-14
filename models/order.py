@@ -135,7 +135,7 @@ class Order(object):
         self.__list_of_dates = [str(day) for day in new_list]
 
     def change_price(self, new_price):
-        """Tekur inn verð og breytir verði pöntunar í það verð"""  # Er þetta fall einhvern tíma notað?
+        """Tekur inn verð og breytir verði pöntunar í það verð"""
         self.__price = new_price
 
     def change_list_of_days(self, new_list):  # Endurtekinn kóði
@@ -158,6 +158,6 @@ class Order(object):
         """Tekur inn kennitölu og breytir kennitölu pöntunar í þá kennitölu"""
         self.__ssn = new_ssn
 
-    def change_discount(self, new_discount):  # Er þetta einhvern tíma notað???
+    def change_discount(self, new_discount):
         """Tekur inn afslátt og breytir afslætti pöntunar í þann afslátt"""
         self.__discount = new_discount
