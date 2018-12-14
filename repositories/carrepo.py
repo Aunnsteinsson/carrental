@@ -61,7 +61,7 @@ class CarRepo(object):
     def save_car_data(self):
         """Tekur upplýsingar úr dict og skrifar það í car_dict"""
         list_of_cars = ["licence_plate", "a_type", "status", "days"]
-        with open("./data/cars.csv", "w", newline="") as car_file:
+        with open("./data/cars.csv", "w", newline="", encoding="utf-8") as car_file:
             csv_writer = csv.writer(car_file)
             csv_writer.writerow(list_of_cars)
             for _, info in self.__car.items():
@@ -72,7 +72,7 @@ class CarRepo(object):
     def save_price_data(self):
         """Tekur upplýsingar úr dict og skrifar það í price_dict"""
         list_of_prices = ["gerd_bils", "verd"]
-        with open("./data/price_list.csv", "w", newline="") as price_file:
+        with open("./data/price_list.csv", "w", newline="", encoding="utf-8") as price_file:
             csv_writer = csv.writer(price_file)
             csv_writer.writerow(list_of_prices)
             for the_type, the_price in self.__price.items():

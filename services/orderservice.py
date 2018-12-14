@@ -249,13 +249,13 @@ class OrderService(object):
     def get_price_of_extra_insurance(self):
         """Skilar verði á aukatryggingu"""
         price_of_insurance = self.__car_repo.get_car_prices()
-        price_of_insurance = price_of_insurance["aukatrygging"]
+        price_of_insurance = price_of_insurance["Aukatrygging"]
         return float(price_of_insurance)
 
     def get_price_of_mandated_insurance(self):
         """Skilar verði á skyldutryggingu"""
         price_of_insurance = self.__car_repo.get_car_prices()
-        price_of_insurance = price_of_insurance["skyldutrygging"]
+        price_of_insurance = price_of_insurance["Skyldutrygging"]
         return float(price_of_insurance)
 
     def price_of_rent(self, licence_plate, discount, insurance, start_date, end_date):
