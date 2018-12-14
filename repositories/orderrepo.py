@@ -52,7 +52,7 @@ class OrderRepo(object):
         um upplýsingarnar.
         '''
         orders_header = "order_number,duration,ssn,car_number,price,insurance,discount"
-        with open("./data/orders.csv", "w", newline="") as orders_file:
+        with open("./data/orders.csv", "w", newline="", encoding="utf-8") as orders_file:
             csv_writer = csv.writer(orders_file)
             csv_writer.writerow(orders_header.split(','))
             for order_number, info in self.__orders.items():
@@ -66,7 +66,7 @@ class OrderRepo(object):
         klasinn með upplýsingunum.
         '''
         order_dict = {}
-        with open("./data/orders.csv", "r") as orders_file:
+        with open("./data/orders.csv", "r", encoding="utf-8") as orders_file:
             csv_reader = csv.reader(orders_file)
             next(csv_reader)
             for order in csv_reader:
