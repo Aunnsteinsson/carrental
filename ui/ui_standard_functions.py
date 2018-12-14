@@ -8,9 +8,10 @@ class UIStandard(object):
         self.__name = name
         self.__a_type = a_type
 
-    def show_menu(self, text, prompt):
+    def show_menu(self, text_of_location, text, prompt):
         '''Prentar það menu sem notandi er staddur á.'''
         self.print_header()
+        self.location_header(text_of_location)
         print(text)
         choice = input(prompt)
         return choice
@@ -36,3 +37,9 @@ class UIStandard(object):
             choice = input(
                 "Veldu aðgerð (H), (S) eða (B)akka: ")
         return choice
+
+    def location_header(self, text_to_print):
+        print()
+        print(text_to_print)
+        print()
+        self.line_seperator()

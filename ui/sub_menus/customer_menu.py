@@ -26,8 +26,8 @@ class CustomerUI(object):
         while choice not in HOMECOMMANDS:
             self.__uistandard.clear_screen()
             choice = self.__uistandard.show_menu(
-                """Viðskiptavinir\n\n\t1. Leita eftir kennitölu
-    \t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur\n""",
+                "Viðskiptavinir", "\n\t1. Leita eftir kennitölu\
+\n\t2. Fá yfirlit yfir alla viðskiptavini\n\t3. Nýr viðskipavinur\n",
                 "Veldu aðgerð: ")
             if choice == "1":
                 ssn = input("Kennitala: ")
@@ -48,11 +48,11 @@ class CustomerUI(object):
     def find_customer(self, ssn, customer):
         choice = ""
         while choice not in HOMECOMMANDS:
+            self.__uistandard.clear_screen()
             self.__uistandard.print_header()
             line_seperator = ("-"*100)
-            print("Viðskiptavinir - Kennitala\n")
-            print("\tViðskiptavinur\n\t{}".format("-"*20))
-            print((line_seperator) + "\n{:^11}| {:^30}| {:^9} |\n".format(
+            self.__uistandard.location_header("Viðskiptavinir - Kennitala")
+            print("\n{:^11}| {:^30}| {:^9} |\n".format(
                 "Kennitala", "Nafn", "Sími") + (line_seperator))
             print(customer)
             print("\n\tSaga pantana\n\t{}".format("-"*60))
@@ -68,10 +68,12 @@ class CustomerUI(object):
                 choice = input("Ertu viss? (J)á/(N)ei: ")
                 if choice.lower() == 'j':
                     self.__customer_service.remove_customer(ssn)
-                    print("Viðskiptavini hefur verið eytt. Notandi færður aftur heim")
+                    print("Viðskiptavini hefur verið eytt. Notandi færður\
+ aftur heim")
                     self.save_program()
-                    list_of_order_numbers = self.__order_service.get_orders_of_customer_menu(
-                        ssn)
+                    list_of_order_numbers = (self.__order_service.
+                                             get_orders_of_customer_menu(
+                                                 ssn))
                     for order_number in list_of_order_numbers:
                         self.__order_service.remove_order(order_number)
                     time.sleep(3)
@@ -127,17 +129,20 @@ class CustomerUI(object):
                     print(string)
                 else:
                     self.__customer_service.change_card(ssn, new_card_number)
-                    print("Kreditkortanúmeri viðskiptavinar hefur verið breytt")
+                    print("Kreditkortanúmeri viðskiptavinar hefur \
+verið breytt")
                 time.sleep(2)
             self.save_program()
         return choice
 
     def get_customer_list(self):
         """Prentar ut lista yfir alla viðskiptavini með grunnupplýsingum"""
+        self.__uistandard.clear_screen()
         self.__uistandard.print_header()
         line_seperator = ("-"*100)
-        print("{:<100}".format("\nViðskiptavinir - Allir Viðskiptavinir\n"))
-        print((line_seperator) + "\n{:^11}| {:^30}| {:^9} |\n".format(
+        self.__uistandard.location_header(
+            "Viðskiptavinir - Allir Viðskiptavinir")
+        print("{:^11}| {:^30}| {:^9} \n".format(
             "Kennitala", "Nafn", "Sími") + (line_seperator))
         string = self.__customer_service.get_list()
         print(string)
@@ -148,7 +153,8 @@ class CustomerUI(object):
         """biður um nauðsynlegar upplýsingar og býr til viðskiptavin"""
         self.__uistandard.clear_screen()
         self.__uistandard.print_header()
-        print("Viðskiptavinir - Nýr viðskiptavinur\n")
+        self.__uistandard.location_header(
+            "Viðskiptavinir - Nýr viðskiptavinur")
         check_string = "1"
         choice = "j"
         while choice == "j":
@@ -163,13 +169,15 @@ class CustomerUI(object):
                 print(check_string)
             else:
                 print("\nKennitala: {}\nNafn: {}\nSími: {}\nKreditkortanúmer: {}\
-\nÖll gildi samþykkt. Athugaðu hvort að þetta innihaldi einhverjar rangar upplýsingar.".format(
+\nÖll gildi samþykkt. Athugaðu hvort að þetta innihaldi einhverjar \
+rangar upplýsingar.".format(
                     ssn, name, phone_number, credit_card_number))
                 time.sleep(2)
             choice = ""
             while choice != "j" and choice != "n":
                 choice = input(
-                    "\nViltu yfirskrifa þessa skráningu?\nVeldu (J)á til að reyna aftur, (N) til að sleppa endurtekningu: "
+                    "\nViltu yfirskrifa þessa skráningu?\nVeldu (J)á til að \
+reyna aftur, (N) til að sleppa endurtekningu: "
                 ).lower()
         if check_string == "":
             a_customer = Customer(ssn, name, phone_number, credit_card_number)

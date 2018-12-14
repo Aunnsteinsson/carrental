@@ -27,8 +27,8 @@ class EmployeeUI(object):
         Prentar haus fyrir starfmannayfirlit kerfisstjóra þar sem hann sér
         einnig lykilorð
         '''
-        print("{:<100}".format("\nStarfsmenn - Starfsmannayfirlit kerfisstjóra\n"))
-        self.__uistandard.line_seperator()
+        self.__uistandard.location_header(
+            "Starfsmenn - Starfsmannayfirlit kerfisstjóra")
         print("{:^10s}| {:^10s}| {:^25s}| {:^25s}| {:^10s}| {:^12s}".format(
             "Notandi", "Lykilorð", "Nafn", "Heimilisfang", "Sími", "Hlutverk"))
         self.__uistandard.line_seperator()
@@ -37,7 +37,8 @@ class EmployeeUI(object):
         '''
         Prentar haus fyrir starfmannayfirlit yfirmanns
         '''
-        print("Starfsmenn - Starfsmannayfirlit yfirmanns")
+        self.__uistandard.location_header(
+            "Starfsmenn - Starfsmannayfirlit yfirmanns")
         print("{:^25s}| {:^10s}| {:^25s}| {:^10s}| {:^12s}".format(
             "Nafn", "Notandi", "Heimilisfang", "Sími", "Hlutverk"))
         self.__uistandard.line_seperator()
@@ -153,6 +154,7 @@ baka")
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             self.__uistandard.print_header()
+            self.__uistandard.location_header("Nýr Starfsmaður")
             print("\t(hámarkslengd*)")
             username = input("\tNotendanafn(10*): ")
             password = input("\tLykilorð(10*): ")

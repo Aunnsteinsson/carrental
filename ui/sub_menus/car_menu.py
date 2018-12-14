@@ -19,10 +19,9 @@ class CarUI(object):
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             self.__uistandard.clear_screen()
-            choice = self.__uistandard.show_menu(
-                "Bílayfirlit\n\t1. Allir bílar\n\t2. Lausir bílar\n\t3. Bílar\
- sem ekki eru tilbúnir til útleigu\n\t\
-4. Nýskrá bíl\n\t5. Afskrá bíl\n", "Veldu aðgerð: ")
+            choice = self.__uistandard.show_menu("Bílayfirlit", "\n\t1. Allir bílar\n\t2. Lausir bílar\n\
+\t3. Bílar sem ekki eru tilbúnir til útleigu\n\t4. Nýskrá bíl\n\t\
+5. Afskrá bíl\n", "Veldu aðgerð: ")
 
             if choice == "1" or choice == "2" or choice == "3":
                 choice = self.show_cars(choice)
@@ -37,8 +36,8 @@ class CarUI(object):
                     time.sleep(2)
                 else:
                     approve_remove_car = input(
-                        "Viltu eyða bíl með bílnúmerið {} ((J)á/(N)ei): ".format(
-                            licence_plate))
+                        "Viltu eyða bíl með bílnúmerið {} \
+((J)á/(N)ei): ".format(licence_plate))
                     if approve_remove_car.lower() == 'j':
                         self.__car_service.remove_car(licence_plate)
                         print("\nBíl með númerið {} hefur verið eytt!".format(
@@ -62,16 +61,20 @@ class CarUI(object):
             approve_plate = ""
             self.__uistandard.clear_screen()
             self.__uistandard.print_header()
+            self.__uistandard.location_header("Bílayfirlit - Nýskrá bíl")
             print("\tFlokkar\n\t{}".format("-"*10))
             print("\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
             a_type = input("Flokkur: ").lower()
             license_plate = input("Bílnúmer: ").upper()
             if a_type.lower() == 'j':
                 a_type = "jeppi"
+                print_type = "jeppa"
             elif a_type.lower() == 'f':
                 a_type = "folksbill"
+                print_type = "fólksbíl"
             elif a_type.lower() == 's':
                 a_type = "sendibill"
+                print_type = "sendibíl"
             else:
                 print("Flokkur ekki í boði")
                 approve_plate = "n"
@@ -79,7 +82,7 @@ class CarUI(object):
             while approve_plate != "j" and approve_plate != "n":
                 approve_plate = input("Skrá {} með númerið {}\
  ((J)á/(N)ei)? ".format(
-                    a_type, license_plate)).lower()
+                    print_type, license_plate)).lower()
             if approve_plate == "n":
                 choice = ""
                 while choice != "j" and choice != "n":
@@ -96,11 +99,11 @@ class CarUI(object):
         """Prentar bílayfirlits viðmót og tekur við input"""
         choice = ""
         self.__car_service = CarService()
-        while choice not in HOMECOMMANDS:  # Placeholder
-            #self.__uistandard.print_location_header("Yfirmaður - Bílayfirlit")
-            choice = self.__uistandard.show_menu(
-                """Bílayfirlit\n\t1. Allir Bílar
-\t2. Lausir Bílar\n\t3. Bílar sem eru í útleigu\n\t4. Bílar sem eru ekki tilbúnir til útleigu\n\t5. Afhenda eða taka á móti bíl\n""", "Veldu Aðgerð: ")
+        while choice not in HOMECOMMANDS:
+            choice = self.__uistandard.show_menu("Bílayfirlit", "\n\t1. Allir\
+ Bílar\n\t2. Lausir Bílar\n\t3. Bílar sem eru í útleigu\n\t4. Bílar sem eru \
+ekki tilbúnir til útleigu\n\t5. Afhenda eða taka á móti bíl\n",
+                                                 "Veldu Aðgerð: ")
             if choice in "12345":
                 choice = self.show_cars(choice)
                 choice = self.return_car_menu(choice)
@@ -114,7 +117,8 @@ class CarUI(object):
             the_car = self.__car_service.show_cars(licence_plate)
             if the_car:
                 print("{:^8} | {:^12} | {:^15} | {:^30} | {:^15} ".format(
-                    "Bílnúmer", "Tegund", "Verð/dag", "Staða bíls", "Næsta bókun"))
+                    "Bílnúmer", "Tegund", "Verð/dag", "Staða bíls",
+                    "Næsta bókun"))
                 print(the_car)
                 print()
                 status = input("Er bíllinn í stæði? (J)á eða (N)ei ").lower()
@@ -122,7 +126,8 @@ class CarUI(object):
                     self.__car_service.change_status(status, the_car)
                     print("Breyting móttekin. Hér er núverandi staða bíls\n")
                     print("{:^8} | {:^12} | {:^15} | {:^30} | {:^15} ".format(
-                        "Bílnúmer", "Tegund", "Verð/dag", "Staða bíls", "Næsta bókun"))
+                        "Bílnúmer", "Tegund", "Verð/dag", "Staða bíls",
+                        "Næsta bókun"))
                     print(the_car)
                     print()
                 else:
@@ -133,7 +138,8 @@ class CarUI(object):
             choice = ""
             while choice not in HOMECOMMANDS and choice != "a":
                 choice = input(
-                    "Veldu aðgerð: (H)eim, (S)krá út eða (A) til að halda áfram: ").lower()
+                    "Veldu aðgerð: (H)eim, (S)krá út eða (A) \
+til að halda áfram: ").lower()
                 print()
         return choice
 
@@ -143,7 +149,8 @@ class CarUI(object):
             if choice == "1":
                 menu = "sem eru lausir eða í útleigu"
                 status_list = ["Hefur ekki enn verið skilað",
-                               "Leigður en ekki sóttur", "Í útleigu", "Tilbúinn til útleigu"]
+                               "Leigður en ekki sóttur", "Í útleigu",
+                               "Tilbúinn til útleigu"]
             if choice == "2":
                 menu = "sem eru lausir "
                 status_list = ["Tilbúinn til útleigu"]
@@ -183,8 +190,8 @@ class CarUI(object):
         self.__uistandard.clear_screen()
         self.__uistandard.print_header()
         line_seperator = ("-"*100)
-        print("Bílayfirlit - {} {}".format(the_type, menu))
-        print(line_seperator)
+        self.__uistandard.location_header(
+            "Bílayfirlit - {} {}".format(the_type, menu))
         print("{:^8} | {:^12} | {:^15} | {:^30} | {:^15} ".format(
             "Bílnúmer", "Tegund", "Verð/dag", "Staða bíls", "Næsta bókun"))
         print(line_seperator)
@@ -192,10 +199,12 @@ class CarUI(object):
             type_list, status_list)
         if strengur == "":
             strengur = (
-                "\nÞví miður eru engir bílar sem uppfylla þessi leitarskilyrði\n")
+                "\nÞví miður eru engir bílar sem uppfylla þessi \
+leitarskilyrði\n")
         print(strengur)
         choice = ""
         while choice not in HOMECOMMANDS and choice != "a":
             choice = input(
-                "Veldu aðgerð: (H)eim, (S)krá út eða (A) fyrir að afhenda eða taka á móti bíl: ").lower()
+                "Veldu aðgerð: (H)eim, (S)krá út eða (A) fyrir að afhenda \
+eða taka á móti bíl: ").lower()
         return choice

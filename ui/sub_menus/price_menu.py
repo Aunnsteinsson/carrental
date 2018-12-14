@@ -20,8 +20,7 @@ class PriceUI(object):
         """ Sýnir verðlistaviðmót yfirmanns og kallar á klasa eftir því sem við á """
         self.__uistandard.print_header()
         price_dict = self.get_price_dict()
-        print("\nVerðlisti\n")
-        self.__uistandard.line_seperator()
+        self.__uistandard.location_header("Verðlisti")
         print("{:^15} | {:^15}".format("Tegund", "Verð/dag"))
         self.__uistandard.line_seperator()
         for types, price in price_dict.items():
@@ -77,6 +76,4 @@ class PriceUI(object):
                     time.sleep(1)
                     choice = input(
                         "Viltu breyta öðru verði? ((J)á/(N)ei) ").lower()
-
-            choice = self.__uistandard.back_input()
         return choice
