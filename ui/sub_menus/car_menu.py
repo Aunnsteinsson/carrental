@@ -67,13 +67,13 @@ class CarUI(object):
             a_type = input("Flokkur: ").lower()
             license_plate = input("Bílnúmer: ").upper()
             if a_type.lower() == 'j':
-                a_type = "jeppi"
+                a_type = "Jeppi"
                 print_type = "jeppa"
             elif a_type.lower() == 'f':
-                a_type = "folksbill"
+                a_type = "Fólksbíll"
                 print_type = "fólksbíl"
             elif a_type.lower() == 's':
-                a_type = "sendibill"
+                a_type = "Sendibíll"
                 print_type = "sendibíl"
             else:
                 print("Flokkur ekki í boði")
@@ -166,18 +166,18 @@ til að halda áfram: ").lower()
             second_choice = input("Veldu síðu: ")
             if second_choice == "2":
                 the_type = "Jeppar"
-                type_list = ["jeppi"]
+                type_list = ["Jeppi"]
             elif second_choice == "3":
                 the_type = "Fólksbílar"
-                type_list = ["folksbill"]
+                type_list = ["Fólksbill"]
             elif second_choice == "4":
                 the_type = "Sendibílar"
-                type_list = ["sendibill"]
+                type_list = ["Sendibíll"]
             elif second_choice in HOMECOMMANDS:
                 return second_choice
             elif second_choice == "1":
                 the_type = "Allir bílar"
-                type_list = ["sendibill", "folksbill", "jeppi"]
+                type_list = ["Sendibíll", "Fólksbíll", "Jeppi"]
             else:
                 print("Val ekki í boði. Notandi sendur aftur heim")
                 time.sleep(3)
@@ -206,9 +206,9 @@ leitarskilyrði\n")
         while choice not in HOMECOMMANDS and choice != "a":
             if admin == 0:
                 choice = input(
-                "Veldu aðgerð: (H)eim, (S)krá út eða (A) fyrir að afhenda \
+                    "Veldu aðgerð: (H)eim, (S)krá út eða (A) fyrir að afhenda \
 eða taka á móti bíl: ").lower()
             else:
                 choice = input(
-                "Veldu aðgerð: ").lower()
+                    "Veldu aðgerð: ").lower()
         return choice

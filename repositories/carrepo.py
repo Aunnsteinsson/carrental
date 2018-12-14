@@ -17,7 +17,7 @@ class CarRepo(object):
         """fall sem les upp úr cars.csv og skilar dict með bílnúmeri
         sem key og instance af car klasanum sem value"""
         car_dict = {}
-        with open("./data/cars.csv", "r") as car_file:
+        with open("./data/cars.csv", "r", encoding="utf-8") as car_file:
             csv_reader = csv.reader(car_file)
             for car in csv_reader:
                 if car[0] != "licence_plate":
@@ -31,7 +31,7 @@ class CarRepo(object):
         """fall sem les upp úr price.csv og skilar dict með verðandlagi
         sem key og verði sem value"""
         price_dict = {}
-        with open("./data/price_list.csv", "r") as price_file:
+        with open("./data/price_list.csv", "r", encoding="utf-8") as price_file:
             csv_reader = csv.reader(price_file)
             for price in csv_reader:
                 if price[0] != "gerd_bils":
