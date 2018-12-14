@@ -17,6 +17,9 @@ class CustomerUI(object):
         self.__uistandard = UIStandard(name, a_type)
 
     def get_the_customer(self, ssn):
+        """Fall sem tekur inn kennitölu og skilar stak af viðskiptavini"""
+        # Þetta fall er gert til að order_menu geti lesið fengið viðskiptavini
+        # án þess að vera að opna csv fælinn
         customer = self.__customer_service.find_customer(ssn)
         return customer
 
@@ -46,6 +49,9 @@ class CustomerUI(object):
         return choice
 
     def find_customer(self, ssn, customer):
+        """Viðmót sem að sýnir það viðmót sem kemur þegar
+        leitað er að viðskiptavin eftir kennitölu og viðmótið
+        þegar valið er að eyða viðskiptavini úr kerfi"""
         choice = ""
         while choice not in HOMECOMMANDS:
             self.__uistandard.clear_screen()
@@ -74,6 +80,8 @@ class CustomerUI(object):
                     list_of_order_numbers = (self.__order_service.
                                              get_orders_of_customer_menu(
                                                  ssn))
+                    # Ef viðskiptavini er eytt er öllum pöntunum sem voru skráðar
+                    # á hann líka eytt
                     for order_number in list_of_order_numbers:
                         self.__order_service.remove_order(order_number)
                     time.sleep(3)
@@ -90,6 +98,7 @@ class CustomerUI(object):
         return choice
 
     def change_menu(self, ssn, customer):
+        """Það viðmót sem kemur þegar ákveðið er að breyta viðskiptavini"""
         choice = ""
         while choice not in HOMECOMMANDS:
             name = customer.get_name()
@@ -194,4 +203,5 @@ reyna aftur, (N) til að sleppa endurtekningu: "
         return ssn
 
     def save_program(self):
+        """Skrifar gögnin um viðskiptavini inn í csv skrána"""
         self.__customer_service.save_program()
