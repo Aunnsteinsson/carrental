@@ -74,7 +74,8 @@ class OrderUI(object):
             "-"*126)
 
     def ssn_order_menu(self, ssn):
-        """fall sem að sýnir viðmót þegar leitað er að pöntunm eftir kennitölu"""
+        """fall sem að sýnir viðmót þegar leitað er að pöntunm eftir
+         kennitölu"""
         self.__uistandard.clear_screen()
         self.__uistandard.print_header()
         self.__uistandard.location_header("Pantanir - Yfirlit pantana\
@@ -95,7 +96,7 @@ class OrderUI(object):
         return choice
 
     def get_single_order(self, order_number):
-        """Fall sem sýnir viðmót þegar leitað er 
+        """Fall sem sýnir viðmót þegar leitað er
         að pöntun eftir pöntunarnúmeri"""
         choice = ""
         self.__uistandard.clear_screen()
@@ -153,8 +154,8 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
             if len(string_of_dates) > 20:
                 choice_of_car = input(
                     "Bílnúmer bíls sem skal breyta: ").upper()
-                # Ef að strengurinn var langur þá velur maður annan bíl sem að passar
-                # fyrir skilyrðin á þeim tíma sem maður vildi
+                # Ef að strengurinn var langur þá velur maður annan bíl sem að
+                #  passar fyrir skilyrðin á þeim tíma sem maður vildi
                 self.__order_service.change_car_again(
                     choice_of_car, order_number)
                 self.__order_service.add_dates_to_car(
@@ -215,7 +216,8 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
             self.__uistandard.print_header()
             self.__uistandard.location_header("Pantanir - Ný pöntun")
             print("\tTímabil\n\t--------")
-            # hér er while loopa sem að villu checkar ef dagsetningar eru rétt srkáðar inn
+            # hér er while loopa sem að villu checkar ef dagsetningar eru
+            #  rétt skráðar inn
             check_string = "string that checks if dates are valid"
             while check_string != "":
                 begin_day = input("\tUpphafsdagur: ")
@@ -225,13 +227,15 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
                 end_month = input("\tSkilamánuður: ")
                 end_year = input("\tSkilaár: ")
                 check_string = self.__uistandard.check_if_date_is_valid(
-                    begin_day, begin_month, begin_year, end_day, end_month, end_year)
+                    begin_day, begin_month, begin_year, end_day, end_month,
+                    end_year)
                 print(check_string)
             begin_date = begin_year + "-" + begin_month + "-" + begin_day
             end_date = end_year + "-" + end_month + "-" + end_day
             list_of_days = self.__order_service.list_of_days(
                 begin_date, end_date)
-            print("\n\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
+            print("\n\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t\
+(S)endibíll\n")
             type_of_car = input("\tFlokkur: ")
             # Hér búum við til lista með þeim flokkum sem fólk valdi
             if type_of_car == "j":
@@ -269,17 +273,19 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
             licence_plate = input("Skrifa bílnúmer: ").upper()
             a_car = self.__car_service.show_cars(licence_plate)
             if licence_plate in list_of_unavailale_plates or not a_car:
-                print("Bíll með bílnúmerið {} er ekki í boði".format(licence_plate))
+                print("Bíll með bílnúmerið {} er ekki í boði".format(
+                    licence_plate))
         order_number = self.__order_service.make_order_number()
         price = self.__order_service.price_of_rent(
             licence_plate, 0, False, begin_date, end_date)
-        print("Verð með skyldutryggingu og VSK en án aukatrygginga: {:,.0f} ISK".format(
+        print("Verð með skyldutryggingu og VSK en án aukatrygginga: {:,.0f}\
+ ISK".format(
             float(price)))
         # Hér þarf að sækja verð
         extra_insurance_price = self.__order_service.get_price_of_extra_insurance()
         insurance = input(
-            "\tViðbótartrygging (verð {:,.0f} ISK á dag) (J)á/(N)ei: ".format(float(
-                extra_insurance_price)))
+            "\tViðbótartrygging (verð {:,.0f} ISK á dag) (J)á/(N)ei: ".format(
+                float(extra_insurance_price)))
         if insurance.lower() == "j":
             insurance = True
             price = self.__order_service.price_of_rent(
@@ -333,7 +339,8 @@ Notandi sendur heim")
         return "h"
 
     def discount_checker(self):
-        """Fall sem að lætur skrá inn afslátt og athugar hvort hann sé rétt sleginn inn"""
+        """Fall sem að lætur skrá inn afslátt og athugar hvort hann sé
+         rétt sleginn inn"""
         tester = True
         while tester:
             discount = input(

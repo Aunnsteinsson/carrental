@@ -40,7 +40,7 @@ class PriceUI(object):
             print("{:<15} | {:>12,.0f} {}".format(types, price, "ISK"))
 
     def salesman_get_price_menu(self):
-        """"""
+        """Fall sem prentar verðlista fyrir söludeild"""
         self.print_price_menu()
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
@@ -48,6 +48,7 @@ class PriceUI(object):
         return choice
 
     def boss_change_price_menu(self):
+        """Fall sem veitir yfirmanni möguleikan á að breyta verðlista"""
         choice = ""
         while choice.lower() not in HOMECOMMANDS and choice.lower() != "b":
             self.__uistandard.clear_screen()
