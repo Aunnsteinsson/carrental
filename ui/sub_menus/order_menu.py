@@ -131,7 +131,7 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
                 new_eday = input("Nýr skiladagur (dd): ")
                 new_emon = input("Nýr skilamánuður (mm): ")
                 new_eyear = input("Nýtt skilaár (yyyy): ")
-                check_string = self.__uistandard.check_if_date_is_valid(begin_day, begin_month, begin_year, end_day, end_month, end_year)
+                check_string = self.__uistandard.check_if_date_is_valid(new_sday, new_smon, new_syear, new_eday, new_emon, new_eyear)
                 print(check_string)
 
             begin_date = "{}-{}-{}".format(new_syear, new_smon, new_sday)

@@ -74,18 +74,23 @@ class BossUI(object):
 
     def revenue_for_time_period(self):
         choice = "j"
-        while choice.lower() not in HOMECOMMANDS and choice.lower() != "b":
-            while choice.lower() == "j":
+        while choice not in HOMECOMMANDS and choice != "b" and choice != "n":
+            if choice.lower() == "j":
                 self.__uistandard.clear_screen()
                 self.__uistandard.print_header()
                 self.__uistandard.location_header("Tekjuyfirlit")
                 print()
-                new_sday = input("\tUpphafsdagur tímabils (dd): ")
-                new_smon = input("\tUpphafsmánuður tímabils(mm): ")
-                new_syear = input("\tUpphafs ár tímabils (yyyy): ")
-                new_eday = input("\tLokadagur tímabils (dd): ")
-                new_emon = input("\tLokamánuður tímabils (mm): ")
-                new_eyear = input("\tLokaár tímabils (yyyy): ")
+                check_string = "Strengur til að athuga hvort dagar séu rétt skráðir inn"
+                while check_string:
+                    new_sday = input("Nýr upphafsdagur (dd): ")
+                    new_smon = input("Nýr upphafsmánuður (mm): ")
+                    new_syear = input("Nýtt upphafsár (yyyy): ")
+                    new_eday = input("Nýr skiladagur (dd): ")
+                    new_emon = input("Nýr skilamánuður (mm): ")
+                    new_eyear = input("Nýtt skilaár (yyyy): ")
+                    check_string = self.__uistandard.check_if_date_is_valid(
+                        new_sday, new_smon, new_syear, new_eday, new_emon, new_eyear)
+                    print(check_string)
                 begin_date = "{}-{}-{}".format(new_syear, new_smon, new_sday)
                 end_date = "{}-{}-{}".format(new_eyear, new_emon, new_eday)
                 list_of_dates = self.__order_service.list_of_days(
@@ -104,18 +109,31 @@ class BossUI(object):
                 print("\t {:>15}|{:<15}".format(("-")*15, ("-")*15))
                 print("{:^13}  | {:>10,.0f} {:<4}\n".format(
                     "Heildartekjur tímabils", total_rev, "ISK"))
-                choice = input(
-                    "\nViltu skoða yfirlit yfir annað tímabil? ((J)á / (N)ei) ").lower()
+                choice = ""
+                while choice != "j" and choice != "n":
+                    choice = input(
+                        "\nViltu skoða yfirlit yfir annað ár? ((J)á / (N)ei)\n\nVeldu aðgerð: ").lower()
+        choice = self.__uistandard.back_input()
         return choice
 
     def revenue_in_year(self):
         choice = "j"
-        while choice.lower() not in HOMECOMMANDS and choice.lower() != "b":
-            while choice.lower() == "j":
+        while choice not in HOMECOMMANDS and choice != "b" and choice != "n":
+            print("Vandamálið er annarsstaðar")
+            if choice.lower() == "j":
                 self.__uistandard.clear_screen()
                 self.__uistandard.print_header()
                 self.__uistandard.location_header("Tekjur - Fyrir ákveðið ár")
-                year = int(input("\n\tSláðu inn ár: "))
+                tester = True
+                while tester:
+                    try:
+                        year = int(input("\n\tSláðu inn ár: "))
+                        if len(str(year)) == 4:
+                            tester = False
+                        else:
+                            print("Árið {} er ekki í boði".format(year))
+                    except ValueError:
+                        print("Árið {} er ekki í boði".format(year))
                 list_of_months_and_rev = []
                 total_revenue_of_year = 0
                 for month in range(1, 13):
@@ -142,7 +160,9 @@ class BossUI(object):
                 print("\t {:>15}|{:<15}".format(("-")*15, ("-")*15))
                 print("   {:>18}   | {:>10,.0f} {:<4}\n".format(
                     "Tekjur árs", total_revenue_of_year, "ISK"))
-                choice = input(
-                    "\nViltu skoða yfirlit yfir annað ár? ((J)á / (N)ei)\n\nVeldu aðgerð: ").lower()
-                choice = self.__uistandard.back_input()
+                choice = ""
+                while choice != "j" and choice != "n":
+                    choice = input(
+                        "\nViltu skoða yfirlit yfir annað ár? ((J)á / (N)ei)\n\nVeldu aðgerð: ").lower()
+        choice = self.__uistandard.back_input()
         return choice
