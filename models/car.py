@@ -1,5 +1,7 @@
 # DENNI
 from datetime import date
+from datetime import datetime
+from datetime import timedelta
 
 
 class Car(object):
@@ -17,11 +19,22 @@ class Car(object):
 
     def __str__(self):
         if self.__rented_days:
+            yesterday = datetime.now() - timedelta(days=1)
+            highest_date = datetime(4500, 12, 30)
             for order_number, date_list in self.__rented_days.items():
-                date = str(date_list[0])
+                for a_date in date_list:
+                    date_list = a_date.split("-")
+                    day = datetime(int(date_list[0]), int(
+                        date_list[1]), int(date_list[2]))
+                    if day > yesterday and day < highest_date:
+                        highest_date = day
+            if highest_date != datetime(4500, 12, 30):
+                the_date = str(highest_date.date())
+            else:
+                the_date = "Engar pantanir"
         else:
-            date = "Engar pantanir"
-        return "{:<8} | {:<12} | {:<11,.0f} {:<} | {:<30} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("ISK"), (self.__wherabouts), date)
+            the_date = "Engar pantanir"
+        return "{:<8} | {:<12} | {:<11,.0f} {:<} | {:<30} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("ISK"), (self.__wherabouts), the_date)
 
     def __repr__(self):
         days_string = self.dict_to_string(self.__rented_days)
