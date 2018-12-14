@@ -66,10 +66,10 @@ class BossUI(object):
                 choice = self.revenue_for_time_period()
             elif choice == "2":
                 choice = self.revenue_in_year()
-            else:
-                choice = input(
-                    "\n\t Vinsamlegast veldu (1) fyrir tímabil, eða (2) fyrir \
-ár.\n\tEinnig geturðu valið (H) til að fara heim, eða (S) til að skrá þig út.")
+#             else:
+#                 choice = input(
+#                     "\n\t Vinsamlegast veldu (1) fyrir tímabil, eða (2) fyrir \
+# ár.\n\tEinnig geturðu valið (H) til að fara heim, eða (S) til að skrá þig út.")
         return choice
 
     def revenue_for_time_period(self):
