@@ -1,32 +1,24 @@
-# Teddi á að massa þennan fæl
 from repositories.carrepo import CarRepo
-from models.car import Car
 
 
 class CarService(object):
-    """ Sér um aðgerðir með bíla """
+    """Sér um aðgerðir með bíla"""
 
     def __init__(self):
         self.__car_repo = CarRepo()
 
     def make_car(self, new_car):
-        """ Nýskráir bíl í kerfi """
+        """Nýskráir bíl í kerfi"""
         self.__car_repo.add_car(new_car)
         self.save_cars()
 
     def remove_car(self, licence_plate):
-        """ Fjarlægir bíl úr kerfi """
+        """Fjarlægir bíl úr kerfi"""
         self.__car_repo.remove_car(licence_plate)
         self.save_cars()
 
-    def change_status(self, licence_plate, new_status):
-        """ Breytir stöðu bíls """
-        car = self.__car_repo.get_car(licence_plate)
-        car.change_status(new_status)
-        self.save_cars()
-
     def show_cars(self, licence_plate):
-        """ Fall sem sýnir upplýsingar um bíl """
+        """Fall sem sýnir upplýsingar um bíl"""
         return self.__car_repo.get_car(licence_plate)
 
     def change_status(self, new_status, car):
@@ -35,8 +27,9 @@ class CarService(object):
         self.__car_repo.save_car_data()
 
     def get_list_of_cars(self, a_type, status):
-        """ Fall sem tekur inn lista af þeim gerðum bíla sem notandinn vill
-        og þeim ástöndum sem hann vill bíl í og skilar bíl sem uppfyllir bæði skilyrði"""
+        """Fall sem tekur inn lista af þeim gerðum bíla sem notandinn vill
+         og þeim ástöndum sem hann vill bíl í og skilar bíl sem uppfyllir
+         bæði skilyrði"""
         dict = self.__car_repo.get_all_cars()
         string = ""
         for _, item in dict.items():

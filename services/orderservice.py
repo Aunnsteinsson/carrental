@@ -27,7 +27,8 @@ class OrderService(object):
         new_order_number = 0
         for order_number in self.__order_repo.get_orders():
             order_num = int(order_number)
-            if order_num > new_order_number:  # Finnur hæsta pöntunarnúmer sem var
+            if order_num > new_order_number:
+                # Finnur hæsta pöntunarnúmer sem var
                 new_order_number = order_num  # í kerfinu fyrir
         new_order_number += 1  # Bætir einum við
         return new_order_number
@@ -48,7 +49,7 @@ class OrderService(object):
 
     def list_of_days(self, start_date, finish_date):
         """Tekur inn upphafs og lokadagsetningu og skilar inn
-        lista af dögum (datetime) sem eru á því bili"""
+         lista af dögum (datetime) sem eru á því bili"""
         list_startdate = start_date.split("-")
         list_finishdate = finish_date.split("-")
         start_year, start_month, start_day = int(list_startdate[2]), int(
@@ -66,16 +67,18 @@ class OrderService(object):
 
     def find_unavailable_cars(self, a_type, start_date, finish_date):
         """Fall sem tekur inn upphafs og lokadag leigu og lista yfir þær gerðir
-        bíla sem eru í boði og skilar lista með þeim bílum sem uppfylla ekki 
-        skilyrðin að vera af réttum flokki og í boði á þessu tímabili"""
+         bíla sem eru í boði og skilar lista með þeim bílum sem uppfylla ekki
+         skilyrðin að vera af réttum flokki og í boði á þessu tímabili"""
         desired_days = self.list_of_days(start_date, finish_date)
-        # Breytum dögum úr datetime í streng því þannig eru þau geymd í klösunum
+        # Breytum dögum úr datetime í streng því þannig eru þau
+        #  geymd í klösunum
         desired_days = [str(day) for day in desired_days]
         car_dict = self.__car_repo.get_all_cars()
         unavailable_cars = []
         for _, cars in car_dict.items():
             type_of_car = cars.get_type()
-            if type_of_car in a_type:  # a_type er listi með þeim flokkum sem notandi vill
+            # a_type er listi með þeim flokkum sem notandi vill
+            if type_of_car in a_type:
                 unavailable_days = cars.get_duration()
                 for _, date_list in unavailable_days.items():
                     for day in date_list:
@@ -87,8 +90,8 @@ class OrderService(object):
 
     def find_available_cars(self, a_type, start_date, finish_date):
         """Fall sem að tekur inn lista af þeim flokkum af bílum sem eru í boði
-        og upphafs og lokadagsetningu og skilar streng með þeim bílum sem 
-        uppfylla það skilyrði að vera af réttri gerð og í boði á tímabilinu"""
+         og upphafs og lokadagsetningu og skilar streng með þeim bílum sem
+         uppfylla það skilyrði að vera af réttri gerð og í boði á tímabilinu"""
         unavailable_cars = self.find_unavailable_cars(
             a_type, start_date, finish_date)
         available_cars_string = ""
@@ -101,8 +104,8 @@ class OrderService(object):
 
     def add_dates_to_car(self, start_date, finish_date,
                          licence_plate, order_number):
-        """Tekur inn dagsetningar, pöntunarnúmer og bílnúmer og bætir 
-        pöntuninni á bíl"""
+        """Tekur inn dagsetningar, pöntunarnúmer og bílnúmer og bætir
+         pöntuninni á bíl"""
         car_dict = self.__car_repo.get_all_cars()
         car_unavailable = self.list_of_days(start_date, finish_date)
         the_car = car_dict[licence_plate]
@@ -145,17 +148,21 @@ class OrderService(object):
         self.remove_order_from_car(order_number)
         unavailable_cars = self.find_unavailable_cars(
             a_type, new_start_time, new_end_time)
-        if the_car not in unavailable_cars:  # Ef bíllin er laus þá fær hann nýjar dagsetningar
+        if the_car not in unavailable_cars:
+            # Ef bíllin er laus þá fær hann nýjar dagsetningar
             self.add_dates_to_car(
                 new_start_time, new_end_time, licence_plate, order_number)
             new_list = self.list_of_days(new_start_time, new_end_time)
             order.change_duration(new_list)
             self.__order_repo.save_new_orders()
             return "Breyting tókst!"
-        else:  # Ef bíllinn er ekki laus er fundinn bíll af réttum flokki sem er laus og notandi beðinn um að velja einn af þeim
+        else:
+            # Ef bíllinn er ekki laus er fundinn bíll af réttum flokki sem er
+            #  laus og notandi beðinn um að velja einn af þeim
             available_cars = self.find_available_cars(
                 a_type, new_start_time, new_end_time)
-            return "Bíll ekki í boði. Vinsamlegast veldu einhvern af þessum bílum. \n {}".format(available_cars)
+            return "Bíll ekki í boði. Vinsamlegast veldu einhvern af þessum\
+ bílum. \n {}".format(available_cars)
 
     def change_car(self, a_type, order_number):
         """Tekur inn gerð bíls og pöntunarnúmer og skilar
@@ -169,7 +176,8 @@ class OrderService(object):
         end = end.split("-")
         end = end[0] + "-" + end[1] + "-" + end[2]
         price_dict = self.__car_repo.get_car_prices()
-        type_list = []  # Við gerum lista með öllum gerðum bíla öðrum en þeim sem
+        type_list = []
+        # Við gerum lista með öllum gerðum bíla öðrum en þeim sem
         for car_type in price_dict:  # var áður í pöntuninni
             if car_type != a_type:
                 type_list.append(car_type)
@@ -219,8 +227,8 @@ class OrderService(object):
 
     def get_total_rev(self, list_of_dates):
         """Tekur inn lista af dögum og skilar inn heildatekjum af öllum
-        pöntunum án VSK á því tímabili og öllum pöntunum á því tímabili tengd við
-        þær tekjur sem sú pöntun gefur á því tímabili"""
+         pöntunum án VSK á því tímabili og öllum pöntunum á því tímabili tengd
+         við þær tekjur sem sú pöntun gefur á því tímabili"""
         list_of_dates = [str(day)for day in list_of_dates]
         dict_of_orders = self.get_orders()
         total_revenue = 0
@@ -243,7 +251,7 @@ class OrderService(object):
 
     def get_orders(self):
         """Skilar dict með pöntunarnúmeri sem key og stökum af
-        pöntunum sem value"""
+         pöntunum sem value"""
         return self.__order_repo.get_orders()
 
     def get_price_of_extra_insurance(self):
@@ -258,9 +266,10 @@ class OrderService(object):
         price_of_insurance = price_of_insurance["Skyldutrygging"]
         return float(price_of_insurance)
 
-    def price_of_rent(self, licence_plate, discount, insurance, start_date, end_date):
+    def price_of_rent(self, licence_plate, discount, insurance,
+                      start_date, end_date):
         """Tekur inn bílnúmer, afslátt, tryggingar, og dagsetningar og
-        reiknar úr heildarverð pöntunar með VSK"""
+         reiknar úr heildarverð pöntunar með VSK"""
         the_car = self.__car_repo.get_car(licence_plate)
         price_of_car = the_car.price_vehicle()
         price_of_car = float(price_of_car)
@@ -275,16 +284,19 @@ class OrderService(object):
             days_of_rent += 1
             start += step
         price_of_rent = days_of_rent * price_of_car
-        print("Verð bíls í {} daga án skyldutrygginga og VSK: {:,.0f} ISK".format(
+        print("Verð bíls í {} daga án skyldutrygginga og VSK: \
+{:,.0f} ISK".format(
             days_of_rent, float(price_of_rent)))
         price_of_mandated = days_of_rent * price_of_mandated_insurance
         price_of_rent += price_of_mandated
         discount = self.change_discount_to_float(discount)
         if insurance:
-            final_price = price_of_extra_insurance * days_of_rent + price_of_rent
+            final_price = price_of_extra_insurance * (days_of_rent +
+                                                      price_of_rent)
             if discount:
                 final_price = final_price * discount
-            return final_price*VSK  # Það verð sem er skilað ef keyptar eru aukatryggingar
+            # Það verð sem er skilað ef keyptar eru aukatryggingar
+            return final_price*VSK
         if discount:
             # Hér er verð án aukatrygginga en með afsl
             price_of_rent = price_of_rent * discount

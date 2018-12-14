@@ -13,18 +13,21 @@ class PriceUI(object):
         self.__uistandard = UIStandard(name, a_type)
 
     def get_price_dict(self):
+        """Fall sem skilar dictionary fyrir verðlista"""
         price_dict = self.__car_service.get_car_prices()
         return price_dict
 
     def print_price_menu(self):
-        """ Sýnir verðlistaviðmót yfirmanns og kallar á klasa eftir því sem við á """
+        """ Sýnir verðlistaviðmót yfirmanns og kallar á klasa eftir
+         því sem við á """
         self.__uistandard.print_header()
         price_dict = self.get_price_dict()
         self.__uistandard.location_header("Verðlisti")
         print("{:^15} | {:^15}".format("Tegund", "Verð/dag"))
         self.__uistandard.line_seperator()
         for types, price in price_dict.items():
-            # Þessi lykkja er nauðsynleg vegna þess að .csv skrár lesa ekki íslenska stafi
+            # Þessi lykkja er nauðsynleg vegna þess að .csv skrár lesa
+            #  ekki íslenska stafi
             price = float(price)
             if types == "folksbill":
                 types = "Fólksbíll"
@@ -37,6 +40,7 @@ class PriceUI(object):
             print("{:<15} | {:>12,.0f} {}".format(types, price, "ISK"))
 
     def salesman_get_price_menu(self):
+        """"""
         self.print_price_menu()
         choice = ""
         while choice.lower() not in HOMECOMMANDS:

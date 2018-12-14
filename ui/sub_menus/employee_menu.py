@@ -10,12 +10,10 @@ VALIDJOB = ["k", "s", "y"]
 
 
 class EmployeeUI(object):
-    '''
-    Klasi sem sér um starfsmenn fyrir kerfisstjóra og yfirmann.
+    """Klasi sem sér um starfsmenn fyrir kerfisstjóra og yfirmann.
     Þá hefur yfirmaður aðgang að yfirliti yfir starfsmenn en kerfisstjóri
     hefur hefur heimild til að breyta og eyða starfsmanni. Einnig prentast
-    lykilorð í yfirliti hjá kerfisstjóra.
-    '''
+    lykilorð í yfirliti hjá kerfisstjóra."""
 
     def __init__(self, username, job_title):
         self.__username = username
@@ -23,10 +21,8 @@ class EmployeeUI(object):
         self.__uistandard = UIStandard(username, job_title)
 
     def print_employee_header(self):
-        '''
-        Prentar haus fyrir starfmannayfirlit kerfisstjóra þar sem hann sér
-        einnig lykilorð
-        '''
+        """Prentar haus fyrir starfmannayfirlit kerfisstjóra þar sem hann sér
+        einnig lykilorð"""
         self.__uistandard.location_header(
             "Starfsmenn - Starfsmannayfirlit kerfisstjóra")
         print("{:^10s}| {:^10s}| {:^25s}| {:^25s}| {:^10s}| {:^12s}".format(
@@ -34,9 +30,7 @@ class EmployeeUI(object):
         self.__uistandard.line_seperator()
 
     def print_employee_header_boss(self):
-        '''
-        Prentar haus fyrir starfmannayfirlit yfirmanns
-        '''
+        """Prentar haus fyrir starfmannayfirlit yfirmanns"""
         self.__uistandard.location_header(
             "Starfsmenn - Starfsmannayfirlit yfirmanns")
         print("{:^25s}| {:^10s}| {:^25s}| {:^10s}| {:^12s}".format(
@@ -44,10 +38,8 @@ class EmployeeUI(object):
         self.__uistandard.line_seperator()
 
     def employee_menu(self):
-        '''
-        Yfirlit yfir alla starfsmenn fyrirtækis,
-        Möguleiki á að eyða og breyta starfsmanni
-        '''
+        """Yfirlit yfir alla starfsmenn fyrirtækis,
+        Möguleiki á að eyða og breyta starfsmanni"""
         self.__uistandard.clear_screen()
         choice = ""
         get_pass = 1
@@ -72,9 +64,7 @@ class EmployeeUI(object):
             return choice
 
     def delete_employee(self, employees_list_string):
-        '''
-        Fall sem sér um eyðingu starfsmanns
-        '''
+        """Fall sem sér um eyðingu starfsmanns"""
         print("\nEyða\n{}".format("-"*40))
         username = input("Notandanafn: ")
         if username.lower() not in HOMECOMMANDS:
@@ -95,10 +85,8 @@ class EmployeeUI(object):
                 time.sleep(2)
 
     def edit_employee(self):
-        '''
-        Fall sem sér um breytingu á starfsmanni. Hægt er að breyta lykilorði,
-        nafni, heimilisfangi, síma.
-        '''
+        """Fall sem sér um breytingu á starfsmanni. Hægt er að breyta lykilorði,
+        nafni, heimilisfangi, síma."""
         print("\nBreyta\n{}".format("-"*40))
         username = input("Notandanafn: ")
         if username.lower() not in HOMECOMMANDS:
@@ -106,7 +94,8 @@ class EmployeeUI(object):
             check = self.__employee_service.check_if_valid(username)
             if check:
                 print("Hverju skal breyta?\n{}".format("-"*40))
-                print("\t1. Lykilorð\n\t2. Nafn\n\t3. Heimilisfang\n\t4. Sími\n")
+                print("\t1. Lykilorð\n\t2. Nafn\n\t3. Heimilisfang\n\t\
+4. Sími\n")
                 choice = ""
                 new_value10 = ""
                 new_value25 = ""
@@ -153,9 +142,7 @@ baka")
                 time.sleep(2)
 
     def new_employee(self):
-        '''
-        Fall sem sér um nýskráningarsíðu starfsmanns.
-        '''
+        """Fall sem sér um nýskráningarsíðu starfsmanns."""
         self.__uistandard.clear_screen()
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
@@ -191,10 +178,12 @@ baka")
 
             else:
                 choice = input(
-                    "\tStaðfesta nýjan notanda {} ((J)á/(N)ei): ".format(username))
+                    "\tStaðfesta nýjan notanda {} ((J)á/(N)ei): ".format(
+                        username))
                 if choice.lower() == "j":
                     self.__employee_service.add_employee(
-                        username, password, name, address, phonenumber, emp_type)
+                        username, password, name, address, phonenumber,
+                        emp_type)
                     print("\n{}\nNýr notandi hefur verið skráður!\n".format(
                         "-"*40))
                     self.save_employees()
@@ -204,9 +193,8 @@ baka")
                 return choice
 
     def show_employees(self):
-        """
-        Prentar út alla starfsmenn í kerfi fyrir yfirmann án lykilorðs
-        """
+        """Prentar út alla starfsmenn í kerfi fyrir yfirmann
+         án lykilorð."""
         self.__uistandard.clear_screen()
         self.__uistandard.print_header()
         self.print_employee_header_boss()
@@ -217,4 +205,5 @@ baka")
         return choice
 
     def save_employees(self):
+        """Vistar viðskiptavinayfirlit í dataskrá"""
         self.__employee_service.save_employees()
