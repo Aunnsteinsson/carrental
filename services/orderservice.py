@@ -8,6 +8,7 @@ from datetime import date, timedelta
 
 STARTDATE = 0
 ENDDATE = -1
+VSK = 1.24
 
 
 class OrderService(object):
@@ -26,9 +27,9 @@ class OrderService(object):
         new_order_number = 0
         for order_number in self.__order_repo.get_orders():
             order_num = int(order_number)
-            if order_num > new_order_number:
-                new_order_number = order_num
-        new_order_number += 1
+            if order_num > new_order_number:  # Finnur hæsta pöntunarnúmer sem var
+                new_order_number = order_num  # í kerfinu fyrir
+        new_order_number += 1  # Bætir einum við
         return new_order_number
 
     def remove_order(self, order_number):
@@ -39,16 +40,15 @@ class OrderService(object):
         self.__car_repo.save_car_data()
 
     def remove_order_from_car(self, order_number):
+        """Eyðir pöntun sem er skráð á bíl af þeim bíl"""
         the_order = self.__order_repo.get_order(order_number)
         licence_plate = the_order.get_licence_plate()
         car = self.__car_repo.get_car(licence_plate)
         car.remove_order(order_number)
 
     def list_of_days(self, start_date, finish_date):
-        """Tekur við upphafsdagsetningu, lokadagsetningu,
-        setur það í sitthvorn lista sem síðan breytir því í dagsetningu
-        býr síðan til lista á milli beggja dagsetninganna og bætir við
-        þeim dögum inn í lista sem sýnir þá daga sem bílar eru uppteknir"""
+        """Tekur inn upphafs og lokadagsetningu og skilar inn
+        lista af dögum (datetime) sem eru á því bili"""
         list_startdate = start_date.split("-")
         list_finishdate = finish_date.split("-")
         start_year, start_month, start_day = int(list_startdate[2]), int(
@@ -58,22 +58,26 @@ class OrderService(object):
         start_date = date(start_day, start_month, start_year)
         finish_date = date(finish_day, finish_month, finish_year)
         step = timedelta(days=1)
-        unavailable_list = []
+        list_of_days = []
         while start_date <= finish_date:
-            unavailable_list.append(start_date)
+            list_of_days.append(start_date)
             start_date += step
-        return unavailable_list
+        return list_of_days
 
     def find_unavailable_cars(self, a_type, start_date, finish_date):
+        """Fall sem tekur inn upphafs og lokadag leigu og lista yfir þær gerðir
+        bíla sem eru í boði og skilar lista með þeim bílum sem uppfylla ekki 
+        skilyrðin að vera af réttum flokki og í boði á þessu tímabili"""
         desired_days = self.list_of_days(start_date, finish_date)
+        # Breytum dögum úr datetime í streng því þannig eru þau geymd í klösunum
         desired_days = [str(day) for day in desired_days]
         car_dict = self.__car_repo.get_all_cars()
         unavailable_cars = []
-        for licence_plate, cars in car_dict.items():
+        for _, cars in car_dict.items():
             type_of_car = cars.get_type()
-            if type_of_car in a_type:
-                not_available = cars.get_duration()
-                for order_number, date_list in not_available.items():
+            if type_of_car in a_type:  # a_type er listi með þeim flokkum sem notandi vill
+                unavailable_days = cars.get_duration()
+                for _, date_list in unavailable_days.items():
                     for day in date_list:
                         if day in desired_days:
                             unavailable_cars.append(cars)
@@ -82,11 +86,14 @@ class OrderService(object):
         return unavailable_cars
 
     def find_available_cars(self, a_type, start_date, finish_date):
+        """Fall sem að tekur inn lista af þeim flokkum af bílum sem eru í boði
+        og upphafs og lokadagsetningu og skilar streng með þeim bílum sem 
+        uppfylla það skilyrði að vera af réttri gerð og í boði á tímabilinu"""
         unavailable_cars = self.find_unavailable_cars(
             a_type, start_date, finish_date)
         available_cars_string = ""
         car_dict = self.__car_repo.get_all_cars()
-        for licence_plate, cars in car_dict.items():
+        for _, cars in car_dict.items():
             if cars not in unavailable_cars:
                 cars_string = cars.__str__()
                 available_cars_string += cars_string + "\n"
@@ -94,6 +101,8 @@ class OrderService(object):
 
     def add_dates_to_car(self, start_date, finish_date,
                          licence_plate, order_number):
+        """Tekur inn dagsetningar, pöntunarnúmer og bílnúmer og bætir 
+        pöntuninni á bíl"""
         car_dict = self.__car_repo.get_all_cars()
         car_unavailable = self.list_of_days(start_date, finish_date)
         the_car = car_dict[licence_plate]
@@ -101,11 +110,13 @@ class OrderService(object):
         self.__car_repo.save_car_data()
 
     def get_customer_name(self, customer):
-        """Nær í nafn á viðskiptavini"""
+        """Tekur inn stak af viðskiptavini og nær í nafn á viðskiptavini"""
         name = customer.get_name()
         return name
 
     def get_orders_of_customer_menu(self, ssn):
+        """Finnur allar pantanir sem eru skráðar á viðskiptavin
+        og skilar þeim sem lista"""
         order = self.__order_repo.get_orders()
         list_of_order_numbers = []
         for ordernumber, orders in order.items():
@@ -116,16 +127,16 @@ class OrderService(object):
     def customer_orders(self, ssn, print_format):
         """Skilar streng þar sem allar pantanir viðskiptavins
         koma fram"""
-        order = self.__order_repo.get_orders()
+        order_list = self.get_orders_of_customer_menu(ssn)
         string_of_orders = ""
-        for _, orders in order.items():
-            if ssn == orders.get_ssn():
-                order_string = orders.__str__(print_format)
-                string_of_orders += order_string + "\n"
+        for order in order_list:
+            order_string = order.__str__(print_format)
+            string_of_orders += order_string + "\n"
         return string_of_orders
 
     def change_time(self, order_number, new_start_time, new_end_time):
-        """Breytir tíma á pöntun"""
+        """Tekur inn pöntunarnúmer og nýjan upphafs og lokatíma og breytir
+        tímunum á pöntuninni"""
         order = self.__order_repo.get_order(order_number)
         licence_plate = order.get_licence_plate()
         the_car = self.__car_repo.get_car(licence_plate)
@@ -133,19 +144,21 @@ class OrderService(object):
         self.remove_order_from_car(order_number)
         unavailable_cars = self.find_unavailable_cars(
             a_type, new_start_time, new_end_time)
-        if the_car not in unavailable_cars:
+        if the_car not in unavailable_cars:  # Ef bíllin er laus þá fær hann nýjar dagsetningar
             self.add_dates_to_car(
                 new_start_time, new_end_time, licence_plate, order_number)
             new_list = self.list_of_days(new_start_time, new_end_time)
             order.change_duration(new_list)
             self.__order_repo.save_new_orders()
             return "Breyting tókst!"
-        else:
+        else:  # Ef bíllinn er ekki laus er fundinn bíll af réttum flokki sem er laus og notandi beðinn um að velja einn af þeim
             available_cars = self.find_available_cars(
                 a_type, new_start_time, new_end_time)
             return "Bíll ekki í boði. Vinsamlegast veldu einhvern af þessum bílum. \n {}".format(available_cars)
 
     def change_car(self, a_type, order_number):
+        """Tekur inn gerð bíls og pöntunarnúmer og skilar
+        streng með öllum þeim bílum sem eru í boði"""
         order = self.__order_repo.get_order(order_number)
         list_of_days = order.get_duration()
         start = list_of_days[STARTDATE]
@@ -154,15 +167,18 @@ class OrderService(object):
         end = list_of_days[ENDDATE]
         end = end.split("-")
         end = end[0] + "-" + end[1] + "-" + end[2]
-        type_list = ["sendibill", "folksbill", "jeppi"]
-        for index, value in enumerate(type_list):
-            if value == a_type:
-                k = type_list.pop(index)
+        price_dict = self.__car_repo.get_car_prices()
+        type_list = []  # Við gerum lista með öllum gerðum bíla öðrum en þeim sem
+        for car_type in price_dict:  # var áður í pöntuninni
+            if car_type != a_type:
+                type_list.append(car_type)
         self.remove_order_from_car(order_number)
         string_car = self.find_available_cars(type_list, start, end)
         return string_car
 
     def change_car_again(self, new_car, order_number):
+        """Tekur inn stak af bíl og setur það inn í dict
+        og skrifar það líka í csv skrána"""
         order = self.__order_repo.get_order(order_number)
         order.change_car(new_car)
         self.__order_repo.save_new_orders()
@@ -183,7 +199,7 @@ class OrderService(object):
         order.change_insurance(new_insurance)
         discount = order.get_discount()
         duration_list = order.get_duration()
-        licence_plate = order.get_car()
+        licence_plate = order.get_licence_plate()
         start = duration_list[STARTDATE]
         end = duration_list[ENDDATE]
         price = self.price_of_rent(
@@ -201,6 +217,9 @@ class OrderService(object):
         return string_of_orders
 
     def get_total_rev(self, list_of_dates):
+        """Tekur inn lista af dögum og skilar inn heildatekjum af öllum
+        pöntunum án VSK á því tímabili og öllum pöntunum á því tímabili tengd við
+        þær tekjur sem sú pöntun gefur á því tímabili"""
         list_of_dates = [str(day)for day in list_of_dates]
         dict_of_orders = self.get_orders()
         total_revenue = 0
@@ -213,7 +232,7 @@ class OrderService(object):
                 if day in list_of_dates:
                     counter += 1
             ratio = counter/len(list_of_days)
-            price_of_order_in_month = ratio * float(price_of_order)
+            price_of_order_in_month = (ratio * float(price_of_order))/VSK
             if counter:
                 new_order_string = "\t{:^15} | {:>9,.0f} ISK\n".format(
                     order_number, price_of_order_in_month)
@@ -222,20 +241,25 @@ class OrderService(object):
         return total_revenue, string_of_orders
 
     def get_orders(self):
+        """Skilar dict með pöntunarnúmeri sem key og stökum af
+        pöntunum sem value"""
         return self.__order_repo.get_orders()
 
     def get_price_of_extra_insurance(self):
+        """Skilar verði á aukatryggingu"""
         price_of_insurance = self.__car_repo.get_car_prices()
         price_of_insurance = price_of_insurance["aukatrygging"]
         return float(price_of_insurance)
 
     def get_price_of_mandated_insurance(self):
+        """Skilar verði á skyldutryggingu"""
         price_of_insurance = self.__car_repo.get_car_prices()
         price_of_insurance = price_of_insurance["skyldutrygging"]
         return float(price_of_insurance)
 
     def price_of_rent(self, licence_plate, discount, insurance, start_date, end_date):
-        """Reiknar út verð á pöntun"""
+        """Tekur inn bílnúmer, afslátt, tryggingar, og dagsetningar og
+        reiknar úr heildarverð pöntunar með VSK"""
         the_car = self.__car_repo.get_car(licence_plate)
         price_of_car = the_car.price_vehicle()
         price_of_car = float(price_of_car)
@@ -250,7 +274,7 @@ class OrderService(object):
             days_of_rent += 1
             start += step
         price_of_rent = days_of_rent * price_of_car
-        print("Verð bíls í {} daga án skyldutrygginga: {}".format(
+        print("Verð bíls í {} daga án skyldutrygginga og VSK: {}".format(
             days_of_rent, price_of_rent))
         price_of_mandated = days_of_rent * price_of_mandated_insurance
         price_of_rent += price_of_mandated
@@ -259,22 +283,26 @@ class OrderService(object):
             final_price = price_of_extra_insurance * days_of_rent + price_of_rent
             if discount:
                 final_price = final_price * discount
-            return final_price
+            return final_price*VSK  # Það verð sem er skilað ef keyptar eru aukatryggingar
         if discount:
+            # Hér er verð án aukatrygginga en með afsl
             price_of_rent = price_of_rent * discount
-            return price_of_rent
+            return price_of_rent*VSK
         else:
-            return price_of_rent
+            return price_of_rent*VSK  # Verð án aukatryggingar og án afsláttar
 
     def change_price(self, order, new_price):
+        """Tekur inn stak af pöntun og nýtt verð og breytir verðinu"""
         order.change_price(new_price)
 
     def change_discount(self, order_number, new_discount):
+        """Tekur inn pöntunarnúmer og breyttan afslátt og
+        breytir afslættinum í pöntununni og uppfærir verðið"""
         order = self.__order_repo.get_order(order_number)
         order.change_discount(new_discount)
         insurance = order.get_insurance()
         duration_list = order.get_duration()
-        licence_plate = order.get_car()
+        licence_plate = order.get_licence_plate()
         start = duration_list[STARTDATE]
         end = duration_list[ENDDATE]
         price = self.price_of_rent(
@@ -283,10 +311,13 @@ class OrderService(object):
         self.__order_repo.save_new_orders()
 
     def change_discount_to_float(self, discount):
+        """Tekur inn afslátt í prósentum og breytir honum í float hlutfall"""
         discount = float(discount)/100
         return 1-discount
 
     def find_order(self, order_number):
+        """Tekur inn pöntunarnúmer og ef það er til pöntun á því
+        númeri og skilar henni"""
         order_dict = self.__order_repo.get_orders()
         for order, _ in order_dict.items():
             if order == order_number:
