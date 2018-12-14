@@ -1,4 +1,6 @@
-from datetime import date, datetime
+from datetime import date
+import datetime
+import calendar
 from repositories.employeerepo import EmployeeRepo
 from services.employeeservice import EmployeeService
 from ui.ui_standard_functions import UIStandard
@@ -48,10 +50,16 @@ class BossUI(object):
             elif choice == "5":
                 choice = self.__price_ui.boss_change_price_menu()
             elif choice == "6":
-                choice = self.revenue()
+                self.revenue()
 
     def revenue(self):
+        choice = input("1 or 2")
+        if choice == "2":
+            self.revenue_in_year()
+        else:
+            self.revenue_in_time()
 
+    def revenue_in_time(self):
         new_sday = input("Upphafsdagur tímabils (dd): ")
         new_smon = input("Upphafsmánuður tímabils(mm): ")
         new_syear = input("Upphafs ár tímabils (yyyy): ")
@@ -60,8 +68,9 @@ class BossUI(object):
         new_eyear = input("Lokaár tímabils (yyyy): ")
         begin_date = "{}-{}-{}".format(new_syear, new_smon, new_sday)
         end_date = "{}-{}-{}".format(new_eyear, new_emon, new_eday)
+        list_of_dates = self.__order_service.list_of_days(begin_date, end_date)
         total_rev, string_of_order_and_rev = self.__order_service.get_total_rev(
-            begin_date, end_date)
+            list_of_dates)
         begin_date = "{}/{}/{}".format(new_sday, new_smon, new_syear)
         end_date = "{}/{}/{}".format(new_eday, new_emon, new_eyear)
         self.__uistandard.clear_screen()
@@ -79,3 +88,23 @@ class BossUI(object):
         while choice.lower() not in HOMECOMMANDS:
             choice = input("\n(H)eim - (S)krá út: ")
         return choice
+
+    def revenue_in_year(self):
+        year = int(input("Fyrir hvaða ár viltu fá tekjur? "))
+        list_of_months_and_rev = []
+        total_revenue_of_year = 0
+        for month in range(1, 13):
+            num_days = calendar.monthrange(year, month)[1]
+            list_of_dates = [datetime.date(year, month, day)
+                             for day in range(1, num_days+1)]
+            total_rev, string_of_order_and_rev = self.__order_service.get_total_rev(
+                list_of_dates)
+            total_revenue_of_year += total_rev
+            temp_list = [month, total_rev]
+            list_of_months_and_rev.append(temp_list)
+
+        for listi in list_of_months_and_rev:
+            print("Mánuður númer: ", listi[0])
+            print("Tekjur þess mánaðar ", listi[1])
+            print(total_revenue_of_year)
+        choice = input("Moment of.....")

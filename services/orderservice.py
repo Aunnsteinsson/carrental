@@ -200,8 +200,7 @@ class OrderService(object):
             string_of_orders += order_string + "\n"
         return string_of_orders
 
-    def get_total_rev(self, begin_date, end_date):
-        list_of_dates = self.list_of_days(begin_date, end_date)
+    def get_total_rev(self, list_of_dates):
         list_of_dates = [str(day)for day in list_of_dates]
         dict_of_orders = self.get_orders()
         total_revenue = 0

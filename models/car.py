@@ -90,17 +90,6 @@ class Car(object):
         vehicle_price = float(vehicle_price)
         return vehicle_price
 
-    # def price_small_car(self, a_type):
-        #  """Ef flokkur bíls er fólksbíll, þá er verðið á honum 5000"""
-        # self.__price = 5000
-        # return self.__price
-
-#    def price_van(self, a_type):
-    #       """Ef flokkur bíls er sendibíll, þá er verðið á honum 15.000"""
-    #      if a_type.lower() == "sendibíll":
-    #         self.__price = 15000
-    #    return self.__price"""
-
     def get_type(self):
         """Skilar flokki bíls"""
         return self.__a_type
@@ -120,30 +109,3 @@ class Car(object):
         days_string = self.dict_to_string(self.__rented_days)
         return "{},{},{},{}".format(self.__licence_plate,
                                     self.__a_type, self.__status, days_string)
-
-
-"""class Jeep(Car):
-    def __init__(self, price, licence_plate, a_type):
-        Car.__init__(self, licence_plate, a_type)
-        self.__price = price
-
-    def get_price(self):
-        return self.__price
-
-
-class SmallCar(Car):
-    def __init__(self, price, licence_plate, a_type):
-        Car.__init__(self, licence_plate, a_type)
-        self.__price = price
-
-    def get_price(self):
-        return self.__price
-
-
-class Van(Car):
-    def __init__(self, price, licence_plate, a_type):
-        Car.__init__(self, licence_plate, a_type)
-        self.__price = price
-
-    def get_price(self):
-        return self.__price"""
