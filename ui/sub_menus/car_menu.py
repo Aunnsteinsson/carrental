@@ -168,7 +168,7 @@ til að halda áfram: ").lower()
                 type_list = ["Jeppi"]
             elif second_choice == "3":
                 the_type = "Fólksbílar"
-                type_list = ["Fólksbill"]
+                type_list = ["Fólksbíll"]
             elif second_choice == "4":
                 the_type = "Sendibílar"
                 type_list = ["Sendibíll"]

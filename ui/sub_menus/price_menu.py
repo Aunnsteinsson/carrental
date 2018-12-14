@@ -75,7 +75,14 @@ class PriceUI(object):
                         a_type = "Aukatrygging"
                     else:
                         return choice
-                    new_price = input("\nNýtt verð: ")
+                    tester = True
+                    while tester:
+                        new_price = input("\nNýtt verð: ")
+                        try:
+                            float(new_price)
+                            tester = False
+                        except ValueError:
+                            print("{} er ekki í boði sem verð".format(new_price))
                     self.__car_service.change_price_of_type(a_type, new_price)
                     print("\nVerði breytt!\n")
                     time.sleep(1)

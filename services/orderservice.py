@@ -153,6 +153,11 @@ class OrderService(object):
             self.add_dates_to_car(
                 new_start_time, new_end_time, licence_plate, order_number)
             new_list = self.list_of_days(new_start_time, new_end_time)
+            discount = order.get_discount()
+            insurance = order.get_insurance()
+            price = self.price_of_rent(
+                licence_plate, discount, insurance, new_start_time, new_end_time)
+            self.change_price(order, price)
             order.change_duration(new_list)
             self.__order_repo.save_new_orders()
             return "Breyting tókst!"

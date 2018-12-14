@@ -162,13 +162,16 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
                     begin_date, end_date, choice_of_car, order_number)
             time.sleep(2)
         elif choice == "2":
-            licence_plate = the_order.get_car()
+            licence_plate = the_order.get_licence_plate()
             the_car = self.__car_service.show_cars(licence_plate)
             car_type = the_car.get_type()
             string_of_cars = self.__order_service.change_car(
                 car_type, order_number)
             print(string_of_cars)
-            choice_of_car = input("Skráðu bílnúmer nýs bíls: ").upper()
+            car = False
+            while not car:
+                choice_of_car = input("Skráðu bílnúmer nýs bíls: ").upper()
+                car = self.__car_service.show_cars(choice_of_car)
             listi = the_order.get_duration()
             self.__order_service.change_car_again(choice_of_car, order_number)
             self.__order_service.add_dates_to_car(
@@ -348,14 +351,14 @@ Notandi sendur heim")
 vera ef einhver: ").replace("%", "")
             try:
                 discount = float(discount)
-                if discount >= 1:
+                if 100 > discount >= 1:
                     discount = discount
                     tester = False
                 elif 1 > discount > 0:
                     discount = discount * 100
                     tester = False
                 else:
-                    print("Aflátturinn vitlaust sleginn inn, reyndu aftur")
+                    print("Afslátturinn {}% ekki í boði, reyndu aftur".format(discount))
             except ValueError:
                 print("{} er ekki tala, reyndu aftur".format(discount))
         return discount

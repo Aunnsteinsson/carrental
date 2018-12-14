@@ -24,6 +24,7 @@ class BossUI(object):
         self.__customer_menu = CustomerUI(self.__username, emp_type)
         self.__price_ui = PriceUI(self.__username, emp_type)
         self.__order_ui = OrderUI(self.__username, emp_type)
+        self.__order_service = OrderService()
 
     def main_menu(self):
         """ Fall sem sýnir aðalviðmót yfirmanns og færir hann á milli falla """
