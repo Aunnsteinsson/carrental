@@ -13,7 +13,7 @@ class CustomerService(object):
             int(new_ssn)
         except ValueError:
             return "Kennitalan {} er ekki samþykkt".format(ssn)
-        if len(new_ssn) < 9:
+        if len(new_ssn) != 10:
             return "Kennitalan {} er ekki samþykkt".format(ssn)
         if len(name) < 2:
             return "Nafnið {} er ekki samþykkt".format(name)
