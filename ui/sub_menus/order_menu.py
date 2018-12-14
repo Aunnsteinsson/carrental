@@ -244,16 +244,17 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
                 print("Vinsamlegast skráðu inn aðrar dagsetningar")
                 time.sleep(2)
         
-        licence_plate = False
-        list_of_unavailale_cars = []
-        list_of_unavailale_cars1 = self.__order_service.find_unavailable_cars(type_list, begin_date, end_date)
-        for car in list_of_unavailale_cars1:
-            plate = car.get_licence_plate()
-            list_of_unavailale_cars.append(plate)
-        while licence_plate in list_of_unavailale_cars or not licence_plate:
+        car = False
+        #list_of_unavailale_cars = []
+        list_of_unavailale_cars = self.__order_service.find_unavailable_cars(type_list, begin_date, end_date)
+        #for car in list_of_unavailale_cars1:
+        #    plate = car.get_licence_plate()
+        #    list_of_unavailale_cars.append(plate)
+        while car in list_of_unavailale_cars or not car:
             print(availablecars, "\n")
             licence_plate = input("Skrifa bílnúmer: ").upper()
-            if licence_plate in list_of_unavailale_cars or not licence_plate:
+            car = self.__car_service.show_cars(licence_plate)
+            if car in list_of_unavailale_cars or not car:
                 print("Bíll með bílnúmerið {} er ekki í boði".format(licence_plate))
         order_number = self.__order_service.make_order_number()
         price = self.__order_service.price_of_rent(
