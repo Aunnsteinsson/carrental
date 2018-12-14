@@ -37,7 +37,7 @@ class BossUI(object):
         choice = ""
         while choice.lower() != HOMECOMMANDS[1]:
             self.__uistandard.clear_screen()
-            choice = self.__uistandard.show_menu("YFIRMAÐUR", "\t1. Pantanir\n\t2. Bílayfirlit\n\
+            choice = self.__uistandard.show_menu("{:^100}".format("YFIRMAÐUR"), "\t1. Pantanir\n\t2. Bílayfirlit\n\
 \t3. Viðskiptavinir\n\t4. Starfsmenn\n\t5. Verðlisti\n\t6. Tekjur\n", "Veldu síðu: ")
             self.__uistandard.clear_screen()
             if choice == "1":
