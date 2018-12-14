@@ -205,7 +205,8 @@ class OrderService(object):
         list_of_dates = [str(day)for day in list_of_dates]
         dict_of_orders = self.get_orders()
         total_revenue = 0
-        for _, order in dict_of_orders.items():
+        string_of_orders = ""
+        for order_number, order in dict_of_orders.items():
             counter = 0
             list_of_days = order.get_duration()
             price_of_order = order.get_price()
@@ -214,8 +215,12 @@ class OrderService(object):
                     counter += 1
             ratio = counter/len(list_of_days)
             price_of_order_in_month = ratio * float(price_of_order)
+            if counter:
+                new_order_string = "{:<25} | {:>15,.0f} ISK\n".format(
+                    order_number, price_of_order_in_month)
+                string_of_orders += new_order_string
             total_revenue += price_of_order_in_month
-        return total_revenue
+        return total_revenue, string_of_orders
 
     def get_orders(self):
         return self.__order_repo.get_orders()

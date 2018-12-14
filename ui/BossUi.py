@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from repositories.employeerepo import EmployeeRepo
 from services.employeeservice import EmployeeService
 from ui.ui_standard_functions import UIStandard
@@ -50,21 +50,8 @@ class BossUI(object):
             elif choice == "6":
                 choice = self.revenue()
 
-    """ def show_all_orders(self):
-        """"""
-        # from services import orderservice
-        print("\tdagsetning  |  Pönt.nr.  |  Nafn  |  Kennitala  |  Tegund  |  Bílnr.  |  Staða\n")
-        self.__uistandard.line_seperator()
-        self.__order_service.show_orders()
-        choice = ""
-        while choice.lower() not in HOMECOMMANDS:
-            choice = input("\n(H)eim - (S)krá út: ")
-        return choice """
-
     def revenue(self):
-        """ Prentar út tekjur bílaleigu """
-        print("Tekjur\n\n{:^15} | {:^15}\n".format(
-            "Pönt.nr.", "Tekjur")+("-")*36)
+
         new_sday = input("Upphafsdagur tímabils (dd): ")
         new_smon = input("Upphafsmánuður tímabils(mm): ")
         new_syear = input("Upphafs ár tímabils (yyyy): ")
@@ -73,21 +60,22 @@ class BossUI(object):
         new_eyear = input("Lokaár tímabils (yyyy): ")
         begin_date = "{}-{}-{}".format(new_syear, new_smon, new_sday)
         end_date = "{}-{}-{}".format(new_eyear, new_emon, new_eday)
-        total_rev = self.__order_service.get_total_rev(begin_date, end_date)
-        print(total_rev)
-
-        """ for _, value in order_dict.items():
-            order = value.get_order_number()
-            income = value.get_price()
-            print("{:^15} | {:^15}".format(
-                order, income))"""
-
+        total_rev, string_of_order_and_rev = self.__order_service.get_total_rev(
+            begin_date, end_date)
+        begin_date = "{}/{}/{}".format(new_sday, new_smon, new_syear)
+        end_date = "{}/{}/{}".format(new_eday, new_emon, new_eyear)
+        self.__uistandard.clear_screen()
+        self.__uistandard.print_header()
+        self.__uistandard.line_seperator()
+        """ Prentar út tekjur bílaleigu """
+        print("Tekjur\n\n{:^25} | {:^15}\n".format(
+            "Pönt.nr.", "Tekjur")+("-")*36)
+        print(string_of_order_and_rev)
+        print("Tímabil frá {} til {}".format(
+            begin_date, end_date))
+        print("\n{:<15} | {:>11,.0f} {:<4}".format(
+            "Heildartekjur tímabils", total_rev, "ISK"))
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             choice = input("\n(H)eim - (S)krá út: ")
         return choice
-
-        """ print("\t{:<25} | {:>10}".format("000001", "120.000 kr"))
-        print("\t{:<25} | {:>10}".format("000002", "10.000 kr"))
-        print("\n\t{:<25} | {:<10}\n\t".format("Mánuður", "Tekjur")+("-")*38)
-        print("\t{:<25} | {:>10}".format("11", "130.000 kr")) """
