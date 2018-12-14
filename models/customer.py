@@ -12,6 +12,24 @@ class Customer(object):
         self.__phone_number = phone_number
         self.__creditcard_number = creditcard_number
 
+    def __str__(self):
+        '''
+         String fall sem prentar allar breytur nema
+         kreditkorta upplýsingar
+        '''
+        return "{:11}| {:30}| {:9}".format(
+            self.__ssn, self.__name, self.__phone_number)
+
+    def __repr__(self):
+        '''
+         String fall sem prentar allar breytur
+        '''
+        return "{},{},{},{}".format(
+            self.__ssn, self.__name, self.__phone_number,
+            self.__creditcard_number)
+
+    # Hér eru nokkur get föll sett inn til að nálgast breyturnar í klasanum
+
     def get_ssn(self):
         """sækir kennitölu viðskiptavinar"""
         return self.__ssn
@@ -28,6 +46,8 @@ class Customer(object):
         """Sækir kreditkortanúmer viðskiptavinar"""
         return self.__creditcard_number
 
+    # Hér eru nokkur föll til að breyta breytum í klasanum
+
     def change_name(self, new_name):
         """Breytir nafni viðskiptavinar"""
         self.__name = new_name
@@ -39,19 +59,3 @@ class Customer(object):
     def change_credit_card(self, new_card_number):
         """Breytir kreditkortanúmeri viðskiptavinar"""
         self.__creditcard_number = new_card_number
-
-    def __str__(self):
-        '''
-         String fall sem prentar allar breytur nema
-         kreditkorta upplýsingar
-        '''
-        return "{:11}| {:30}| {:9}".format(
-            self.__ssn, self.__name, self.__phone_number)
-
-    def __repr__(self):
-        '''
-         String fall sem prentar allar breytur
-        '''
-        return "{},{},{},{}".format(
-            self.__ssn, self.__name, self.__phone_number,
-            self.__creditcard_number)

@@ -160,7 +160,7 @@ baka")
             address = input("\tHeimilisfang(25*): ")
             phonenumber = input("\tSími(10*): ")
             phonenumber = self.__employee_service.check_phone(phonenumber)
-            if phonenumber == 5812345:
+            if phonenumber == "5812345":
                 webbrowser.open("https://www.dominos.is")
             emp_type = ""
             while emp_type.lower() not in VALIDJOB:
@@ -174,7 +174,7 @@ baka")
                 emp_type = "soludeild"
 
             if (len(username) > 10 or len(password) > 10 or len(name) > 25 or
-                    len(address) > 25 or len(str(phonenumber)) > 10):
+                    len(address) > 25 or len(phonenumber) > 10):
                 print("\n\tPassaðu að hafa innsetningu á notendanafni, lykilorði\
  og síma ekki lengri en 10 stafi \n\tog nafn og heimilisfang ekki lengra en 25\
  stafi - fer á upphafssíðu!")

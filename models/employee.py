@@ -17,38 +17,6 @@ class Employee(object):
         self.__phone_number = phonenumber
         self.__emp_type = emp_type
 
-    # Hér eru nokkur get föll sett inn til að nálgast breyturnar í fallinu
-    def get_name(self):
-        return self.__name
-
-    def get_address(self):
-        return self.__address
-
-    def get_username(self):
-        return self.__username
-
-    def get_password(self):
-        return self.__password
-
-    def get_type(self):
-        return self.__emp_type
-
-    def get_phone_number(self):
-        return self.__phone_number
-
-    # Hér eru nokkur change föll sett inn til að breyta breytum í fallinu
-    def change_name(self, new_name):
-        self.__name = new_name
-
-    def change_address(self, new_address):
-        self.__address = new_address
-
-    def change_password(self, new_password):
-        self.__password = new_password
-
-    def change_phone_number(self, new_phone_number):
-        self.__phone_number = new_phone_number
-
     def __str__(self):
         """
          Skilar öllum breytum nema lykilorði, þetta fall er fyrir yfirmann
@@ -79,3 +47,46 @@ class Employee(object):
                                               self.__address,
                                               self.__phone_number,
                                               self.__emp_type)
+
+    # Hér eru nokkur get föll sett inn til að nálgast breyturnar í fallinu
+
+    def get_name(self):
+        """skilar nafni starfsmanns"""
+        return self.__name
+
+    def get_address(self):
+        """Skilar heimilisfangi starfsmanns"""
+        return self.__address
+
+    def get_username(self):
+        """Skilar notendanafni starfsmanns"""
+        return self.__username
+
+    def get_password(self):
+        """Skilar lykilorði starfsmanns"""
+        return self.__password
+
+    def get_type(self):
+        """Skilar starfsheiti starfsmanns"""
+        return self.__emp_type
+
+    def get_phone_number(self):
+        """Skilar símanúmeri Starfsmanns"""
+        return self.__phone_number
+
+    # Hér eru nokkur change föll sett inn til að breyta breytum í fallinu
+    def change_name(self, new_name):
+        """Tekur inn nafn og breytir nafni starfsmanns í það nafn2"""
+        self.__name = new_name
+
+    def change_address(self, new_address):
+        """Tekur inn heimilsifang og breytir heimilisfangi stafsmanns í það heimilisfang"""
+        self.__address = new_address
+
+    def change_password(self, new_password):
+        """Tekur inn lykilorð og breytir lykilorði starfsmanns í það lykilorð"""
+        self.__password = new_password
+
+    def change_phone_number(self, new_phone_number):
+        """Tekur inn símanúmer og breytir símanúmeri starfsmanns í það símanúmer"""
+        self.__phone_number = new_phone_number
