@@ -59,9 +59,8 @@ class BossUI(object):
         while choice.lower() not in HOMECOMMANDS:
             self.__uistandard.clear_screen()
             self.__uistandard.print_header()
-            self.__uistandard.location_header("Tekjuyfirlit")
-            choice = input(
-                "\n\t1. Fyrir sérstakt tímabil\n\t2. Fyrir ákveðið ár\n")
+            print("Tekjuyfirlit\n\n\t1. Fyrir sérstakt tímabil\n\t2. Fyrir ákveðið ár\n")
+            choice = input("Veldu aðgerð: ")
             if choice == "1":
                 self.revenue_for_time_period()
             elif choice == "2":
@@ -96,15 +95,14 @@ class BossUI(object):
                 self.__uistandard.clear_screen()
                 self.__uistandard.print_header()
                 print("Tekjuyfirlit fyrir sérstakt tímabil")
-                print("\n\nTekjur tímabils: {} til {}\n\n\n\t{:^15} | \
-{:^14}".format(begin_date, end_date, "Pönt.nr.", "Tekjur")+("\n\t")+("-")*34)
+                print("\n\nTekjur tímabils: {} til {}\n\n\n\t{:^15} | {:^14}".format(begin_date, end_date,
+                                                                                     "Pöntunarnúmer", "Tekjur án vsk.")+("\n\t")+("-")*34)
                 print(string_of_order_and_rev)
-                print("{:^13}  | {:>11,.0f} {:<4}\n".format(
-                    "\nHeildartekjur tímabils", total_rev, "ISK"))
+                print("\t {:>15}|{:<15}".format(("-")*15, ("-")*15))
+                print("{:^13}  | {:>10,.0f} {:<4}\n".format(
+                    "Heildartekjur tímabils", total_rev, "ISK"))
                 choice = input(
-                    "\nViltu skoða yfirlit yfir annað tímabil? ((J)á \
-/ (N)ei) ").lower()
-            choice = self.__uistandard.back_input()
+                    "\nViltu skoða yfirlit yfir annað tímabil? ((J)á / (N)ei) ").lower()
         return choice
 
     def revenue_in_year(self):
@@ -131,16 +129,17 @@ class BossUI(object):
                 print("Tekjur - Fyrir ákveðið ár\n\n")
                 print("Yfirlit yfir tekjur ársins {}\n\n".format(year))
                 print("\t{:^15} | {:^14}".format(
-                    "Númer mánaðar", "Tekjur mánaðar"))
+                    "Númer mánaðar", "Tekjur án vsk."))
                 print("\t" + ("-")*34)
                 for listi in list_of_months_and_rev:
                     print("\t{:^15} | {:>10,.0f} {:<4}".format(
                         (listi[0]), (listi[1]), "ISK"))
                     #print("Mánuður númer: ", listi[0])
                     #print("Tekjur þess mánaðar ", listi[1])
-                print("\n\n     {:^18} | {:>10,.0f} {:<4}".format(
-                    "Heildartekjur árs", total_revenue_of_year, "ISK"))
+                print("\t {:>15}|{:<15}".format(("-")*15, ("-")*15))
+                print("   {:>18}   | {:>10,.0f} {:<4}\n".format(
+                    "Tekjur árs", total_revenue_of_year, "ISK"))
                 choice = input(
-                    "\nViltu skoða yfirlit yfir annað ár? ((J)á / (N)ei) ").lower()
+                    "\nViltu skoða yfirlit yfir annað ár? ((J)á / (N)ei)\n\nVeldu aðgerð: ").lower()
             choice = self.__uistandard.back_input()
         return choice
