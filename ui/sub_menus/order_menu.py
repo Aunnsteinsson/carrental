@@ -189,28 +189,8 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
                 print("Enginn viðskiptavinur með þessa kennitölu")
                 time.sleep(3)
         elif choice == "5":
-            tester = True
-            # Hér er while loopa til að gera ráð fyrir mismunandi leiðum
-            # til að skrifa afslátt
-            while tester:
-                discount = input(
-                    "Hvað viltu að nýji afslátturinn sé mörg prósent?").replace("%", "")
-                try:
-                    discount = float(discount)
-                    if discount >= 1:
-                        self.__order_service.change_discount(
-                            order_number, discount)
-                        tester = False
-                    elif 1 > discount > 0:
-                        discount = discount * 100
-                        self.__order_service.change_discount(
-                            order_number, discount)
-                        tester = False
-                    else:
-                        print("Afslátturinn vitlaust sleginn inn, reyndu aftur")
-                except ValueError:
-                    print("{} er ekki tala, reyndu aftur".format(discount))
-
+            discount = self.discount_checker()
+            self.__order_service.change_discount(order_number, discount)
         return choice
 
     def all_orders(self):
@@ -309,23 +289,7 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
         else:
             insurance = False
 
-        tester = True
-        while tester:
-            discount = input(
-                "\tSkrifaðu hversu mörg prósent afslátturinn á að \
-vera ef einhver: ").replace("%", "")
-            try:
-                discount = float(discount)
-                if discount >= 1:
-                    discount = discount
-                    tester = False
-                elif 1 > discount > 0:
-                    discount = discount * 100
-                    tester = False
-                else:
-                    print("Aflátturinn vitlaust sleginn inn, reyndu aftur")
-            except ValueError:
-                print("{} er ekki tala, reyndu aftur".format(discount))
+        discount = self.discount_checker()
         total_price = self.__order_service.price_of_rent(
             licence_plate, discount, insurance, begin_date, end_date)
         if total_price != price:
@@ -367,3 +331,24 @@ Notandi sendur heim")
             print("---------------------\nPöntun Staðfest\n")
             time.sleep(2)
         return "h"
+
+    def discount_checker(self):
+        """Fall sem að lætur skrá inn afslátt og athugar hvort hann sé rétt sleginn inn"""
+        tester = True
+        while tester:
+            discount = input(
+                "\tSkrifaðu hversu mörg prósent afslátturinn á að \
+vera ef einhver: ").replace("%", "")
+            try:
+                discount = float(discount)
+                if discount >= 1:
+                    discount = discount
+                    tester = False
+                elif 1 > discount > 0:
+                    discount = discount * 100
+                    tester = False
+                else:
+                    print("Aflátturinn vitlaust sleginn inn, reyndu aftur")
+            except ValueError:
+                print("{} er ekki tala, reyndu aftur".format(discount))
+        return discount
