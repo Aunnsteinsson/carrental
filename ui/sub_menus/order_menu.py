@@ -209,26 +209,16 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
             self.__uistandard.print_header()
             self.__uistandard.location_header("Pantanir - Ný pöntun")
             print("\tTímabil\n\t--------")
-            while not dates_okay:
+            check_string = "string that checks if dates are valid"
+            while check_string != "":
                 begin_day = input("\tUpphafsdagur: ")
                 begin_month = input("\tUpphafsmánuður: ")
                 begin_year = input("\tUpphafsár: ")
                 end_day = input("\tSkiladagur: ")
                 end_month = input("\tSkilamánuður: ")
                 end_year = input("\tSkilaár: ")
-                try:
-                    begining_date = date(
-                        int(begin_year), int(begin_month), int(begin_day))
-                    ending_date = date(
-                        int(end_year), int(end_month), int(end_day))
-                    if begining_date < ending_date:
-                        dates_okay = True
-                    else:
-                        print("Ekki hægt að leiga bíl í minna en einn dag")
-                except ValueError:
-                    print("Vinsamlegast skráðu daga og mánuði á heiltölu \
-    forminu 1,2,3... og ár á forminu 2018, 2019... ")
-
+                check_string = self.__uistandard.check_if_date_is_valid(begin_day, begin_month, begin_year, end_day, end_month, end_year)
+                print(check_string)
             begin_date = begin_year + "-" + begin_month + "-" + begin_day
             end_date = end_year + "-" + end_month + "-" + end_day
             list_of_days = self.__order_service.list_of_days(
@@ -249,8 +239,20 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
                 print("Engir bílar í boði af þessari gerð á þessum tíma.")
                 print("Vinsamlegast skráðu inn aðrar dagsetningar")
                 time.sleep(2)
-        print(availablecars)
-        licence_plate = input("Skrifa bílnúmer: ").upper()
+        
+        a_car = False
+        list_of_unavailale_cars = []
+        list_of_unavailale_cars1 = self.__order_service.find_unavailable_cars(type_list, begin_date, end_date)
+        for car in list_of_unavailale_cars1:
+            plate = car.get_licence_plate()
+            list_of_unavailale_cars.append(plate)
+        while a_car in list_of_unavailale_cars or not a_car:
+            print(list_of_unavailale_cars)
+            print(availablecars)
+            licence_plate = input("Skrifa bílnúmer: ").upper()
+            a_car = self.__car_service.show_cars(licence_plate)
+            if a_car in list_of_unavailale_cars or not a_car:
+                print("Bíll með bílnúmerið {} er ekki í boði".format(licence_plate))
         order_number = self.__order_service.make_order_number()
         price = self.__order_service.price_of_rent(
             licence_plate, 0, False, begin_date, end_date)

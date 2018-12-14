@@ -43,3 +43,16 @@ class UIStandard(object):
         print(text_to_print)
         print()
         self.line_seperator()
+
+    def check_if_date_is_valid(self, begin_day, begin_month, begin_year, end_day, end_month, end_year):
+        try:
+            begining_date = date(
+                int(begin_year), int(begin_month), int(begin_day))
+            ending_date = date(
+                int(end_year), int(end_month), int(end_day))
+            if begining_date < ending_date:
+                return ""
+            else:
+                return "Ekki hægt að leiga bíl í minna en einn dag"
+        except ValueError:
+            return "Vinsamlegast skráðu daga og mánuði á heiltölu á forminu 1,2,3... og ár á forminu 2018, 2019... "
