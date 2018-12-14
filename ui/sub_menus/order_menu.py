@@ -230,13 +230,13 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
             print("\n\tFlokkar\n\t-------\n\t(J)eppi\n\t(F)ólksbíll\n\t(S)endibíll\n")
             type_of_car = input("\tFlokkur: ")
             if type_of_car == "j":
-                type_list = ["jeppi"]
+                type_list = ["Jeppi"]
             elif type_of_car == "f":
-                type_list = ["folksbill"]
+                type_list = ["Fólksbíll"]
             elif type_of_car == "s":
-                type_list = ["sendibill"]
+                type_list = ["Sendibíll"]
             else:
-                type_list = ["sendibill", "folksbill", "jeppi"]
+                type_list = ["Sendibíll", "Fólksbíll", "Jeppi"]
             availablecars = self.__order_service.find_available_cars(
                 type_list, begin_date, end_date)
             if availablecars == "":
