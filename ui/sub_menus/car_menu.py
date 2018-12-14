@@ -15,7 +15,7 @@ class CarUI(object):
         self.__uistandard = UIStandard(name, a_type)
 
     def car_menu_admin(self):
-        '''Bílayfirlit menu fyrir Kerfisstjóra'''
+        """Bílayfirlitsviðmót fyrir Kerfisstjóra"""
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             self.__uistandard.clear_screen()
@@ -31,7 +31,7 @@ class CarUI(object):
                     self.__car_service.make_car(new_car)
             elif choice == "5":
                 licence_plate = input("Númer bíls til afskráningar: ").upper()
-                if self.check_if_licence_plate(licence_plate) is False:
+                if self.__car_service.show_cars(licence_plate) is False:
                     print("Bílnúmer er ekki á skrá\n")
                     time.sleep(2)
                 else:
@@ -47,14 +47,8 @@ class CarUI(object):
                     time.sleep(2)
             return choice
 
-    def check_if_licence_plate(self, licence_plate):
-        return self.__car_service.show_cars(licence_plate)
-
-    def get_car_prices_dict(self):
-        price_dict = self.__car_service.get_car_prices()
-        return price_dict
-
     def add_new_car(self):
+        """Sýnir viðmót þegar bíl er bætt við"""
         self.__uistandard.clear_screen()
         approve_plate = ""
         while approve_plate.lower() != "j":
@@ -68,6 +62,8 @@ class CarUI(object):
             license_plate = input("Bílnúmer: ").upper()
             if a_type.lower() == 'j':
                 a_type = "Jeppi"
+                # ÞEtta er vegna þess að annars myndu setningarnar ekki prentast
+                # í réttu málfræðilegu falli
                 print_type = "jeppa"
             elif a_type.lower() == 'f':
                 a_type = "Fólksbíll"
@@ -89,7 +85,7 @@ class CarUI(object):
                     choice = input("Viltu endurtaka skráningu bíls? ").lower()
                 if choice == "n":
                     return False
-        price_dict = self.get_car_prices_dict()
+        price_dict = self.__car_service.get_car_prices()
         new_car = Car(license_plate, a_type, price_dict)
         print("\nBíll hefur verið skráður!")
         time.sleep(2)
@@ -110,6 +106,7 @@ ekki tilbúnir til útleigu\n\t5. Afhenda eða taka á móti bíl\n",
         return choice
 
     def return_car_menu(self, choice):
+        """Sýnir viðmót þegar að ákveðið er að taka á móti bíl eða afhenda"""
         while choice not in HOMECOMMANDS:
             licence_plate = input(
                 "Hvert er bílnúmerið á bílnum sem þú vilt breyta stöðunni á? ").upper()
@@ -144,6 +141,8 @@ til að halda áfram: ").lower()
         return choice
 
     def show_cars(self, choice, admin=0):
+        """sýnir viðmót þegar ákveðið er að sýna bíla og gefur val um
+        að þrengja leitina enn frekar"""
         choicelist = ["1", "2", "3", "4"]
         if choice in choicelist:
             if choice == "1":
@@ -187,6 +186,7 @@ til að halda áfram: ").lower()
         return choice
 
     def second_car_menu(self, the_type, menu, status_list, type_list, admin=0):
+        """Fall sem tekur inn upplýsingar um þá bíla sem var leitað að og prentar þá"""
         self.__uistandard.clear_screen()
         self.__uistandard.print_header()
         line_seperator = ("-"*100)
