@@ -22,9 +22,7 @@ class SalesmanUI(object):
         choice = ""
         while choice != HOMECOMMANDS[2] and choice != HOMECOMMANDS[3]:
             self.__uistandard.clear_screen()
-            choice = self.__uistandard.show_menu("SÖLUDEILD",
-                                                 """ \t1. Pantanir\n\t2. Bílayfirlit
-\t3. Viðskiptavinir\n\t4. Verðlisti\n""", "Veldu aðgerð: ")
+            choice = self.__uistandard.show_menu("{:^100}".format("SÖLUDEILD"),"\t1. Pantanir\n\t2. Bílayfirlit\n\t3. Viðskiptavinir\n\t4. Verðlisti\n""", "Veldu aðgerð: ")
             self.__uistandard.clear_screen()
             if choice == "1":
                 choice = self.__order_ui.order_menu()

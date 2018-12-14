@@ -45,7 +45,11 @@ class Order(object):
 
         else:
             # Skilar öllum upplýsingum um pöntun.
-            return "{:11}| {:11}| {:9}| {:30}| {:11}| {:7}| {:12,.0f} ISK| {:9}| {:5.0f}%".format(
+            if self.__insurance == "True":
+                insurance = "Já"   
+            else:
+                insurance = "Nei"
+            return "{:11}| {:11}| {:9}| {:30}| {:11}| {:7}| {:12,.0f} ISK| {:>9}| {:5.0f}%".format(
                 start_date,
                 end_date,
                 self.__order_number,
@@ -53,7 +57,7 @@ class Order(object):
                 self.__ssn,
                 self.__car_number,
                 float(self.__price),
-                self.__insurance,
+                insurance,
                 float(self.__discount))
 
     def __repr__(self):

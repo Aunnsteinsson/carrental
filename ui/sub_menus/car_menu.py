@@ -19,12 +19,12 @@ class CarUI(object):
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
             self.__uistandard.clear_screen()
-            choice = self.__uistandard.show_menu("Bílayfirlit", "\n\t1. Allir bílar\n\t2. Lausir bílar\n\
+            choice = self.__uistandard.show_menu("Bílayfirlit", "\t1. Allir bílar\n\t2. Lausir bílar\n\
 \t3. Bílar sem ekki eru tilbúnir til útleigu\n\t4. Nýskrá bíl\n\t\
 5. Afskrá bíl\n", "Veldu aðgerð: ")
 
             if choice == "1" or choice == "2" or choice == "3":
-                choice = self.show_cars(choice)
+                choice = self.show_cars(choice, 1)
             elif choice == "4":
                 new_car = self.add_new_car()
                 if new_car:
@@ -143,7 +143,7 @@ til að halda áfram: ").lower()
                 print()
         return choice
 
-    def show_cars(self, choice):
+    def show_cars(self, choice, admin=0):
         choicelist = ["1", "2", "3", "4"]
         if choice in choicelist:
             if choice == "1":
@@ -183,10 +183,10 @@ til að halda áfram: ").lower()
                 time.sleep(3)
                 return "h"
             choice = self.second_car_menu(
-                the_type, menu, status_list, type_list)
+                the_type, menu, status_list, type_list, admin)
         return choice
 
-    def second_car_menu(self, the_type, menu, status_list, type_list):
+    def second_car_menu(self, the_type, menu, status_list, type_list, admin=0):
         self.__uistandard.clear_screen()
         self.__uistandard.print_header()
         line_seperator = ("-"*100)
@@ -204,7 +204,11 @@ leitarskilyrði\n")
         print(strengur)
         choice = ""
         while choice not in HOMECOMMANDS and choice != "a":
-            choice = input(
+            if admin == 0:
+                choice = input(
                 "Veldu aðgerð: (H)eim, (S)krá út eða (A) fyrir að afhenda \
 eða taka á móti bíl: ").lower()
+            else:
+                choice = input(
+                "Veldu aðgerð: ").lower()
         return choice

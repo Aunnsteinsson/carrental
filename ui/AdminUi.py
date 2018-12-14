@@ -22,8 +22,7 @@ class AdminUI(object):
         choice = ""
         while choice.lower() != HOMECOMMANDS[1]:
             self.__uistandard.clear_screen()
-            choice = self.__uistandard.show_menu("KERFISSTJÓRI", "\n\t1. Starfsmenn\n\t\
-2. Nýr starfsmaður\n\t3. Bílayfirlit\n", "Veldu síðu: ")
+            choice = self.__uistandard.show_menu("{:^100}".format("KERFISSTJÓRI"), "\t1. Starfsmenn\n\t2. Nýr starfsmaður\n\t3. Bílayfirlit\n", "Veldu síðu: ")
             if choice == "1":
                 choice = self.__employee_ui.employee_menu()
             elif choice == "2":
