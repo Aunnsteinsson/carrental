@@ -70,53 +70,69 @@ class BossUI(object):
 
 
     def revenue_for_time_period(self):
-        self.__uistandard.clear_screen()
-        self.__uistandard.print_header()
-        print("Tekjuyfirlit\n\n")
-        new_sday = input("\tUpphafsdagur tímabils (dd): ")
-        new_smon = input("\tUpphafsmánuður tímabils(mm): ")
-        new_syear = input("\tUpphafs ár tímabils (yyyy): ")
-        new_eday = input("\tLokadagur tímabils (dd): ")
-        new_emon = input("\tLokamánuður tímabils (mm): ")
-        new_eyear = input("\tLokaár tímabils (yyyy): ")
-        begin_date = "{}-{}-{}".format(new_syear, new_smon, new_sday)
-        end_date = "{}-{}-{}".format(new_eyear, new_emon, new_eday)
-        list_of_dates = self.__order_service.list_of_days(begin_date, end_date)
-        total_rev, string_of_order_and_rev = self.__order_service.get_total_rev(
-            list_of_dates)
-        begin_date = "{}/{}/{}".format(new_sday, new_smon, new_syear)
-        end_date = "{}/{}/{}".format(new_eday, new_emon, new_eyear)
-        self.__uistandard.clear_screen()
-        self.__uistandard.print_header()
-        """ Prentar út tekjur bílaleigu """
-        print("Tekjur tímabils {} til {}\n\n\n\t{:^15} | {:^14}".format(begin_date, end_date,
-            "Pönt.nr.", "Tekjur")+("\n\t")+("-")*34)
-        print(string_of_order_and_rev)
-        print("{:^13}  | {:>11,.0f} {:<4}\n".format(
-            "\nHeildartekjur tímabils", total_rev, "ISK"))
-        choice = ""
-        while choice.lower() not in HOMECOMMANDS:
-            choice = input("\nViltu skoða yfirlit yfir annað tímabil? ")
+        choice = "j"
+        while choice.lower() not in HOMECOMMANDS and choice.lower() != "b":
+            while choice.lower() == "j":
+                self.__uistandard.clear_screen()
+                self.__uistandard.print_header()
+                print("Tekjuyfirlit\n\n")
+                new_sday = input("\tUpphafsdagur tímabils (dd): ")
+                new_smon = input("\tUpphafsmánuður tímabils(mm): ")
+                new_syear = input("\tUpphafs ár tímabils (yyyy): ")
+                new_eday = input("\tLokadagur tímabils (dd): ")
+                new_emon = input("\tLokamánuður tímabils (mm): ")
+                new_eyear = input("\tLokaár tímabils (yyyy): ")
+                begin_date = "{}-{}-{}".format(new_syear, new_smon, new_sday)
+                end_date = "{}-{}-{}".format(new_eyear, new_emon, new_eday)
+                list_of_dates = self.__order_service.list_of_days(begin_date, end_date)
+                total_rev, string_of_order_and_rev = self.__order_service.get_total_rev(
+                    list_of_dates)
+                begin_date = "{}/{}/{}".format(new_sday, new_smon, new_syear)
+                end_date = "{}/{}/{}".format(new_eday, new_emon, new_eyear)
+                self.__uistandard.clear_screen()
+                self.__uistandard.print_header()
+                """ Prentar út tekjur bílaleigu """
+                print("Tekjuyfirlit fyrir sérstakt tímabil")
+                print("\n\nTekjur tímabils: {} til {}\n\n\n\t{:^15} | {:^14}".format(begin_date, end_date,
+                    "Pönt.nr.", "Tekjur")+("\n\t")+("-")*34)
+                print(string_of_order_and_rev)
+                print("{:^13}  | {:>11,.0f} {:<4}\n".format(
+                    "\nHeildartekjur tímabils", total_rev, "ISK"))
+                choice = input("\nViltu skoða yfirlit yfir annað tímabil? ((J)á / (N)ei) ").lower()
+            choice = self.__uistandard.back_input()
         return choice
 
     def revenue_in_year(self):
-        self.__uistandard.clear_screen()
-        self.__uistandard.print_header()
-        year = int(input("Fyrir hvaða ár viltu fá tekjur? "))
-        list_of_months_and_rev = []
-        total_revenue_of_year = 0
-        for month in range(1, 13):
-            num_days = calendar.monthrange(year, month)[1]
-            list_of_dates = [datetime.date(year, month, day)
-                             for day in range(1, num_days+1)]
-            total_rev, string_of_order_and_rev = self.__order_service.get_total_rev(
-                list_of_dates)
-            total_revenue_of_year += total_rev
-            temp_list = [month, total_rev]
-            list_of_months_and_rev.append(temp_list)
-
-        for listi in list_of_months_and_rev:
-            print("Mánuður númer: ", listi[0])
-            print("Tekjur þess mánaðar ", listi[1])
-            print(total_revenue_of_year)
-        choice = input("Moment of.....")
+        choice = "j"
+        while choice.lower() not in HOMECOMMANDS and choice.lower() != "b":
+            while choice.lower() == "j":
+                self.__uistandard.clear_screen()
+                self.__uistandard.print_header()
+                print("Tekjur - Fyrir ákveðið ár ári\n")
+                year = int(input("\tFyrir hvaða ár viltu fá tekjur? "))
+                list_of_months_and_rev = []
+                total_revenue_of_year = 0
+                for month in range(1, 13):
+                    num_days = calendar.monthrange(year, month)[1]
+                    list_of_dates = [datetime.date(year, month, day)
+                                    for day in range(1, num_days+1)]
+                    total_rev, string_of_order_and_rev = self.__order_service.get_total_rev(
+                        list_of_dates)
+                    total_revenue_of_year += total_rev
+                    temp_list = [month, total_rev]
+                    list_of_months_and_rev.append(temp_list)
+                self.__uistandard.clear_screen()
+                self.__uistandard.print_header()
+                print("Tekjur - Fyrir ákveðið ár ári\n\n")
+                print("Yfirlit yfir tekjur ársins {}\n\n".format(year))
+                print ("\t{:^15} | {:^14}".format("Númer mánaðar","Tekjur mánaðar"))
+                print ("\t" + ("-")*34)
+                for listi in list_of_months_and_rev:
+                    print("\t{:^15} | {:>10,.0f} {:<4}".format((listi[0]), (listi[1]), "ISK"))
+                    #print("Mánuður númer: ", listi[0])
+                    #print("Tekjur þess mánaðar ", listi[1])
+                print("\n\n     {:^18} | {:>10,.0f} {:<4}".format(
+                            "Heildartekjur árs", total_revenue_of_year, "ISK"))
+                choice = input("\nViltu skoða yfirlit yfir annað ár? ((J)á / (N)ei) ").lower()
+            choice = self.__uistandard.back_input()
+        return choice
