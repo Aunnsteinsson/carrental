@@ -12,27 +12,32 @@ class Customer(object):
         self.__phone_number = phone_number
         self.__creditcard_number = creditcard_number
 
-    # Hér eru nokkur get föll sett inn til að nálgast breyturnar í fallinu
     def get_ssn(self):
+        """sækir kennitölu viðskiptavinar"""
         return self.__ssn
 
     def get_name(self):
+        """Sækir nafn viðskiptavinar"""
         return self.__name
 
     def get_phone_number(self):
+        """Sækir símanúmer viðskiptavinar"""
         return self.__phone_number
 
     def get_creditcard_number(self):
+        """Sækir kreditkortanúmer viðskiptavinar"""
         return self.__creditcard_number
 
-    # Hér eru nokkur get föll sett inn til að breyta breytunum í fallinu
     def change_name(self, new_name):
+        """Breytir nafni viðskiptavinar"""
         self.__name = new_name
 
     def change_phone_number(self, new_phone_number):
+        """Breytir símanúmeri viðskiptavinar"""
         self.__phone_number = new_phone_number
 
     def change_credit_card(self, new_card_number):
+        """Breytir kreditkortanúmeri viðskiptavinar"""
         self.__creditcard_number = new_card_number
 
     def __str__(self):

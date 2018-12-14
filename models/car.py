@@ -24,10 +24,12 @@ class Car(object):
         return "{:<8} | {:<12} | {:<11,.0f} {:<} | {:<30} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("ISK"), (self.__wherabouts), date)
 
     def see_if_returned(self):
+        """Fall sem sér hvort að bíll eigi að vera í útleigu eða ekki í dag og hvort hann sé í stæði eða ekki"""
         if self.__rented_days:
             for order_number, list_of_days in self.__rented_days.items():
+                # athugar hvort að dagurinn í dag sé einn af þeim dögum sem að bíllinn er leigður
                 if str(date.today()) in list_of_days:
-                    if self.__status == "j":
+                    if self.__status == "j":  # "j" stendur fyrir í stæði og "n" fyrir að hann sé ekki í stæði
                         return "Leigður en ekki sóttur"
                     if self.__status == "n":
                         return "Í útleigu"
@@ -37,24 +39,30 @@ class Car(object):
             return "Hefur ekki enn verið skilað"
 
     def get_status(self):
+        """sendir streng sem er "j" ef bíll er í stæði en annars "n" """
         return self.__status
 
     def get_wherabouts(self):
+        """Fall sem að sendir streng með því ástandi sem bíll er í """
         return self.__wherabouts
 
     def change_status(self, new_status):
+        """Fall sem breytir því hvort bill sé í stæði eða ekki"""
         self.__status = new_status
+        # ástand bíls breytist með stæðinu og því þarf að kalla á þetta
         self.__wherabouts = self.see_if_returned()
 
     def dict_to_string(self, date_dict):
+        """Fall sem að breytid dagsetningadict í streng til að hægt sé að setja í csv skrá"""
         string = ""
         for key, value in date_dict.items():
+            # Hér bætum við inn breytum sem eru aldrei annars í strengnum til að splitta á þegar lesið er úr skránni
             string += ":" + str(key) + "&"
             for day in value:
-                string += str(day) + "$"
+                string += str(day) + "$"  # sama hér
         return string
 
-    def print_a_type(self, a_type):
+    def print_a_type(self, a_type):  # Er þetta fall nauðsynlegt????
         if a_type == "folksbill":
             return "Fólksbíll"
         elif a_type == "jeppi":
@@ -65,13 +73,17 @@ class Car(object):
             return "Aukatrygging"
 
     def string_to_dict(self, order_string):
+        """Fall sem les úr dagsetningar csv skránni og setur upplýsingarnar í dictionary"""
         dictionary = {}
-        if order_string == "None":
+        if order_string == "None":  # Ef að það voru engir dagar skráðir á bílinn þá skilar þetta tómu dict
             return dictionary
+        # splittum á : til að skilja að einstakar pantanir
         string = order_string.split(":")
         for value in string:
-            if value != "":
+            if value != "":  # TIl að forðast villur þar sem við splittum tómum streng
+                # Skiljum að pöntunarnúmer og dagsetningar
                 new_list = value.split("&")
+                # Skiljum að dagsetningar í pöntun
                 the_list = new_list[1].split("$")
                 last_list = []
                 for day in the_list:
@@ -99,9 +111,11 @@ class Car(object):
         return self.__rented_days
 
     def remove_order(self, order_number):
+        """Eyðir pöntun af bíl"""
         self.__rented_days.pop(order_number, None)
 
     def add_rented_days(self, list_of_days, order_number):
+        """Bætir pöntun á bíl"""
         list_of_days = [str(day) for day in list_of_days]
         self.__rented_days[order_number] = list_of_days
 
