@@ -62,7 +62,7 @@ class OrderUI(object):
 
     def print_full_order_header(self):
         return "{:^11}| {:^11}| {:^9}| {:^30}| {:^11}| {:^7}|\
- {:^10}| {:^9}| {:^6}\n{}".format(
+ {:^16}| {:^9}| {:^6}\n{}".format(
             "Upphafsd.",
                     "Skilad.",
                     "Pönt.nr.",
@@ -72,7 +72,7 @@ class OrderUI(object):
                     "Verð",
                     "Viðb.Try.",
                     "Afsl.",
-                    "-"*120)
+                    "-"*126)
 
     def ssn_order_menu(self, ssn):
         self.__uistandard.clear_screen()
@@ -172,9 +172,24 @@ Pöntun: {}\n{}\n{}\n{}\n\n1. Breyta Pöntun\n2. Bakfæra pöntun\n\
                 print("Enginn viðskiptavinur með þessa kennitölu")
                 time.sleep(3)
         elif choice == "5":
-            discount = input(
-                "Hvað viltu að nýji afslátturinn sé mörg prósent?")
-            self.__order_service.change_discount(order, discount)
+            tester = True
+            while tester:
+                discount = input(
+                    "Hvað viltu að nýji afslátturinn sé mörg prósent?").replace("%", "")
+                try:
+                    discount = float(discount)
+                    if discount >= 1:
+                        self.__order_service.change_discount(order, discount)
+                        tester= False
+                    elif 1 > discount > 0:
+                        discount = discount *100
+                        self.__order_service.change_discount(order,discount)
+                        tester = False
+                    else: 
+                        print("Afslátturinn vitlaust sleginn inn, reyndu aftur")
+                except ValueError:
+                    print("{} er ekki tala, reyndu aftur".format(discount))
+
         return choice
 
     def all_orders(self):
@@ -250,8 +265,22 @@ Pöntun: {}\n{}\n{}\n{}\n\n1. Breyta Pöntun\n2. Bakfæra pöntun\n\
         else:
             insurance = False
 
-        discount = input(
-            "\tSkrifaðu hversu mörg prósent afslátturinn á að vera ef einhver: ")
+        tester = True
+        while tester:
+            discount = input(
+                "\tSkrifaðu hversu mörg prósent afslátturinn á að vera ef einhver: ").replace("%", "")
+            try:
+                discount = float(discount)
+                if discount >= 1:
+                    discount = discount
+                    tester= False
+                elif 1 > discount > 0:
+                    discount = discount *100
+                    tester = False
+                else: 
+                    print("Aflátturinn vitlaust sleginn inn, reyndu aftur")
+            except ValueError:
+                print("{} er ekki tala, reyndu aftur".format(discount))
         total_price = self.__order_service.price_of_rent(
             licence_plate, discount, insurance, begin_date, end_date)
         if total_price != price:
