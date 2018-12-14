@@ -19,7 +19,7 @@ class Car(object):
 
     def __str__(self):
         the_date = self.get_the_next_order()
-        return "{:<8} | {:<12} | {:<11,.0f} {:<} | {:<30} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("ISK"), (self.__wherabouts), the_date)
+        return "{:<8} | {:<12} | {:<11,.0f} {:<} | {:<30} | {:<20}".format(self.__licence_plate, self.__a_type, self.__price_of_car, ("ISK"), (self.__wherabouts), the_date)
 
     def __repr__(self):
         days_string = self.dict_to_string(self.__rented_days)
@@ -71,15 +71,15 @@ class Car(object):
         if self.__status == "n":
             return "Hefur ekki enn verið skilað"
 
-    def print_a_type(self, a_type):  # Er þetta fall nauðsynlegt????
-        if a_type == "folksbill":
-            return "Fólksbíll"
-        elif a_type == "jeppi":
-            return "Jeppi"
-        elif a_type == "sendibill":
-            return "Sendibíll"
-        elif a_type == "trygging":
-            return "Aukatrygging"
+    # def print_a_type(self, a_type):  # Er þetta fall nauðsynlegt????
+    #     if a_type == "folksbill":
+    #         return "Fólksbíll"
+    #     elif a_type == "jeppi":
+    #         return "Jeppi"
+    #     elif a_type == "sendibill":
+    #         return "Sendibíll"
+    #     elif a_type == "trygging":
+    #         return "Aukatrygging"
 
     def get_the_next_order(self):
         """Fall sem að gefur þér dagsetningu næsta dags sem bíllinn er frátekinn"""

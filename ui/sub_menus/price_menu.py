@@ -59,15 +59,15 @@ class PriceUI(object):
                     car_choice = input("""\nVeldu það verð sem þú vilt breyta - (F)ólksbíl, \
 (J)eppi, (S)endibíll, (T)rygging, (A)uka trygging: """)
                     if car_choice.lower() == "f":
-                        a_type = "folksbill"
+                        a_type = "Fólksbíll"
                     elif car_choice.lower() == "j":
-                        a_type = "jeppi"
+                        a_type = "Jeppi"
                     elif car_choice.lower() == "s":
-                        a_type = "sendibill"
+                        a_type = "Sendibíll"
                     elif car_choice.lower() == "t":
-                        a_type = "skyldutrygging"
+                        a_type = "Skyldutrygging"
                     elif car_choice.lower() == "a":
-                        a_type = "aukatrygging"
+                        a_type = "Aukatrygging"
                     else:
                         return choice
                     new_price = input("\nNýtt verð: ")
