@@ -18,22 +18,7 @@ class Car(object):
         self.__wherabouts = self.see_if_returned()
 
     def __str__(self):
-        if self.__rented_days:
-            yesterday = datetime.now() - timedelta(days=1)
-            highest_date = datetime(4500, 12, 30)
-            for order_number, date_list in self.__rented_days.items():
-                for a_date in date_list:
-                    date_list = a_date.split("-")
-                    day = datetime(int(date_list[0]), int(
-                        date_list[1]), int(date_list[2]))
-                    if day > yesterday and day < highest_date:
-                        highest_date = day
-            if highest_date != datetime(4500, 12, 30):
-                the_date = str(highest_date.date())
-            else:
-                the_date = "Engar pantanir"
-        else:
-            the_date = "Engar pantanir"
+        the_date = self.get_the_next_order()
         return "{:<8} | {:<12} | {:<11,.0f} {:<} | {:<30} | {:<20}".format(self.__licence_plate, self.print_a_type(self.__a_type), self.__price_of_car, ("ISK"), (self.__wherabouts), the_date)
 
     def __repr__(self):
@@ -95,6 +80,33 @@ class Car(object):
             return "Sendibíll"
         elif a_type == "trygging":
             return "Aukatrygging"
+
+    def get_the_next_order(self):
+        """Fall sem að gefur þér dagsetningu næsta dags sem bíllinn er frátekinn"""
+        if self.__rented_days:
+            # Býr til gærdaginn til að bera saman við
+            yesterday = datetime.now() - timedelta(days=1)
+            # dagur sem er svo langt í burtu að enginn(með viti) mun leigja hann
+            highest_date = datetime(4500, 12, 30)
+            for order_number, date_list in self.__rented_days.items():
+                for a_date in date_list:
+                    date_list = a_date.split("-")
+                    day = datetime(int(date_list[0]), int(
+                        date_list[1]), int(date_list[2]))
+                    # ef dagurinn er ekki í fortíð og ekki það sem nú er skráð sem highest day
+                    if day > yesterday and day < highest_date:
+                        # þá er dagurinn skráður sem highest day því við viljum lægstu dagsetningu sem er ekki í dag
+                        highest_date = day
+            # Ef einhver dagur var í framtíðinni
+            if highest_date != datetime(4500, 12, 30):
+                # þá skilar fallið þeim degi
+                the_date = str(highest_date.date())
+            else:
+                the_date = "Engar pantanir"  # annars engar pantanir
+        else:
+            # Ef engin pöntun var skráð á bíl þá skilar fallið setningu um það
+            the_date = "Engar pantanir"
+        return(the_date)
 
     # Hér koma nokkur föll sem að sækja breytur í klasann
 

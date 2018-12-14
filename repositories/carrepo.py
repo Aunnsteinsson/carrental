@@ -14,6 +14,8 @@ class CarRepo(object):
         self.__car = self.car_dict()
 
     def car_dict(self):
+        """fall sem les upp úr cars.csv og skilar dict með bílnúmeri
+        sem key og instance af car klasanum sem value"""
         car_dict = {}
         with open("./data/cars.csv", "r") as car_file:
             csv_reader = csv.reader(car_file)
@@ -26,6 +28,8 @@ class CarRepo(object):
         return car_dict
 
     def price_dict(self):
+        """fall sem les upp úr price.csv og skilar dict með verðandlagi
+        sem key og verði sem value"""
         price_dict = {}
         with open("./data/price_list.csv", "r") as price_file:
             csv_reader = csv.reader(price_file)
@@ -35,7 +39,7 @@ class CarRepo(object):
             return price_dict
 
     def add_car(self, new_car):
-        """Bætir bíl inn í geymslu"""
+        """Bætir bíl inn í dictið"""
         licence_plate = new_car.get_licence_plate()
         self.__car[licence_plate] = new_car
 
@@ -50,40 +54,12 @@ class CarRepo(object):
         """ Sækir bíla fyrir útlistun af bílum """
         return self.__car
 
-        """ list_of_cars = []
-        with open("./data/cars.csv", "r") as car_file:
-            csv_reader = csv.reader(car_file)
-            for line in csv_reader:
-                if line[0] != "númeraplata":
-                    list_of_cars.append(line)
-        return list_of_cars """
-
     def remove_car(self, licence_plate):
         """Eyðir bíl úr geymslu"""
         del self.__car[licence_plate]
 
-    def change_status(self, licence_plate, new_status):
-        """Finnur __bíl sem á að breyta og sendir í service"""
-
-        """ with open("./data/cars.csv", "r") as car_input:
-            with open("./data/cars_edit.csv", "w", newline="") as car_output:
-                csv_reader = csv.reader(car_input)
-                csv_writer = csv.writer(car_output)
-                for row in csv_reader:
-                    if row:
-                        if row[0] == licence_plate:
-                            row[2] = (new_status)
-                        csv_writer.writerow(row)
-
-        with open("./data/cars.csv", "w", newline="") as new_car_file:
-            with open("./data/cars_edit.csv", "r") as new_car_edit:
-                csv_reader = csv.reader(new_car_edit)
-                csv_writer = csv.writer(new_car_file)
-                for row in csv_reader:
-                    if row:
-                        csv_writer.writerow(row) """
-
     def save_car_data(self):
+        """Tekur upplýsingar úr dict og skrifar það í car_dict"""
         list_of_cars = ["licence_plate", "a_type", "status", "days"]
         with open("./data/cars.csv", "w", newline="") as car_file:
             csv_writer = csv.writer(car_file)
@@ -94,6 +70,7 @@ class CarRepo(object):
                 csv_writer.writerow(temp_car_list)
 
     def save_price_data(self):
+        """Tekur upplýsingar úr dict og skrifar það í price_dict"""
         list_of_prices = ["gerd_bils", "verd"]
         with open("./data/price_list.csv", "w", newline="") as price_file:
             csv_writer = csv.writer(price_file)
@@ -103,7 +80,10 @@ class CarRepo(object):
                 csv_writer.writerow(listi)
 
     def get_car_prices(self):
+        """skilar dict með verðandlgi sem key og verði á 
+        bílum eða tryggingum sem key"""
         return self.__price
 
     def change_price_of_type(self, a_type, new_price):
+        """Tekur inn nýtt verð og verðandlag og breytir verðinu á verðandlaginu"""
         self.__price[a_type] = new_price
