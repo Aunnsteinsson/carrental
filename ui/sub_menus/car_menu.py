@@ -101,9 +101,9 @@ class CarUI(object):
             choice = self.__uistandard.show_menu(
                 """Bílayfirlit\n\t1. Allir Bílar
 \t2. Lausir Bílar\n\t3. Bílar sem eru í útleigu\n\t4. Bílar sem eru ekki tilbúnir til útleigu\n\t5. Afhenda eða taka á móti bíl\n""", "Veldu Aðgerð: ")
-            if choice in "12345"
-            choice = self.show_cars(choice)
-            choice = self.return_car_menu(choice)
+            if choice in "12345":
+                choice = self.show_cars(choice)
+                choice = self.return_car_menu(choice)
         return choice
 
     def return_car_menu(self, choice):
