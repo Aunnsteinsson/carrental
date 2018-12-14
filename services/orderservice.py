@@ -129,7 +129,8 @@ class OrderService(object):
         koma fram"""
         order_list = self.get_orders_of_customer_menu(ssn)
         string_of_orders = ""
-        for order in order_list:
+        for order_number in order_list:
+            order = self.__order_repo.get_order(order_number)
             order_string = order.__str__(print_format)
             string_of_orders += order_string + "\n"
         return string_of_orders
