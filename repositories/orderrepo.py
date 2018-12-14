@@ -21,7 +21,7 @@ class OrderRepo(object):
 
     def remove_order(self, order_number):
         """Notar order_number sem key til að leita í dictionary með pöntunum,
-        ef í dict, þá eyðir fallið þeirri pöntun."""
+         ef í dict, þá eyðir fallið þeirri pöntun."""
         for ordernr, _ in self.__orders.items():
             if ordernr == order_number:
                 print(self.__orders[order_number])
@@ -31,7 +31,7 @@ class OrderRepo(object):
 
     def get_order(self, order_number):
         """Tekur við order_number og skilar pöntuninni sem passar
-        við það númer"""
+         við það númer"""
         order = self.__orders[order_number]
         return order
 
@@ -41,9 +41,11 @@ class OrderRepo(object):
 
     def save_new_orders(self):
         """Vistar upplýsingar úr dictionary í csv skrá sem heldur utan
-        um upplýsingarnar."""
-        orders_header = "order_number,duration,ssn,car_number,price,insurance,discount"
-        with open("./data/orders.csv", "w", newline="", encoding="utf-8") as orders_file:
+         um upplýsingarnar."""
+        orders_header = "order_number,duration,ssn,car_number,price,insurance,\
+discount"
+        with open("./data/orders.csv", "w", newline="",
+                  encoding="utf-8") as orders_file:
             csv_writer = csv.writer(orders_file)
             csv_writer.writerow(orders_header.split(','))
             for _, info in self.__orders.items():
@@ -52,10 +54,11 @@ class OrderRepo(object):
 
     def order_dict(self):
         """Tekur við gögnum, upplýsingum um pantanir, úr orders.csv og les inn í
-        dictionary. Þá er lykillinn pöntunarnúmerið og gildið er Orders
-        klasinn með upplýsingunum."""
+         dictionary. Þá er lykillinn pöntunarnúmerið og gildið er Orders
+         klasinn með upplýsingunum."""
         order_dict = {}
-        with open("./data/orders.csv", "r", encoding="utf-8") as orders_file:
+        with open("./data/orders.csv", "r",
+                  encoding="utf-8") as orders_file:
             csv_reader = csv.reader(orders_file)
             next(csv_reader)
             for order in csv_reader:

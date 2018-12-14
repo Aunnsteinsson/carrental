@@ -14,7 +14,7 @@ class CarRepo(object):
         self.__car = self.car_dict()
 
     def car_dict(self):
-        """fall sem les upp úr cars.csv og skilar dict með bílnúmeri
+        """Fall sem les upp úr cars.csv og skilar dict með bílnúmeri
         sem key og instance af car klasanum sem value"""
         car_dict = {}
         with open("./data/cars.csv", "r", encoding="utf-8") as car_file:
@@ -22,16 +22,21 @@ class CarRepo(object):
             for car in csv_reader:
                 if car[0] != "licence_plate":
                     car_class = Car(
-                        car[LICENCE_PLATE], car[A_TYPE], self.__price, car[STATUS], car[DAYS])
+                        car[LICENCE_PLATE],
+                        car[A_TYPE],
+                        self.__price,
+                        car[STATUS],
+                        car[DAYS])
                     licence_plate = car[LICENCE_PLATE]
                     car_dict[licence_plate] = car_class
         return car_dict
 
     def price_dict(self):
-        """fall sem les upp úr price.csv og skilar dict með verðandlagi
+        """Fall sem les upp úr price.csv og skilar dict með verðandlagi
         sem key og verði sem value"""
         price_dict = {}
-        with open("./data/price_list.csv", "r", encoding="utf-8") as price_file:
+        with open("./data/price_list.csv", "r",
+                  encoding="utf-8") as price_file:
             csv_reader = csv.reader(price_file)
             for price in csv_reader:
                 if price[0] != "gerd_bils":
@@ -61,7 +66,8 @@ class CarRepo(object):
     def save_car_data(self):
         """Tekur upplýsingar úr dict og skrifar það í car_dict"""
         list_of_cars = ["licence_plate", "a_type", "status", "days"]
-        with open("./data/cars.csv", "w", newline="", encoding="utf-8") as car_file:
+        with open("./data/cars.csv", "w", newline="",
+                  encoding="utf-8") as car_file:
             csv_writer = csv.writer(car_file)
             csv_writer.writerow(list_of_cars)
             for _, info in self.__car.items():
@@ -72,7 +78,8 @@ class CarRepo(object):
     def save_price_data(self):
         """Tekur upplýsingar úr dict og skrifar það í price_dict"""
         list_of_prices = ["gerd_bils", "verd"]
-        with open("./data/price_list.csv", "w", newline="", encoding="utf-8") as price_file:
+        with open("./data/price_list.csv", "w", newline="",
+                  encoding="utf-8") as price_file:
             csv_writer = csv.writer(price_file)
             csv_writer.writerow(list_of_prices)
             for the_type, the_price in self.__price.items():
@@ -80,10 +87,11 @@ class CarRepo(object):
                 csv_writer.writerow(listi)
 
     def get_car_prices(self):
-        """skilar dict með verðandlgi sem key og verði á 
-        bílum eða tryggingum sem key"""
+        """skilar dict með verðandlgi sem key og verði á
+         bílum eða tryggingum sem key"""
         return self.__price
 
     def change_price_of_type(self, a_type, new_price):
-        """Tekur inn nýtt verð og verðandlag og breytir verðinu á verðandlaginu"""
+        """Tekur inn nýtt verð og verðandlag og breytir verðinu
+         á verðandlaginu"""
         self.__price[a_type] = new_price

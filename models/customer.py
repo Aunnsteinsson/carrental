@@ -1,10 +1,10 @@
 class Customer(object):
-    '''
+    """
      Breytur í þessum klasa eru kennitala, nafn, sími, og kreditkorta númer
-     einnig inniheldur klasin föll sem eru gerð til að kalla á breytur eða 
+     einnig inniheldur klasin föll sem eru gerð til að kalla á breytur eða
      breyta breytum, __str__ fallið inniheldur ekki kreditkorta númerið en
       __repr__ gerir það
-    '''
+    """
 
     def __init__(self, ssn, name, phone_number, creditcard_number):
         self.__ssn = ssn
@@ -13,23 +13,18 @@ class Customer(object):
         self.__creditcard_number = creditcard_number
 
     def __str__(self):
-        '''
-         String fall sem prentar allar breytur nema
-         kreditkorta upplýsingar
-        '''
+        """String fall sem prentar allar breytur nema
+         kreditkorta upplýsingar"""
         return "{:11}| {:30}| {:9}".format(
             self.__ssn, self.__name, self.__phone_number)
 
     def __repr__(self):
-        '''
-         String fall sem prentar allar breytur
-        '''
+        """String fall sem prentar allar breytur"""
         return "{},{},{},{}".format(
             self.__ssn, self.__name, self.__phone_number,
             self.__creditcard_number)
 
     # Hér eru nokkur get föll sett inn til að nálgast breyturnar í klasanum
-
     def get_ssn(self):
         """sækir kennitölu viðskiptavinar"""
         return self.__ssn
@@ -47,7 +42,6 @@ class Customer(object):
         return self.__creditcard_number
 
     # Hér eru nokkur föll til að breyta breytum í klasanum
-
     def change_name(self, new_name):
         """Breytir nafni viðskiptavinar"""
         self.__name = new_name

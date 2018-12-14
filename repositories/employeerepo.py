@@ -13,7 +13,8 @@ class EmployeeRepo(object):
         self.__employee = self.employees_dict()
 
     def get_employees(self):
-        """Skilar dict sem er með notendanöfn sem key og staki af klasanum sem value"""
+        """Skilar dict sem er með notendanöfn sem key og staki af
+         klasanum sem value"""
         return self.__employee
 
     def add_employee(self, username, password,
@@ -28,14 +29,15 @@ class EmployeeRepo(object):
         del self.__employee[username]
 
     def change_info_of_employee(self, username_of_user_to_change):
-        """tekur inn stak af starfmanni og breytir stakinu á notendanafns key í það stak"""
+        """tekur inn stak af starfmanni og breytir stakinu á notendanafns key
+         í það stak"""
         for username, _ in self.__employee.items():
             if username == username_of_user_to_change:
                 return self.__employee[username]
         return False
 
     def save(self):
-        """LEs upplýsingar úr dictinu og setur það inn í csv skjalið"""
+        """Les upplýsingar úr dictinu og setur það inn í csv skjalið"""
         list_of_employees = [
             "Notendanafn,lykilord,nafn,heimilisfang,simi,hlutverk"]
         with open("./data/employees.csv", "w", newline="",
