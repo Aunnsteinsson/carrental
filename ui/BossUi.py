@@ -51,7 +51,7 @@ class BossUI(object):
             elif choice == "5":
                 choice = self.__price_ui.boss_change_price_menu()
             elif choice == "6":
-                self.revenue()
+                choice = self.revenue()
         return choice
 
     def revenue(self):
@@ -63,9 +63,9 @@ class BossUI(object):
             print("\n\t1. Fyrir sérstakt tímabil\n\t2. Fyrir ákveðið ár\n")
             choice = input("Veldu aðgerð: ")
             if choice == "1":
-                self.revenue_for_time_period()
+                choice = self.revenue_for_time_period()
             elif choice == "2":
-                self.revenue_in_year()
+                choice = self.revenue_in_year()
             else:
                 choice = input(
                     "\n\t Vinsamlegast veldu (1) fyrir tímabil, eða (2) fyrir \
