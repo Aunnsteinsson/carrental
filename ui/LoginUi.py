@@ -12,9 +12,7 @@ class LoginUI(object):
         self.__employee_repo = EmployeeRepo()
 
     def print_header(self):
-        '''
-         Prentar haus fyrir innskráningu
-        '''
+        '''Prentar haus fyrir innskráningu'''
         today = date.today()
         print(("-"*100))
         print("{:40s}{:>27}   {}     \
@@ -25,10 +23,8 @@ class LoginUI(object):
         print(("-"*100))
 
     def tjasl_rental_header(self):
-        '''
-         Prentar Tjasl rental í
-         skrautskrift með stórum stöfum
-        '''
+        '''Prentar Tjasl rental í
+         skrautskrift með stórum stöfum'''
         print()
         print("    ______    __  ______  ______  __           ______  ______  \
 __   __  ______  ______  __        ")
@@ -42,9 +38,7 @@ __   __  ______  ______  __        ")
 \\/_____/\\/_/ \\/_/  \\/_/  \\/_/\\/_/\\/_____/ ")
 
     def ask_for_username_password(self):
-        '''
-         Spyr starfsmann um notandanafn og lykilorð
-        '''
+        '''Spyr starfsmann um notandanafn og lykilorð'''
         username = input("Notendanafn: ")
         if username.lower() == "l":
             print("Loka kerfi...")
@@ -64,11 +58,9 @@ __   __  ______  ______  __        ")
             return username, password
 
     def check_employee_type(self, username, password):
-        '''
-         Kíkir hvort notendanafnið sé í employee.csv
+        '''Kíkir hvort notendanafnið sé í employee.csv
          og hvort það passi við lykilorðið, það skilar síðan
-         hlutverki og notendanafni
-        '''
+         hlutverki og notendanafni'''
         employee_dict = self.__employee_repo.get_employees()
         for employee, value in employee_dict.items():
             if username == employee:
@@ -78,9 +70,7 @@ __   __  ______  ______  __        ")
                     return value_list[5], username
 
     def easter_egg(self):
-        '''
-         Shhhhh
-        '''
+        '''Shhhhh'''
         for _ in range(4):
             os.system("cls" if os.name == "nt" else "clear")
             print("\tEASTER", end="")
@@ -165,10 +155,8 @@ ASLTJA")
         sys.exit(0)
 
     def main_menu(self):
-        '''
-         Þetta fall kallar í öll innri föllin og skilar
-         notendanafni og hluthverki starfsmanns
-        '''
+        '''Þetta fall kallar í öll innri föllin og skilar
+         notendanafni og hluthverki starfsmanns'''
         self.tjasl_rental_header()
         self.print_header()
         username, password = self.ask_for_username_password()
