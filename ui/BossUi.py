@@ -1,4 +1,5 @@
 from datetime import date
+import time
 import datetime
 import calendar
 from repositories.employeerepo import EmployeeRepo
@@ -51,21 +52,33 @@ class BossUI(object):
                 choice = self.__price_ui.boss_change_price_menu()
             elif choice == "6":
                 self.revenue()
-
+        return choice
+    
     def revenue(self):
-        choice = input("1 or 2")
-        if choice == "2":
-            self.revenue_in_year()
-        else:
-            self.revenue_in_time()
+        choice = ""
+        while choice.lower() not in HOMECOMMANDS:
+            self.__uistandard.clear_screen()
+            self.__uistandard.print_header()
+            choice = input("Tekjuyfirlit\n\n\t1. Fyrir sérstakt tímabil\n\t2. Fyrir ákveðið ár\n")
+            if choice == "1":
+                self.revenue_for_time_period()
+            elif choice == "2":
+                self.revenue_in_year()
+            else:
+                choice = input("\n\t Vinsamlegast veldu (1) fyrir tímabil, eða (2) fyrir ár.\n\tEinnig geturðu valið (H) til að fara heim, eða (S) til að skrá þig út.")
+        return choice        
 
-    def revenue_in_time(self):
-        new_sday = input("Upphafsdagur tímabils (dd): ")
-        new_smon = input("Upphafsmánuður tímabils(mm): ")
-        new_syear = input("Upphafs ár tímabils (yyyy): ")
-        new_eday = input("Lokadagur tímabils (dd): ")
-        new_emon = input("Lokamánuður tímabils (mm): ")
-        new_eyear = input("Lokaár tímabils (yyyy): ")
+
+    def revenue_for_time_period(self):
+        self.__uistandard.clear_screen()
+        self.__uistandard.print_header()
+        print("Tekjuyfirlit\n\n")
+        new_sday = input("\tUpphafsdagur tímabils (dd): ")
+        new_smon = input("\tUpphafsmánuður tímabils(mm): ")
+        new_syear = input("\tUpphafs ár tímabils (yyyy): ")
+        new_eday = input("\tLokadagur tímabils (dd): ")
+        new_emon = input("\tLokamánuður tímabils (mm): ")
+        new_eyear = input("\tLokaár tímabils (yyyy): ")
         begin_date = "{}-{}-{}".format(new_syear, new_smon, new_sday)
         end_date = "{}-{}-{}".format(new_eyear, new_emon, new_eday)
         list_of_dates = self.__order_service.list_of_days(begin_date, end_date)
@@ -75,21 +88,20 @@ class BossUI(object):
         end_date = "{}/{}/{}".format(new_eday, new_emon, new_eyear)
         self.__uistandard.clear_screen()
         self.__uistandard.print_header()
-        self.__uistandard.line_seperator()
         """ Prentar út tekjur bílaleigu """
-        print("Tekjur\n\n{:^25} | {:^15}\n".format(
-            "Pönt.nr.", "Tekjur")+("-")*36)
+        print("Tekjur tímabils {} til {}\n\n\n\t{:^15} | {:^14}".format(begin_date, end_date,
+            "Pönt.nr.", "Tekjur")+("\n\t")+("-")*34)
         print(string_of_order_and_rev)
-        print("Tímabil frá {} til {}".format(
-            begin_date, end_date))
-        print("\n{:<15} | {:>11,.0f} {:<4}".format(
-            "Heildartekjur tímabils", total_rev, "ISK"))
+        print("{:^13}  | {:>11,.0f} {:<4}\n".format(
+            "\nHeildartekjur tímabils", total_rev, "ISK"))
         choice = ""
         while choice.lower() not in HOMECOMMANDS:
-            choice = input("\n(H)eim - (S)krá út: ")
+            choice = input("\nViltu skoða yfirlit yfir annað tímabil? ")
         return choice
 
     def revenue_in_year(self):
+        self.__uistandard.clear_screen()
+        self.__uistandard.print_header()
         year = int(input("Fyrir hvaða ár viltu fá tekjur? "))
         list_of_months_and_rev = []
         total_revenue_of_year = 0

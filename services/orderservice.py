@@ -215,7 +215,7 @@ class OrderService(object):
             ratio = counter/len(list_of_days)
             price_of_order_in_month = ratio * float(price_of_order)
             if counter:
-                new_order_string = "{:<25} | {:>15,.0f} ISK\n".format(
+                new_order_string = "\t{:^15} | {:>9,.0f} ISK\n".format(
                     order_number, price_of_order_in_month)
                 string_of_orders += new_order_string
             total_revenue += price_of_order_in_month
