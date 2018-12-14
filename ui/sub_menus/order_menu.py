@@ -123,12 +123,16 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
 4. Viðskiptavinur\n5. Afsláttur\n")
         choice = input("Veldu aðgerð: ")
         if choice == "1":
-            new_sday = input("Nýr upphafsdagur (dd): ")
-            new_smon = input("Nýr upphafsmánuður (mm): ")
-            new_syear = input("Nýtt upphafsár (yyyy): ")
-            new_eday = input("Nýr skiladagur (dd): ")
-            new_emon = input("Nýr skilamánuður (mm): ")
-            new_eyear = input("Nýtt skilaár (yyyy): ")
+            check_string = "Strengur til að athuga hvort dagar séu rétt skráðir inn"
+            while check_string:
+                new_sday = input("Nýr upphafsdagur (dd): ")
+                new_smon = input("Nýr upphafsmánuður (mm): ")
+                new_syear = input("Nýtt upphafsár (yyyy): ")
+                new_eday = input("Nýr skiladagur (dd): ")
+                new_emon = input("Nýr skilamánuður (mm): ")
+                new_eyear = input("Nýtt skilaár (yyyy): ")
+                check_string = self.__uistandard.check_if_date_is_valid(begin_day, begin_month, begin_year, end_day, end_month, end_year)
+                print(check_string)
 
             begin_date = "{}-{}-{}".format(new_syear, new_smon, new_sday)
             end_date = "{}-{}-{}".format(new_eyear, new_emon, new_eday)
@@ -240,33 +244,31 @@ pantana- Pöntunarnúmer", strengur, "Veldu aðgerð: ").lower()
                 print("Vinsamlegast skráðu inn aðrar dagsetningar")
                 time.sleep(2)
         
-        a_car = False
+        licence_plate = False
         list_of_unavailale_cars = []
         list_of_unavailale_cars1 = self.__order_service.find_unavailable_cars(type_list, begin_date, end_date)
         for car in list_of_unavailale_cars1:
             plate = car.get_licence_plate()
             list_of_unavailale_cars.append(plate)
-        while a_car in list_of_unavailale_cars or not a_car:
-            print(list_of_unavailale_cars)
-            print(availablecars)
+        while licence_plate in list_of_unavailale_cars or not licence_plate:
+            print(availablecars, "\n")
             licence_plate = input("Skrifa bílnúmer: ").upper()
-            a_car = self.__car_service.show_cars(licence_plate)
-            if a_car in list_of_unavailale_cars or not a_car:
+            if licence_plate in list_of_unavailale_cars or not licence_plate:
                 print("Bíll með bílnúmerið {} er ekki í boði".format(licence_plate))
         order_number = self.__order_service.make_order_number()
         price = self.__order_service.price_of_rent(
             licence_plate, 0, False, begin_date, end_date)
-        print("Verð með skyldutryggingu og VSK en án aukatrygginga: {}".format(price))
+        print("Verð með skyldutryggingu og VSK en án aukatrygginga: {:,.0f} ISK".format(float(price)))
         # Hér þarf að sækja verð
         extra_insurance_price = self.__order_service.get_price_of_extra_insurance()
         insurance = input(
-            "\tViðbótartrygging (verð {} á dag) (J)á/(N)ei: ".format(
-                extra_insurance_price))
+            "\tViðbótartrygging (verð {:,.0f} ISK á dag) (J)á/(N)ei: ".format(float(
+                extra_insurance_price)))
         if insurance.lower() == "j":
             insurance = True
             price = self.__order_service.price_of_rent(
                 licence_plate, 0, True, begin_date, end_date)
-            print("Verð með aukatryggingum og VSK: {}".format(price))
+            print("Verð með aukatryggingum og VSK: {:,.0f} ISK".format(float(price)))
         else:
             insurance = False
 
@@ -290,8 +292,7 @@ vera ef einhver: ").replace("%", "")
         total_price = self.__order_service.price_of_rent(
             licence_plate, discount, insurance, begin_date, end_date)
         if total_price != price:
-            print("Heildarverð með afslætti og VSK: {}".format(
-                total_price))  # hér þarð að nota aðra klasa
+            print("Heildarverð með afslætti og VSK: {:,.0f} ISK".format(float(total_price)))  # hér þarð að nota aðra klasa
         ssn = input("\tKennitala viðskiptavinar: ")
         # if setning til að athuga hvort manneskjan sé til. Ef svo er
         # þá prentast út upplýsingar um hana, annars er sótt fall til

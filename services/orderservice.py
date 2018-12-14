@@ -274,8 +274,8 @@ class OrderService(object):
             days_of_rent += 1
             start += step
         price_of_rent = days_of_rent * price_of_car
-        print("Verð bíls í {} daga án skyldutrygginga og VSK: {}".format(
-            days_of_rent, price_of_rent))
+        print("Verð bíls í {} daga án skyldutrygginga og VSK: {:,.0f} ISK".format(
+            days_of_rent, float(price_of_rent)))
         price_of_mandated = days_of_rent * price_of_mandated_insurance
         price_of_rent += price_of_mandated
         discount = self.change_discount_to_float(discount)
