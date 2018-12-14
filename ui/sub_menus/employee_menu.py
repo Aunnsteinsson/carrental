@@ -129,7 +129,7 @@ tölustafi - fer til baka")
                         print(choice, "er ekki valmöguleiki, - fer til baka")
                         time.sleep(2)
                         return choice
-                    if new_value10 > 11 or new_value25 > 26:
+                    if len(new_value10) > 11 or len(new_value25) > 26:
                         print("Passaðu að hafa innsetningu ekki of langa! - fer til \
 baka")
                         time.sleep(2)
