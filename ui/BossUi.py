@@ -59,7 +59,8 @@ class BossUI(object):
         while choice.lower() not in HOMECOMMANDS:
             self.__uistandard.clear_screen()
             self.__uistandard.print_header()
-            print("Tekjuyfirlit\n\n\t1. Fyrir sérstakt tímabil\n\t2. Fyrir ákveðið ár\n")
+            self.__uistandard.location_header("Tekjuyfirlit")
+            print("\n\t1. Fyrir sérstakt tímabil\n\t2. Fyrir ákveðið ár\n")
             choice = input("Veldu aðgerð: ")
             if choice == "1":
                 self.revenue_for_time_period()
@@ -77,7 +78,8 @@ class BossUI(object):
             while choice.lower() == "j":
                 self.__uistandard.clear_screen()
                 self.__uistandard.print_header()
-                print("Tekjuyfirlit\n\n")
+                self.__uistandard.location_header("Tekjuyfirlit")
+                print()
                 new_sday = input("\tUpphafsdagur tímabils (dd): ")
                 new_smon = input("\tUpphafsmánuður tímabils(mm): ")
                 new_syear = input("\tUpphafs ár tímabils (yyyy): ")
@@ -94,9 +96,10 @@ class BossUI(object):
                 end_date = "{}/{}/{}".format(new_eday, new_emon, new_eyear)
                 self.__uistandard.clear_screen()
                 self.__uistandard.print_header()
-                print("Tekjuyfirlit fyrir sérstakt tímabil")
-                print("\n\nTekjur tímabils: {} til {}\n\n\n\t{:^15} | {:^14}".format(begin_date, end_date,
-                                                                                     "Pöntunarnúmer", "Tekjur án vsk.")+("\n\t")+("-")*34)
+                self.__uistandard.location_header(
+                    "Tekjuyfirlit fyrir sérstakt tímabil")
+                print("Tekjur tímabils: {} til {}\n\n\n\t{:^15} | {:^14}".format(begin_date, end_date,
+                                                                                 "Pöntunarnúmer", "Tekjur án vsk.")+("\n\t")+("-")*34)
                 print(string_of_order_and_rev)
                 print("\t {:>15}|{:<15}".format(("-")*15, ("-")*15))
                 print("{:^13}  | {:>10,.0f} {:<4}\n".format(
@@ -111,7 +114,7 @@ class BossUI(object):
             while choice.lower() == "j":
                 self.__uistandard.clear_screen()
                 self.__uistandard.print_header()
-                print("Tekjur - Fyrir ákveðið ár\n")
+                self.__uistandard.location_header("Tekjur - Fyrir ákveðið ár")
                 year = int(input("\n\tSláðu inn ár: "))
                 list_of_months_and_rev = []
                 total_revenue_of_year = 0
@@ -126,7 +129,7 @@ class BossUI(object):
                     list_of_months_and_rev.append(temp_list)
                 self.__uistandard.clear_screen()
                 self.__uistandard.print_header()
-                print("Tekjur - Fyrir ákveðið ár\n\n")
+                self.__uistandard.location_header("Tekjur - Fyrir ákveðið ár")
                 print("Yfirlit yfir tekjur ársins {}\n\n".format(year))
                 print("\t{:^15} | {:^14}".format(
                     "Númer mánaðar", "Tekjur án vsk."))
@@ -134,12 +137,12 @@ class BossUI(object):
                 for listi in list_of_months_and_rev:
                     print("\t{:^15} | {:>10,.0f} {:<4}".format(
                         (listi[0]), (listi[1]), "ISK"))
-                    #print("Mánuður númer: ", listi[0])
-                    #print("Tekjur þess mánaðar ", listi[1])
+                    # print("Mánuður númer: ", listi[0])
+                    # print("Tekjur þess mánaðar ", listi[1])
                 print("\t {:>15}|{:<15}".format(("-")*15, ("-")*15))
                 print("   {:>18}   | {:>10,.0f} {:<4}\n".format(
                     "Tekjur árs", total_revenue_of_year, "ISK"))
                 choice = input(
                     "\nViltu skoða yfirlit yfir annað ár? ((J)á / (N)ei)\n\nVeldu aðgerð: ").lower()
-            choice = self.__uistandard.back_input()
+                choice = self.__uistandard.back_input()
         return choice
