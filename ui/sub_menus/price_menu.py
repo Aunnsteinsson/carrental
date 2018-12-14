@@ -45,27 +45,38 @@ class PriceUI(object):
         return choice
 
     def boss_change_price_menu(self):
-        self.print_price_menu()
         choice = ""
-        print("\n\nMögulegar aðgerðir\n{}".format("-"*25))
-        print("1. Breyta verði á tegund\n")
-        while choice.lower() not in HOMECOMMANDS:
+        while choice.lower() not in HOMECOMMANDS and choice.lower() != "b":
+            self.__uistandard.clear_screen()
+            self.print_price_menu()
+            print("\n\nMögulegar aðgerðir\n{}".format("-"*25))
+            print("1. Breyta verði á tegund\n")
             choice = input("\nVeldu aðgerð: ")
             if choice.lower() == "1":
-                car_choice = input(
-                    "\nVeldu það verð sem þú vilt breyta - (F)ólksbíl, (J)eppi, (S)endibíll, (A)uka trygging: ")
-                if car_choice.lower() == "f":
-                    a_type = "folksbill"
-                elif car_choice.lower() == "j":
-                    a_type = "jeppi"
-                elif car_choice.lower() == "s":
-                    a_type = "sendibill"
-                elif car_choice.lower() == "a":
-                    a_type = "trygging"
-                else:
-                    return choice
-                new_price = input("\nNýtt verð: ")
-                self.__car_service.change_price_of_type(a_type, new_price)
-                choice = input(
-                    "\nVerði breytt!\n\nVeldu (H) til að fara heim, eða (S) til að skrá þig út: ")
+                choice = "j"
+                while choice.lower() == 'j':
+                    self.__uistandard.clear_screen()
+                    self.print_price_menu()
+                    car_choice = input("""\nVeldu það verð sem þú vilt breyta - (F)ólksbíl, \
+(J)eppi, (S)endibíll, (T)rygging, (A)uka trygging: """)
+                    if car_choice.lower() == "f":
+                        a_type = "folksbill"
+                    elif car_choice.lower() == "j":
+                        a_type = "jeppi"
+                    elif car_choice.lower() == "s":
+                        a_type = "sendibill"
+                    elif car_choice.lower() == "t":
+                        a_type = "skyldutrygging"
+                    elif car_choice.lower() == "a":
+                        a_type = "aukatrygging"
+                    else:
+                        return choice
+                    new_price = input("\nNýtt verð: ")
+                    self.__car_service.change_price_of_type(a_type, new_price)
+                    print("\nVerði breytt!\n")
+                    time.sleep(1)
+                    choice = input(
+                        "Viltu breyta öðru verði? ((J)á/(N)ei) ").lower()
+
+            choice = self.__uistandard.back_input()
         return choice

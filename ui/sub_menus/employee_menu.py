@@ -205,10 +205,7 @@ baka")
         employees_list_string = self.__employee_service.get_employees()
         print(employees_list_string)
         choice = ""
-        print("\nMögulegar aðgerðir\n{}".format("-"*25))
-        print("1. Fara til baka\n")
-        while choice.lower() not in HOMECOMMANDS:
-            choice = input("\nVeldu aðgerð: ")
+        choice = self.__uistandard.back_input()
         return choice
 
     def save_employees(self):
