@@ -108,7 +108,8 @@ class EmployeeUI(object):
                 print("Hverju skal breyta?\n{}".format("-"*40))
                 print("\t1. Lykilorð\n\t2. Nafn\n\t3. Heimilisfang\n\t4. Sími\n")
                 choice = ""
-                new_value = ""
+                new_value10 = ""
+                new_value25 = ""
                 while choice.lower() not in HOMECOMMANDS:
                     choice = input("Veldu aðgerð: ")
                     if choice == "1":
@@ -129,12 +130,17 @@ tölustafi - fer til baka")
                         print(choice, "er ekki valmöguleiki, - fer til baka")
                         time.sleep(2)
                         return choice
-                    if len(new_value10) > 11 or len(new_value25) > 26:
+                    if len(str(new_value10)) > 11 or len(str(new_value25)) > 26:
                         print("Passaðu að hafa innsetningu ekki of langa! - fer til \
 baka")
                         time.sleep(2)
                         return choice
+
                     else:
+                        if new_value10 == "":
+                            new_value = new_value25
+                        else:
+                            new_value = new_value10
                         self.__employee_service.change_employee(
                             username, choice, new_value)
                         self.save_employees()
